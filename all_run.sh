@@ -1,6 +1,6 @@
 #!/bin/bash
 
-arch_files="../../gemini_legacy_architecture/gemini_vpr.xml ../../gemini_legacy_architecture/gemini_openfpga.xml"
+arch_files="../../../gemini_legacy_architecture/gemini_vpr.xml ../../../gemini_legacy_architecture/gemini_openfpga.xml"
 set_device_size="castor10x8_heterogeneous"
 strategy="delay"
 main_path=$PWD

@@ -1,4 +1,4 @@
-`include "../../../fabric10x8/CustomModules/bram/rtl/bram.svh"
+`include "../../../../fabric10x8/CustomModules/bram/rtl/bram.svh"
 // ---- Default Nettype ----
 `default_nettype wire
   // Topr level wrapper to multiplex input signals based on operating mode
