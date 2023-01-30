@@ -5,6 +5,8 @@ arch_files="$1 $2"
 set_device_size=$3
 strategy=$4
 
+python3 ../../scripts/gen_openfpga_script.py $design_name
+
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
 
@@ -25,6 +27,7 @@ echo "add_library_ext .v .sv">>raptor.tcl
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
 echo "set_device_size $set_device_size">>raptor.tcl 
+echo "custom_openfpga_script ../add_1bit_custom.openfpga">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs vcc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
@@ -76,7 +79,7 @@ lut_map=`find $library -wholename "*/common/simlib.v"`
 TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
-# primitive=`find $library -wholename "*/genesis2/primitives.v"`
+primitive=`find $library -wholename "*/genesis2/primitives.v"`
 primitive="/nfs_scratch/scratch/CompilerValidation/abdul_hameed/zaheer/ArchBench/primitives.v"
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
