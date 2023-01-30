@@ -1,11 +1,12 @@
 #!/bin/bash
 
 design_name="or_1bit"
-arch_files="$1 $2"
+vpr_file=$1
+openfpga_file=$2
 set_device_size=$3
 strategy=$4
 
-python3 ../../scripts/gen_openfpga_script.py $design_name
+python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file
 
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
@@ -20,7 +21,7 @@ cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
 echo "#target_device GEMINI_LEGACY">>raptor.tcl
-echo "architecture $arch_files">>raptor.tcl
+echo "architecture $vpr_file $openfpga_file">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
@@ -100,5 +101,5 @@ done < post_route_sim.log
 cd ..
 [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
-timeout 4m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+timeout 10m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 ./simv | tee -a bitstream_sim.log

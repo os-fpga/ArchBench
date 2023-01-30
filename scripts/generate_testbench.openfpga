@@ -1,5 +1,5 @@
 # vpr RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/gemini_vpr.xml \
-vpr /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/gemini_vpr.xml \
+vpr {} \
 {} \
 {} \
 --clock_modeling ideal \
@@ -19,7 +19,7 @@ vpr /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_ne
 
 # Read OpenFPGA architecture definition
 # read_openfpga_arch -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/gemini_openfpga.xml
-read_openfpga_arch -f /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/gemini_openfpga.xml
+read_openfpga_arch -f {}
 
 # Read OpenFPGA simulation settings
 # read_openfpga_simulation_setting -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/fixed_sim_openfpga.xml
