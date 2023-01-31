@@ -51,13 +51,13 @@ command = "which raptor"
 p = subprocess.Popen(command.split(),stdout=subprocess.PIPE)
 out = p.wait()
 RAPTOR_PATH = os.path.dirname(os.path.dirname(p.stdout.read().decode('utf-8')[:-1]))
-print(RAPTOR_PATH)
+# print(RAPTOR_PATH)
 CURRENT_PATH=os.getcwd()
 # print(CURRENT_PATH)
 # ==========================================================
 
 def update_custom_openfpga_script(design_dir,design_name, ftype='verilog', pcf=0, size='10x8',netlist='SRC'):
-    print(design_dir)
+    # print(design_dir)
     netfile = "#"
     plfile = "#"
     rfile = "#"
@@ -84,7 +84,7 @@ def update_custom_openfpga_script(design_dir,design_name, ftype='verilog', pcf=0
         pcf_file_option = f"--fix_clusters ../{design_name}.place"
     of = open("../../scripts/generate_testbench.openfpga",'r')
     openfpga_file= of.read()
-    file_content = openfpga_file.format(vpr_file,design_input,pcf_file_option,device,netfile,plfile,rfile,crkt,openfpga_f,f"{design_name}_fabric_bitstream.xml",\
+    file_content = openfpga_file.format(vpr_file,design_input,pcf_file_option,device,netfile,plfile,rfile,crkt,openfpga_f,fixed_sim_openfpga_file,bitstream_annotation_file,repack_design_constraint_file,f"{design_name}_fabric_bitstream.xml",\
         f"fabric_bitstream.bit")
     file_content = file_content.replace("RAPTOR_PATH",RAPTOR_PATH)
     if size == 'full':
@@ -104,9 +104,12 @@ design_name = sys.argv[1]
 design_dir = os.getcwd()
 vpr_file=sys.argv[2]
 openfpga_f=sys.argv[3]
-print(vpr_file)
-print(openfpga_f)
-# print(design_name)
+fixed_sim_openfpga_file=sys.argv[4]
+repack_design_constraint_file=sys.argv[5]
+bitstream_annotation_file=sys.argv[6]
+print(fixed_sim_openfpga_file)
+print(repack_design_constraint_file)
+print(bitstream_annotation_file)
 # design_dir = design_files_exits(design_name, ftype, pcf)
 # print(design_dir)
 design_openfpga_script = update_custom_openfpga_script(design_dir,design_name, ftype, pcf, size, netlist)
