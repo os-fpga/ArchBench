@@ -1,15 +1,15 @@
 {   
-    "bitstream.log": {
+    "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_bitstream_sim_files/bitstream.log": {
         "Status": "Status: ",
         "Runtime": "RunTime: ",
         "Memory": "MEM: "
     },
-    "post_route.log": {
+    "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_post_route_files/post_route.log": {
         "Status": "Error: ",
         "Runtime": "RunTime: ",
         "Memory": "MEM: "
     },
-    "raptor.log": {
+    "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/raptor.log": {
         "Status": "INFO: BIT: ",
         "Runtime": "RunTime: ",
         "Memory": "MEM: ",

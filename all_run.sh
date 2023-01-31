@@ -1,7 +1,7 @@
 #!/bin/bash
 
-vpr_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/gemini_vpr.xml"
-openfpga_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/gemini_openfpga.xml"
+vpr_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/gemini_legacy_architecture/gemini_vpr.xml"
+openfpga_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/gemini_legacy_architecture/gemini_openfpga.xml"
 set_device_size="castor10x8_heterogeneous"
 strategy="delay"
 main_path=$PWD
