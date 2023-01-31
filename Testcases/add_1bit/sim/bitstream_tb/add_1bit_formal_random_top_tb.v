@@ -57,57 +57,57 @@ module add_1bit_top_formal_verification_random_tb;
 	  b = 1'b0;
 	  @(posedge clk);
 	  if (c_gfpga === 0)
-		$display("               Test Passed");
+		$display("Status: Test Passed");
 	  else  
-		$display("               Test Failed");
+		$display("Status: Test Failed");
 		
 	  a = 1'b0; 
 	  b = 1'b1;
 	  @(posedge clk);
 	  if (c_gfpga === 1)
-		$display("               Test Passed");
+		$display("Status: Test Passed");
 	  else  
-		$display("               Test Failed");
+		$display("Status: Test Failed");
 
 	  a = 1'b1;
 	  b = 1'b0;
 	  @(posedge clk);
 	  if (c_gfpga === 1)
-		$display("               Test Passed");
+		$display("Status: Test Passed");
 	  else  
-		$display("               Test Failed");
+		$display("Status: Test Failed");
 
 	  a = 1'b1;
 	  b = 1'b1;
 	  @(posedge clk);
 	  if (c_gfpga === 0)
-		$display("               Test Passed");
+		$display("Status: Test Passed");
 	  else  
-		$display("               Test Failed");
+		$display("Status: Test Failed");
 
 	  a = 1'b0;
 	  b = 1'b1;
 	  @(posedge clk);
 	  if (c_gfpga === 1)
-		$display("               Test Passed");
+		$display("Status: Test Passed");
 	  else  
-		$display("               Test Failed");
+		$display("Status: Test Failed");
 
 	  a = 1'b1;
 	  b = 1'b0;
 	  @(posedge clk);
 	  if (c_gfpga === 1)
-		$display("               Test Passed");
+		$display("Status: Test Passed");
 	  else  
-		$display("               Test Failed");
+		$display("Status: Test Failed");
 
 		a = 1'b1;
 		b = 1'b1;
 		@(posedge clk);
 		if (c_gfpga === 0)
-		  $display("               Test Passed");
+		  $display("Status: Test Passed");
 		else  
-		  $display("               Test Failed");
+		  $display("Status: Test Failed");
 	  repeat(10)@(posedge clk);
 	  $finish;
 	end
