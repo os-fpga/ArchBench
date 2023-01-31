@@ -3,10 +3,13 @@
 design_name="or_1bit"
 vpr_file=$1
 openfpga_file=$2
-set_device_size=$3
-strategy=$4
+fixed_sim_openfpga_file=$3
+repack_design_constraint_file=$4
+bitstream_annotation_file=$5
+set_device_size=$6
+strategy=$7
 
-python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file
+python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file
 
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
@@ -101,5 +104,7 @@ done < post_route_sim.log
 cd ..
 [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
-timeout 10m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+timeout 4m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 ./simv | tee -a bitstream_sim.log
+
+# python3 ../../scripts/parser.py
