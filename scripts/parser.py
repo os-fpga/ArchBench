@@ -33,7 +33,7 @@ def parse_log_files(files, log_line_keys_map):
             sum_dsps = 0
             ###bitstream.log###
             # Looping through each line in the log file
-            if file == "bitstream.log":
+            if file == "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_bitstream_sim_files/bitstream_sim.log":
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -50,7 +50,7 @@ def parse_log_files(files, log_line_keys_map):
 
             ###post_route.log###
             # Looping through each line in the log file
-            if file == "post_route.log":
+            if file == "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_post_route_files/post_route_sim.log":
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -66,7 +66,7 @@ def parse_log_files(files, log_line_keys_map):
 
             ###raptor.log###
             # Looping through each line in the log file
-            if file == "raptor.log":
+            if file == "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/raptor.log":
                 #start looping from end index of log and check the index where Printing statistics. occured, store in start variable
                 for i in range(len(lines) - 1, -1, -1):
                     if "Printing statistics." in lines[i]:
@@ -123,9 +123,9 @@ def parse_log_files(files, log_line_keys_map):
 
 def main():
     # List of log file names to be parsed
-    files = ['bitstream.log', 'post_route.log', 'raptor.log']
+    files = ['/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_bitstream_sim_files/bitstream_sim.log', '/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_post_route_files/post_route_sim.log', '/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/raptor.log']
     # Open the keywords file and read the keywords mapping
-    with open('keywords.json', 'r') as f:
+    with open('/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/scripts/keywords.json', 'r') as f:
         log_line_keys_map = json.load(f)
     data = parse_log_files(files, log_line_keys_map)
     with open('parsed_data.json', 'w') as f:
