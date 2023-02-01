@@ -8,6 +8,7 @@
 
 # Importing the json module
 import json
+import sys
 
 # Defining the function parse_log_files() that takes in a list of log files and a log_line_keys_map
 def parse_log_files(files, log_line_keys_map):
@@ -33,7 +34,7 @@ def parse_log_files(files, log_line_keys_map):
             sum_dsps = 0
             ###bitstream.log###
             # Looping through each line in the log file
-            if file == "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_bitstream_sim_files/bitstream_sim.log":
+            if file == "bitstream_sim.log":
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -50,7 +51,7 @@ def parse_log_files(files, log_line_keys_map):
 
             ###post_route.log###
             # Looping through each line in the log file
-            if file == "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_post_route_files/post_route_sim.log":
+            if file == "post_route_sim.log":
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -63,10 +64,10 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()      
                             elif log_line_key == 'Runtime':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
-
+            start = 0
             ###raptor.log###
             # Looping through each line in the log file
-            if file == "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/raptor.log":
+            if file == "raptor.log":
                 #start looping from end index of log and check the index where Printing statistics. occured, store in start variable
                 for i in range(len(lines) - 1, -1, -1):
                     if "Printing statistics." in lines[i]:
@@ -123,9 +124,10 @@ def parse_log_files(files, log_line_keys_map):
 
 def main():
     # List of log file names to be parsed
-    files = ['/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_bitstream_sim_files/bitstream_sim.log', '/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_post_route_files/post_route_sim.log', '/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/raptor.log']
+    files = ['bitstream_sim.log', 'post_route_sim.log', 'raptor.log']
+    # files = [sys.argv[1], sys.argv[2], sys.argv[3]]
     # Open the keywords file and read the keywords mapping
-    with open('/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/scripts/keywords.json', 'r') as f:
+    with open('../../scripts/keywords.json', 'r') as f:
         log_line_keys_map = json.load(f)
     data = parse_log_files(files, log_line_keys_map)
     with open('parsed_data.json', 'w') as f:
