@@ -14,11 +14,11 @@ default_paths()
 {
 #    echo ""
     echo "default paths for architecture"
-    vpr_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/gemini_vpr.xml"
-    openfpga_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/gemini_openfpga.xml"
-    fixed_sim_openfpga_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/fixed_sim_openfpga.xml"
-    repack_design_constraint_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/repack_design_constraint.xml"
-    bitstream_annotation_file="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/gemini_legacy_architecture/bitstream_annotation.xml"   
+    vpr_file="../../../gemini_legacy_architecture/gemini_vpr.xml"
+    openfpga_file="../../../gemini_legacy_architecture/gemini_openfpga.xml"
+    fixed_sim_openfpga_file="../../../gemini_legacy_architecture/fixed_sim_openfpga.xml"
+    repack_design_constraint_file="../../../gemini_legacy_architecture/repack_design_constraint.xml"
+    bitstream_annotation_file="../../../gemini_legacy_architecture/bitstream_annotation.xml"   
 }
 
 while getopts "v:o:f:r:b:" flag
