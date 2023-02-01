@@ -53,7 +53,7 @@ out = p.wait()
 RAPTOR_PATH = os.path.dirname(os.path.dirname(p.stdout.read().decode('utf-8')[:-1]))
 # print(RAPTOR_PATH)
 CURRENT_PATH=os.getcwd()
-# print(CURRENT_PATH)
+# print("CURRENT_PATH",CURRENT_PATH)
 # ==========================================================
 
 def update_custom_openfpga_script(design_dir,design_name, ftype='verilog', pcf=0, size='10x8',netlist='SRC'):
@@ -86,7 +86,7 @@ def update_custom_openfpga_script(design_dir,design_name, ftype='verilog', pcf=0
     openfpga_file= of.read()
     file_content = openfpga_file.format(vpr_file,design_input,pcf_file_option,device,netfile,plfile,rfile,crkt,openfpga_f,fixed_sim_openfpga_file,bitstream_annotation_file,repack_design_constraint_file,f"fabric_bitstream.xml",\
         f"fabric_bitstream.bit")
-    file_content = file_content.replace("RAPTOR_PATH",RAPTOR_PATH)
+    file_content = file_content.replace("CURRENT_PATH",CURRENT_PATH+"/"+design_name+"_golden")
     if size == 'full':
         file_content = file_content.replace("gemini_10x8","gemini")
     of.close()

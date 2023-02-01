@@ -1,5 +1,5 @@
 # vpr RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/gemini_vpr.xml \
-vpr {} \
+vpr CURRENT_PATH/{} \
 {} \
 {} \
 --clock_modeling ideal \
@@ -19,14 +19,14 @@ vpr {} \
 
 # Read OpenFPGA architecture definition
 # read_openfpga_arch -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/gemini_openfpga.xml
-read_openfpga_arch -f {}
+read_openfpga_arch -f CURRENT_PATH/{}
 
 # Read OpenFPGA simulation settings
 # read_openfpga_simulation_setting -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/fixed_sim_openfpga.xml
-read_openfpga_simulation_setting -f {}
+read_openfpga_simulation_setting -f CURRENT_PATH/{}
 
 # read_openfpga_bitstream_setting -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/bitstream_setting.xml
-read_openfpga_bitstream_setting -f {}
+read_openfpga_bitstream_setting -f CURRENT_PATH/{}
 
 # Annotate the OpenFPGA architecture to VPR data base
 # to debug use --verbose options
@@ -46,7 +46,7 @@ build_fabric --frame_view --compress_routing --duplicate_grid_pin
 # This must be done before bitstream generator and testbench generation
 # Strongly recommend it is done after all the fix-up have been applied
 # repack --design_constraints RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/fpga_repack_constraints.xml
-repack --design_constraints {}
+repack --design_constraints CURRENT_PATH/{}
 
 build_architecture_bitstream
 
