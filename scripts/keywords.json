@@ -1,20 +1,20 @@
 {   
-    "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_bitstream_sim_files/bitstream.log": {
+    "bitstream_sim.log": {
         "Status": "Status: ",
         "Runtime": "RunTime: ",
-        "Memory": "MEM: "
+        "Memory": " Data structure size: "
     },
-    "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/and2_vcs_post_route_files/post_route.log": {
-        "Status": "Error: ",
+    "post_route_sim.log": {
+        "Status": "Simulation ",
         "Runtime": "RunTime: ",
-        "Memory": "MEM: "
+        "Memory": " Data structure size: "
     },
-    "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench_1/ArchBench/Testcases/and2/and2_golden/raptor.log": {
-        "Status": "INFO: BIT: ",
+    "raptor.log": {
+        "Status": "BIT: Design",
         "Runtime": "RunTime: ",
         "Memory": "MEM: ",
         "DFFs": " dff , dffn , sdff , sdffn , dffr , dffnr , dffe , dffne , sdffre , sdffnre , dffre , dffnre ",
-        "LUTs": " $lut",
+        "LUTs": " $lut ",
         "BRAMs": " RS_TDP36K ",
         "DSPs": " RS_DSP , RS_DSP_MULT , RS_DSP_MULT_REGIN , RS_DSP_MULT_REGOUT , RS_DSP_MULT_REGIN_REGOUT , RS_DSP_MULTADD , RS_DSP_MULTADD_REGIN , RS_DSP_MULTADD_REGOUT , RS_DSP_MULTADD_REGIN_REGOUT , RS_DSP_MULTACC , RS_DSP_MULTACC_REGIN , RS_DSP_MULTACC_REGOUT , RS_DSP_MULTACC_REGIN_REGOUT "
     }

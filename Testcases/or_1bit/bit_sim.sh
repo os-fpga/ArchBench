@@ -1,5 +1,7 @@
 #!/bin/bash
 
+main_path=$PWD
+
 design_name="or_1bit"
 vpr_file=$1
 openfpga_file=$2
@@ -8,6 +10,12 @@ repack_design_constraint_file=$4
 bitstream_annotation_file=$5
 set_device_size=$6
 strategy=$7
+
+[ -d $design_name\_golden ] && rm -fr $design_name\_golden
+[ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
+[ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
+[ -f post_route_sim.log ] && rm -fr post_route_sim.log
+[ -f raptor.log ] && rm -fr raptor.log
 
 python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file
 
@@ -31,7 +39,7 @@ echo "add_library_ext .v .sv">>raptor.tcl
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
 echo "set_device_size $set_device_size">>raptor.tcl 
-echo "custom_openfpga_script ../or_1bit_custom.openfpga">>raptor.tcl
+echo "custom_openfpga_script ../$design_name\_custom.openfpga">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs vcc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
@@ -42,7 +50,12 @@ echo "sta">>raptor.tcl
 echo "power">>raptor.tcl  
 echo "bitstream">>raptor.tcl  
 
+start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
+end_raptor=`date +%s`
+runtime_raptor=$((end_raptor-start_raptor))
+echo "\nTotal RunTime: $runtime_raptor sec">>raptor.log
+raptor --version>>raptor.log
 
 string="_post_route"
 while read line; do
@@ -88,8 +101,13 @@ primitive="/nfs_scratch/scratch/CompilerValidation/abdul_hameed/zaheer/ArchBench
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
+start_post_route=`date +%s`
 timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
 ./simv | tee -a post_route_sim.log
+end_post_route=`date +%s`
+runtime_post_route=$((end_post_route-start_post_route))
+echo "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+
 while read line; do
         if [[ $line == *"All Comparison Matched"* ]]
         then
@@ -104,7 +122,17 @@ done < post_route_sim.log
 cd ..
 [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
+start_bitstream=`date +%s`
 timeout 4m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 ./simv | tee -a bitstream_sim.log
+end_bitstream=`date +%s`
+runtime_bitstream=$((end_bitstream-start_bitstream))
+echo "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
 
-# python3 ../../scripts/parser.py
+cd $main_path
+mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log .
+mv ./$design_name\_golden/$design_name\_vcs_post_route_files/post_route_sim.log .
+mv ./$design_name\_golden/raptor.log .
+
+python3 ../../scripts/parser.py 
+
