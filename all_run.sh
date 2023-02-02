@@ -53,3 +53,9 @@ for i in $files; do
     bash bit_sim.sh $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $set_device_size $strategy
     cd $main_path
 done
+
+python3 ./scripts/combine_json.py
+
+python3 ./scripts/compare_json.py
+
+[ $? -eq 1 ] && exit 1 || exit 0

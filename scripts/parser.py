@@ -143,7 +143,7 @@ def main():
     with open('../../scripts/keywords.json', 'r') as f:
         log_line_keys_map = json.load(f)
     data = parse_log_files(files, log_line_keys_map)
-    with open('golden_data.json', 'w') as f:
+    with open('parsed_data.json', 'w') as f:
         json.dump(data, f, indent=4)
 
 if __name__ == '__main__':
