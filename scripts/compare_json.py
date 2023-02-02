@@ -84,4 +84,4 @@ def compare_jsons(golden_json_file, new_json_file):
                         return
     print("passed")
 
-compare_jsons("golden_data_final.json", "/nfs_scratch/scratch/CompilerValidation/abdul_hameed/data_final.json")
+compare_jsons("golden_data_final.json", "new_data.json")
