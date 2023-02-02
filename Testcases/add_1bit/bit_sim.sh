@@ -39,7 +39,7 @@ echo "add_library_ext .v .sv">>raptor.tcl
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
 echo "set_device_size $set_device_size">>raptor.tcl 
-echo "custom_openfpga_script ../$design_name\_custom.openfpga">>raptor.tcl
+echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs vcc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
@@ -54,7 +54,7 @@ start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
 end_raptor=`date +%s`
 runtime_raptor=$((end_raptor-start_raptor))
-echo "\nTotal RunTime: $runtime_raptor sec">>raptor.log
+echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
 raptor --version>>raptor.log
 
 string="_post_route"
@@ -97,7 +97,7 @@ TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis2/primitives.v"`
-primitive="/nfs_scratch/scratch/CompilerValidation/abdul_hameed/zaheer/ArchBench/primitives.v"
+primitive="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/test/ArchBench/primitives.v"
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
@@ -106,7 +106,7 @@ timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $
 ./simv | tee -a post_route_sim.log
 end_post_route=`date +%s`
 runtime_post_route=$((end_post_route-start_post_route))
-echo "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
 
 while read line; do
         if [[ $line == *"All Comparison Matched"* ]]
@@ -127,7 +127,7 @@ timeout 4m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee b
 ./simv | tee -a bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
-echo "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
+echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
 
 cd $main_path
 mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log .
