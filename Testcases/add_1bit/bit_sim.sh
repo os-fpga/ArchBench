@@ -96,8 +96,8 @@ lut_map=`find $library -wholename "*/common/simlib.v"`
 TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
-primitive=`find $library -wholename "*/genesis2/primitives.v"`
-primitive="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/test/ArchBench/primitives.v"
+# primitive=`find $library -wholename "*/genesis2/primitives.v"`
+primitive="$main_path/../../primitives.v"
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
