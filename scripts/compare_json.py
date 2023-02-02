@@ -44,8 +44,15 @@ def compare_jsons(golden_json_file, new_json_file):
                     if golden_json[key][sub_key][last_key] and "MB" in golden_json[key][sub_key][last_key]:
                         g_value = float(golden_json[key][sub_key][last_key].split("MB")[0])
                         delta_runtime = 0.1 * g_value
+                    elif golden_json[key][sub_key][last_key] and "Mb" in golden_json[key][sub_key][last_key]:
+                        g_value = float(golden_json[key][sub_key][last_key].split("Mb")[0])
+                        delta_runtime = 0.1 * g_value
+
                     if new_json[key][sub_key][last_key] and "MB" in new_json[key][sub_key][last_key]:
                         n_value = float(new_json[key][sub_key][last_key].split("MB")[0])
+                    elif new_json[key][sub_key][last_key] and "Mb" in new_json[key][sub_key][last_key]:
+                        n_value = float(new_json[key][sub_key][last_key].split("Mb")[0])
+
                     if abs(g_value - n_value) > delta_runtime:
                         print("Memory difference in " +design_name+ " for " +file_name+ " is more than 10%: Test failed")
                         sys.exit(1)
