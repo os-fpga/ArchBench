@@ -55,3 +55,5 @@ for i in $files; do
 done
 
 python3 ./scripts/combine_json.py
+
+python3 ./scripts/compare_json.py
