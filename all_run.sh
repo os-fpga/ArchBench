@@ -57,3 +57,5 @@ done
 python3 ./scripts/combine_json.py
 
 python3 ./scripts/compare_json.py
+
+[ $? -eq 1 ] && exit 1 || exit 0
