@@ -32,6 +32,7 @@ def parse_log_files(files, log_line_keys_map):
             status_bitstream = []
             sum_dffs = 0
             sum_dsps = 0
+            sum_brams = 0
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
@@ -86,9 +87,7 @@ def parse_log_files(files, log_line_keys_map):
                             elif log_line_key == 'Status':
                                 data[file][log_line_key] = 'Pass' if ' '.join(line.split(log_line_keyword)[1].split(" ")[i] for i in [2,3,4]).split('\n')[0] == "bitstream is generated" else 'Fail'
                             elif log_line_key == 'LUTs':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
-                            elif log_line_key == 'BRAMs': 
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
+                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]  
 
 #                   The code first checks if the log line key
 #                   is equal to "DSPs" and "DFFs" 
@@ -119,7 +118,21 @@ def parse_log_files(files, log_line_keys_map):
                                                 sum_dffs = sum_dffs + int(var)
                                                 data[file][log_line_key] = str(sum_dffs)
                                             except ValueError:
-                                                data[file][log_line_key] = '0'   
+                                                data[file][log_line_key] = '0' 
+    
+                        elif log_line_key == 'BRAMs':
+                            brams_keywords = log_line_keyword.split(',')
+                            for brams_keyword in brams_keywords:
+                                if brams_keyword in line:
+                                    for var in line.split(brams_keyword)[1].strip().split():
+                                    # Applying error - handling method
+                                            try:
+                                                # try converting to integer
+                                                sum_brams = sum_brams + int(var)
+                                                data[file][log_line_key] = str(sum_brams)
+                                            except ValueError:
+                                                data[file][log_line_key] = '0'  
+                            # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
     return data
 
 def main():
@@ -130,7 +143,7 @@ def main():
     with open('../../scripts/keywords.json', 'r') as f:
         log_line_keys_map = json.load(f)
     data = parse_log_files(files, log_line_keys_map)
-    with open('parsed_data.json', 'w') as f:
+    with open('golden_data.json', 'w') as f:
         json.dump(data, f, indent=4)
 
 if __name__ == '__main__':
