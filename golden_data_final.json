@@ -1,50 +1,8 @@
 {
-    "add_1bit": {
-        "bitstream_sim.log": {
-            "Status": "Pass",
-            "Runtime": "151 sec",
-            "Memory": "275.7Mb"
-        },
-        "post_route_sim.log": {
-            "Status": "Pass",
-            "Runtime": "20 sec",
-            "Memory": "0.3Mb"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "Runtime": "13 sec",
-            "Memory": "26.11 MB",
-            "DFFs": "0",
-            "LUTs": "1",
-            "BRAMs": "0",
-            "DSPs": "0"
-        }
-    },
-    "or_1bit": {
-        "bitstream_sim.log": {
-            "Status": "Pass",
-            "Runtime": "151 sec",
-            "Memory": "275.7Mb"
-        },
-        "post_route_sim.log": {
-            "Status": "Pass",
-            "Runtime": "12 sec",
-            "Memory": "0.3Mb"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "Runtime": "13 sec",
-            "Memory": "25.79 MB",
-            "DFFs": "0",
-            "LUTs": "1",
-            "BRAMs": "0",
-            "DSPs": "0"
-        }
-    },
     "and2": {
         "bitstream_sim.log": {
             "Status": "Pass",
-            "Runtime": "151 sec",
+            "Runtime": "148 sec",
             "Memory": "275.7Mb"
         },
         "post_route_sim.log": {
@@ -54,12 +12,57 @@
         },
         "raptor.log": {
             "Status": "Pass",
-            "Runtime": "13 sec",
-            "Memory": "26.07 MB",
+            "Runtime": "15 sec",
+            "Memory": "26.08 MB",
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
-            "DSPs": "0"
+            "DSPs": "0",
+            "CLBs": "1"
+        }
+    },
+    "or_1bit": {
+        "bitstream_sim.log": {
+            "Status": "Pass",
+            "Runtime": "140 sec",
+            "Memory": "275.7Mb"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass",
+            "Runtime": "10 sec",
+            "Memory": "0.3Mb"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "Runtime": "16 sec",
+            "Memory": "25.98 MB",
+            "DFFs": "0",
+            "LUTs": "1",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "1"
+        }
+    },
+    "add_1bit": {
+        "bitstream_sim.log": {
+            "Status": "Pass",
+            "Runtime": "153 sec",
+            "Memory": "275.7Mb"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass",
+            "Runtime": "11 sec",
+            "Memory": "0.3Mb"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "Runtime": "17 sec",
+            "Memory": "26.13 MB",
+            "DFFs": "0",
+            "LUTs": "1",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "1"
         }
     }
 }

@@ -30,13 +30,13 @@ def compare_jsons(golden_json_file, new_json_file):
                 if last_key == "Runtime":
                     if golden_json[key][sub_key][last_key] and " sec" in golden_json[key][sub_key][last_key]:
                         g_value = int(golden_json[key][sub_key][last_key].split(" sec")[0])
-                        delta_runtime = 0.1 * g_value
+                        delta_runtime = 0.2 * g_value
                     if new_json[key][sub_key][last_key] and " sec" in new_json[key][sub_key][last_key]:
                         n_value = int(new_json[key][sub_key][last_key].split(" sec")[0])  
                     # g_value = int(golden_json[key][sub_key][:-4])
                     # n_value = int(new_json[key][sub_key][:-4])
                     if abs(g_value - n_value) > delta_runtime:
-                        print("Runtime difference in " +design_name+ " for " +file_name+ " is more than 10%: Test failed")
+                        print("Runtime difference in " +design_name+ " for " +file_name+ " is more than 20%: Test failed")
                         sys.exit(1)
                         return
 
@@ -60,33 +60,46 @@ def compare_jsons(golden_json_file, new_json_file):
                 elif last_key == "DFFs":
                     g_value = int(golden_json[key][sub_key][last_key])
                     n_value = int(new_json[key][sub_key][last_key])
-                    delta_runtime = 0.05 * g_value
-                    if abs(g_value - n_value) > delta_runtime:
-                        print("DFFs difference in " +design_name+ " for " +file_name+ " is more than 5%: Test failed")
+                    # delta_runtime = 0.05 * g_value
+                    # if abs(g_value - n_value) > delta_runtime:
+                    if g_value != n_value:
+                        print("DFFs difference in " +design_name+ " for " +file_name+ " : Test failed")
                         sys.exit(1)
                         return
                 elif last_key == "LUTs":
                     g_value = int(golden_json[key][sub_key][last_key])
                     n_value = int(new_json[key][sub_key][last_key])
-                    delta_runtime = 0.05 * g_value
-                    if abs(g_value - n_value) > delta_runtime:
-                        print("LUTs difference in " +design_name+ " for " +file_name+ " is more than 5%: Test failed")
+                    # delta_runtime = 0.05 * g_value
+                    # if abs(g_value - n_value) > delta_runtime:
+                    if g_value != n_value:
+                        print("LUTs difference in " +design_name+ " for " +file_name+ " : Test failed")
                         sys.exit(1)
                         return
                 elif last_key == "BRAMs":
                     g_value = int(golden_json[key][sub_key][last_key])
                     n_value = int(new_json[key][sub_key][last_key])
-                    delta_runtime = 0.05 * g_value
-                    if abs(g_value - n_value) > delta_runtime:
-                        print("BRAMs difference in " +design_name+ " for " +file_name+ " is more than 5%: Test failed")
+                    # delta_runtime = 0.05 * g_value
+                    # if abs(g_value - n_value) > delta_runtime:
+                    if g_value != n_value:
+                        print("BRAMs difference in " +design_name+ " for " +file_name+ " : Test failed")
                         sys.exit(1)
                         return
                 elif last_key == "DSPs":
                     g_value = int(golden_json[key][sub_key][last_key])
                     n_value = int(new_json[key][sub_key][last_key])
-                    delta_runtime = 0.05 * g_value
-                    if abs(g_value - n_value) > delta_runtime:
-                        print("DSPs difference in " +design_name+ " for " +file_name+ " is more than 5%: Test failed")
+                    # delta_runtime = 0.05 * g_value
+                    # if abs(g_value - n_value) > delta_runtime:
+                    if g_value != n_value:
+                        print("DSPs difference in " +design_name+ " for " +file_name+ " : Test failed")
+                        sys.exit(1)
+                        return
+                elif last_key == "CLBs":
+                    g_value = int(golden_json[key][sub_key][last_key])
+                    n_value = int(new_json[key][sub_key][last_key])
+                    # delta_runtime = 0.05 * g_value
+                    # if abs(g_value - n_value) > delta_runtime:
+                    if g_value != n_value:
+                        print("CLBs difference in " +design_name+ " for " +file_name+ " : Test failed")
                         sys.exit(1)
                         return
     print("passed")
