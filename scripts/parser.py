@@ -33,6 +33,8 @@ def parse_log_files(files, log_line_keys_map):
             sum_dffs = 0
             sum_dsps = 0
             sum_brams = 0
+            start_print_stats = 0
+            start_pb_usage = 0
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
@@ -65,16 +67,28 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()      
                             elif log_line_key == 'Runtime':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
-            start = 0
+            
             ###raptor.log###
             # Looping through each line in the log file
             if file == "raptor.log":
                 #start looping from end index of log and check the index where Printing statistics. occured, store in start variable
                 for i in range(len(lines) - 1, -1, -1):
                     if "Printing statistics." in lines[i]:
-                        start = i
+                        start_print_stats = i
                         break
-                for line in lines[start+1:]:
+                for i in range(len(lines) - 1, -1, -1):
+                    if "Printing statistics." in lines[i]:
+                        start_pb_usage = i
+                        break
+                for line in lines[start_pb_usage+1:]:
+                    for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                        # Checking if the keyword is in the current line
+                        if log_line_keyword in line:
+                            # Checking the file name and updating the value of the log line key accordingly
+                            if log_line_key == 'CLBs':
+                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]      
+                            
+                for line in lines[start_print_stats+1:]:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line
