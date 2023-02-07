@@ -10,6 +10,7 @@ repack_design_constraint_file=$4
 bitstream_annotation_file=$5
 set_device_size=$6
 strategy=$7
+default=$8
 
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
 [ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
@@ -17,7 +18,7 @@ strategy=$7
 [ -f post_route_sim.log ] && rm -fr post_route_sim.log
 [ -f raptor.log ] && rm -fr raptor.log
 
-python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file
+python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
