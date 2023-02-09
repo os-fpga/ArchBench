@@ -2,7 +2,7 @@
 
 main_path=$PWD
 
-design_name="dffnsre_inst_1"
+design_name=${PWD##*/}
 vpr_file=$1
 openfpga_file=$2
 fixed_sim_openfpga_file=$3
