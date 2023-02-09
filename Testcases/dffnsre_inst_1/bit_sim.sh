@@ -2,7 +2,7 @@
 
 main_path=$PWD
 
-design_name="dffnsre_inst_1"
+design_name=${PWD##*/}
 vpr_file=$1
 openfpga_file=$2
 fixed_sim_openfpga_file=$3
@@ -88,15 +88,15 @@ else
 fi
 
 
-bram_sim=`find $library -wholename "*/genesis2/brams_sim.v"`    
-cell_path=`find $library -wholename "*/genesis2/cells_sim.v"`
-dsp_sim=`find $library -wholename "*/genesis2/dsp_sim.v"`
-dsp_map=`find $library -wholename "*/genesis2/dsp_map.v"`
-dsp_final_map=`find $library -wholename "*/genesis2/dsp_final_map.v"`
+bram_sim=`find $library -wholename "*/genesis/brams_sim.v"`    
+cell_path=`find $library -wholename "*/genesis/cells_sim.v"`
+dsp_sim=`find $library -wholename "*/genesis/dsp_sim.v"`
+dsp_map=`find $library -wholename "*/genesis/dsp_map.v"`
+dsp_final_map=`find $library -wholename "*/genesis/dsp_final_map.v"`
 lut_map=`find $library -wholename "*/common/simlib.v"`
-TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
-ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
-sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
+TDP18K_FIFO=`find $library -wholename "*/genesis/TDP18K_FIFO.v"`
+ufifo_ctl=`find $library -wholename "*/genesis/ufifo_ctl.v"`
+sram1024x18=`find $library -wholename "*/genesis/sram1024x18.v"`
 # primitive=`find $library -wholename "*/genesis2/primitives.v"`
 primitive="$main_path/../../primitives.v"
 

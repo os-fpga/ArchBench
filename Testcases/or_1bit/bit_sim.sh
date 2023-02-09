@@ -2,7 +2,7 @@
 
 main_path=$PWD
 
-design_name="or_1bit"
+design_name=${PWD##*/}
 vpr_file=$1
 openfpga_file=$2
 fixed_sim_openfpga_file=$3
