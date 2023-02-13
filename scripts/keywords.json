@@ -1,13 +1,9 @@
 {   
     "bitstream_sim.log": {
-        "Status": "Status: ",
-        "Runtime": "RunTime: ",
-        "Memory": " Data structure size: "
+        "Status": "Status: "
     },
     "post_route_sim.log": {
-        "Status": "Simulation ",
-        "Runtime": "RunTime: ",
-        "Memory": " Data structure size: "
+        "Status": "Simulation "
     },
     "raptor.log": {
         "Status": "BIT: Design",
