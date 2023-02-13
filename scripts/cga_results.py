@@ -260,5 +260,5 @@ def cga_results():
 
 
 result=cga_results()
-with open('cga_result.json', 'w') as f:
+with open('CGA_result.json', 'w') as f:
         json.dump(result, f, indent=4)
