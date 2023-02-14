@@ -17,6 +17,10 @@
             "CLBs": "1",
             "FLE_Percentage_used": "0.3472222222222222",
             "Metal_Percentage": "0.05808080808080808"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "577 ms.",
+            "Router_time": "1173 ms."
         }
     },
     "or_1bit": {
@@ -37,6 +41,10 @@
             "CLBs": "1",
             "FLE_Percentage_used": "0.3472222222222222",
             "Metal_Percentage": "0.05808080808080808"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "613 ms.",
+            "Router_time": "1136 ms."
         }
     },
     "add_1bit": {
@@ -57,6 +65,10 @@
             "CLBs": "1",
             "FLE_Percentage_used": "0.3472222222222222",
             "Metal_Percentage": "0.05808080808080808"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "609 ms.",
+            "Router_time": "1162 ms."
         }
     }
 }
