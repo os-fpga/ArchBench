@@ -80,6 +80,18 @@ def parse_log_files(files, log_line_keys_map):
                     if "Printing statistics." in lines[i]:
                         start_pb_usage = i
                         break
+                for i in range(len(lines) - 1, -1, -1):
+                    if "Pb types usage..." in lines[i]:
+                        start_pb_type_usage = i
+                        break
+                for i in range(len(lines) - 1, -1, -1):
+                    if "blocks of type: clb" in lines[i]:
+                        blocks_of_type_clb = i
+                        break
+                for i in range(len(lines) - 1, -1, -1):
+                    if "Total wirelength:" in lines[i]:
+                        line_of_total_wirelength = i
+                        break
                 for line in lines[start_pb_usage+1:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line
@@ -87,7 +99,42 @@ def parse_log_files(files, log_line_keys_map):
                             # Checking the file name and updating the value of the log line key accordingly
                             if log_line_key == 'CLBs':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]      
-                            
+                # parsing the percentage of fle used from raptor.log
+                for line in lines[start_pb_type_usage+1:]:
+                    if "fle            :" in line:
+                        fle_used=line.split()[2].strip()
+                for line in lines[blocks_of_type_clb:]:
+                    if "blocks of type: clb" in line:
+                        total_clbs=line.split(log_line_keyword)[0].strip().split()[0]
+                        total_fles=8*int(total_clbs) # 100 * (#fle_wrapper) / (8 * #clb). 
+                        fle_percentage=100*int(fle_used)/int(total_fles)
+                    for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                        if log_line_key == 'FLE_Percentage_used':
+                            data[file][log_line_key] = str(fle_percentage)
+
+                # parsing the percentage of metal used from raptor.log 
+                for i in range(len(lines) - 1, -1, -1):
+                    if "Total tracks in x-direction:" in lines[i]:
+                        line_of_total_track_x = i
+                        y_directed_channel=lines[line_of_total_track_x-2].strip().split()[0]
+                        break
+                for i in range(len(lines) - 1, -1, -1):
+                    if "Y - Directed channels:" in lines[i]:
+                        line_of_total_track_y = i
+                        x_directed_channel=lines[line_of_total_track_y-1].strip().split()[0]
+                        break
+                for line in lines[line_of_total_wirelength:]:
+                    if "Total wirelength:" in line:
+                        total_wirelength=line.split()[2].split(",")[0]  
+                    if "Total tracks in x-direction:" in line:
+                        x_direction=line.split()[4].split(",")[0]
+                        y_direction=line.split()[7]
+                        total_available_wirelength=int(x_direction)*(int(y_directed_channel)+1) + int(y_direction)*(int(x_directed_channel)+1)              # Total available wirelength will be 720 * (10 + 1) + 1760 * (8 + 1)
+                        metal_percentage=100*int(total_wirelength)/int(total_available_wirelength)    #%metal used will be 100 * total_wirelength / total_available.
+                for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                    if log_line_key == 'Metal_Percentage_used':
+                        data[file][log_line_key] = str(metal_percentage)
+
                 for line in lines[start_print_stats+1:]:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
