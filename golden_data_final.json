@@ -1,14 +1,10 @@
 {
     "and2": {
         "bitstream_sim.log": {
-            "Status": "Pass",
-            "Runtime": "148 sec",
-            "Memory": "275.7Mb"
+            "Status": "Pass"
         },
         "post_route_sim.log": {
-            "Status": "Pass",
-            "Runtime": "11 sec",
-            "Memory": "0.3Mb"
+            "Status": "Pass"
         },
         "raptor.log": {
             "Status": "Pass",
@@ -18,19 +14,17 @@
             "LUTs": "1",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "1"
+            "CLBs": "1",
+            "FLE_Percentage_used": "0.3472222222222222",
+            "Metal_Percentage": "0.05808080808080808"
         }
     },
     "or_1bit": {
         "bitstream_sim.log": {
-            "Status": "Pass",
-            "Runtime": "140 sec",
-            "Memory": "275.7Mb"
+            "Status": "Pass"
         },
         "post_route_sim.log": {
-            "Status": "Pass",
-            "Runtime": "10 sec",
-            "Memory": "0.3Mb"
+            "Status": "Pass"
         },
         "raptor.log": {
             "Status": "Pass",
@@ -40,19 +34,17 @@
             "LUTs": "1",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "1"
+            "CLBs": "1",
+            "FLE_Percentage_used": "0.3472222222222222",
+            "Metal_Percentage": "0.05808080808080808"
         }
     },
     "add_1bit": {
         "bitstream_sim.log": {
-            "Status": "Pass",
-            "Runtime": "153 sec",
-            "Memory": "275.7Mb"
+            "Status": "Pass"
         },
         "post_route_sim.log": {
-            "Status": "Pass",
-            "Runtime": "11 sec",
-            "Memory": "0.3Mb"
+            "Status": "Pass"
         },
         "raptor.log": {
             "Status": "Pass",
@@ -62,7 +54,9 @@
             "LUTs": "1",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "1"
+            "CLBs": "1",
+            "FLE_Percentage_used": "0.3472222222222222",
+            "Metal_Percentage": "0.05808080808080808"
         }
     }
 }
