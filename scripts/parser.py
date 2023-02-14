@@ -194,11 +194,30 @@ def parse_log_files(files, log_line_keys_map):
                                             except ValueError:
                                                 data[file][log_line_key] = '0'  
                             # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
+            # parse the router and packer time
+            if file == "raptor_perf.log":
+                for i in range(len(lines)):
+                    if "Packing has started" in lines[i]:
+                        start_print_stats = i
+                        packer_time=lines[start_print_stats+2].strip().split()[4]+" "+lines[start_print_stats+2].strip().split()[5]
+                        print(packer_time)
+                        break
+                for i in range(len(lines)):
+                    if "Route has started" in lines[i]:
+                        start_print_stats = i
+                        router_time=lines[start_print_stats+2].strip().split()[4]+" "+lines[start_print_stats+2].strip().split()[5]
+                        print(router_time)
+                        break
+                for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                    if log_line_key == 'Packer_time':
+                        data[file][log_line_key] = str(packer_time)
+                    if log_line_key == 'Router_time':
+                        data[file][log_line_key] = str(router_time)
     return data
 
 def main():
     # List of log file names to be parsed
-    files = ['bitstream_sim.log', 'post_route_sim.log', 'raptor.log']
+    files = ['bitstream_sim.log', 'post_route_sim.log', 'raptor.log','raptor_perf.log']
     # files = [sys.argv[1], sys.argv[2], sys.argv[3]]
     # Open the keywords file and read the keywords mapping
     with open('../../scripts/keywords.json', 'r') as f:
