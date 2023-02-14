@@ -16,5 +16,9 @@
         "CLBs": " clb             : ",
         "FLE_Percentage_used": " fle            : ",
         "Metal_Percentage_used": "X - Directed channels:"
+    },
+    "raptor_perf.log": {
+        "Packer_time":"Packing has started",
+        "Router_time":"Route has started"
     }
 }
