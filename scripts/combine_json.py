@@ -13,7 +13,7 @@ for root, dirs, files in os.walk(main_path):
     if "parsed_data.json" in files:
         files_json.append(os.path.join(root, "parsed_data.json"))
         
-print(files_json)
+# print(files_json)
 # Create an empty dictionary
 data_final = {}
 
