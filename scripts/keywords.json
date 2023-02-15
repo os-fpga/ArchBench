@@ -7,8 +7,6 @@
     },
     "raptor.log": {
         "Status": "BIT: Design",
-        "Runtime": "RunTime: ",
-        "Memory": "MEM: ",
         "DFFs": " dff , dffn , sdff , sdffn , dffr , dffnr , dffe , dffne , sdffre , sdffnre , dffre , dffnre , dffsre , dffnsre ",
         "LUTs": " $lut ",
         "BRAMs": " RS_TDP36K , TDP36K ",

@@ -16,7 +16,7 @@
             "DSPs": "0",
             "CLBs": "1",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage": "0.05808080808080808"
+            "Metal_Percentage_used": "0.05808080808080808"
         },
         "raptor_perf.log": {
             "Packer_time": "577 ms.",
@@ -40,7 +40,7 @@
             "DSPs": "0",
             "CLBs": "1",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage": "0.05808080808080808"
+            "Metal_Percentage_used": "0.05808080808080808"
         },
         "raptor_perf.log": {
             "Packer_time": "613 ms.",
@@ -64,7 +64,7 @@
             "DSPs": "0",
             "CLBs": "1",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage": "0.05808080808080808"
+            "Metal_Percentage_used": "0.05808080808080808"
         },
         "raptor_perf.log": {
             "Packer_time": "609 ms.",

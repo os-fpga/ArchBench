@@ -256,7 +256,79 @@ def cga_results():
                                                         diff=int_clb_new-int_clb_golden
                                                         golden_memory_unit="Failed. Latest CLBs are greater than Golden by "+str(diff)+". Golden: "+str(int_clb_golden) +", Latest: "+ str(int_clb_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
-    return result
+                                            if "FLE_Percentage_used" in golden_sub_key:
+                                                if "FLE_Percentage_used" in new_sub_key:
+                                                    int_fle_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
+                                                    int_fle_new=float(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    if (int_fle_golden==int_fle_new):
+                                                        golden_memory_unit="Passed. FLE_Percentage_used are same."+" Golden: "+str(int_fle_golden) +", Latest: "+ str(int_fle_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_fle_golden>int_fle_new):
+                                                        diff=int_fle_golden-int_fle_new
+                                                        golden_memory_unit="Passed. Golden FLE_Percentage_used are greater than Latest by "+str(diff)+". Golden: "+str(int_fle_golden) +", Latest: "+ str(int_fle_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    else:
+                                                        diff=int_fle_new-int_fle_golden
+                                                        golden_memory_unit="Failed. Latest FLE_Percentage_used are greater than Golden by "+str(diff)+". Golden: "+str(int_fle_golden) +", Latest: "+ str(int_fle_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                            if "Metal_Percentage" in golden_sub_key:
+                                                if "Metal_Percentage" in new_sub_key:
+                                                    int_metal_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
+                                                    int_metal_new=float(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    if (int_metal_golden==int_metal_new):
+                                                        golden_memory_unit="Passed. Metal_Percentage are same."+" Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_metal_golden>int_metal_new):
+                                                        diff=int_metal_golden-int_metal_new
+                                                        golden_memory_unit="Passed. Golden Metal_Percentage are greater than Latest by "+str(diff)+". Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    else:
+                                                        diff=int_metal_new-int_metal_golden
+                                                        golden_memory_unit="Failed. Latest Metal_Percentage are greater than Golden by "+str(diff)+". Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                        if golden_key=="raptor_perf.log":
+                                            if "Packer_time" in golden_sub_key:
+                                                if "Packer_time" in new_sub_key:
+                                                    int_packer_golden=int(golden_data[golden_log_line_key][golden_key][golden_sub_key].split()[0])
+                                                    int_packer_new=int(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
+                                                    percent10=int((10*int_packer_golden)/100)+int_packer_golden
+                                                    if (int_packer_golden==int_packer_new):
+                                                        golden_memory_unit="Passed. Packer_time are same."+" Golden: "+str(int_packer_golden) +", Latest: "+ str(int_packer_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_packer_new>int_packer_golden and int_packer_new<percent10):
+                                                        diff=int_packer_golden-int_packer_new
+                                                        golden_memory_unit="Passed. Golden Packer_time are greater than Latest by "+str(diff)+". Golden: "+str(int_packer_golden) +", Latest: "+ str(int_packer_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_packer_golden>int_packer_new):
+                                                        diff=int_packer_golden-int_packer_new
+                                                        golden_memory_unit="Passed. Golden Packer_time are greater than Latest by "+str(diff)+". Golden: "+str(int_packer_golden) +", Latest: "+ str(int_packer_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    else:
+                                                        diff=int_packer_new-int_packer_golden
+                                                        golden_memory_unit="Failed. Latest Packer_time are greater than Golden by "+str(diff)+". Golden: "+str(int_packer_golden) +", Latest: "+ str(int_packer_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                            if "Router_time" in golden_sub_key:
+                                                if "Router_time" in new_sub_key:
+                                                    int_router_golden=int(golden_data[golden_log_line_key][golden_key][golden_sub_key].split()[0])
+                                                    int_router_new=int(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
+                                                    percent10=int((10*int_router_golden)/100)+int_router_golden
+                                                    if (int_router_golden==int_router_new):
+                                                        golden_memory_unit="Passed. Router_time are same."+" Golden: "+str(int_router_golden) +", Latest: "+ str(int_router_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_router_new>int_router_golden and int_router_new<percent10):
+                                                        diff=int_router_golden-int_router_new
+                                                        golden_memory_unit="Passed. Golden Router_time are greater than Latest by "+str(diff)+". Golden: "+str(int_router_golden) +", Latest: "+ str(int_router_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_router_golden>int_router_new):
+                                                        diff=int_router_golden-int_router_new
+                                                        golden_memory_unit="Passed. Golden Router_time are greater than Latest by "+str(diff)+". Golden: "+str(int_router_golden) +", Latest: "+ str(int_router_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    else:
+                                                        diff=int_router_new-int_router_golden
+                                                        golden_memory_unit="Failed. Latest Router_time are greater than Golden by "+str(diff)+". Golden: "+str(int_router_golden) +", Latest: "+ str(int_router_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+
+    return result               
 
 
 result=cga_results()
