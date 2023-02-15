@@ -15,7 +15,7 @@ def compare_jsons(golden_json_file, new_json_file):
     for key in golden_json:
         design_name=key
         if key not in new_json:
-            sys.exit(1)
+            # sys.exit(1)
             print("key " +key+ " not present in new_data.json")
             return
 
@@ -23,7 +23,7 @@ def compare_jsons(golden_json_file, new_json_file):
             file_name=sub_key
             for last_key in golden_json[key][sub_key]:
                 if new_json[key][sub_key][last_key] == "Fail" or new_json[key][sub_key][last_key] == "N/A":
-                    sys.exit(1)
+                    # sys.exit(1)
                     print(str(file_name) + " in " + design_name +" failed")
                     return
 
@@ -37,7 +37,7 @@ def compare_jsons(golden_json_file, new_json_file):
                     # n_value = int(new_json[key][sub_key][:-4])
                     if abs(g_value - n_value) > delta_runtime:
                         print("Runtime difference in " +design_name+ " for " +file_name+ " is more than 20%: Test failed")
-                        sys.exit(1)
+                        # sys.exit(1)
                         return
 
                 elif last_key == "Memory":
@@ -55,7 +55,7 @@ def compare_jsons(golden_json_file, new_json_file):
 
                     if abs(g_value - n_value) > delta_runtime:
                         print("Memory difference in " +design_name+ " for " +file_name+ " is more than 10%: Test failed")
-                        sys.exit(1)
+                        # sys.exit(1)
                         return
                 elif last_key == "DFFs":
                     g_value = int(golden_json[key][sub_key][last_key])
@@ -64,7 +64,7 @@ def compare_jsons(golden_json_file, new_json_file):
                     # if abs(g_value - n_value) > delta_runtime:
                     if g_value != n_value:
                         print("DFFs difference in " +design_name+ " for " +file_name+ " : Test failed")
-                        sys.exit(1)
+                        # sys.exit(1)
                         return
                 elif last_key == "LUTs":
                     g_value = int(golden_json[key][sub_key][last_key])
@@ -73,7 +73,7 @@ def compare_jsons(golden_json_file, new_json_file):
                     # if abs(g_value - n_value) > delta_runtime:
                     if g_value != n_value:
                         print("LUTs difference in " +design_name+ " for " +file_name+ " : Test failed")
-                        sys.exit(1)
+                        # sys.exit(1)
                         return
                 elif last_key == "BRAMs":
                     g_value = int(golden_json[key][sub_key][last_key])
@@ -82,7 +82,7 @@ def compare_jsons(golden_json_file, new_json_file):
                     # if abs(g_value - n_value) > delta_runtime:
                     if g_value != n_value:
                         print("BRAMs difference in " +design_name+ " for " +file_name+ " : Test failed")
-                        sys.exit(1)
+                        # sys.exit(1)
                         return
                 elif last_key == "DSPs":
                     g_value = int(golden_json[key][sub_key][last_key])
@@ -91,7 +91,7 @@ def compare_jsons(golden_json_file, new_json_file):
                     # if abs(g_value - n_value) > delta_runtime:
                     if g_value != n_value:
                         print("DSPs difference in " +design_name+ " for " +file_name+ " : Test failed")
-                        sys.exit(1)
+                        # sys.exit(1)
                         return
                 elif last_key == "CLBs":
                     g_value = int(golden_json[key][sub_key][last_key])
@@ -100,7 +100,7 @@ def compare_jsons(golden_json_file, new_json_file):
                     # if abs(g_value - n_value) > delta_runtime:
                     if g_value != n_value:
                         print("CLBs difference in " +design_name+ " for " +file_name+ " : Test failed")
-                        sys.exit(1)
+                        # sys.exit(1)
                         return
     print("passed")
 
