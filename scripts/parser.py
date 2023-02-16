@@ -15,7 +15,6 @@ def parse_log_files(files, log_line_keys_map):
     # Initializing an empty dictionary to store the parsed data
     data = {}
     for file in files:
-        print("here aaaa",files)
         with open(file, 'r') as f:
             # Adding the current file name as a key to the data dictionary and initializing its value as another dictionary
             data[file] = {}
