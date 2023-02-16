@@ -218,5 +218,27 @@
             "Packer_time": "499 ms.",
             "Router_time": "1473 ms."
         }
+    },
+    "AES_DECRYPT": {
+        "bitstream_sim.log": {
+            "Status": "N/A"
+        },
+        "post_route_sim.log": {
+            "Status": "N/A"
+        },
+        "raptor.log": {
+            "Status": "N/A",
+            "DFFs": "432",
+            "LUTs": "1257",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "0",
+            "FLE_Percentage_used": "0",
+            "Metal_Percentage_used": "0"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "2438 ms.",
+            "Router_time": "0"
+        }
     }
 }

@@ -34,6 +34,12 @@ def parse_log_files(files, log_line_keys_map):
             sum_dsps = 0
             sum_brams = 0
             start_print_stats = 0
+            start_pb_type_usage=0
+            blocks_of_type_clb=0
+            fle_percentage=0
+            line_of_total_wirelength=0
+            metal_percentage=0
+            router_time=0
             start_pb_usage = 0
             ###bitstream.log###
             # Looping through each line in the log file
@@ -215,7 +221,7 @@ def parse_log_files(files, log_line_keys_map):
 
 def main():
     # List of log file names to be parsed
-    files = ['bitstream_sim.log', 'post_route_sim.log', 'raptor.log','raptor_perf.log']
+    files = ['bitstream_sim.log', 'post_route_sim.log','raptor.log','raptor_perf.log']
     # files = [sys.argv[1], sys.argv[2], sys.argv[3]]
     # Open the keywords file and read the keywords mapping
     with open('../../scripts/keywords.json', 'r') as f:
