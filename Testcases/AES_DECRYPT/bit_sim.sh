@@ -14,8 +14,6 @@ default=$8
 
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
 [ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
-[ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
-[ -f post_route_sim.log ] && rm -fr post_route_sim.log
 [ -f raptor.log ] && rm -fr raptor.log
 
 python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
