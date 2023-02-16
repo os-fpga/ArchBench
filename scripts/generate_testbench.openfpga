@@ -1,5 +1,4 @@
-# vpr RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/gemini_vpr.xml \
-vpr CURRENT_PATH/{} \
+vpr RAPTOR_PATH/share/raptor/etc/devices/gemini_compact_10x8/gemini_vpr.xml \
 {} \
 {} \
 --clock_modeling ideal \
@@ -7,26 +6,22 @@ vpr CURRENT_PATH/{} \
 {} \
 {} \
 {} \
---route_chan_width 200 \
+--route_chan_width 192 \
 --sdc_file and2_openfpga.sdc \
 --absorb_buffer_luts off \
 --constant_net_method route \
 --skip_sync_clustering_and_routing_results on \
 --circuit_format {} \
 --allow_dangling_combinational_nodes on
-# --analysis
-# --post_synth_netlist_unconn_inputs vcc
+#--analysis
 
 # Read OpenFPGA architecture definition
-# read_openfpga_arch -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/gemini_openfpga.xml
-read_openfpga_arch -f CURRENT_PATH/{}
+read_openfpga_arch -f RAPTOR_PATH/share/raptor/etc/devices/gemini_compact_10x8/gemini_openfpga.xml
 
 # Read OpenFPGA simulation settings
-# read_openfpga_simulation_setting -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/fixed_sim_openfpga.xml
-read_openfpga_simulation_setting -f CURRENT_PATH/{}
+read_openfpga_simulation_setting -f RAPTOR_PATH/share/raptor/etc/devices/gemini_compact_10x8/fixed_sim_openfpga.xml
 
-# read_openfpga_bitstream_setting -f RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/bitstream_setting.xml
-read_openfpga_bitstream_setting -f CURRENT_PATH/{}
+read_openfpga_bitstream_setting -f RAPTOR_PATH/share/raptor/etc/devices/gemini_compact_10x8/bitstream_setting.xml
 
 # Annotate the OpenFPGA architecture to VPR data base
 # to debug use --verbose options
@@ -40,13 +35,12 @@ lut_truth_table_fixup
 # Build the module graph
 #  - Enabled compression on routing architecture modules
 #  - Enable pin duplication on grid modules
-build_fabric --frame_view --compress_routing --duplicate_grid_pin 
+build_fabric --frame_view --compress_routing --duplicate_grid_pin --load_fabric_key RAPTOR_PATH/share/raptor/etc/devices/gemini_compact_10x8/fabric_key.xml
 
 # Repack the netlist to physical pbs
 # This must be done before bitstream generator and testbench generation
 # Strongly recommend it is done after all the fix-up have been applied
-# repack --design_constraints RAPTOR_PATH/share/raptor/etc/devices/gemini_10x8/fpga_repack_constraints.xml
-repack --design_constraints CURRENT_PATH/{}
+repack --design_constraints RAPTOR_PATH/share/raptor/etc/devices/gemini_compact_10x8/fpga_repack_constraints.xml
 
 build_architecture_bitstream
 
@@ -54,6 +48,8 @@ build_fabric_bitstream
 write_fabric_bitstream --format xml --file {}
 write_fabric_bitstream --format plain_text --file {}
 write_io_mapping -f PinMapping.xml
+
+write_fabric_verilog --file ./SRC --explicit_port_mapping --include_timing --print_user_defined_template --verbose
 
 # Finish and exit OpenFPGA
 exit
