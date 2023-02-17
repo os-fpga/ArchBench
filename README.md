@@ -17,3 +17,9 @@ If you want to give paths to your local architecture paths then provide paths wi
     -b : path for bitstream_annotation.xml file
 
 All of the files should be provided incase of providing these flags.
+
+### Submodules:
+
+Clone the repo with command: git clone git@github.com:RapidSilicon/ArchBench.git
+ 
+There is make file that clones sub_repo openfpga-pd-castor-rs repo and checkout on main branch. To run make file, run the command: make init_submodule
