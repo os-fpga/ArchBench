@@ -303,19 +303,19 @@ def cga_results():
                                                     int_packer_new=int(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
                                                     percent10=int((10*int_packer_golden)/100)+int_packer_golden
                                                     if (int_packer_golden==int_packer_new):
-                                                        golden_memory_unit="Pass. Packer_time are same."+" Golden: "+str(int_packer_golden) +", Latest: "+ str(int_packer_new)
+                                                        golden_memory_unit="Pass. Packer_time is same."+" Golden: "+str(int_packer_golden) +", Latest: "+ str(int_packer_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     elif (int_packer_new>int_packer_golden and int_packer_new<percent10):
                                                         diff=int_packer_new-int_packer_golden
-                                                        golden_memory_unit="Pass. Golden Packer_time are greater than Latest but within 10 percent by "+str(diff)+"ms. Golden: "+str(int_packer_golden) +"ms, Latest: "+ str(int_packer_new)+"ms"
+                                                        golden_memory_unit="Pass. Golden Packer_time is greater than Latest but within 10 percent by "+str(diff)+"ms. Golden: "+str(int_packer_golden) +"ms, Latest: "+ str(int_packer_new)+"ms"
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     elif (int_packer_golden>int_packer_new):
                                                         diff=int_packer_golden-int_packer_new
-                                                        golden_memory_unit="Pass. Golden Packer_time are greater than Latest by "+str(diff)+"ms. Golden: "+str(int_packer_golden) +"ms, Latest: "+ str(int_packer_new)+"ms"
+                                                        golden_memory_unit="Pass. Golden Packer_time is greater than Latest by "+str(diff)+"ms. Golden: "+str(int_packer_golden) +"ms, Latest: "+ str(int_packer_new)+"ms"
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     else:
                                                         diff=int_packer_new-int_packer_golden
-                                                        golden_memory_unit="Fail. Latest Packer_time are greater than Golden by "+str(diff)+"ms. Golden: "+str(int_packer_golden) +"ms, Latest: "+ str(int_packer_new)+"ms"
+                                                        golden_memory_unit="Fail. Latest Packer_time is greater than Golden by "+str(diff)+"ms. Golden: "+str(int_packer_golden) +"ms, Latest: "+ str(int_packer_new)+"ms"
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                             if "Router_time" in golden_sub_key:
                                                 if "Router_time" in new_sub_key:
@@ -323,19 +323,19 @@ def cga_results():
                                                     int_router_new=int(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
                                                     percent10=int((10*int_router_golden)/100)+int_router_golden
                                                     if (int_router_golden==int_router_new):
-                                                        golden_memory_unit="Pass. Router_time are same."+" Golden: "+str(int_router_golden) +", Latest: "+ str(int_router_new)
+                                                        golden_memory_unit="Pass. Router_time is same."+" Golden: "+str(int_router_golden) +", Latest: "+ str(int_router_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     elif (int_router_new>int_router_golden and int_router_new<percent10):
                                                         diff=int_router_new-int_router_golden
-                                                        golden_memory_unit="Pass. Golden Router_time are greater than Latest but within 10 percent by "+str(diff)+"ms. Golden: "+str(int_router_golden) +"ms, Latest: "+ str(int_router_new)+"ms"
+                                                        golden_memory_unit="Pass. Golden Router_time is greater than Latest but within 10 percent by "+str(diff)+"ms. Golden: "+str(int_router_golden) +"ms, Latest: "+ str(int_router_new)+"ms"
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     elif (int_router_golden>int_router_new):
                                                         diff=int_router_golden-int_router_new
-                                                        golden_memory_unit="Pass. Golden Router_time are greater than Latest by "+str(diff)+"ms. Golden: "+str(int_router_golden) +"ms, Latest: "+ str(int_router_new)+"ms"
+                                                        golden_memory_unit="Pass. Golden Router_time is greater than Latest by "+str(diff)+"ms. Golden: "+str(int_router_golden) +"ms, Latest: "+ str(int_router_new)+"ms"
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     else:
                                                         diff=int_router_new-int_router_golden
-                                                        golden_memory_unit="Fail. Latest Router_time are greater than Golden by "+str(diff)+"ms. Golden: "+str(int_router_golden) +"ms, Latest: "+ str(int_router_new)+"ms"
+                                                        golden_memory_unit="Fail. Latest Router_time is greater than Golden by "+str(diff)+"ms. Golden: "+str(int_router_golden) +"ms, Latest: "+ str(int_router_new)+"ms"
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
 
     return result               
