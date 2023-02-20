@@ -1,48 +1,4 @@
 {
-    "up5bit_counter": {
-        "bitstream_sim.log": {
-            "Status": "N/A"
-        },
-        "post_route_sim.log": {
-            "Status": "N/A"
-        },
-        "raptor.log": {
-            "Status": "Fail",
-            "DFFs": "5",
-            "LUTs": "5",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1",
-            "FLE_Percentage_used": "1.3888888888888888",
-            "Metal_Percentage_used": "0.1736111111111111"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "529 ms.",
-            "Router_time": "1145 ms."
-        }
-    },
-    "MultiplierLUT": {
-        "bitstream_sim.log": {
-            "Status": "N/A"
-        },
-        "post_route_sim.log": {
-            "Status": "N/A"
-        },
-        "raptor.log": {
-            "Status": "Fail",
-            "DFFs": "0",
-            "LUTs": "4",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1",
-            "FLE_Percentage_used": "0.6944444444444444",
-            "Metal_Percentage_used": "0.18413299663299662"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "624 ms.",
-            "Router_time": "1119 ms."
-        }
-    },
     "lut_ff_mux": {
         "bitstream_sim.log": {
             "Status": "N/A"
@@ -51,8 +7,8 @@
             "Status": "N/A"
         },
         "raptor.log": {
-            "Status": "Fail",
-            "DFFs": "11",
+            "Status": "Pass",
+            "DFFs": "1",
             "LUTs": "1",
             "BRAMs": "0",
             "DSPs": "0",
@@ -61,8 +17,30 @@
             "Metal_Percentage_used": "0.07628367003367004"
         },
         "raptor_perf.log": {
-            "Packer_time": "743 ms.",
-            "Router_time": "1114 ms."
+            "Packer_time": "548 ms.",
+            "Router_time": "1093 ms."
+        }
+    },
+    "add_1bit": {
+        "bitstream_sim.log": {
+            "Status": "N/A"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "DFFs": "0",
+            "LUTs": "1",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "1",
+            "FLE_Percentage_used": "0.3472222222222222",
+            "Metal_Percentage_used": "0.07628367003367004"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "509 ms.",
+            "Router_time": "1084 ms."
         }
     },
     "and4": {
@@ -73,7 +51,7 @@
             "Status": "N/A"
         },
         "raptor.log": {
-            "Status": "Fail",
+            "Status": "Pass",
             "DFFs": "0",
             "LUTs": "7",
             "BRAMs": "0",
@@ -83,63 +61,19 @@
             "Metal_Percentage_used": "0.7733585858585859"
         },
         "raptor_perf.log": {
-            "Packer_time": "550 ms.",
-            "Router_time": "1136 ms."
+            "Packer_time": "559 ms.",
+            "Router_time": "1215 ms."
         }
     },
-    "mux_8_1_a": {
+    "or_1bit": {
         "bitstream_sim.log": {
             "Status": "N/A"
         },
         "post_route_sim.log": {
-            "Status": "N/A"
+            "Status": "Pass"
         },
         "raptor.log": {
-            "Status": "Fail",
-            "DFFs": "0",
-            "LUTs": "3",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1",
-            "FLE_Percentage_used": "1.0416666666666667",
-            "Metal_Percentage_used": "0.1762415824915825"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "571 ms.",
-            "Router_time": "1238 ms."
-        }
-    },
-    "mux_8_1": {
-        "bitstream_sim.log": {
-            "Status": "N/A"
-        },
-        "post_route_sim.log": {
-            "Status": "N/A"
-        },
-        "raptor.log": {
-            "Status": "Fail",
-            "DFFs": "0",
-            "LUTs": "1",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1",
-            "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage_used": "0.06050084175084175"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "508 ms.",
-            "Router_time": "1109 ms."
-        }
-    },
-    "add_1bit": {
-        "bitstream_sim.log": {
-            "Status": "N/A"
-        },
-        "post_route_sim.log": {
-            "Status": "N/A"
-        },
-        "raptor.log": {
-            "Status": "Fail",
+            "Status": "Pass",
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
@@ -149,11 +83,11 @@
             "Metal_Percentage_used": "0.07628367003367004"
         },
         "raptor_perf.log": {
-            "Packer_time": "497 ms.",
-            "Router_time": "1239 ms."
+            "Packer_time": "498 ms.",
+            "Router_time": "1257 ms."
         }
     },
-    "and2": {
+    "single_port_ram": {
         "bitstream_sim.log": {
             "Status": "N/A"
         },
@@ -161,18 +95,18 @@
             "Status": "N/A"
         },
         "raptor.log": {
-            "Status": "Fail",
-            "DFFs": "0",
-            "LUTs": "1",
+            "Status": "N/A",
+            "DFFs": "518",
+            "LUTs": "246",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "1",
-            "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage_used": "0.07628367003367004"
+            "CLBs": "0",
+            "FLE_Percentage_used": "0",
+            "Metal_Percentage_used": "0"
         },
         "raptor_perf.log": {
-            "Packer_time": "579 ms.",
-            "Router_time": "1115 ms."
+            "Packer_time": "3154 ms.",
+            "Router_time": "0"
         }
     },
     "shift_register": {
@@ -183,21 +117,43 @@
             "Status": "N/A"
         },
         "raptor.log": {
-            "Status": "Fail",
-            "DFFs": "88",
+            "Status": "Pass",
+            "DFFs": "8",
             "LUTs": "10",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "2",
-            "FLE_Percentage_used": "3.125",
-            "Metal_Percentage_used": "0.40772306397306396"
+            "CLBs": "1",
+            "FLE_Percentage_used": "2.7777777777777777",
+            "Metal_Percentage_used": "0.38404882154882153"
         },
         "raptor_perf.log": {
-            "Packer_time": "843 ms.",
-            "Router_time": "1235 ms."
+            "Packer_time": "611 ms.",
+            "Router_time": "1175 ms."
         }
     },
-    "or_1bit": {
+    "MultiplierLUT": {
+        "bitstream_sim.log": {
+            "Status": "N/A"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "DFFs": "0",
+            "LUTs": "4",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "1",
+            "FLE_Percentage_used": "0.6944444444444444",
+            "Metal_Percentage_used": "0.13941498316498316"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "589 ms.",
+            "Router_time": "1183 ms."
+        }
+    },
+    "mux_8_1": {
         "bitstream_sim.log": {
             "Status": "N/A"
         },
@@ -205,7 +161,29 @@
             "Status": "N/A"
         },
         "raptor.log": {
-            "Status": "Fail",
+            "Status": "Pass",
+            "DFFs": "0",
+            "LUTs": "1",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "1",
+            "FLE_Percentage_used": "0.3472222222222222",
+            "Metal_Percentage_used": "0.06050084175084175"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "569 ms.",
+            "Router_time": "1073 ms."
+        }
+    },
+    "and2": {
+        "bitstream_sim.log": {
+            "Status": "N/A"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass"
+        },
+        "raptor.log": {
+            "Status": "Pass",
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
@@ -215,8 +193,52 @@
             "Metal_Percentage_used": "0.07628367003367004"
         },
         "raptor_perf.log": {
-            "Packer_time": "499 ms.",
-            "Router_time": "1473 ms."
+            "Packer_time": "629 ms.",
+            "Router_time": "1277 ms."
+        }
+    },
+    "mux_8_1_a": {
+        "bitstream_sim.log": {
+            "Status": "N/A"
+        },
+        "post_route_sim.log": {
+            "Status": "N/A"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "DFFs": "0",
+            "LUTs": "3",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "1",
+            "FLE_Percentage_used": "1.0416666666666667",
+            "Metal_Percentage_used": "0.1762415824915825"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "539 ms.",
+            "Router_time": "1116 ms."
+        }
+    },
+    "up5bit_counter": {
+        "bitstream_sim.log": {
+            "Status": "N/A"
+        },
+        "post_route_sim.log": {
+            "Status": "N/A"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "DFFs": "5",
+            "LUTs": "5",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "1",
+            "FLE_Percentage_used": "1.3888888888888888",
+            "Metal_Percentage_used": "0.1736111111111111"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "508 ms.",
+            "Router_time": "1105 ms."
         }
     },
     "AES_DECRYPT": {
@@ -228,8 +250,8 @@
         },
         "raptor.log": {
             "Status": "N/A",
-            "DFFs": "432",
-            "LUTs": "1257",
+            "DFFs": "144",
+            "LUTs": "1276",
             "BRAMs": "0",
             "DSPs": "0",
             "CLBs": "0",
@@ -237,7 +259,7 @@
             "Metal_Percentage_used": "0"
         },
         "raptor_perf.log": {
-            "Packer_time": "2438 ms.",
+            "Packer_time": "2684 ms.",
             "Router_time": "0"
         }
     }
