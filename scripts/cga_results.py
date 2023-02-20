@@ -140,6 +140,14 @@ def cga_results():
                                                         result[golden_log_line_key][golden_key][golden_sub_key]="Pass"
                                                     else:
                                                         result[golden_log_line_key][golden_key][golden_sub_key]="Fail"
+                                            if "error_msg" in golden_sub_key:
+                                                if "error_msg" in new_sub_key:
+                                                    if golden_data[golden_log_line_key][golden_key][golden_sub_key]==None and new_data[new_log_line_key][new_key][new_sub_key]==None:
+                                                        print("golden_sub_key in golden",golden_data[golden_log_line_key][golden_key][golden_sub_key],new_data[new_log_line_key][new_key][new_sub_key])
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=None
+                                                    else:
+                                                        print(new_data[new_log_line_key][new_key][new_sub_key])
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=new_data[new_log_line_key][new_key][new_sub_key]
                                             if "Runtime" in golden_sub_key:
                                                 if "Runtime" in new_sub_key:
                                                     golden_time=golden_data[golden_log_line_key][golden_key][golden_sub_key].split(" ")
