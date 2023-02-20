@@ -25,7 +25,9 @@ def parse_log_files(files, log_line_keys_map):
             for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                 # Initializing the value for this key as N/A or 0 depending on the key
                     if log_line_key == 'Status':
-                        data[file][log_line_key] = 'N/A'
+                        data[file][log_line_key] = 'Fail'
+                    elif  log_line_key == 'error_msg':
+                        data[file][log_line_key] = None    
                     else:
                         data[file][log_line_key] = '0'
 
@@ -98,6 +100,17 @@ def parse_log_files(files, log_line_keys_map):
                     if "Total wirelength:" in lines[i]:
                         line_of_total_wirelength = i
                         break
+                for line in lines:
+                    # Looping through each key and keyword in the log_line_keys_map for this log file
+                    for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                        # Checking if the keyword is in the current line
+                        if log_line_keyword in line:
+                            # Checking the file name and updating the value of the log line key accordingly
+                            if log_line_key == 'error_msg':
+                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
+                            elif log_line_key == 'Status':
+                                data[file][log_line_key] = 'Pass' if ' '.join(line.split(log_line_keyword)[1].split(" ")[i] for i in [2,3,4]).split('\n')[0] == "bitstream is generated" else 'Fail'
+                            
                 for line in lines[start_pb_usage+1:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line
@@ -151,8 +164,6 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()      
                             elif log_line_key == 'Runtime':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
-                            elif log_line_key == 'Status':
-                                data[file][log_line_key] = 'Pass' if ' '.join(line.split(log_line_keyword)[1].split(" ")[i] for i in [2,3,4]).split('\n')[0] == "bitstream is generated" else 'Fail'
                             elif log_line_key == 'LUTs':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]  
 
@@ -201,6 +212,8 @@ def parse_log_files(files, log_line_keys_map):
                                                 data[file][log_line_key] = '0'  
                             # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
             # parse the router and packer time
+            packer_time=0
+            router_time=0
             if file == "raptor_perf.log":
                 for i in range(len(lines)):
                     if "Packing has started" in lines[i]:
