@@ -8,6 +8,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "1",
             "LUTs": "1",
             "BRAMs": "0",
@@ -30,6 +31,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
@@ -52,6 +54,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "0",
             "LUTs": "7",
             "BRAMs": "0",
@@ -74,6 +77,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
@@ -96,6 +100,7 @@
         },
         "raptor.log": {
             "Status": "N/A",
+            "error_msg": null,
             "DFFs": "518",
             "LUTs": "246",
             "BRAMs": "0",
@@ -118,6 +123,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "8",
             "LUTs": "10",
             "BRAMs": "0",
@@ -140,6 +146,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "0",
             "LUTs": "4",
             "BRAMs": "0",
@@ -162,6 +169,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
@@ -184,6 +192,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
@@ -206,6 +215,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "0",
             "LUTs": "3",
             "BRAMs": "0",
@@ -228,6 +238,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
+            "error_msg": null,
             "DFFs": "5",
             "LUTs": "5",
             "BRAMs": "0",
@@ -250,6 +261,7 @@
         },
         "raptor.log": {
             "Status": "N/A",
+            "error_msg": null,
             "DFFs": "144",
             "LUTs": "1276",
             "BRAMs": "0",
