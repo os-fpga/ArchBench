@@ -32,7 +32,7 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
-echo "target_device GEMINI_COMPACT_10x8">>raptor.tcl
+echo "target_device GEMINI_COMPACT_82x68">>raptor.tcl
 echo "#architecture $vpr_file $openfpga_file">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
