@@ -55,4 +55,3 @@ python3 ./scripts/compare_json.py
 
 python3 ./scripts/cga_results.py
 
-[ $? -eq 1 ] && exit 1 || exit 0
