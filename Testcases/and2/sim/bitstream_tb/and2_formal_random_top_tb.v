@@ -3,7 +3,7 @@
 //	Description: FPGA Verilog Testbench for Formal Top-level netlist of Design: and2
 //	Author: Xifan TANG
 //	Organization: University of Utah
-//	Date: Wed Jan 25 17:37:32 2023
+//	Date: Wed Feb 22 10:03:32 2023
 //-------------------------------------------
 //----- Time scale -----
 `timescale 1ns / 1ps
@@ -24,9 +24,9 @@ module and2_top_formal_verification_random_tb;
 
 // ----- FPGA fabric instanciation -------
 	and2_top_formal_verification FPGA_DUT(
-		.a(a),
-		.b(b),
-		.c(c_gfpga)
+		a,
+		b,
+		c_gfpga
 	);
 // ----- End FPGA Fabric Instanication -------
 
