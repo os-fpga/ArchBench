@@ -39,7 +39,7 @@ echo "add_library_path ../rtl">>raptor.tcl
 echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
-echo "set_device_size $set_device_size">>raptor.tcl 
+# echo "set_device_size $set_device_size">>raptor.tcl 
 echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs vcc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
