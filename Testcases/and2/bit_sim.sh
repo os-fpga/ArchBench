@@ -140,6 +140,8 @@ cd ..
 # sed -i '17s/^/`include \"..\/..\/SRC\/CustomModules\/QL_IOFF_dti.v\"\n/' ../../SRC/fabric_netlists.v
 # sed -i '18s/^/`include \"..\/..\/SRC\/CustomModules\/QL_XOR_MUX2_dti.v\"\n/' ../../SRC/fabric_netlists.v
 # sed -i '19s/^/`include \"..\/..\/SRC\/CustomModules\/GC_FF_dti.v\"\n/' ../../SRC/fabric_netlists.v
+# sed -i '21s/^/`include \"..\/..\/SRC\/CustomModules\/RS_CCFF_dti.v\"\n/' ../../SRC/fabric_netlists.v
+# sed -i '14s/^/`include \"\/cadlib\/gemini\/TSMC16NMFFC\/library\/std_cells\/dti\/7p5t\/rev_220704\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid_fe_views_svt\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid\/verilog\/dti_tm16ffc_90c_7p5t_stdcells_rev1p0p0.v\"\n/' ../../SRC/fabric_netlists.v
 
 start_bitstream=`date +%s`
 timeout 4m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
