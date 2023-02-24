@@ -58,7 +58,7 @@ echo "add_design_file ../rtl/gfmul.sv">>raptor.tcl
 echo "add_design_file ../rtl/wrapper.v">>raptor.tcl
 echo "add_design_file ../rtl/wrapper_top.v">>raptor.tcl
 echo "set_top_module wrapper_top">>raptor.tcl
-echo "set_device_size castor82x68_heterogeneous">>raptor.tcl
+# echo "set_device_size castor82x68_heterogeneous">>raptor.tcl
 echo "add_constraint_file ../constrs_1/aes_decrypt.sdc">>raptor.tcl
 echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs vcc">>raptor.tcl 
