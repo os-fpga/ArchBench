@@ -23,7 +23,7 @@ pf.close()
 
 output_file = open("../../bitstream_text.txt", "w")
 
-with open("../and2/fabric_bitstream.xml",'r') as f:
+with open(f"../{design_name}/fabric_bitstream.xml",'r') as f:
     for line in f:
         if "path=" in line:
             path=line.split('"')[5]
