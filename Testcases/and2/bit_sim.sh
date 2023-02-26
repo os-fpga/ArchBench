@@ -17,6 +17,8 @@ default=$8
 [ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
 [ -f post_route_sim.log ] && rm -fr post_route_sim.log
 [ -f raptor.log ] && rm -fr raptor.log
+[ -f raptor_perf.log ] && rm -fr raptor_perf.log
+[ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
 
 python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
@@ -124,27 +126,29 @@ cd ..
 [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
 
-# cp -R /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/k6n8_vpr/top/MIN_ROUTE_CHAN_WIDTH/SRC/ ../../SRC
-# cp -R ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ ../../SRC/CustomModules
-# sed -i s'/include \"/include \"..\/..\/SRC\//' ../../SRC/fabric_netlists.v
-# sed -i s'/include \"..\/..\/SRC\/.\/SRC\/sc_verilog\//include "..\/..\/sim\//' ../../SRC/fabric_netlists.v
-# sed -i s'/..\/..\/SRC\/.\//..\/..\//' ../../SRC/fabric_netlists.v
-# sed -i s'/rs_preio/ql_preio/' ../../SRC/fabric_netlists.v
-# sed -i s'/rs_dsp/QL_DSP/' ../../SRC/fabric_netlists.v
-# sed -i s'/rs_bram/QL_BRAM/' ../../SRC/fabric_netlists.v
-# sed -i s'/rs_ioff/ql_ioff/' ../../SRC/fabric_netlists.v
-# sed -i '12s/^/`include "..\/..\/SRC\/CustomModules\/bram\/rtl\/dti_dp_tm16ffcll_1024x18_t8bw2x_m_hc.v"\n/' ../../SRC/fabric_netlists.v
-# sed -i '22s/^/`include \"..\/..\/SRC\/CustomModules\/ql_dsp.v\"\n/' ../../SRC/fabric_netlists.v
-# sed -i '24s/^/`include \"..\/..\/SRC\/CustomModules\/QL_TDP36K.v\"\n/' ../../SRC/fabric_netlists.v
-# sed -i '16s/^/`include \"..\/..\/SRC\/CustomModules\/QL_PREIO_dti.v\"\n/' ../../SRC/fabric_netlists.v
-# sed -i '17s/^/`include \"..\/..\/SRC\/CustomModules\/QL_IOFF_dti.v\"\n/' ../../SRC/fabric_netlists.v
-# sed -i '18s/^/`include \"..\/..\/SRC\/CustomModules\/QL_XOR_MUX2_dti.v\"\n/' ../../SRC/fabric_netlists.v
-# sed -i '19s/^/`include \"..\/..\/SRC\/CustomModules\/GC_FF_dti.v\"\n/' ../../SRC/fabric_netlists.v
-# sed -i '21s/^/`include \"..\/..\/SRC\/CustomModules\/RS_CCFF_dti.v\"\n/' ../../SRC/fabric_netlists.v
-# sed -i '14s/^/`include \"\/cadlib\/gemini\/TSMC16NMFFC\/library\/std_cells\/dti\/7p5t\/rev_220704\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid_fe_views_svt\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid\/verilog\/dti_tm16ffc_90c_7p5t_stdcells_rev1p0p0.v\"\n/' ../../SRC/fabric_netlists.v
+cp -R /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8/SRC/ ../../SRC
+cp -R ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ ../../SRC/CustomModules
+sed -i s'/include \"/include \"..\/..\/SRC\//' ../../SRC/fabric_netlists.v
+sed -i s'/include \"..\/..\/SRC\/.\/SRC\/sc_verilog\//include "..\/..\/sim\//' ../../SRC/fabric_netlists.v
+sed -i s'/..\/..\/SRC\/.\//..\/..\//' ../../SRC/fabric_netlists.v
+sed -i s'/rs_preio/ql_preio/' ../../SRC/fabric_netlists.v
+sed -i s'/rs_dsp/QL_DSP/' ../../SRC/fabric_netlists.v
+sed -i s'/rs_bram/QL_BRAM/' ../../SRC/fabric_netlists.v
+sed -i s'/rs_ioff/ql_ioff/' ../../SRC/fabric_netlists.v
+sed -i '12s/^/`include "..\/..\/SRC\/CustomModules\/bram\/rtl\/dti_dp_tm16ffcll_1024x18_t8bw2x_m_hc.v"\n/' ../../SRC/fabric_netlists.v
+sed -i '22s/^/`include \"..\/..\/SRC\/CustomModules\/ql_dsp.v\"\n/' ../../SRC/fabric_netlists.v
+sed -i '24s/^/`include \"..\/..\/SRC\/CustomModules\/QL_TDP36K.v\"\n/' ../../SRC/fabric_netlists.v
+sed -i '16s/^/`include \"..\/..\/SRC\/CustomModules\/QL_PREIO_dti.v\"\n/' ../../SRC/fabric_netlists.v
+sed -i '17s/^/`include \"..\/..\/SRC\/CustomModules\/QL_IOFF_dti.v\"\n/' ../../SRC/fabric_netlists.v
+sed -i '18s/^/`include \"..\/..\/SRC\/CustomModules\/QL_XOR_MUX2_dti.v\"\n/' ../../SRC/fabric_netlists.v
+sed -i '19s/^/`include \"..\/..\/SRC\/CustomModules\/GC_FF_dti.v\"\n/' ../../SRC/fabric_netlists.v
+sed -i '21s/^/`include \"..\/..\/SRC\/CustomModules\/RS_CCFF_dti.v\"\n/' ../../SRC/fabric_netlists.v
+sed -i '14s/^/`include \"\/cadlib\/gemini\/TSMC16NMFFC\/library\/std_cells\/dti\/7p5t\/rev_220704\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid_fe_views_svt\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid\/verilog\/dti_tm16ffc_90c_7p5t_stdcells_rev1p0p0.v\"\n/' ../../SRC/fabric_netlists.v
+
+python3 ../../../../scripts/force.py $design_name
 
 start_bitstream=`date +%s`
-timeout 4m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 ./simv | tee -a bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))

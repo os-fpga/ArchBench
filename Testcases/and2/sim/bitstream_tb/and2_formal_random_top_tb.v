@@ -1,136 +1,146 @@
-//-------------------------------------------
-//	FPGA Synthesizable Verilog Netlist
-//	Description: FPGA Verilog Testbench for Formal Top-level netlist of Design: and2
-//	Author: Xifan TANG
-//	Organization: University of Utah
-//	Date: Wed Feb 22 10:03:32 2023
-//-------------------------------------------
-//----- Time scale -----
+// import uvm_pkg::*;
+// `include "uvm_macros.svh"
+
 `timescale 1ns / 1ps
 
-//----- Default net type -----
 `default_nettype none
 
 module and2_top_formal_verification_random_tb;
-// ----- Default clock port is added here since benchmark does not contain one -------
-	reg [0:0] clk;
-
-// ----- Shared inputs -------
 	reg [0:0] a;
 	reg [0:0] b;
+	wire [0:0] c;
 
-// ----- FPGA fabric outputs -------
-	wire [0:0] c_gfpga;
+	// and2_top_formal_verification FPGA_DUT(
+	// 	a,
+	// 	b,
+	// 	c
+	// );
 
-// ----- FPGA fabric instanciation -------
-	and2_top_formal_verification FPGA_DUT(
-		a,
-		b,
-		c_gfpga
-	);
-// ----- End FPGA Fabric Instanication -------
+  reg [0:3] clk;
+  wire [0:0] global_reset;
+  wire [0:0] scan_reset;
+  wire [0:639] gfpga_pad_QL_PREIO_A2F;
+  wire [0:639] gfpga_pad_QL_PREIO_F2A;
+  wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF0;
+  wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF1;
+  wire [0:639] gfpga_pad_QL_PREIO_F2A_CLK;
+  wire [0:9] ccff_head;
+  wire [0:9] ccff_tail;
+  wire [0:0] test_en;
+  wire [0:0] scan_mode;
+  wire [0:0] scan_clk;
+  bit [0:0] config_enable;
+  wire [0:0] prog_clock;
+  bit [0:0] CFG_DONE;
 
-// ----- Clock 'clk' Initialization -------
-	initial begin
-		clk[0] <= 1'b0;
-		while(1) begin
-			#1
-			clk[0] <= !clk[0];
-		end
+fpga_top U0_formal_verification (
+	clk[0:3],
+	global_reset[0],
+	scan_reset[0],
+	test_en[0],
+	scan_mode[0],
+	scan_clk[0],
+	config_enable[0],
+	prog_clock[0],
+	CFG_DONE[0],
+	gfpga_pad_QL_PREIO_A2F[0:639],
+	gfpga_pad_QL_PREIO_F2A[0:639],
+	gfpga_pad_QL_PREIO_F2A_DEF0[0:639],
+	gfpga_pad_QL_PREIO_F2A_DEF1[0:639],
+	gfpga_pad_QL_PREIO_F2A_CLK[0:639],
+	ccff_head[0:9],
+	ccff_tail[0:9]);
+
+  // assign config_enable[0] = 1'b0;
+	assign prog_clock[0] = 1'b0;
+	// assign CFG_DONE[0] = 1'b0;
+	assign test_en[0] = 1'b0;
+	assign scan_mode[0] = 1'b0;
+	assign scan_clk[0] = 1'b0;
+	assign global_reset[0] = 1'b1;
+	assign scan_reset[0] = 1'b1;
+
+initial begin
+  clk[0] <= 1'b0;
+  clk[1] <= 1'b0;
+  clk[2] <= 1'b0;
+  clk[3] <= 1'b0;
+	while(1) begin
+		#1
+		clk[0] <= !clk[0];
+		clk[1] <= !clk[1];
+		clk[2] <= !clk[2];
+		clk[3] <= !clk[3];
 	end
+end
+`include "../and2/PinMapping.v"
 
-// ----- Begin reset signal generation -----
-// ----- End reset signal generation -----
+initial begin
+  `include "../../bitstream_text.txt"
+  config_enable[0] = 1'b1;
+  CFG_DONE[0] = 1'b1;
+  #10;
 
-// ----- Input Initialization -------
-	initial begin
-		a <= 1'b0;
-		b <= 1'b0;
-	end
-
-// ----- Input Stimulus -------
-	always@(negedge clk[0]) begin
-		// a <= $random;
-		// b <= $random;
-		repeat(10)@(posedge clk);
-        a = 1'b0;
-        b = 1'b0;
-        @(posedge clk);
-        if (c_gfpga === 0)
-          $display("Status: Test Passed");
-        else  
-          $display("Status: Test Failed");
+  a = 1'b0;
+  b = 1'b0;
+  #5;
+  if (c === 0)
+    $display("Status: Test Passed");
+  else  
+    $display("Status: Test Failed");
           
-        a = 1'b0; 
-        b = 1'b1;
-        @(posedge clk);
-        if (c_gfpga === 0)
-          $display("Status: Test Passed");
-        else  
-          $display("Status: Test Failed");
+  a = 1'b0; 
+  b = 1'b1;
+  #5;
+  if (c === 0)
+    $display("Status: Test Passed");
+  else  
+    $display("Status: Test Failed");
 
-        a = 1'b1;
-        b = 1'b0;
-        @(posedge clk);
-        if (c_gfpga === 0)
-          $display("Status: Test Passed");
-        else  
-          $display("Status: Test Failed");
+  a = 1'b1;
+  b = 1'b0;
+  #5;
+  if (c === 0)
+    $display("Status: Test Passed");
+  else  
+    $display("Status: Test Failed");
 
-        a = 1'b1;
-        b = 1'b1;
-        @(posedge clk);
-        if (c_gfpga === 1)
-          $display("Status: Test Passed");
-        else  
-          $display("Status: Test Failed");
+  a = 1'b1;
+  b = 1'b1;
+  #5;
+  if (c === 1)
+    $display("Status: Test Passed");
+  else  
+    $display("Status: Test Failed");
 
-        a = 1'b0;
-        b = 1'b1;
-        @(posedge clk);
-        if (c_gfpga === 0)
-          $display("Status: Test Passed");
-        else  
-          $display("Status: Test Failed");
+  a = 1'b0;
+  b = 1'b1;
+  #5;
+  if (c === 0)
+    $display("Status: Test Passed");
+  else  
+    $display("Status: Test Failed");
 
-        a = 1'b1;
-        b = 1'b0;
-        @(posedge clk);
-        if (c_gfpga === 0)
-          $display("Status: Test Passed");
-        else  
-          $display("Status: Test Failed");
+  a = 1'b1;
+  b = 1'b0;
+  #5;
+  if (c === 0)
+    $display("Status: Test Passed");
+  else  
+    $display("Status: Test Failed");
 
-          a = 1'b1;
-          b = 1'b1;
-          @(posedge clk);
-          if (c_gfpga === 1)
-            $display("Status: Test Passed");
-          else  
-            $display("Status: Test Failed");
-        repeat(10)@(posedge clk);
-        $finish;
+  a = 1'b1;
+  b = 1'b1;
+  #5;
+  if (c === 1)
+    $display("Status: Test Passed");
+  else  
+    $display("Status: Test Failed");
+  #5;
+  $finish;
 	end
-
-// ----- Begin output waveform to VCD file-------
-	initial begin
-		$dumpfile("and2_formal.vcd");
-		$dumpvars(1, and2_top_formal_verification_random_tb);
-	end
-// ----- END output waveform to VCD file -------
-
-// initial begin
-// 	$timeformat(-9, 2, "ns", 20);
-// 	$display("Simulation start");
-// // ----- Can be changed by the user for his/her need -------
-// 	#20
-// 	$display("Simulation Succeed");
-// 	$finish;
-// end
 
 endmodule
-// ----- END Verilog module for and2_top_formal_verification_random_tb -----
 
-//----- Default net type -----
 `default_nettype none
 
