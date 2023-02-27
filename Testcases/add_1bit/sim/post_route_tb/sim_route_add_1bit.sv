@@ -21,6 +21,27 @@ initial begin
 	@(negedge clk);
 	compare();
 
+	a=1;
+	b=0;
+	@(negedge clk);
+	display_stimulus();
+	@(negedge clk);
+	compare();
+
+	a=0;
+	b=1;
+	@(negedge clk);
+	display_stimulus();
+	@(negedge clk);
+	compare();
+
+	a=1;
+	b=1;
+	@(negedge clk);
+	display_stimulus();
+	@(negedge clk);
+	compare();
+
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
