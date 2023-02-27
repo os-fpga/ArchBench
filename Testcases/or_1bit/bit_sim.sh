@@ -36,14 +36,14 @@ cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
 echo "target_device GEMINI_COMPACT_10x8">>raptor.tcl
-echo "#architecture $vpr_file $openfpga_file">>raptor.tcl
+# echo "architecture $vpr_file $openfpga_file">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
 # echo "set_device_size $set_device_size">>raptor.tcl
-echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
+# echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs vcc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
@@ -52,7 +52,7 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl  
-echo "bitstream">>raptor.tcl  
+echo "bitstream enable_simulation">>raptor.tcl  
 
 start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
@@ -82,7 +82,7 @@ then
 else 
     echo -e "Test Bench for this design Found!"
 fi
-bitstream_tb_path=`find ../ -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
+bitstream_tb_path=`find ../sim -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
 if [ -z "$bitstream_tb_path" ]
 then
     echo "No such Test Bench for $design_name"
