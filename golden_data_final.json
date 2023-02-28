@@ -260,7 +260,7 @@
             "Status": "N/A"
         },
         "raptor.log": {
-            "Status": "N/A",
+            "Status": "Pass",
             "error_msg": null,
             "DFFs": "144",
             "LUTs": "1276",
