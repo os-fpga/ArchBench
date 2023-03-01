@@ -94,6 +94,7 @@ def parse_log_files(files, log_line_keys_map):
             metal_percentage=0
             router_time=0
             start_pb_usage = 0
+            start_fmax = 0 
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
@@ -151,6 +152,11 @@ def parse_log_files(files, log_line_keys_map):
                     if "Total wirelength:" in lines[i]:
                         line_of_total_wirelength = i
                         break
+                for i in range(len(lines) - 1, -1, -1):
+                    if "Fmax: " in lines[i]:
+                        start_fmax = i
+                        break
+
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -210,7 +216,7 @@ def parse_log_files(files, log_line_keys_map):
                         Wirelength_Percentage_used_margin=read_config_test_margins("Wirelength_Percentage_used_margin")
                         str_metal_percentage=str(metal_percentage)+", margin:"+str(Wirelength_Percentage_used_margin)
                         data[file][log_line_key] = str_metal_percentage
-
+                
                 for line in lines[start_print_stats+1:]:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -284,6 +290,14 @@ def parse_log_files(files, log_line_keys_map):
                                     BRAMs_margin=read_config_test_margins("BRAMs_margin")
                                     data[file][log_line_key] = "0, margin:"+str(BRAMs_margin) 
                             # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
+                for line in lines[start_fmax:]:
+                    for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                        if log_line_key == 'Fmax':
+                            if log_line_keyword in line:
+                                fmax=line.split()[-2]
+                                fmax_freq=line.split()[-1]
+                                frequency=fmax+" "+fmax_freq
+                                data[file][log_line_key]=frequency
             # parse the router and packer time
             packer_time=0
             router_time=0
