@@ -37,6 +37,7 @@
             "BRAMs": "0",
             "DSPs": "0",
             "CLBs": "1",
+            "Fmax": "265.465 MHz",
             "FLE_Percentage_used": "0.3472222222222222",
             "Wirelength_Percentage_used": "0.07628367003367004"
         },
@@ -198,6 +199,7 @@
             "BRAMs": "0",
             "DSPs": "0",
             "CLBs": "1",
+            "Fmax": "265.465 MHz",
             "FLE_Percentage_used": "0.3472222222222222",
             "Wirelength_Percentage_used": "0.07628367003367004"
         },

@@ -262,6 +262,17 @@ def cga_results():
                                                         diff=int_clb_new-int_clb_golden
                                                         golden_memory_unit="Fail. Latest CLBs are greater than Golden by "+str(diff)+". Golden: "+str(int_clb_golden) +", Latest: "+ str(int_clb_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                            if "Fmax" in golden_sub_key:
+                                                if "Fmax" in new_sub_key:
+                                                    int_fmax_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key].split()[0])
+                                                    int_fmax_new=float(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
+                                                    if (int_fmax_golden==int_fmax_new):
+                                                        golden_fmax_unit="Pass. Fmax are same."+" Golden: "+str(int_fmax_golden) +"MHz, Latest: "+ str(int_fmax_new)+"MHz"
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_fmax_unit
+                                                    else:
+                                                        diff=int_fmax_golden-int_fmax_new
+                                                        golden_fmax_unit="Fail. Latest Fmax is greater than Golden by "+str(diff)+". Golden: "+str(int_fmax_golden) +", Latest: "+ str(int_fmax_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_fmax_unit
                                             if "FLE_Percentage_used" in golden_sub_key:
                                                 if "FLE_Percentage_used" in new_sub_key:
                                                     int_fle_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
