@@ -25,7 +25,7 @@
     },
     "add_1bit": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": "Pass"
         },
         "post_route_sim.log": {
             "Status": "Pass"
@@ -73,7 +73,7 @@
     },
     "or_1bit": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": "Pass"
         },
         "post_route_sim.log": {
             "Status": "Pass"
@@ -193,7 +193,7 @@
     },
     "and2": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": "Pass"
         },
         "post_route_sim.log": {
             "Status": "Pass"
