@@ -190,7 +190,8 @@ def cga_results():
                                             if "DFFs" in golden_sub_key:
                                                 if "DFFs" in new_sub_key:
                                                     int_dff_golden=convert_to_int(golden_data[golden_log_line_key][golden_key][golden_sub_key])
-                                                    int_dff_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    int_dff_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    # int_dff_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
                                                     if (int_dff_golden==int_dff_new):
                                                         golden_memory_unit="Pass. DFFs are same."+" Golden: "+str(int_dff_golden) +", Latest: "+ str(int_dff_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -205,7 +206,8 @@ def cga_results():
                                             if "LUTs" in golden_sub_key:
                                                 if "LUTs" in new_sub_key:
                                                     int_luts_golden=convert_to_int(golden_data[golden_log_line_key][golden_key][golden_sub_key])
-                                                    int_luts_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    int_luts_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    # int_luts_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
                                                     if (int_luts_golden==int_luts_new):
                                                         golden_memory_unit="Pass. LUTs are same."+" Golden: "+str(int_luts_golden) +", Latest: "+ str(int_luts_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -220,7 +222,8 @@ def cga_results():
                                             if "BRAMs" in golden_sub_key:
                                                 if "BRAMs" in new_sub_key:
                                                     int_brams_golden=convert_to_int(golden_data[golden_log_line_key][golden_key][golden_sub_key])
-                                                    int_brams_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    int_brams_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    # int_brams_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
                                                     if (int_brams_golden==int_brams_new):
                                                         golden_memory_unit="Pass. BRAMs are same."+" Golden: "+str(int_brams_golden) +", Latest: "+ str(int_brams_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -235,7 +238,8 @@ def cga_results():
                                             if "DSPs" in golden_sub_key:
                                                 if "DSPs" in new_sub_key:
                                                     int_dsp_golden=convert_to_int(golden_data[golden_log_line_key][golden_key][golden_sub_key])
-                                                    int_dsp_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    int_dsp_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    # int_dsp_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
                                                     if (int_dsp_golden==int_dsp_new):
                                                         golden_memory_unit="Pass. DSPs are same."+" Golden: "+str(int_dsp_golden) +", Latest: "+ str(int_dsp_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -250,7 +254,8 @@ def cga_results():
                                             if "CLBs" in golden_sub_key:
                                                 if "CLBs" in new_sub_key:
                                                     int_clb_golden=convert_to_int(golden_data[golden_log_line_key][golden_key][golden_sub_key])
-                                                    int_clb_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    int_clb_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    # int_clb_new=convert_to_int(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
                                                     if (int_clb_golden==int_clb_new):
                                                         golden_memory_unit="Pass. CLBs are same."+" Golden: "+str(int_clb_golden) +", Latest: "+ str(int_clb_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -276,9 +281,11 @@ def cga_results():
                                             if "FLE_Percentage_used" in golden_sub_key:
                                                 if "FLE_Percentage_used" in new_sub_key:
                                                     int_fle_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
-                                                    int_fle_new=float(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
-                                                    percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
-                                                    percent20=float((percent*int_fle_golden)/100)+int_fle_golden
+                                                    int_fle_new=float(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    percent20=float((10*int_fle_golden)/100)+int_fle_golden
+                                                    # int_fle_new=float(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    # percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
+                                                    # percent20=float((percent*int_fle_golden)/100)+int_fle_golden
                                                     if (int_fle_golden==int_fle_new):
                                                         golden_memory_unit="Pass. FLE_Percentage_used are same."+" Golden: "+str(int_fle_golden) +", Latest: "+ str(int_fle_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -297,9 +304,11 @@ def cga_results():
                                             if "Wirelength_Percentage_used" in golden_sub_key:
                                                 if "Wirelength_Percentage_used" in new_sub_key:
                                                     int_metal_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
-                                                    int_metal_new=float(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
-                                                    percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
-                                                    percent20=float((percent*int_metal_golden)/100)+int_metal_golden
+                                                    int_metal_new=float(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    percent20=float((10*int_metal_golden)/100)+int_metal_golden
+                                                    # int_metal_new=float(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    # percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
+                                                    # percent20=float((percent*int_metal_golden)/100)+int_metal_golden
                                                     if (int_metal_golden==int_metal_new):
                                                         golden_memory_unit="Pass. Wirelength_Percentage are same."+" Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -320,8 +329,9 @@ def cga_results():
                                                 if "Packer_time" in new_sub_key:
                                                     int_packer_golden=int(golden_data[golden_log_line_key][golden_key][golden_sub_key].split()[0])
                                                     int_packer_new=int(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
-                                                    percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
-                                                    percent10=int((percent*int_packer_golden)/100)+int_packer_golden
+                                                    percent10=int((20*int_packer_golden)/100)+int_packer_golden
+                                                    # percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
+                                                    # percent10=int((percent*int_packer_golden)/100)+int_packer_golden
                                                     if (int_packer_golden==int_packer_new):
                                                         golden_memory_unit="Pass. Packer_time is same."+" Golden: "+str(int_packer_golden) +", Latest: "+ str(int_packer_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
@@ -341,8 +351,9 @@ def cga_results():
                                                 if "Router_time" in new_sub_key:
                                                     int_router_golden=int(golden_data[golden_log_line_key][golden_key][golden_sub_key].split()[0])
                                                     int_router_new=int(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
-                                                    percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
-                                                    percent10=int((percent*int_router_golden)/100)+int_router_golden
+                                                    percent10=int((20*int_router_golden)/100)+int_router_golden
+                                                    # percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
+                                                    # percent10=int((percent*int_router_golden)/100)+int_router_golden
                                                     if (int_router_golden==int_router_new):
                                                         golden_memory_unit="Pass. Router_time is same."+" Golden: "+str(int_router_golden) +", Latest: "+ str(int_router_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
