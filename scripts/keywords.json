@@ -15,7 +15,7 @@
         "CLBs": " clb             : ",
         "Fmax": " Fmax: ",
         "FLE_Percentage_used": " fle            : ",
-        "Wirelength_Percentage_used": "X - Directed channels:"
+        "Metal_Percentage_used": "X - Directed channels:"
     },
     "raptor_perf.log": {
         "Packer_time":"Packing has started",
