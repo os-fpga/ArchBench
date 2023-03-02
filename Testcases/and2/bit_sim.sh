@@ -55,12 +55,17 @@ echo "sta">>raptor.tcl
 echo "power">>raptor.tcl  
 echo "bitstream enable_simulation">>raptor.tcl  
 
+cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8
+xml_version=`readlink -f latest | xargs basename`
+cd -
+
 start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
 end_raptor=`date +%s`
 runtime_raptor=$((end_raptor-start_raptor))
 echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
 raptor --version>>raptor.log
+echo -e "Netlist Version: $xml_version">>raptor.log
 
 string="_post_route"
 while read line; do
