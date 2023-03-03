@@ -95,6 +95,8 @@ def parse_log_files(files, log_line_keys_map):
             router_time=0
             start_pb_usage = 0
             start_fmax = 0 
+            LUTs = 0
+            CLBs = 0
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
@@ -175,6 +177,7 @@ def parse_log_files(files, log_line_keys_map):
                             # Checking the file name and updating the value of the log line key accordingly
                             if log_line_key == 'CLBs':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
+                                CLBs=int(line.split(log_line_keyword)[1].strip().split()[0])
                                 # CLBs_margin=read_config_test_margins("CLBs_margin")           #to dump margin in parsed_data.json
                                 # clbs_num=line.split(log_line_keyword)[1].strip().split()[0]
                                 # data[file][log_line_key] = str(clbs_num)+", margin:"+str(CLBs_margin)
@@ -232,6 +235,7 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
                             elif log_line_key == 'LUTs':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
+                                LUTs=int(line.split(log_line_keyword)[1].strip().split()[0])
                                 # LUTs_margin=read_config_test_margins("LUTs_margin")           #to dump margin in parsed_data.json
                                 # luts_num=line.split(log_line_keyword)[1].strip().split()[0] 
                                 # data[file][log_line_key] =  str(luts_num)+", margin:"+str(LUTs_margin)
@@ -304,6 +308,11 @@ def parse_log_files(files, log_line_keys_map):
                                 fmax_freq=line.split()[-1]
                                 frequency=fmax+" "+fmax_freq
                                 data[file][log_line_key]=frequency
+
+                        if log_line_key == "LUTs_CLBs_ratio":
+                            if log_line_keyword == "LUTs/CLBs":
+                                luts_clbs_ratio=LUTs/CLBs
+                                data[file][log_line_key]=str(luts_clbs_ratio)
             # parse the router and packer time
             packer_time=0
             router_time=0
