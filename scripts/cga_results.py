@@ -311,8 +311,8 @@ def cga_results():
                                                         diff=int_fle_new-int_fle_golden
                                                         golden_memory_unit="Fail. Latest FLE_Percentage_used are greater than Golden by "+str(diff)+". Golden: "+str(int_fle_golden) +", Latest: "+ str(int_fle_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
-                                            if "Wirelength_Percentage_used" in golden_sub_key:
-                                                if "Wirelength_Percentage_used" in new_sub_key:
+                                            if "Metal_Percentage_used" in golden_sub_key:
+                                                if "Metal_Percentage_used" in new_sub_key:
                                                     int_metal_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
                                                     int_metal_new=float(new_data[new_log_line_key][new_key][new_sub_key])
                                                     percent20=float((10*int_metal_golden)/100)+int_metal_golden
@@ -324,7 +324,7 @@ def cga_results():
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     elif (int_metal_golden>int_metal_new):
                                                         diff=int_metal_golden-int_metal_new
-                                                        golden_memory_unit="Pass. Golden Wirelength_Percentage are greater than Latest by "+str(diff)+". Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
+                                                        golden_memory_unit="Pass. Golden Wirelength_Percentage is greater than Latest by "+str(diff)+". Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     elif (int_metal_new>int_metal_golden and int_metal_new<percent20):
                                                         diff=int_metal_new-int_metal_golden
@@ -332,7 +332,7 @@ def cga_results():
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                                     else:
                                                         diff=int_metal_new-int_metal_golden
-                                                        golden_memory_unit="Fail. Latest Wirelength_Percentage are greater than Golden by "+str(diff)+". Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
+                                                        golden_memory_unit="Fail. Latest Wirelength_Percentage is greater than Golden by "+str(diff)+". Golden: "+str(int_metal_golden) +", Latest: "+ str(int_metal_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                         if golden_key=="raptor_perf.log":
                                             if "Packer_time" in golden_sub_key:
