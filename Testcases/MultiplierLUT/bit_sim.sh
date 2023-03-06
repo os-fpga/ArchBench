@@ -12,14 +12,14 @@ set_device_size=$6
 strategy=$7
 default=$8
 
-[ -d SRC ] && rm -fr SRC
-[ -d $design_name\_golden ] && rm -fr $design_name\_golden
-[ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
-[ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
-[ -f post_route_sim.log ] && rm -fr post_route_sim.log
-[ -f raptor.log ] && rm -fr raptor.log
-[ -f raptor_perf.log ] && rm -fr raptor_perf.log
-[ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
+# [ -d SRC ] && rm -fr SRC
+# [ -d $design_name\_golden ] && rm -fr $design_name\_golden
+# [ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
+# [ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
+# [ -f post_route_sim.log ] && rm -fr post_route_sim.log
+# [ -f raptor.log ] && rm -fr raptor.log
+# [ -f raptor_perf.log ] && rm -fr raptor_perf.log
+# [ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
 
 python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
@@ -59,13 +59,13 @@ cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compa
 xml_version=`readlink -f latest | xargs basename`
 cd -
 
-start_raptor=`date +%s`
-raptor --batch --script raptor.tcl 
-end_raptor=`date +%s`
-runtime_raptor=$((end_raptor-start_raptor))
-echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
-raptor --version>>raptor.log
-echo -e "Netlist Version: $xml_version">>raptor.log
+# start_raptor=`date +%s`
+# raptor --batch --script raptor.tcl 
+# end_raptor=`date +%s`
+# runtime_raptor=$((end_raptor-start_raptor))
+# echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
+# raptor --version>>raptor.log
+# echo -e "Netlist Version: $xml_version">>raptor.log
 
 string="_post_route"
 while read line; do
@@ -112,8 +112,8 @@ primitive="$main_path/../../primitives.v"
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
 start_post_route=`date +%s`
-timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
-./simv | tee -a post_route_sim.log
+# timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+# ./simv | tee -a post_route_sim.log
 end_post_route=`date +%s`
 runtime_post_route=$((end_post_route-start_post_route))
 echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
