@@ -12,11 +12,14 @@ set_device_size=$6
 strategy=$7
 default=$8
 
-[ -d $design_name\_golden ] && rm -fr $design_name\_golden
-[ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
-[ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
-[ -f post_route_sim.log ] && rm -fr post_route_sim.log
-[ -f raptor.log ] && rm -fr raptor.log
+# [ -d SRC ] && rm -fr SRC
+# [ -d $design_name\_golden ] && rm -fr $design_name\_golden
+# [ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
+# [ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
+# [ -f post_route_sim.log ] && rm -fr post_route_sim.log
+# [ -f raptor.log ] && rm -fr raptor.log
+# [ -f raptor_perf.log ] && rm -fr raptor_perf.log
+# [ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
 
 python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
@@ -33,16 +36,16 @@ cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
 echo "target_device GEMINI_COMPACT_10x8">>raptor.tcl
-echo "#architecture $vpr_file $openfpga_file">>raptor.tcl
+# echo "architecture $vpr_file $openfpga_file">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
 # echo "set_device_size $set_device_size">>raptor.tcl
+# echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
+echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
-echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
-echo "pnr_options --post_synth_netlist_unconn_inputs vcc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
@@ -50,19 +53,19 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl  
-echo "bitstream">>raptor.tcl  
-  
+echo "bitstream enable_simulation">>raptor.tcl
+
 cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8
 xml_version=`readlink -f latest | xargs basename`
 cd -
 
-start_raptor=`date +%s`
-raptor --batch --script raptor.tcl 
-end_raptor=`date +%s`
-runtime_raptor=$((end_raptor-start_raptor))
-echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
-raptor --version>>raptor.log
-echo -e "Netlist Version: $xml_version">>raptor.log
+# start_raptor=`date +%s`
+# raptor --batch --script raptor.tcl 
+# end_raptor=`date +%s`
+# runtime_raptor=$((end_raptor-start_raptor))
+# echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
+# raptor --version>>raptor.log
+# echo -e "Netlist Version: $xml_version">>raptor.log
 
 string="_post_route"
 while read line; do
@@ -85,7 +88,7 @@ then
 else 
     echo -e "Test Bench for this design Found!"
 fi
-bitstream_tb_path=`find ../ -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
+bitstream_tb_path=`find ../sim -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
 if [ -z "$bitstream_tb_path" ]
 then
     echo "No such Test Bench for $design_name"
@@ -109,8 +112,8 @@ primitive="$main_path/../../primitives.v"
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
 start_post_route=`date +%s`
-timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
-./simv | tee -a post_route_sim.log
+# timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+# ./simv | tee -a post_route_sim.log
 end_post_route=`date +%s`
 runtime_post_route=$((end_post_route-start_post_route))
 echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
@@ -129,8 +132,20 @@ done < post_route_sim.log
 cd ..
 [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
+
+cd ../../..
+if [ -d "SRC" ] 
+then
+    echo "SRC folder already exists" 
+else
+    . ../scripts/change_netlist_dir_10x8.sh
+fi
+cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
+
+python3 ../../../../scripts/force.py $design_name
+
 start_bitstream=`date +%s`
-timeout 4m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 ./simv | tee -a bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
