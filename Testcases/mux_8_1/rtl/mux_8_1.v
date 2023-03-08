@@ -5,7 +5,7 @@ module mux_8_1(out, D0, D1, D2, D3, D4, D5, D6, D7, S0, S1, S2);
     output reg out;
 
     always@(*) begin
-        case(S2 & S1 & S0)
+        case({S2,S1,S0})
             3'b000: out=D0;
             3'b001: out=D1;
             3'b010: out=D2;
