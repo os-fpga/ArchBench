@@ -97,6 +97,7 @@ def parse_log_files(files, log_line_keys_map):
             start_fmax = 0 
             LUTs = 0
             CLBs = 0
+            clb_used_percent=0
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
@@ -190,8 +191,6 @@ def parse_log_files(files, log_line_keys_map):
                         total_clbs=line.split(log_line_keyword)[0].strip().split()[0]
                         total_fles=8*int(total_clbs) # 100 * (#fle_wrapper) / (8 * #clb). 
                         fle_percentage=100*int(fle_used)/int(total_fles)
-                        print(type(total_clbs))
-                        print(type(CLBs))
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if log_line_key == 'FLE_Percentage_used':
                             data[file][log_line_key] = str(fle_percentage)
