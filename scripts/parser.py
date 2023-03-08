@@ -190,12 +190,18 @@ def parse_log_files(files, log_line_keys_map):
                         total_clbs=line.split(log_line_keyword)[0].strip().split()[0]
                         total_fles=8*int(total_clbs) # 100 * (#fle_wrapper) / (8 * #clb). 
                         fle_percentage=100*int(fle_used)/int(total_fles)
+                        print(type(total_clbs))
+                        print(type(CLBs))
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if log_line_key == 'FLE_Percentage_used':
                             data[file][log_line_key] = str(fle_percentage)
                             # FLE_Percentage_used_margin=read_config_test_margins("FLE_Percentage_used_margin")           #to dump margin in parsed_data.json
                             # str_fle_percentage=str(fle_percentage)+", margin:"+str(FLE_Percentage_used_margin)
                             # data[file][log_line_key] = str_fle_percentage
+                    for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                        clb_used_percent=(CLBs/int(total_clbs))*100
+                        if log_line_key == 'CLB_percentage_used':
+                            data[file][log_line_key] = str(clb_used_percent)
 
                 # parsing the percentage of metal used from raptor.log 
                 for i in range(len(lines) - 1, -1, -1):

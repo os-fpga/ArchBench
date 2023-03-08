@@ -15,6 +15,7 @@
         "CLBs": " clb             : ",
         "Fmax": " Fmax: ",
         "LUTs_CLBs_ratio": "LUTs/CLBs",
+        "CLB_percentage_used":"percent_clbs_used",
         "FLE_Percentage_used": " fle            : ",
         "Metal_Percentage_used": "X - Directed channels:"
     },
