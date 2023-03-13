@@ -157,5 +157,5 @@ mv ./$design_name\_golden/$design_name\_vcs_post_route_files/post_route_sim.log 
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 
-python3 ../../scripts/parser.py 
+python3 ../../../scripts/parser.py 
 

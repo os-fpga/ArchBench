@@ -362,7 +362,7 @@ def main():
     files = ['bitstream_sim.log', 'post_route_sim.log','raptor.log','raptor_perf.log']
     # files = [sys.argv[1], sys.argv[2], sys.argv[3]]
     # Open the keywords file and read the keywords mapping
-    with open('../../scripts/keywords.json', 'r') as f:
+    with open('../../../scripts/keywords.json', 'r') as f:
         log_line_keys_map = json.load(f)
     data = parse_log_files(files, log_line_keys_map)
     with open('parsed_data.json', 'w') as f:
