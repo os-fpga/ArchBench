@@ -16,7 +16,7 @@
             "CLBs": "1",
             "Fmax": "261.773 MHz",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage_used": "0.07628367003367004"
+            "Wirelength_Percentage_used": "0.07628367003367004"
         },
         "raptor_perf.log": {
             "Packer_time": "548 ms",
@@ -40,7 +40,7 @@
             "CLBs": "1",
             "Fmax": "265.465 MHz",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage_used": "0.07628367003367004"
+            "Wirelength_Percentage_used": "0.07628367003367004"
         },
         "raptor_perf.log": {
             "Packer_time": "509 ms",
@@ -64,7 +64,7 @@
             "CLBs": "1",
             "Fmax": "233.759 MHz",
             "FLE_Percentage_used": "0.6944444444444444",
-            "Metal_Percentage_used": "0.1210016835016835"
+            "Wirelength_Percentage_used": "0.1210016835016835"
         },
         "raptor_perf.log": {
             "Packer_time": "548 ms",
@@ -88,7 +88,7 @@
             "CLBs": "1",
             "Fmax": "265.465 MHz",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage_used": "0.07628367003367004"
+            "Wirelength_Percentage_used": "0.07628367003367004"
         },
         "raptor_perf.log": {
             "Packer_time": "498 ms",
@@ -112,7 +112,7 @@
             "CLBs": "69",
             "Fmax": "102.405 MHz",
             "FLE_Percentage_used": "1.3888888888888888",
-            "Metal_Percentage_used": "0.3430842936965252"
+            "Wirelength_Percentage_used": "0.3430842936965252"
         },
         "raptor_perf.log": {
             "Packer_time": "21947 ms",
@@ -136,7 +136,7 @@
             "CLBs": "1",
             "Fmax": "270.262 MHz",
             "FLE_Percentage_used": "2.7777777777777777",
-            "Metal_Percentage_used": "0.38404882154882153"
+            "Wirelength_Percentage_used": "0.38404882154882153"
         },
         "raptor_perf.log": {
             "Packer_time": "611 ms",
@@ -160,7 +160,7 @@
             "CLBs": "1",
             "Fmax": "486.15 MHz",
             "FLE_Percentage_used": "0.6944444444444444",
-            "Metal_Percentage_used": "0.13941498316498316"
+            "Wirelength_Percentage_used": "0.13941498316498316"
         },
         "raptor_perf.log": {
             "Packer_time": "589 ms",
@@ -184,7 +184,7 @@
             "CLBs": "1",
             "Fmax": "532.771 MHz",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage_used": "0.06050084175084175"
+            "Wirelength_Percentage_used": "0.06050084175084175"
         },
         "raptor_perf.log": {
             "Packer_time": "569 ms",
@@ -208,7 +208,7 @@
             "CLBs": "1",
             "Fmax": "260.465 MHz",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Metal_Percentage_used": "0.07628367003367004"
+            "Wirelength_Percentage_used": "0.07628367003367004"
         },
         "raptor_perf.log": {
             "Packer_time": "629 ms",
@@ -232,7 +232,7 @@
             "CLBs": "1",
             "Fmax": "420.258 MHz",
             "FLE_Percentage_used": "1.0416666666666667",
-            "Metal_Percentage_used": "0.1762415824915825"
+            "Wirelength_Percentage_used": "0.1762415824915825"
         },
         "raptor_perf.log": {
             "Packer_time": "539 ms",
@@ -256,7 +256,7 @@
             "CLBs": "1",
             "Fmax": "263.428 MHz",
             "FLE_Percentage_used": "1.3888888888888888",
-            "Metal_Percentage_used": "0.1736111111111111"
+            "Wirelength_Percentage_used": "0.1736111111111111"
         },
         "raptor_perf.log": {
             "Packer_time": "508 ms",
@@ -280,7 +280,7 @@
             "CLBs": "156",
             "Fmax": "146.71 MHz",
             "FLE_Percentage_used": "3.4205693296602386",
-            "Metal_Percentage_used": "1.0359372271695477"
+            "Wirelength_Percentage_used": "1.0359372271695477"
         },
         "raptor_perf.log": {
             "Packer_time": "29945 ms",
