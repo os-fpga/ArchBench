@@ -19,6 +19,8 @@ def read_config_test_margins(flag):
     Wirelength_Percentage_used_margin=0
     Packer_time_margin=0
     Router_time_margin=0
+    fmax_margin=0
+    LUTs_CLBs_ratio_margin=0
     with open("test.config") as conf:
         contents = conf.readlines()
         for i in range(len(contents)):
@@ -40,6 +42,10 @@ def read_config_test_margins(flag):
                 Packer_time_margin=contents[i].split('"')[1]
             if "Router_time_margin" in contents[i]:
                 Router_time_margin=contents[i].split('"')[1]
+            if "fmax_margin" in contents[i]:
+                fmax_margin=contents[i].split('"')[1]
+            if "LUTs_CLBs_ratio_margin" in contents[i]:
+                LUTs_CLBs_ratio_margin=contents[i].split('"')[1]
         if flag=="DFFs_margin":
             return DFFs_margin
         if flag=="LUTs_margin":
@@ -58,6 +64,10 @@ def read_config_test_margins(flag):
             return Packer_time_margin
         if flag=="Router_time_margin":
             return Router_time_margin
+        if flag=="fmax_margin":
+            return fmax_margin
+        if flag=="LUTs_CLBs_ratio_margin":
+            return LUTs_CLBs_ratio_margin
 
 # Router_time_m=read_config_test_margins("FLE_Percentage_used_margin")
 # print("value",Router_time_m)
@@ -181,11 +191,11 @@ def parse_log_files(files, log_line_keys_map):
                         if log_line_keyword in line:
                             # Checking the file name and updating the value of the log line key accordingly
                             if log_line_key == 'CLBs':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
+                                # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
                                 CLBs=int(line.split(log_line_keyword)[1].strip().split()[0])
-                                # CLBs_margin=read_config_test_margins("CLBs_margin")           #to dump margin in parsed_data.json
-                                # clbs_num=line.split(log_line_keyword)[1].strip().split()[0]
-                                # data[file][log_line_key] = str(clbs_num)+", margin:"+str(CLBs_margin)
+                                CLBs_margin=read_config_test_margins("CLBs_margin")           #to dump margin in parsed_data.json
+                                clbs_num=line.split(log_line_keyword)[1].strip().split()[0]
+                                data[file][log_line_key] = str(clbs_num)+", margin:"+str(CLBs_margin)
                 # parsing the percentage of fle used from raptor.log
                 for line in lines[start_pb_type_usage+1:]:
                     if "fle            :" in line:
@@ -197,17 +207,20 @@ def parse_log_files(files, log_line_keys_map):
                         fle_percentage=100*int(fle_used)/int(total_fles)
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if log_line_key == 'FLE_Percentage_used':
-                            data[file][log_line_key] = str(fle_percentage)
-                            # FLE_Percentage_used_margin=read_config_test_margins("FLE_Percentage_used_margin")           #to dump margin in parsed_data.json
-                            # str_fle_percentage=str(fle_percentage)+", margin:"+str(FLE_Percentage_used_margin)
-                            # data[file][log_line_key] = str_fle_percentage
+                            # data[file][log_line_key] = str(fle_percentage)
+                            FLE_Percentage_used_margin=read_config_test_margins("FLE_Percentage_used_margin")           #to dump margin in parsed_data.json
+                            str_fle_percentage=str(fle_percentage)+", margin:"+str(FLE_Percentage_used_margin)
+                            data[file][log_line_key] = str_fle_percentage
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if total_clbs == 0:
                             clb_used_percent=0
                         else:
                             clb_used_percent=(CLBs/int(total_clbs))*100
                         if log_line_key == 'CLB_percentage_used':
-                            data[file][log_line_key] = str(clb_used_percent)
+                            # data[file][log_line_key] = str(clb_used_percent)
+                            clb_percentage_used_margin=read_config_test_margins("Packer_time_margin")           #to dump margin in parsed_data.json
+                            str_clb_percentage_used=str(clb_used_percent)+", margin:"+str(clb_percentage_used_margin)
+                            data[file][log_line_key] = str_clb_percentage_used
 
                 # parsing the percentage of metal used from raptor.log 
                 for i in range(len(lines) - 1, -1, -1):
@@ -230,10 +243,10 @@ def parse_log_files(files, log_line_keys_map):
                         wirelength_percentage=100*int(total_wirelength)/int(total_available_wirelength)    #%metal used will be 100 * total_wirelength / total_available.
                 for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                     if log_line_key == 'Wirelength_Percentage_used':
-                        data[file][log_line_key] = str(wirelength_percentage)
-                        # Wirelength_Percentage_used_margin=read_config_test_margins("Wirelength_Percentage_used_margin")           #to dump margin in parsed_data.json
-                        # str_metal_percentage=str(metal_percentage)+", margin:"+str(Wirelength_Percentage_used_margin)
-                        # data[file][log_line_key] = str_metal_percentage
+                        # data[file][log_line_key] = str(wirelength_percentage)
+                        Wirelength_Percentage_used_margin=read_config_test_margins("Wirelength_Percentage_used_margin")           #to dump margin in parsed_data.json
+                        str_metal_percentage=str(wirelength_percentage)+", margin:"+str(Wirelength_Percentage_used_margin)
+                        data[file][log_line_key] = str_metal_percentage
                 
                 for line in lines[start_print_stats+1:]:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
@@ -246,11 +259,11 @@ def parse_log_files(files, log_line_keys_map):
                             elif log_line_key == 'Runtime':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
                             elif log_line_key == 'LUTs':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
+                                # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
                                 LUTs=int(line.split(log_line_keyword)[1].strip().split()[0])
-                                # LUTs_margin=read_config_test_margins("LUTs_margin")           #to dump margin in parsed_data.json
-                                # luts_num=line.split(log_line_keyword)[1].strip().split()[0] 
-                                # data[file][log_line_key] =  str(luts_num)+", margin:"+str(LUTs_margin)
+                                LUTs_margin=read_config_test_margins("LUTs_margin")           #to dump margin in parsed_data.json
+                                luts_num=line.split(log_line_keyword)[1].strip().split()[0] 
+                                data[file][log_line_key] =  str(luts_num)+", margin:"+str(LUTs_margin)
 
 #                   The code first checks if the log line key
 #                   is equal to "DSPs" and "DFFs" 
@@ -265,15 +278,15 @@ def parse_log_files(files, log_line_keys_map):
                                             try:
                                                 # DSPs_margin=read_config_test_margins("DSPs_margin")           #to dump margin in parsed_data.json
                                                 sum_dsps = sum_dsps + int(var)
-                                                data[file][log_line_key] = str(sum_dsps)
-                                                # str_sum_dsps= str(sum_dsps)+", margin:"+str(DSPs_margin)           #to dump margin in parsed_data.json
-                                                # data[file][log_line_key] = str_sum_dsps
+                                                # data[file][log_line_key] = str(sum_dsps)
+                                                str_sum_dsps= str(sum_dsps)+", margin:"+str(DSPs_margin)           #to dump margin in parsed_data.json
+                                                data[file][log_line_key] = str_sum_dsps
                                             except ValueError:
                                                 #If the conversion fails, the code stores the value "0" 
                                                 data[file][log_line_key] = '0' 
-                                # if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
-                                #     DSPs_margin=read_config_test_margins("DSPs_margin")
-                                #     data[file][log_line_key] = "0, margin:"+str(DSPs_margin)          
+                                if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
+                                    DSPs_margin=read_config_test_margins("DSPs_margin")
+                                    data[file][log_line_key] = "0, margin:"+str(DSPs_margin)          
                         elif log_line_key == 'DFFs':
                             dffs_keywords = log_line_keyword.split(',')
                             for dffs_keyword in dffs_keywords:
@@ -284,14 +297,14 @@ def parse_log_files(files, log_line_keys_map):
                                                 # try converting to integer
                                                 # DFFs_margin=read_config_test_margins("DFFs_margin")           #to dump margin in parsed_data.json
                                                 sum_dffs = sum_dffs + int(var)
-                                                data[file][log_line_key] = str(sum_dffs)
-                                                # str_sum_dff= str(sum_dffs)+", margin:"+str(DFFs_margin)           #to dump margin in parsed_data.json
-                                                # data[file][log_line_key] = str_sum_dff
+                                                # data[file][log_line_key] = str(sum_dffs)
+                                                str_sum_dff= str(sum_dffs)+", margin:"+str(DFFs_margin)           #to dump margin in parsed_data.json
+                                                data[file][log_line_key] = str_sum_dff
                                             except ValueError:
                                                 data[file][log_line_key] = "0"
-                                # if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
-                                #     DFFs_margin=read_config_test_margins("DFFs_margin")
-                                #     data[file][log_line_key] = "0, margin:"+str(DFFs_margin)
+                                if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
+                                    DFFs_margin=read_config_test_margins("DFFs_margin")
+                                    data[file][log_line_key] = "0, margin:"+str(DFFs_margin)
 # wirelength_Percentage_used instead of metal_Percentage_used    
                         elif log_line_key == 'BRAMs':
                             brams_keywords = log_line_keyword.split(',')
@@ -303,14 +316,14 @@ def parse_log_files(files, log_line_keys_map):
                                                 # try converting to integer
                                                 # BRAMs_margin=read_config_test_margins("BRAMs_margin")           #to dump margin in parsed_data.json
                                                 sum_brams = sum_brams + int(var)
-                                                data[file][log_line_key] = str(sum_brams)
-                                                # str_sum_brams= str(sum_brams)+", margin:"+str(BRAMs_margin)           #to dump margin in parsed_data.json
-                                                # data[file][log_line_key] = str_sum_brams
+                                                # data[file][log_line_key] = str(sum_brams)
+                                                str_sum_brams= str(sum_brams)+", margin:"+str(BRAMs_margin)           #to dump margin in parsed_data.json
+                                                data[file][log_line_key] = str_sum_brams
                                             except ValueError:
                                                 data[file][log_line_key] = '0' 
-                                # if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
-                                #     BRAMs_margin=read_config_test_margins("BRAMs_margin")
-                                #     data[file][log_line_key] = "0, margin:"+str(BRAMs_margin) 
+                                if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
+                                    BRAMs_margin=read_config_test_margins("BRAMs_margin")
+                                    data[file][log_line_key] = "0, margin:"+str(BRAMs_margin) 
                             # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
                 for line in lines[start_fmax:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -319,7 +332,10 @@ def parse_log_files(files, log_line_keys_map):
                                 fmax=line.split()[-2]
                                 fmax_freq=line.split()[-1]
                                 frequency=fmax+" "+fmax_freq
-                                data[file][log_line_key]=frequency
+                                # data[file][log_line_key]=frequency
+                                fmax_margin=read_config_test_margins("fmax_margin")           #to dump margin in parsed_data.json
+                                str_fmax=str(frequency)+", margin:"+str(fmax_margin)
+                                data[file][log_line_key] = str_fmax
 
                         if log_line_key == "LUTs_CLBs_ratio":
                             if log_line_keyword == "LUTs/CLBs":
@@ -327,7 +343,10 @@ def parse_log_files(files, log_line_keys_map):
                                     luts_clbs_ratio=0
                                 else:    
                                     luts_clbs_ratio=LUTs/CLBs
-                                data[file][log_line_key]=str(luts_clbs_ratio)
+                                # data[file][log_line_key]=str(luts_clbs_ratio)
+                                lut_clb_ratio_margin=read_config_test_margins("LUTs_CLBs_ratio_margin")           #to dump margin in parsed_data.json
+                                str_lut_clb_ratio=str(luts_clbs_ratio)+", margin:"+str(lut_clb_ratio_margin)
+                                data[file][log_line_key] = str_lut_clb_ratio
             # parse the router and packer time
             packer_time=0
             router_time=0
@@ -346,15 +365,15 @@ def parse_log_files(files, log_line_keys_map):
                         break
                 for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                     if log_line_key == 'Packer_time':
-                        data[file][log_line_key] = str(packer_time)
-                        # Packer_time_margin=read_config_test_margins("Packer_time_margin")           #to dump margin in parsed_data.json
-                        # str_packer_time=packer_time+", margin:"+str(Packer_time_margin)
-                        # data[file][log_line_key] = str_packer_time
+                        # data[file][log_line_key] = str(packer_time)
+                        Packer_time_margin=read_config_test_margins("Packer_time_margin")           #to dump margin in parsed_data.json
+                        str_packer_time=packer_time+", margin:"+str(Packer_time_margin)
+                        data[file][log_line_key] = str_packer_time
                     if log_line_key == 'Router_time':
-                        data[file][log_line_key] = str(router_time)
-                        # Router_time_margin=read_config_test_margins("Router_time_margin")           #to dump margin in parsed_data.json
-                        # str_router_time=str(router_time)+", margin:"+str(Router_time_margin)
-                        # data[file][log_line_key] = str_router_time
+                        # data[file][log_line_key] = str(router_time)
+                        Router_time_margin=read_config_test_margins("Router_time_margin")           #to dump margin in parsed_data.json
+                        str_router_time=str(router_time)+", margin:"+str(Router_time_margin)
+                        data[file][log_line_key] = str_router_time
     return data
 
 def main():
