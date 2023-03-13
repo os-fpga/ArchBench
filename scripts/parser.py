@@ -98,6 +98,10 @@ def parse_log_files(files, log_line_keys_map):
             LUTs = 0
             CLBs = 0
             clb_used_percent=0
+            total_clbs=0
+            total_fles=0
+            fle_used=0
+            total_wirelength=0
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
