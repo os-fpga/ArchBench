@@ -202,7 +202,10 @@ def parse_log_files(files, log_line_keys_map):
                             # str_fle_percentage=str(fle_percentage)+", margin:"+str(FLE_Percentage_used_margin)
                             # data[file][log_line_key] = str_fle_percentage
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
-                        clb_used_percent=(CLBs/int(total_clbs))*100
+                        if total_clbs == 0:
+                            clb_used_percent=0
+                        else:
+                            clb_used_percent=(CLBs/int(total_clbs))*100
                         if log_line_key == 'CLB_percentage_used':
                             data[file][log_line_key] = str(clb_used_percent)
 
@@ -320,7 +323,10 @@ def parse_log_files(files, log_line_keys_map):
 
                         if log_line_key == "LUTs_CLBs_ratio":
                             if log_line_keyword == "LUTs/CLBs":
-                                luts_clbs_ratio=LUTs/CLBs
+                                if CLBs == 0:
+                                    luts_clbs_ratio=0
+                                else:    
+                                    luts_clbs_ratio=LUTs/CLBs
                                 data[file][log_line_key]=str(luts_clbs_ratio)
             # parse the router and packer time
             packer_time=0
