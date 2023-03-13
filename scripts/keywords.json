@@ -17,7 +17,7 @@
         "LUTs_CLBs_ratio": "LUTs/CLBs",
         "CLB_percentage_used":"percent_clbs_used",
         "FLE_Percentage_used": " fle            : ",
-        "Metal_Percentage_used": "X - Directed channels:"
+        "Wirelength_Percentage_used": "X - Directed channels:"
     },
     "raptor_perf.log": {
         "Packer_time":"Packing has started",

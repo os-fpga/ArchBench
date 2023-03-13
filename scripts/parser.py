@@ -91,7 +91,7 @@ def parse_log_files(files, log_line_keys_map):
             blocks_of_type_clb=0
             fle_percentage=0
             line_of_total_wirelength=0
-            metal_percentage=0
+            wirelength_percentage=0
             router_time=0
             start_pb_usage = 0
             start_fmax = 0 
@@ -227,10 +227,10 @@ def parse_log_files(files, log_line_keys_map):
                         x_direction=line.split()[4].split(",")[0]
                         y_direction=line.split()[7]
                         total_available_wirelength=int(x_direction)*(int(y_directed_channel)+1) + int(y_direction)*(int(x_directed_channel)+1)              # Total available wirelength will be 720 * (10 + 1) + 1760 * (8 + 1)
-                        metal_percentage=100*int(total_wirelength)/int(total_available_wirelength)    #%metal used will be 100 * total_wirelength / total_available.
+                        wirelength_percentage=100*int(total_wirelength)/int(total_available_wirelength)    #%metal used will be 100 * total_wirelength / total_available.
                 for log_line_key, log_line_keyword in log_line_keys_map[file].items():
-                    if log_line_key == 'Metal_Percentage_used':
-                        data[file][log_line_key] = str(metal_percentage)
+                    if log_line_key == 'Wirelength_Percentage_used':
+                        data[file][log_line_key] = str(wirelength_percentage)
                         # Wirelength_Percentage_used_margin=read_config_test_margins("Wirelength_Percentage_used_margin")           #to dump margin in parsed_data.json
                         # str_metal_percentage=str(metal_percentage)+", margin:"+str(Wirelength_Percentage_used_margin)
                         # data[file][log_line_key] = str_metal_percentage
