@@ -311,8 +311,8 @@ def cga_results():
                                                         diff=int_fle_new-int_fle_golden
                                                         golden_memory_unit="Fail. Latest FLE_Percentage_used are greater than Golden by "+str(diff)+". Golden: "+str(int_fle_golden) +", Latest: "+ str(int_fle_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
-                                            if "Metal_Percentage_used" in golden_sub_key:
-                                                if "Metal_Percentage_used" in new_sub_key:
+                                            if "Wirelength_Percentage_used" in golden_sub_key:
+                                                if "Wirelength_Percentage_used" in new_sub_key:
                                                     int_metal_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
                                                     int_metal_new=float(new_data[new_log_line_key][new_key][new_sub_key])
                                                     percent20=float((10*int_metal_golden)/100)+int_metal_golden
