@@ -271,8 +271,9 @@ def cga_results():
                                                 if "Fmax" in new_sub_key:
                                                     int_fmax_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key].split()[0])
                                                     int_fmax_new=float(new_data[new_log_line_key][new_key][new_sub_key].split()[0])
-                                                    positive_percent5=float((5*int_fmax_golden)/100)+int_fmax_golden
-                                                    negative_percent5=int_fmax_golden-float((5*int_fmax_golden)/100)
+                                                    fmax_percent=float(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
+                                                    positive_percent5=float((fmax_percent*int_fmax_golden)/100)+int_fmax_golden
+                                                    negative_percent5=int_fmax_golden-float((fmax_percent*int_fmax_golden)/100)
                                                     if (int_fmax_golden==int_fmax_new):
                                                         golden_fmax_unit="Pass. Fmax are same."+" Golden: "+str(int_fmax_golden) +"MHz, Latest: "+ str(int_fmax_new)+"MHz"
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_fmax_unit
