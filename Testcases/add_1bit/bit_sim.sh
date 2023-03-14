@@ -106,13 +106,13 @@ lut_map=`find $library -wholename "*/common/simlib.v"`
 TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
-# primitive=`find $library -wholename "*/genesis2/primitives.v"`
-primitive="$main_path/../../primitives.v"
+primitive=`find $library -wholename "*/genesis2/primitives.v"`
+# primitive="$main_path/../../primitives.v"
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
 start_post_route=`date +%s`
-timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
 ./simv | tee -a post_route_sim.log
 end_post_route=`date +%s`
 runtime_post_route=$((end_post_route-start_post_route))
@@ -145,7 +145,7 @@ cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_fil
 python3 ../../../../scripts/force.py $design_name
 
 start_bitstream=`date +%s`
-timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+timeout 20m vcs -sverilog -timescale=1ns/1ps $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 ./simv | tee -a bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
