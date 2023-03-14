@@ -49,9 +49,4 @@ for i in $files; do
     cd $main_path
 done
 
-python3 ./scripts/combine_json.py
-
-python3 ./scripts/compare_json.py
-
-python3 ./scripts/cga_results.py
-
+bash cga_final_results.sh
