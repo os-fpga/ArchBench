@@ -367,7 +367,7 @@ def parse_log_files(files, log_line_keys_map):
                     if log_line_key == 'Packer_time':
                         # data[file][log_line_key] = str(packer_time)
                         Packer_time_margin=read_config_test_margins("Packer_time_margin")           #to dump margin in parsed_data.json
-                        str_packer_time=packer_time+", margin:"+str(Packer_time_margin)
+                        str_packer_time=str(packer_time)+", margin:"+str(Packer_time_margin)
                         data[file][log_line_key] = str_packer_time
                     if log_line_key == 'Router_time':
                         # data[file][log_line_key] = str(router_time)
