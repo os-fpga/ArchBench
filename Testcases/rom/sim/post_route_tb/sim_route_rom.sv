@@ -13,36 +13,11 @@ module rom_post_route_tb;
   #1  clk = !clk;
   
   initial begin
-    // reset <= 1'b1;
-    // @(negedge clk);
-	  // compare();
-
-	//   repeat(100)@(posedge clk);
-	//   reset <= 1'b0;
-    // repeat(1000)@(negedge clk);
-    //   @(negedge clk);
-	//     compare();
     for (i = 0; i <1023; i = i+1 )begin
       @(negedge clk); 
       address = i;
-    //   $display("Address: %0d, data: %0d, Time: %0t", data, address, $time);
       compare();
     end
-	  // repeat(10)@(posedge clk);
-    // @(negedge clk);
-	  // compare();
-
-	  // repeat(10)@(posedge clk);
-    // @(negedge clk);
-	  // compare();
-
-	  // repeat(10)@(posedge clk);
-    // @(negedge clk);
-	  // compare();
-
-	  // repeat(10)@(posedge clk);
-    // @(negedge clk);
-	  // compare();
 	  
   	if(mismatch == 0)
       $display("\n**** All Comparison Matched ***\nSimulation Passed");
