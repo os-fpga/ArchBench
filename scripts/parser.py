@@ -192,13 +192,13 @@ def parse_log_files(files, log_line_keys_map):
                             # Checking the file name and updating the value of the log line key accordingly
                             if log_line_key == 'CLBs':
                                 # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
-                                CLBs=int(line.split(log_line_keyword)[1].strip().split()[0])
+                                CLBs=int(line.split(log_line_keyword)[1].strip().split()[1])
                                 CLBs_margin=read_config_test_margins("CLBs_margin")           #to dump margin in parsed_data.json
-                                clbs_num=line.split(log_line_keyword)[1].strip().split()[0]
+                                clbs_num=line.split(log_line_keyword)[1].strip().split()[1]
                                 data[file][log_line_key] = str(clbs_num)+", margin:"+str(CLBs_margin)
                 # parsing the percentage of fle used from raptor.log
                 for line in lines[start_pb_type_usage+1:]:
-                    if "fle            :" in line:
+                    if "fle            " in line:
                         fle_used=line.split()[2].strip()
                 for line in lines[blocks_of_type_clb:]:
                     if "blocks of type: clb" in line:
