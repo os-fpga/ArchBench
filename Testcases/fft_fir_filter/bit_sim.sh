@@ -68,7 +68,7 @@ echo "sta">>raptor.tcl
 echo "power">>raptor.tcl  
 echo "bitstream">>raptor.tcl
 
-cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8
+cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact
 xml_version=`readlink -f latest | xargs basename`
 cd -
 

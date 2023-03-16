@@ -75,7 +75,7 @@ echo "sta">>raptor.tcl
 echo "power">>raptor.tcl  
 echo "bitstream enable_simulation">>raptor.tcl 
 
-cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8
+cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact
 xml_version=`readlink -f latest | xargs basename`
 cd -
 
@@ -153,7 +153,7 @@ echo -e "Netlist Version: $xml_version">>raptor.log
 # [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 # [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
 
-# cp -R /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8/SRC/ ../../SRC
+# cp -R /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/SRC/ ../../SRC
 # cp -R ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ ../../SRC/CustomModules
 # sed -i s'/include \"/include \"..\/..\/SRC\//' ../../SRC/fabric_netlists.v
 # sed -i s'/include \"..\/..\/SRC\/.\/SRC\/sc_verilog\//include "..\/..\/sim\//' ../../SRC/fabric_netlists.v
