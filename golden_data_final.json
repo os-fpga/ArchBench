@@ -179,6 +179,32 @@
             "Router_time": "307013 ms"
         }
     },
+    "design3_5_5_top":{
+        "bitstream_sim.log": {
+            "Status": "Fail"
+        },
+        "post_route_sim.log": {
+            "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "DFFs": "373",
+            "LUTs": "157",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "CLBs": "30",
+            "Fmax": "149.045 MHz",
+            "LUTs_CLBs_ratio": "5.233333333333333",
+            "CLB_percentage_used": "83.33333333333334",
+            "FLE_Percentage_used": "81.59722222222223",
+            "Wirelength_Percentage_used": "8.677925084175085"
+        },
+        "raptor_perf.log": {
+            "Packer_time": "1043 ms",
+            "Router_time": "1495 ms"
+        }
+    },
     "design136_40_35_top":{
         "bitstream_sim.log": {
             "Status": "Fail"
