@@ -112,6 +112,7 @@ def parse_log_files(files, log_line_keys_map):
             total_fles=0
             fle_used=0
             total_wirelength=0
+            frequency=0
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
@@ -190,12 +191,17 @@ def parse_log_files(files, log_line_keys_map):
                         # Checking if the keyword is in the current line
                         if log_line_keyword in line:
                             # Checking the file name and updating the value of the log line key accordingly
+                            # print(log_line_key)
                             if log_line_key == 'CLBs':
                                 # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
                                 CLBs=int(line.split(log_line_keyword)[1].strip().split()[1])
                                 CLBs_margin=read_config_test_margins("CLBs_margin")           #to dump margin in parsed_data.json
                                 clbs_num=line.split(log_line_keyword)[1].strip().split()[1]
                                 data[file][log_line_key] = str(clbs_num)+", margin:"+str(CLBs_margin)
+                        else:
+                            if log_line_key == 'CLBs':
+                                CLBs_margin=read_config_test_margins("CLBs_margin")
+                                data[file][log_line_key] = str(CLBs)+", margin:"+str(CLBs_margin)
                 # parsing the percentage of fle used from raptor.log
                 for line in lines[start_pb_type_usage+1:]:
                     if "fle            " in line:
@@ -327,8 +333,8 @@ def parse_log_files(files, log_line_keys_map):
                             # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
                 for line in lines[start_fmax:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
-                        if log_line_key == 'Fmax':
-                            if log_line_keyword in line:
+                        if log_line_keyword in line:
+                            if log_line_key == 'Fmax':
                                 fmax=line.split()[-2]
                                 fmax_freq=line.split()[-1]
                                 frequency=fmax+" "+fmax_freq
@@ -336,6 +342,11 @@ def parse_log_files(files, log_line_keys_map):
                                 fmax_margin=read_config_test_margins("fmax_margin")           #to dump margin in parsed_data.json
                                 str_fmax=str(frequency)+", margin:"+str(fmax_margin)
                                 data[file][log_line_key] = str_fmax
+                        else:
+                            if log_line_key == 'Fmax':
+                                fmax_margin=read_config_test_margins("fmax_margin")
+                                str_fmax=str(frequency)+", margin:"+str(fmax_margin)
+                                data[file][log_line_key] = str_fmax 
 
                         if log_line_key == "LUTs_CLBs_ratio":
                             if log_line_keyword == "LUTs/CLBs":
