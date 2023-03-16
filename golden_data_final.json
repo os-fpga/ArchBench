@@ -15,6 +15,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "261.773 MHz",
+            "LUT_CLB_ratio":"1.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
             "Wirelength_Percentage_used": "0.07628367003367004"
         },
@@ -39,7 +41,7 @@
             "DSPs": "0",
             "CLBs": "1433",
             "Fmax": "19.7345 MHz",
-            "LUTs_CLBs_ratio": "8.396371249127704",
+            "LUT_CLB_ratio": "8.396371249127704",
             "CLB_percentage_used": "32.897153351698805",
             "FLE_Percentage_used": "31.729224058769514",
             "Wirelength_Percentage_used": "11.527268494266922"
@@ -65,7 +67,7 @@
             "DSPs": "0",
             "CLBs": "163",
             "Fmax": "157.913 MHz",
-            "LUTs_CLBs_ratio": "8.190184049079754",
+            "LUT_CLB_ratio": "8.190184049079754",
             "CLB_percentage_used": "3.7419651056014693",
             "FLE_Percentage_used": "3.5095270890725434",
             "Wirelength_Percentage_used": "1.1369299662417787"
@@ -91,7 +93,7 @@
             "DSPs": "0",
             "CLBs": "1970",
             "Fmax": "126.505 MHz",
-            "LUTs_CLBs_ratio": "8.607106598984771,",
+            "LUT_CLB_ratio": "8.607106598984771,",
             "CLB_percentage_used": "45.22497704315886",
             "FLE_Percentage_used": "44.146005509641874",
             "Wirelength_Percentage_used": "17.44450628601362"
@@ -117,7 +119,7 @@
             "DSPs": "0",
             "CLBs": "29",
             "Fmax": "192.384 MHz",
-            "LUTs_CLBs_ratio": "10.03448275862069",
+            "LUT_CLB_ratio": "10.03448275862069",
             "CLB_percentage_used": "0.6657483930211203",
             "FLE_Percentage_used": "0.6255739210284664",
             "Wirelength_Percentage_used": "0.1585599644956638"
@@ -143,7 +145,7 @@
             "DSPs": "0",
             "CLBs": "25",
             "Fmax": "183.415 MHz",
-            "LUTs_CLBs_ratio": "9.16",
+            "LUT_CLB_ratio": "9.16",
             "CLB_percentage_used": "0.573921028466483",
             "FLE_Percentage_used": "0.4935720844811754",
             "Wirelength_Percentage_used": "0.15205750538385426"
@@ -169,7 +171,7 @@
             "DSPs": "0",
             "CLBs": "262",
             "Fmax": "106.703 MHz",
-            "LUTs_CLBs_ratio": "6.851145038167939",
+            "LUT_CLB_ratio": "6.851145038167939",
             "CLB_percentage_used": "6.014692378328742",
             "FLE_Percentage_used": "4.648760330578512",
             "Wirelength_Percentage_used": "1.354193949711891"
@@ -195,7 +197,7 @@
             "DSPs": "0",
             "CLBs": "30",
             "Fmax": "149.045 MHz",
-            "LUTs_CLBs_ratio": "5.233333333333333",
+            "LUT_CLB_ratio": "5.233333333333333",
             "CLB_percentage_used": "83.33333333333334",
             "FLE_Percentage_used": "81.59722222222223",
             "Wirelength_Percentage_used": "8.677925084175085"
@@ -221,7 +223,7 @@
             "DSPs": "0",
             "CLBs": "2520",
             "Fmax": "114.297 MHz",
-            "LUTs_CLBs_ratio": "12.186904761904762",
+            "LUT_CLB_ratio": "12.186904761904762",
             "CLB_percentage_used": "57.85123966942148",
             "FLE_Percentage_used": "57.7020202020202",
             "Wirelength_Percentage_used": "14.004750887608404"
@@ -247,7 +249,7 @@
             "DSPs": "0",
             "CLBs": "574",
             "Fmax": "104.28 MHz",
-            "LUTs_CLBs_ratio": "28.933797909407666",
+            "LUT_CLB_ratio": "28.933797909407666",
             "CLB_percentage_used": "13.177226813590451",
             "FLE_Percentage_used": "13.114095500459136",
             "Wirelength_Percentage_used": "3.3949657324951983"
@@ -273,7 +275,7 @@
             "DSPs": "0",
             "CLBs": "705",
             "Fmax": "106.642 MHz",
-            "LUTs_CLBs_ratio": "25.038297872340426",
+            "LUT_CLB_ratio": "25.038297872340426",
             "CLB_percentage_used": "16.18457300275482",
             "FLE_Percentage_used": "16.13578971533517",
             "Wirelength_Percentage_used": "4.014745576508934"
@@ -299,7 +301,7 @@
             "DSPs": "0",
             "CLBs": "1706",
             "Fmax": "98.4292 MHz",
-            "LUTs_CLBs_ratio": "11.8968347010551",
+            "LUT_CLB_ratio": "11.8968347010551",
             "CLB_percentage_used": "39.164370982552796,",
             "FLE_Percentage_used": "39.09550045913682",
             "Wirelength_Percentage_used": "10.054211410860834"
@@ -325,7 +327,7 @@
             "DSPs": "0",
             "CLBs": "72",
             "Fmax": "122.699 MHz",
-            "LUTs_CLBs_ratio": "58.40277777777778",
+            "LUT_CLB_ratio": "58.40277777777778",
             "CLB_percentage_used": "1.6528925619834711",
             "FLE_Percentage_used": "1.6155876951331496",
             "Wirelength_Percentage_used": "0.39987849950526744"
@@ -351,7 +353,7 @@
             "DSPs": "0",
             "CLBs": "78",
             "Fmax": "125.888 MHz",
-            "LUTs_CLBs_ratio": "43.56410256410256",
+            "LUT_CLB_ratio": "43.56410256410256",
             "CLB_percentage_used": "1.790633608815427",
             "FLE_Percentage_used": "1.721763085399449",
             "Wirelength_Percentage_used": "0.42211418136313367"
@@ -377,7 +379,7 @@
             "DSPs": "0",
             "CLBs": "258",
             "Fmax": "109.587 MHz",
-            "LUTs_CLBs_ratio": "50.13953488372093",
+            "LUT_CLB_ratio": "50.13953488372093",
             "CLB_percentage_used": "5.922865013774105",
             "FLE_Percentage_used": "5.871212121212121",
             "Wirelength_Percentage_used": "1.4718293463709913"
@@ -403,7 +405,7 @@
             "DSPs": "0",
             "CLBs": "91",
             "Fmax": "108.941 MHz",
-            "LUTs_CLBs_ratio": "8.989010989010989",
+            "LUT_CLB_ratio": "8.989010989010989",
             "CLB_percentage_used": "2.089072543617998",
             "FLE_Percentage_used": "2.054637281910009",
             "Wirelength_Percentage_used": "0.4569455357662534"
@@ -429,7 +431,7 @@
             "DSPs": "0",
             "CLBs": "189",
             "Fmax": "149.984 MHz",
-            "LUTs_CLBs_ratio": "11.941798941798941",
+            "LUT_CLB_ratio": "11.941798941798941",
             "CLB_percentage_used": "4.338842975206612",
             "FLE_Percentage_used": "4.2957988980716255",
             "Wirelength_Percentage_used": "0.6350583493393865"
@@ -455,7 +457,7 @@
             "DSPs": "0",
             "CLBs": "28",
             "Fmax": "110.715 MHz",
-            "LUTs_CLBs_ratio": "3.642857142857143",
+            "LUT_CLB_ratio": "3.642857142857143",
             "CLB_percentage_used": "77.77777777777779",
             "FLE_Percentage_used": "75.34722222222223",
             "Wirelength_Percentage_used": "9.219802188552189"
@@ -481,7 +483,7 @@
             "DSPs": "0",
             "CLBs": "3488",
             "Fmax": "119.097 MHz",
-            "LUTs_CLBs_ratio": "15.340883027522937",
+            "LUT_CLB_ratio": "15.340883027522937",
             "CLB_percentage_used": "80.0734618916437",
             "FLE_Percentage_used": "80.00459136822774",
             "Wirelength_Percentage_used": "9.522965048600199"
@@ -507,7 +509,7 @@
             "DSPs": "0",
             "CLBs": "36",
             "Fmax": "170.278 MHz",
-            "LUTs_CLBs_ratio": "8.777777777777779",
+            "LUT_CLB_ratio": "8.777777777777779",
             "CLB_percentage_used": "100.0",
             "FLE_Percentage_used": "93.75",
             "Wirelength_Percentage_used": "5.942234848484849"
@@ -533,7 +535,7 @@
             "DSPs": "0",
             "CLBs": "248",
             "Fmax": "120.191 MHz",
-            "LUTs_CLBs_ratio": "6.911290322580645",
+            "LUT_CLB_ratio": "6.911290322580645",
             "CLB_percentage_used": "5.693296602387512",
             "FLE_Percentage_used": "4.241276400367309",
             "Wirelength_Percentage_used": "2.7017490250858507"
@@ -559,7 +561,7 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "177.156 MHz",
-            "LUTs_CLBs_ratio": "0.0",
+            "LUT_CLB_ratio": "0.0",
             "CLB_percentage_used": "2.7777777777777777",
             "FLE_Percentage_used": "1.7361111111111112",
             "Wirelength_Percentage_used": "0.23148148148148148"
@@ -585,7 +587,7 @@
             "DSPs": "0",
             "CLBs": "2474",
             "Fmax": "44.0049 MHz",
-            "LUTs_CLBs_ratio": "9.248181083265965",
+            "LUT_CLB_ratio": "9.248181083265965",
             "CLB_percentage_used": "56.795224977043155",
             "FLE_Percentage_used": "56.01469237832874",
             "Wirelength_Percentage_used": "23.021660919038474"
@@ -611,7 +613,7 @@
             "DSPs": "0",
             "CLBs": "1401",
             "Fmax": "118.359 MHz",
-            "LUTs_CLBs_ratio": "5.854389721627409",
+            "LUT_CLB_ratio": "5.854389721627409",
             "CLB_percentage_used": "32.162534435261705",
             "FLE_Percentage_used": "31.838269054178145",
             "Wirelength_Percentage_used": "11.402312147139282"
@@ -637,7 +639,7 @@
             "DSPs": "24",
             "CLBs": "404",
             "Fmax": "84.9512 MHz",
-            "LUTs_CLBs_ratio": "6.517326732673268",
+            "LUT_CLB_ratio": "6.517326732673268",
             "CLB_percentage_used": "9.274563820018365",
             "FLE_Percentage_used": "9.016299357208448",
             "Wirelength_Percentage_used": "4.1111001978930215"
@@ -663,7 +665,7 @@
             "DSPs": "0",
             "CLBs": "1205",
             "Fmax": "94.0051 MHz",
-            "LUTs_CLBs_ratio": "7.788381742738589",
+            "LUT_CLB_ratio": "7.788381742738589",
             "CLB_percentage_used": "27.66299357208448",
             "FLE_Percentage_used": "27.017332415059688",
             "Wirelength_Percentage_used": "9.688118415691752"
@@ -689,7 +691,7 @@
             "DSPs": "1",
             "CLBs": "2",
             "Fmax": "281.845 MHz",
-            "LUTs_CLBs_ratio": "0.0",
+            "LUT_CLB_ratio": "0.0",
             "CLB_percentage_used": "5.555555555555555",
             "FLE_Percentage_used": "0.6944444444444444",
             "Wirelength_Percentage_used": "0.42613636363636365"
@@ -715,6 +717,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "265.465 MHz",
+            "LUT_CLB_ratio":"1.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
             "Wirelength_Percentage_used": "0.07628367003367004"
         },
@@ -739,6 +743,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "233.759 MHz",
+            "LUT_CLB_ratio":"2.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "0.6944444444444444",
             "Wirelength_Percentage_used": "0.1210016835016835"
         },
@@ -763,6 +769,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "265.465 MHz",
+            "LUT_CLB_ratio":"1.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
             "Wirelength_Percentage_used": "0.07628367003367004"
         },
@@ -787,6 +795,8 @@
             "DSPs": "0",
             "CLBs": "69",
             "Fmax": "102.405 MHz",
+            "LUT_CLB_ratio":"0.0",
+            "CLB_percentage_used":"0.04591368227731864",
             "FLE_Percentage_used": "1.3888888888888888",
             "Wirelength_Percentage_used": "0.3430842936965252"
         },
@@ -811,6 +821,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "270.262 MHz",
+            "LUT_CLB_ratio":"5.0",
+            "CLB_percentage_used":"5.555555555555555",
             "FLE_Percentage_used": "2.7777777777777777",
             "Wirelength_Percentage_used": "0.38404882154882153"
         },
@@ -835,6 +847,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "486.15 MHz",
+            "LUT_CLB_ratio":"4.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "0.6944444444444444",
             "Wirelength_Percentage_used": "0.13941498316498316"
         },
@@ -859,6 +873,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "532.771 MHz",
+            "LUT_CLB_ratio":"3.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
             "Wirelength_Percentage_used": "0.06050084175084175"
         },
@@ -883,6 +899,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "260.465 MHz",
+            "LUT_CLB_ratio":"1.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
             "Wirelength_Percentage_used": "0.07628367003367004"
         },
@@ -907,6 +925,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "420.258 MHz",
+            "LUT_CLB_ratio":"3.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "1.0416666666666667",
             "Wirelength_Percentage_used": "0.1762415824915825"
         },
@@ -931,6 +951,8 @@
             "DSPs": "0",
             "CLBs": "1",
             "Fmax": "263.428 MHz",
+            "LUT_CLB_ratio":"5.0",
+            "CLB_percentage_used":"2.7777777777777777",
             "FLE_Percentage_used": "1.3888888888888888",
             "Wirelength_Percentage_used": "0.1736111111111111"
         },
@@ -955,6 +977,8 @@
             "DSPs": "0",
             "CLBs": "156",
             "Fmax": "146.71 MHz",
+            "LUT_CLB_ratio": "8.31875",
+            "CLB_percentage_used": "3.6730945821854912",
             "FLE_Percentage_used": "3.4205693296602386",
             "Wirelength_Percentage_used": "1.0359372271695477"
         },
