@@ -350,8 +350,8 @@ def parse_log_files(files, log_line_keys_map):
                                 str_fmax=str(frequency)+", margin:"+str(fmax_margin)
                                 data[file][log_line_key] = str_fmax 
 
-                        if log_line_key == "LUTs_CLBs_ratio":
-                            if log_line_keyword == "LUTs/CLBs":
+                        if log_line_key == "LUT_CLB_ratio":
+                            if log_line_keyword == "LUT/CLB":
                                 if CLBs == 0:
                                     luts_clbs_ratio=0
                                 else:    
