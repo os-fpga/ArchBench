@@ -289,6 +289,52 @@ def cga_results():
                                                         diff=int_fmax_golden-int_fmax_new
                                                         golden_fmax_unit="Fail. Latest Fmax is greater than Golden by "+str(diff)+". Golden: "+str(int_fmax_golden) +", Latest: "+ str(int_fmax_new)
                                                         result[golden_log_line_key][golden_key][golden_sub_key]=golden_fmax_unit
+                                            if "LUT_CLB_ratio" in golden_sub_key:
+                                                if "LUT_CLB_ratio" in new_sub_key:
+                                                    int_lut_clb_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
+                                                    # int_lut_clb_new=float(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    # percent20=float((10*int_lut_clb_golden)/100)+int_lut_clb_golden
+                                                    int_lut_clb_new=float(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
+                                                    percent20=float((percent*int_lut_clb_golden)/100)+int_lut_clb_golden
+                                                    if (int_lut_clb_golden==int_lut_clb_new):
+                                                        golden_memory_unit="Pass. LUT_CLB_ratio is same."+" Golden: "+str(int_lut_clb_golden) +", Latest: "+ str(int_lut_clb_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_lut_clb_golden>int_lut_clb_new):
+                                                        diff=int_lut_clb_golden-int_lut_clb_new
+                                                        golden_memory_unit="Pass. Golden LUT_CLB_ratio is greater than Latest by "+str(diff)+". Golden: "+str(int_lut_clb_golden) +", Latest: "+ str(int_lut_clb_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_lut_clb_new>int_lut_clb_golden and int_lut_clb_new<percent20):
+                                                        diff=int_lut_clb_new-int_lut_clb_golden
+                                                        golden_memory_unit="Pass. Latest LUT_CLB_ratio is greater than Golden but within 20 percent by "+str(diff)+". Golden: "+str(int_lut_clb_golden) +", Latest: "+ str(int_lut_clb_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    else:
+                                                        diff=int_lut_clb_new-int_lut_clb_golden
+                                                        golden_memory_unit="Fail. Latest LUT_CLB_ratio are greater than Golden by "+str(diff)+". Golden: "+str(int_lut_clb_golden) +", Latest: "+ str(int_lut_clb_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                            if "CLB_percentage_used" in golden_sub_key:
+                                                if "CLB_percentage_used" in new_sub_key:
+                                                    int_clb_percentage_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
+                                                    # int_clb_percentage_new=float(new_data[new_log_line_key][new_key][new_sub_key])
+                                                    # percent20=float((10*int_clb_percentage_golden)/100)+int_clb_percentage_golden
+                                                    int_clb_percentage_new=float(new_data[new_log_line_key][new_key][new_sub_key].split(',')[0])
+                                                    percent=int(new_data[new_log_line_key][new_key][new_sub_key].split(':')[1])
+                                                    percent20=float((percent*int_clb_percentage_golden)/100)+int_clb_percentage_golden
+                                                    if (int_clb_percentage_golden==int_clb_percentage_new):
+                                                        golden_memory_unit="Pass. CLB_percentage_used is same."+" Golden: "+str(int_clb_percentage_golden) +", Latest: "+ str(int_clb_percentage_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_clb_percentage_golden>int_clb_percentage_new):
+                                                        diff=int_clb_percentage_golden-int_clb_percentage_new
+                                                        golden_memory_unit="Pass. Golden CLB_percentage_used is greater than Latest by "+str(diff)+". Golden: "+str(int_clb_percentage_golden) +", Latest: "+ str(int_clb_percentage_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    elif (int_clb_percentage_new>int_clb_percentage_golden and int_clb_percentage_new<percent20):
+                                                        diff=int_clb_percentage_new-int_clb_percentage_golden
+                                                        golden_memory_unit="Pass. Latest CLB_percentage_used is greater than Golden but within 20 percent by "+str(diff)+". Golden: "+str(int_clb_percentage_golden) +", Latest: "+ str(int_clb_percentage_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
+                                                    else:
+                                                        diff=int_clb_percentage_new-int_clb_percentage_golden
+                                                        golden_memory_unit="Fail. Latest LUT_CLB_ratio are greater than Golden by "+str(diff)+". Golden: "+str(int_clb_percentage_golden) +", Latest: "+ str(int_clb_percentage_new)
+                                                        result[golden_log_line_key][golden_key][golden_sub_key]=golden_memory_unit
                                             if "FLE_Percentage_used" in golden_sub_key:
                                                 if "FLE_Percentage_used" in new_sub_key:
                                                     int_fle_golden=float(golden_data[golden_log_line_key][golden_key][golden_sub_key])
