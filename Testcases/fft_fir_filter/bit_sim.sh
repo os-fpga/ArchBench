@@ -68,9 +68,9 @@ echo "sta">>raptor.tcl
 echo "power">>raptor.tcl  
 echo "bitstream">>raptor.tcl
 
-cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact
-xml_version=`readlink -f latest | xargs basename`
-cd -
+# cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact
+xml_version=`cat /nfs_eda_sw/softwares/Raptor/special_instal/latest/share/raptor/etc/xml_version`
+# cd -
 
 start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
