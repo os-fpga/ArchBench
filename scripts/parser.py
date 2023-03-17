@@ -21,6 +21,7 @@ def read_config_test_margins(flag):
     Router_time_margin=0
     fmax_margin=0
     LUTs_CLBs_ratio_margin=0
+    adder_carry_margin=0
     with open("test.config") as conf:
         contents = conf.readlines()
         for i in range(len(contents)):
@@ -34,6 +35,8 @@ def read_config_test_margins(flag):
                 DSPs_margin=contents[i].split('"')[1]
             if "CLBs_margin" in contents[i]:
                 CLBs_margin=contents[i].split('"')[1]
+            if "adder_carry" in contents[i]:
+                adder_carry_margin=contents[i].split('"')[1]
             if "FLE_Percentage_used_margin" in contents[i]:
                 FLE_Percentage_used_margin=contents[i].split('"')[1]
             if "Wirelength_Percentage_used_margin" in contents[i]:
@@ -56,6 +59,8 @@ def read_config_test_margins(flag):
             return DSPs_margin
         if flag=="CLBs_margin":
             return CLBs_margin
+        if flag=="adder_carry_margin":
+            return adder_carry_margin
         if flag=="FLE_Percentage_used_margin":
             return FLE_Percentage_used_margin
         if flag=="Wirelength_Percentage_used_margin":
@@ -332,7 +337,14 @@ def parse_log_files(files, log_line_keys_map):
                                 if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
                                     BRAMs_margin=read_config_test_margins("BRAMs_margin")
                                     data[file][log_line_key] = "0, margin:"+str(BRAMs_margin) 
-                            # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]   
+                            # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
+                        elif log_line_key == 'Adder_Carry':
+                            if log_line_keyword in line:
+                                str_adder_carry=line.split()[1]+", margin:"+str(read_config_test_margins("adder_carry_margin"))
+                                data[file][log_line_key] = str_adder_carry 
+                            if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
+                                # BRAMs_marin=
+                                data[file][log_line_key] = "0, margin:"+str(read_config_test_margins("adder_carry_margin"))   
                 for line in lines[start_fmax:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if log_line_keyword in line:
