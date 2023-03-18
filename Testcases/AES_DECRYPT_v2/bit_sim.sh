@@ -67,7 +67,7 @@ echo "set_top_module wrapper_top">>raptor.tcl
 echo "analyze">>raptor.tcl
 # echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
 echo "add_constraint_file ../constrs_1/aes_decrypt.sdc">>raptor.tcl 
-echo "synthesize">>raptor.tcl
+echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
