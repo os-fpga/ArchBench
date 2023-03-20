@@ -1,14 +1,6 @@
-//-------------------------------------------
-//	FPGA Synthesizable Verilog Netlist
-//	Description: Netlist Summary
-//	Author: Xifan TANG
-//	Organization: University of Utah
-//	Date: Mon Mar 20 11:54:32 2023
-//-------------------------------------------
-//----- Time scale -----
+
 `timescale 1ns / 1ps
 
-// ------ Include fabric top-level netlists -----
 `include "../../../SRC/fabric_netlists.v"
 
 // `include "BIT_SIM/add_1bit_top_formal_verification.v"
