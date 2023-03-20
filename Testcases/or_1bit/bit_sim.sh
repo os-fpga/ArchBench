@@ -56,7 +56,7 @@ echo "power">>raptor.tcl
 echo "bitstream enable_simulation">>raptor.tcl  
   
 # cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact
-xml_version=`cat /nfs_eda_sw/softwares/Raptor/special_instal/latest/share/raptor/etc/xml_version`
+xml_version=`cat /nfs_eda_sw/softwares/Raptor/special_instal/latest/share/raptor/etc/xml_version | tail -n 1`
 # cd -
 
 start_raptor=`date +%s`
