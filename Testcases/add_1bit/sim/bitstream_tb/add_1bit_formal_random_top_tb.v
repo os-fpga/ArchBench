@@ -13,14 +13,14 @@
 
 module add_1bit_top_formal_verification_random_tb;
 // ----- Default clock port is added here since benchmark does not contain one -------
-	reg [0:0] clk;
+	reg [0:3] clk;
 
 // ----- Shared inputs -------
-	reg [0:0] a;
-	reg [0:0] b;
+	reg a;
+	reg b;
 
 // ----- FPGA fabric outputs -------
-	wire [0:0] c;
+	wire c;
 
 // ----- FPGA fabric instanciation -------
 	// add_1bit_top_formal_verification FPGA_DUT(
@@ -37,20 +37,21 @@ module add_1bit_top_formal_verification_random_tb;
 	wire [0:639] gfpga_pad_QL_PREIO_F2A_CLK;
 	wire [0:9] ccff_head;
 	wire [0:9] ccff_tail;
-	wire [0:0] test_en;
-	wire [0:0] scan_mode;
-	wire [0:0] scan_clk;
-	bit [0:0] config_enable;
-	wire [0:0] prog_clock;
-	bit [0:0] CFG_DONE;
+	wire test_en;
+	wire scan_mode;
+	wire scan_clk;
+	// bit config_enable;
+	wire prog_clock;
+	// bit [0:0] CFG_DONE;
+	bit global_resetn;
 
 	fpga_top U0_formal_verification (
-		test_en[0],
-		scan_mode[0],
-		scan_clk[0],
-		config_enable[0],
-		prog_clock[0],
-		CFG_DONE[0],
+		clk,	
+		test_en,
+		scan_mode,
+		scan_clk,
+		prog_clock,
+		global_resetn,
 		gfpga_pad_QL_PREIO_A2F[0:639],
 		gfpga_pad_QL_PREIO_F2A[0:639],
 		gfpga_pad_QL_PREIO_F2A_DEF0[0:639],
@@ -68,7 +69,7 @@ module add_1bit_top_formal_verification_random_tb;
 		// assign clk[1] = 1'b0;
 		// assign clk[2] = 1'b0;
 		// assign clk[3] = 1'b0;
-		// assign global_reset[0] = 1'b1;
+		assign global_resetn = 1'b1;
 		// assign scan_reset[0] = 1'b1;
 
 // ----- Clock 'clk' Initialization -------
@@ -93,13 +94,13 @@ module add_1bit_top_formal_verification_random_tb;
 // ----- Input Initialization -------
 		initial begin
 			`include "../../bitstream_text.txt"
-			config_enable[0]=1'b1;
-			CFG_DONE=1'b1;
+			// config_enable[0]=1'b1;
+			// CFG_DONE=1'b1;
 			#10;
 			
-			a <= 1'b0;
-			b <= 1'b0;
-			#10
+			// a <= 1'b0;
+			// b <= 1'b0;
+			// #10
 			a = 1'b0;
 			b = 1'b0;
 			#15
