@@ -5188,7 +5188,7 @@ module JtagBridge (
   );
   initial begin
   `ifndef SYNTHESIS
-    jtag_tap_fsm_state = {1{$urandom}};
+    jtag_tap_fsm_state = {1{$random}};
   `endif
   end
 
