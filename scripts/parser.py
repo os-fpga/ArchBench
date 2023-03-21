@@ -8,6 +8,7 @@
 
 # Importing the json module
 import json
+import os
 
 def read_config_test_margins(flag):
     DFFs_margin=0
@@ -125,16 +126,19 @@ def parse_log_files(files, log_line_keys_map):
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line
-                        if log_line_keyword in line:
-                            # Checking the file name and updating the value of the log line key accordingly
-                            if log_line_key == 'Status':
-                                status_bitstream.append(line.split(log_line_keyword)[1].split('\n')[0])
-                                data[file][log_line_key] = 'Fail' if "Test Failed" in status_bitstream else 'Pass'
-                            elif log_line_key == 'Memory':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()      
-                            elif log_line_key == 'Runtime':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
-
+                        bitstream_tb_dir=os.path.isdir('sim/bitstream_tb')
+                        if bitstream_tb_dir:
+                            if log_line_keyword in line:
+                                # Checking the file name and updating the value of the log line key accordingly
+                                if log_line_key == 'Status':
+                                    status_bitstream.append(line.split(log_line_keyword)[1].split('\n')[0])
+                                    data[file][log_line_key] = 'Fail' if "Test Failed" in status_bitstream else 'Pass'
+                                elif log_line_key == 'Memory':
+                                    data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()
+                                elif log_line_key == 'Runtime':
+                                    data[file][log_line_key] = line.split(log_line_keyword)[1].strip()
+                        else:
+                            data[file][log_line_key] = None
             ###post_route.log###
             # Looping through each line in the log file
             if file == "post_route_sim.log":
@@ -142,15 +146,19 @@ def parse_log_files(files, log_line_keys_map):
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line
-                        if log_line_keyword in line:
-                            # Checking the file name and updating the value of the log line key accordingly
+                        post_route_tb_dir=os.path.isdir('sim/post_route_tb')
+                        if post_route_tb_dir:
+                            if log_line_keyword in line:
+                                # Checking the file name and updating the value of the log line key accordingly
+                                    if log_line_key == 'Status':
+                                        data[file][log_line_key] = 'Fail' if line.split(log_line_keyword)[1].split('\n')[0] == "Simulation Failed" else 'Pass'
+                                    elif log_line_key == 'Memory':
+                                        data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()
+                                    elif log_line_key == 'Runtime':
+                                        data[file][log_line_key] = line.split(log_line_keyword)[1].strip()
+                        else:
                             if log_line_key == 'Status':
-                                data[file][log_line_key] = 'Fail' if line.split(log_line_keyword)[1].split('\n')[0] == "Simulation Failed" else 'Pass'
-                            elif log_line_key == 'Memory':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()      
-                            elif log_line_key == 'Runtime':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
-            
+                                data[file][log_line_key] = None
             ###raptor.log###
             # Looping through each line in the log file
             if file == "raptor.log":
