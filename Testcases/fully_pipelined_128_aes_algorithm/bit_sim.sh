@@ -21,7 +21,7 @@ default=$8
 [ -f raptor_perf.log ] && rm -fr raptor_perf.log
 [ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
 
-python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
+# python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
