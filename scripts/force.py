@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import sys
+import os.path
 
 design_name= sys.argv[1]
 netlist="SRC"
@@ -23,13 +24,19 @@ pf.close()
 
 output_file = open("../../bitstream_text.txt", "w")
 
-with open(f"../{design_name}/fabric_bitstream.xml",'r') as f:
-    for line in f:
-        if "path=" in line:
-            path=line.split('"')[5]
-            value=line.split('"')[3]
-            fpga_top="force "+path+" = "+value+";\n"
-            fpga_inst = fpga_top.replace("fpga_top","U0_formal_verification")
-            output_file.write(fpga_inst)
+file_path=(f'../{design_name}/fabric_bitstream.xml')
+check_xml_bitstream = os.path.isfile(file_path)
 
+if check_xml_bitstream:
+    with open(f"../{design_name}/fabric_bitstream.xml",'r') as f:
+        for line in f:
+            if "path=" in line:
+                path=line.split('"')[5]
+                value=line.split('"')[3]
+                fpga_top="force "+path+" = "+value+";\n"
+                fpga_inst = fpga_top.replace("fpga_top","U0_formal_verification")
+                output_file.write(fpga_inst)
+else:
+    fpga_inst=f"// xml bitsteam is not generated for {design_name} design"
+    output_file.write(fpga_inst)
 output_file.close()

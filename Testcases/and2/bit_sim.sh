@@ -16,6 +16,10 @@ if [ -e ../suite.conf ]; then
     source ../suite.conf
 fi
 
+if [ -e ./design.conf ]; then 
+    source ./design.conf
+fi
+
 [ -d SRC ] && rm -fr SRC
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
 [ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
@@ -59,7 +63,6 @@ echo "route">>raptor.tcl
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
 [ -z "$vpr_file_path" ] && echo "bitstream enable_simulation">>raptor.tcl || echo "bitstream">>raptor.tcl 
-# echo "bitstream enable_simulation">>raptor.tcl  
 
 xml_version=`cat /nfs_eda_sw/softwares/Raptor/special_instal/latest/share/raptor/etc/xml_version | tail -n 1`
 
@@ -111,7 +114,6 @@ TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis2/primitives.v"`
-# primitive="$main_path/../../primitives.v"
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
