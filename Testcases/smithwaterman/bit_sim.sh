@@ -3,14 +3,22 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-vpr_file=$1
-openfpga_file=$2
-fixed_sim_openfpga_file=$3
-repack_design_constraint_file=$4
-bitstream_annotation_file=$5
-set_device_size=$6
-strategy=$7
-default=$8
+# vpr_file=$1
+# openfpga_file=$2
+# fixed_sim_openfpga_file=$3
+# repack_design_constraint_file=$4
+# bitstream_annotation_file=$5
+# set_device_size=$6
+strategy=$1
+default=$2
+
+if [ -e ../suite.conf ]; then 
+    source ../suite.conf
+fi
+
+if [ -e ./design.conf ]; then 
+    source ./design.conf
+fi
 
 [ -d SRC ] && rm -fr SRC
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
@@ -35,29 +43,25 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 cd $design_name\_golden
 
 echo "create_design smithwaterman_02_24">raptor.tcl
-echo "target_device GEMINI_COMPACT_82x68">>raptor.tcl
-# echo "architecture $vpr_file $openfpga_file">>raptor.tcl
+[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "target_device GEMINI_COMPACT_82x68">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
-echo "add_library_path ../rtl">>raptor.tcl  
-# echo "add_library_ext .v .sv">>raptor.tcl 
+echo "add_library_path ../rtl">>raptor.tcl
 echo "add_design_file ../rtl/smithwaterman.v">>raptor.tcl
 echo "set_top_module smithwaterman">>raptor.tcl
-# echo "synth_options -effort high">>raptor.tcl
-echo "analyze">>raptor.tcl
-# echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
-# echo "add_constraint_file ../constrs_1/aes_decrypt.sdc">>raptor.tcl 
+[ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
+# echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
+[ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
+[ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "synthesize">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
-echo "power">>raptor.tcl  
-echo "bitstream">>raptor.tcl
+echo "power">>raptor.tcl
+[ -z "$vpr_file_path" ] && echo "bitstream enable_simulation">>raptor.tcl || echo "bitstream">>raptor.tcl 
 
-# cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact
 xml_version=`cat /nfs_eda_sw/softwares/Raptor/special_instal/latest/share/raptor/etc/xml_version | tail -n 1`
-# cd -
 
 start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
@@ -106,13 +110,12 @@ echo -e "Netlist Version: $xml_version">>raptor.log
 # TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
 # ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
 # sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
-# # primitive=`find $library -wholename "*/genesis2/primitives.v"`
-# primitive="$main_path/../../primitives.v"
+# primitive=`find $library -wholename "*/genesis2/primitives.v"`
 
 # [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 # [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
 # start_post_route=`date +%s`
-# timeout 4m vcs -sverilog $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+# timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
 # ./simv | tee -a post_route_sim.log
 # end_post_route=`date +%s`
 # runtime_post_route=$((end_post_route-start_post_route))
