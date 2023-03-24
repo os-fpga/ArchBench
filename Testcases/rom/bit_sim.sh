@@ -3,14 +3,38 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-vpr_file=$1
-openfpga_file=$2
-fixed_sim_openfpga_file=$3
-repack_design_constraint_file=$4
-bitstream_annotation_file=$5
-set_device_size=$6
-strategy=$7
-default=$8
+# vpr_file=$1
+# openfpga_file=$2
+# fixed_sim_openfpga_file=$3
+# repack_design_constraint_file=$4
+# bitstream_annotation_file=$5
+# set_device_size=$6
+# strategy=$1
+default=$1
+
+xml_root=`git rev-parse --show-toplevel`
+cd $xml_root/openfpga-pd-castor-rs 
+
+if [ -d .git ]; then
+    git checkout main && git pull origin main && git pull origin --tags
+else
+    echo -e "openfpga-pd-castor-rs is not initialized. Initialize it using command\ncd $xml_root/openfpga-pd-castor-rs && git submodule update --init"
+    exit 1
+fi 
+fixed_sim_path=`which raptor | xargs dirname`
+cd -
+
+if [ -e ./tool.conf ]; then # tool.conf
+    source ./tool.conf
+fi
+if [ ! $xml_tag == "latest" ]; then
+    cd $xml_root/openfpga-pd-castor-rs && git checkout $xml_tag && cd -
+else
+    cd $xml_root/openfpga-pd-castor-rs 
+    latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+    git checkout $latest_tag
+    cd -
+fi
 
 [ -d SRC ] && rm -fr SRC
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
@@ -21,7 +45,7 @@ default=$8
 [ -f raptor_perf.log ] && rm -fr raptor_perf.log
 [ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
 
-python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
+# python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
@@ -36,29 +60,27 @@ cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
 echo "target_device GEMINI_COMPACT_10x8">>raptor.tcl
-# echo "architecture $vpr_file $openfpga_file">>raptor.tcl
+[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
-# echo "set_device_size $set_device_size">>raptor.tcl
-# echo "custom_openfpga_script ../${design_name}_custom.openfpga">>raptor.tcl
-echo "synth_options -no_bram">>raptor.tcl 
-echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
+[ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
+[ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
+[ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
+echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
-echo "power">>raptor.tcl  
-echo "bitstream enable_simulation">>raptor.tcl
+echo "power">>raptor.tcl
+[ -z "$vpr_file_path" ] && echo "bitstream enable_simulation">>raptor.tcl || echo "bitstream">>raptor.tcl 
 
-# cd /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact
-xml_version=`cat /nfs_eda_sw/softwares/Raptor/special_instal/latest/share/raptor/etc/xml_version | tail -n 1`
-# cd -
+xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
 start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
@@ -67,6 +89,7 @@ runtime_raptor=$((end_raptor-start_raptor))
 echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
 raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
+echo -e "device: $device">>raptor.log
 
 string="_post_route"
 while read line; do
@@ -108,7 +131,6 @@ TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis2/primitives.v"`
-# primitive="$main_path/../../primitives.v"
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
