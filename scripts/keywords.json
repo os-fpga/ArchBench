@@ -23,6 +23,7 @@
     },
     "raptor_perf.log": {
         "Packer_time":"Packing has started",
+        "Placer_time":"Placement has started",
         "Router_time":"Route has started"
     }
 }

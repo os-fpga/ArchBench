@@ -19,6 +19,7 @@ def read_config_test_margins(flag):
     FLE_Percentage_used_margin=0
     Wirelength_Percentage_used_margin=0
     Packer_time_margin=0
+    Placer_time_margin=0
     Router_time_margin=0
     fmax_margin=0
     LUTs_CLBs_ratio_margin=0
@@ -44,6 +45,8 @@ def read_config_test_margins(flag):
                 Wirelength_Percentage_used_margin=contents[i].split('"')[1]
             if "Packer_time_margin" in contents[i]:
                 Packer_time_margin=contents[i].split('"')[1]
+            if "Placer_time_margin" in contents[i]:
+                Placer_time_margin=contents[i].split('"')[1]
             if "Router_time_margin" in contents[i]:
                 Router_time_margin=contents[i].split('"')[1]
             if "fmax_margin" in contents[i]:
@@ -68,6 +71,8 @@ def read_config_test_margins(flag):
             return Wirelength_Percentage_used_margin
         if flag=="Packer_time_margin":
             return Packer_time_margin
+        if flag=="Placer_time_margin":
+            return Placer_time_margin
         if flag=="Router_time_margin":
             return Router_time_margin
         if flag=="fmax_margin":
@@ -382,6 +387,7 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = str_lut_clb_ratio
             # parse the router and packer time
             packer_time=0
+            placer_time=0
             router_time=0
             if file == "raptor_perf.log":
                 for i in range(len(lines)):
@@ -396,12 +402,23 @@ def parse_log_files(files, log_line_keys_map):
                         router_time_with_dot=lines[start_print_stats+2].strip().split()[4]+" "+lines[start_print_stats+2].strip().split()[5]
                         router_time=router_time_with_dot[0:-1]
                         break
+                for i in range(len(lines)):
+                    if "Placement has started" in lines[i]:
+                        placement_start_line = i
+                        placer_time_with_dor=lines[placement_start_line+2].strip().split()[4]+" "+lines[placement_start_line+2].strip().split()[5]
+                        placer_time=placer_time_with_dor[0:-1]
+                        break
                 for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                     if log_line_key == 'Packer_time':
                         # data[file][log_line_key] = str(packer_time)
                         Packer_time_margin=read_config_test_margins("Packer_time_margin")           #to dump margin in parsed_data.json
                         str_packer_time=str(packer_time)+", margin:"+str(Packer_time_margin)
                         data[file][log_line_key] = str_packer_time
+                    if log_line_key == 'Placer_time':
+                        # data[file][log_line_key] = str(router_time)
+                        Placer_time_margin=read_config_test_margins("Placer_time_margin")           #to dump margin in parsed_data.json
+                        str_placer_time=str(placer_time)+", margin:"+str(Placer_time_margin)
+                        data[file][log_line_key] = str_placer_time
                     if log_line_key == 'Router_time':
                         # data[file][log_line_key] = str(router_time)
                         Router_time_margin=read_config_test_margins("Router_time_margin")           #to dump margin in parsed_data.json
