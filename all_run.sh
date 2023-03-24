@@ -45,8 +45,8 @@ echo "$bitstream_annotation_file"
 for i in $files; do
     directory_path=$(dirname $i) 
     cd $directory_path
-    bash bit_sim.sh $strategy $default
-    # $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $set_device_size 
+    bash bit_sim.sh $default
+    # $strategy $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $set_device_size 
     cd $main_path
 done
 
