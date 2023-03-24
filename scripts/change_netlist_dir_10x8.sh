@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp -R /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8/SRC/ ./SRC
+cp -R /cadlib/gemini/TSMC16NMFFC/release/netlist_gemini_compact/latest/gemini_compact_10x8/ ./SRC
 cp -R ../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ ./SRC/CustomModules
 sed -i s'/include \"/include \"..\/..\/..\/SRC\//' ./SRC/fabric_netlists.v
 sed -i s'/`include \"..\/..\/..\/SRC\/.\/SRC\/sc_verilog\//\/\/`include "..\/..\/sim\//' ./SRC/fabric_netlists.v
