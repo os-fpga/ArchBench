@@ -205,6 +205,8 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = 'Pass' if ' '.join(line.split(log_line_keyword)[1].split(" ")[i] for i in [2,3,4]).split('\n')[0] == "bitstream is generated" else 'Fail'
                             if log_line_key == 'Fabric_netlist_version':
                                 data[file][log_line_key] = line.split()[2]
+                            if log_line_key == 'Device_name':
+                                data[file][log_line_key]=line.split()[-1]
                             
                 for line in lines[start_pb_usage+1:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
