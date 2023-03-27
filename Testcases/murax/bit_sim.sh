@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 main_path=$PWD
 
@@ -13,19 +14,20 @@ else
     cd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
 fi 
 fixed_sim_path=`which raptor | xargs dirname`
-cd -
 
-if [ -e ./tool.conf ]; then # tool.conf
-    source ./tool.conf
+if [ -f $main_path/tool.conf ]; then # tool.conf
+    source $main_path/tool.conf
 fi
-if [ ! $xml_tag == "latest" ]; then
-    cd $xml_root/openfpga-pd-castor-rs && git checkout $xml_tag && cd -
-else
+echo "vpr_file_path $vpr_file_path"
+echo "xml_tag $xml_tag"
+if [ "$xml_tag" == "latest" ]; then
     cd $xml_root/openfpga-pd-castor-rs 
     latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
     git checkout $latest_tag
-    cd -
+else
+    cd $xml_root/openfpga-pd-castor-rs && git checkout $xml_tag
 fi
+cd $main_path
 
 [ -d SRC ] && rm -fr SRC
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
