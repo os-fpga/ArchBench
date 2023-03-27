@@ -3,14 +3,6 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-# vpr_file=$1
-# openfpga_file=$2
-# fixed_sim_openfpga_file=$3
-# repack_design_constraint_file=$4
-# bitstream_annotation_file=$5
-# set_device_size=$6
-# strategy=$1
-default=$1
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
@@ -18,8 +10,7 @@ cd $xml_root/openfpga-pd-castor-rs
 if [ -d .git ]; then
     git checkout main && git pull origin main && git pull origin --tags
 else
-    echo -e "openfpga-pd-castor-rs is not initialized. Initialize it using command\ncd $xml_root/openfpga-pd-castor-rs && git submodule update --init"
-    exit 1
+    cd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
 fi 
 fixed_sim_path=`which raptor | xargs dirname`
 cd -
