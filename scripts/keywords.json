@@ -19,7 +19,8 @@
         "CLB_percentage_used":"percent_clbs_used",
         "FLE_Percentage_used": " fle            ",
         "Wirelength_Percentage_used": "X - Directed channels:",
-        "Fabric_netlist_version": "Netlist Version:"
+        "Fabric_netlist_version": "Netlist Version:",
+        "Device_name": "Device:"
     },
     "raptor_perf.log": {
         "Packer_time":"Packing has started",
