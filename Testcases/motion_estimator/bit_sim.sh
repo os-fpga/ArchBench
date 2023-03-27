@@ -100,7 +100,7 @@ runtime_raptor=$((end_raptor-start_raptor))
 echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
 raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
-echo -e "device: $device">>raptor.log
+echo -e "Device: $device">>raptor.log
 
 # string="_post_route"
 # while read line; do
