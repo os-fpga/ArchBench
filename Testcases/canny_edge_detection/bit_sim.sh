@@ -51,6 +51,8 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 
 cd $design_name\_golden
 
+echo "set_clock_pin -device_clock clk[0] -design_clock clock0">pin_settings.pin
+
 echo "create_design canny_edge_detector_02_24">raptor.tcl
 echo "target_device GEMINI_COMPACT_82x68">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
@@ -67,6 +69,7 @@ echo "add_design_file ../rtl/CacheSystem2.vhd">>raptor.tcl
 echo "add_design_file ../rtl/buffer.vhd">>raptor.tcl
 echo "add_design_file ../rtl/wrapper.vhd">>raptor.tcl
 echo "add_design_file ../rtl/top.vhd">>raptor.tcl
+echo "add_constraint_file pin_settings.pin">>raptor.tcl
 echo "set_top_module top">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
