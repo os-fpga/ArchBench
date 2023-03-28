@@ -320,7 +320,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
-            "error_msg": "BIT: Design design152_50_45_top bitstream generation failedDesign design152_50_45_top bitstream generation failed",
+            "error_msg": null,
             "DFFs": "5654",
             "LUTs": "4205",
             "BRAMs": "0",
