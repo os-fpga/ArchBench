@@ -8,24 +8,40 @@ design_name=${PWD##*/}
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
-if [ -d .git ]; then
-    git checkout main && git pull origin main && git pull origin --tags
+if [ -f $main_path/../submodule_udpated.txt ]; then
+    echo "No need to update submodule"
 else
-    cd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
-fi 
+    if [ -d .git ]; then
+        git checkout main && git pull origin main && git pull origin --tags 
+        echo "submodule is updated" >> $main_path/../submodule_udpated.txt
+    else
+        cd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
+        echo "submodule is updated" >> $main_path/../submodule_udpated.txt
+    fi 
+fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_10x8.conf ]; then # tool.confx
+if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
     source $main_path/../tool_10x8.conf
 fi
 
+cd $xml_root/openfpga-pd-castor-rs 
+current_tag=$(git describe --tags --abbrev=0)
+latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
 if [ "$xml_tag" == "latest" ]; then
-    cd $xml_root/openfpga-pd-castor-rs 
-    latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-    git checkout $latest_tag
+    if [ "$current_tag" == "$latest_tag" ]; then
+        echo "Already on latest tag"
+    else
+        git checkout $latest_tag
+    fi
 else
-    cd $xml_root/openfpga-pd-castor-rs && git checkout $xml_tag
+    if [ "$current_tag" == "$xml_tag" ]; then
+        echo "Already on $xml_tag tag"
+    else
+        cd $xml_root/openfpga-pd-castor-rs && git checkout $xml_tag
+    fi
 fi
+
 cd $main_path
 
 [ -d SRC ] && rm -fr SRC
