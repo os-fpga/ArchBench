@@ -8,6 +8,7 @@
     "raptor.log": {
         "Status": "BIT: Design",
         "error_msg": "ERROR: ",
+        "Runtime": "RunTime: ",
         "DFFs": " dff          , dffn          , sdff          , sdffn          , dffr          , dffnr          , dffe          , dffne          , sdffre          , sdffnre          , dffre          , dffnre          , dffsre          , dffnsre          ",
         "LUTs": " $lut ",
         "BRAMs": " RS_TDP36K       , TDP36K       ",
@@ -23,8 +24,10 @@
         "Device_name": "Device:"
     },
     "raptor_perf.log": {
+        "Synthesis_time":"Synthesize has started",
         "Packer_time":"Packing has started",
         "Placer_time":"Placement has started",
-        "Router_time":"Route has started"
+        "Router_time":"Route has started",
+        "Bitstream_time":"GenerateBitstream has started"
     }
 }

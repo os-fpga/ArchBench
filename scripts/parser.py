@@ -18,9 +18,11 @@ def read_config_test_margins(flag):
     CLBs_margin=0
     FLE_Percentage_used_margin=0
     Wirelength_Percentage_used_margin=0
+    synthesis_time_margin=0
     Packer_time_margin=0
     Placer_time_margin=0
     Router_time_margin=0
+    Bitstram_time_margin=0
     fmax_margin=0
     LUTs_CLBs_ratio_margin=0
     adder_carry_margin=0
@@ -43,12 +45,18 @@ def read_config_test_margins(flag):
                 FLE_Percentage_used_margin=contents[i].split('"')[1]
             if "Wirelength_Percentage_used_margin" in contents[i]:
                 Wirelength_Percentage_used_margin=contents[i].split('"')[1]
+            if  "Synthesis_time_margin"in contents[i]:
+                synthesis_time_margin=contents[i].split('"')[1]
+                return synthesis_time_margin
             if "Packer_time_margin" in contents[i]:
                 Packer_time_margin=contents[i].split('"')[1]
             if "Placer_time_margin" in contents[i]:
                 Placer_time_margin=contents[i].split('"')[1]
             if "Router_time_margin" in contents[i]:
                 Router_time_margin=contents[i].split('"')[1]
+            if  "Bitstram_time_margin"in contents[i]:
+                Bitstram_time_margin=contents[i].split('"')[1]
+                return Bitstram_time_margin
             if "fmax_margin" in contents[i]:
                 fmax_margin=contents[i].split('"')[1]
             if "LUTs_CLBs_ratio_margin" in contents[i]:
@@ -393,6 +401,12 @@ def parse_log_files(files, log_line_keys_map):
             router_time=0
             if file == "raptor_perf.log":
                 for i in range(len(lines)):
+                    if "Synthesize has started" in lines[i]:
+                        synth_start = i
+                        synth_time_with_dot=lines[synth_start+2].strip().split()[4]+" "+lines[synth_start+2].strip().split()[5]
+                        synth_time=synth_time_with_dot[0:-1]
+                        break
+                for i in range(len(lines)):
                     if "Packing has started" in lines[i]:
                         start_print_stats = i
                         packer_time_with_dot=lines[start_print_stats+2].strip().split()[4]+" "+lines[start_print_stats+2].strip().split()[5]
@@ -410,7 +424,18 @@ def parse_log_files(files, log_line_keys_map):
                         placer_time_with_dor=lines[placement_start_line+2].strip().split()[4]+" "+lines[placement_start_line+2].strip().split()[5]
                         placer_time=placer_time_with_dor[0:-1]
                         break
+                for i in range(len(lines)):
+                    if "GenerateBitstream has started" in lines[i]:
+                        bitstream_start_line = i
+                        bitstream_time_with_dot=lines[bitstream_start_line+2].strip().split()[4]+" "+lines[bitstream_start_line+2].strip().split()[5]
+                        bitstream_time=bitstream_time_with_dot[0:-1]
+                        break
                 for log_line_key, log_line_keyword in log_line_keys_map[file].items():
+                    if log_line_key == 'Synthesis_time':
+                        # data[file][log_line_key] = str(packer_time)
+                        Synthesis_time_margin=read_config_test_margins("Synthesis_time_margin")           #to dump margin in parsed_data.json
+                        str_synthesis_time=str(synth_time)+", margin:"+str(Synthesis_time_margin)
+                        data[file][log_line_key] = str_synthesis_time
                     if log_line_key == 'Packer_time':
                         # data[file][log_line_key] = str(packer_time)
                         Packer_time_margin=read_config_test_margins("Packer_time_margin")           #to dump margin in parsed_data.json
@@ -426,6 +451,11 @@ def parse_log_files(files, log_line_keys_map):
                         Router_time_margin=read_config_test_margins("Router_time_margin")           #to dump margin in parsed_data.json
                         str_router_time=str(router_time)+", margin:"+str(Router_time_margin)
                         data[file][log_line_key] = str_router_time
+                    if log_line_key == 'Bitstream_time':
+                        # data[file][log_line_key] = str(router_time)
+                        Bitstram_time_margin=read_config_test_margins("Bitstram_time_margin")           #to dump margin in parsed_data.json
+                        str_bitstream_time=str(bitstream_time)+", margin:"+str(Bitstram_time_margin)
+                        data[file][log_line_key] = str_bitstream_time
     return data
 
 def main():
