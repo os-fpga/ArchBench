@@ -15,11 +15,10 @@ else
 fi 
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/tool.conf ]; then # tool.conf
-    source $main_path/tool.conf
+if [ -f $main_path/../tool_10x8.conf ]; then # tool.confx
+    source $main_path/../tool_10x8.conf
 fi
-echo "vpr_file_path $vpr_file_path"
-echo "xml_tag $xml_tag"
+
 if [ "$xml_tag" == "latest" ]; then
     cd $xml_root/openfpga-pd-castor-rs 
     latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
