@@ -21,7 +21,7 @@
         "FLE_Percentage_used": " fle            ",
         "Wirelength_Percentage_used": "X - Directed channels:",
         "Fabric_netlist_version": "Netlist Version:",
-        "Device_name": "Device:"
+        "device": "Device:"
     },
     "raptor_perf.log": {
         "Synthesis_time":"Synthesize has started",
