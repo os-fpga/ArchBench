@@ -396,9 +396,11 @@ def parse_log_files(files, log_line_keys_map):
                                 str_lut_clb_ratio=str(luts_clbs_ratio)+", margin:"+str(lut_clb_ratio_margin)
                                 data[file][log_line_key] = str_lut_clb_ratio
             # parse the router and packer time
+            synth_time=0
             packer_time=0
             placer_time=0
             router_time=0
+            bitstream_time=0
             if file == "raptor_perf.log":
                 for i in range(len(lines)):
                     if "Synthesize has started" in lines[i]:
