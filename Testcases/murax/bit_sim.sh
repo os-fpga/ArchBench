@@ -8,16 +8,11 @@ design_name=${PWD##*/}
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
-if [ -f $main_path/../submodule_udpated.txt ]; then
+if [ -f $xml_root/openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/FPGA82x68_gemini_compact_pnr/fabric_task/flow_inputs/k6n8_vpr_annotated.xml ]; then
     echo "No need to update submodule"
 else
-    if [ -d .git ]; then
-        git checkout main && git pull origin main && git pull origin --tags 
-        echo "submodule is updated" >> $main_path/../submodule_udpated.txt
-    else
-        cd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
-        echo "submodule is updated" >> $main_path/../submodule_udpated.txt
-    fi 
+    echo -e "openfpga-pd-castor-rs is not initialized. Please inilialize it using below command:\ncd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags"
+    exit 1
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
