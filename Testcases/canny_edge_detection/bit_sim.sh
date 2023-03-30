@@ -16,8 +16,8 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
-    source $main_path/../tool_10x8.conf
+if [ -f $main_path/../tool_82x68.conf ]; then # tool.conf
+    source $main_path/../tool_82x68.conf
 fi
 
 cd $xml_root/openfpga-pd-castor-rs 
