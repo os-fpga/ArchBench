@@ -17,8 +17,9 @@ def read_config_test_margins(flag):
     DSPs_margin=0
     CLBs_margin=0
     FLE_Percentage_used_margin=0
+    CLB_percentage_used_margin=0
     Wirelength_Percentage_used_margin=0
-    synthesis_time_margin=0
+    Synthesis_time_margin=0
     Packer_time_margin=0
     Placer_time_margin=0
     Router_time_margin=0
@@ -41,13 +42,14 @@ def read_config_test_margins(flag):
                 CLBs_margin=contents[i].split('"')[1]
             if "adder_carry" in contents[i]:
                 adder_carry_margin=contents[i].split('"')[1]
+            if "CLB_percentage_used_margin" in contents[i]:
+                CLB_percentage_used_margin=contents[i].split('"')[1]
             if "FLE_Percentage_used_margin" in contents[i]:
                 FLE_Percentage_used_margin=contents[i].split('"')[1]
             if "Wirelength_Percentage_used_margin" in contents[i]:
                 Wirelength_Percentage_used_margin=contents[i].split('"')[1]
             if  "Synthesis_time_margin"in contents[i]:
-                synthesis_time_margin=contents[i].split('"')[1]
-                return synthesis_time_margin
+                Synthesis_time_margin=contents[i].split('"')[1]
             if "Packer_time_margin" in contents[i]:
                 Packer_time_margin=contents[i].split('"')[1]
             if "Placer_time_margin" in contents[i]:
@@ -56,7 +58,6 @@ def read_config_test_margins(flag):
                 Router_time_margin=contents[i].split('"')[1]
             if  "Bitstram_time_margin"in contents[i]:
                 Bitstram_time_margin=contents[i].split('"')[1]
-                return Bitstram_time_margin
             if "fmax_margin" in contents[i]:
                 fmax_margin=contents[i].split('"')[1]
             if "LUTs_CLBs_ratio_margin" in contents[i]:
@@ -73,16 +74,22 @@ def read_config_test_margins(flag):
             return CLBs_margin
         if flag=="adder_carry_margin":
             return adder_carry_margin
+        if flag=="CLB_percentage_used_margin":
+            return CLB_percentage_used_margin
         if flag=="FLE_Percentage_used_margin":
             return FLE_Percentage_used_margin
         if flag=="Wirelength_Percentage_used_margin":
             return Wirelength_Percentage_used_margin
+        if flag=="Synthesis_time_margin":
+            return Synthesis_time_margin
         if flag=="Packer_time_margin":
             return Packer_time_margin
         if flag=="Placer_time_margin":
             return Placer_time_margin
         if flag=="Router_time_margin":
             return Router_time_margin
+        if flag=="Bitstram_time_margin":
+            return Bitstram_time_margin
         if flag=="fmax_margin":
             return fmax_margin
         if flag=="LUTs_CLBs_ratio_margin":
@@ -254,7 +261,7 @@ def parse_log_files(files, log_line_keys_map):
                             clb_used_percent=(CLBs/int(total_clbs))*100
                         if log_line_key == 'CLB_percentage_used':
                             # data[file][log_line_key] = str(clb_used_percent)
-                            clb_percentage_used_margin=read_config_test_margins("Packer_time_margin")           #to dump margin in parsed_data.json
+                            clb_percentage_used_margin=read_config_test_margins("CLB_percentage_used_margin")           #to dump margin in parsed_data.json
                             str_clb_percentage_used=str(clb_used_percent)+", margin:"+str(clb_percentage_used_margin)
                             data[file][log_line_key] = str_clb_percentage_used
 
