@@ -8,12 +8,12 @@ Each testcase contain there own bit_sim.sh which generates the raptor.tcl for Ra
 
 ### tool.conf:
 
-    There are two device model files:
+There are two device model files:
 
-        1) tool_10x8.conf for GEMINI_COMPACT_10x8
-        2) tool_82x68.conf for GEMINI_COMPACT_82x68
+    1) tool_10x8.conf for GEMINI_COMPACT_10x8
+    2) tool_82x68.conf for GEMINI_COMPACT_82x68
 
-    We are providing paths to the architecture files in these two files.
+We are providing paths to the architecture files in these two files.
 
 ### Submodules:
 
@@ -21,6 +21,6 @@ Clone the repo with command: git clone git@github.com:RapidSilicon/ArchBench.git
 
 Once you clone the repo, you should initialize the openfpga_pd_castor_rs repo using this command: 
 
-        cd openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
+    cd openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
  
 There is make file that clones sub_repo openfpga-pd-castor-rs repo and checkout on main branch.
