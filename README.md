@@ -6,20 +6,21 @@ all_run.sh is a bash script that triggers the run. If you want to provide anothe
 
 Each testcase contain there own bit_sim.sh which generates the raptor.tcl for Raptor and then runs the Raptor. It also triggers VCS for post_route simulation and bitstream_simulation
 
-### Command Line Options:
+### tool.conf:
 
-If you want to give paths to your local architecture paths then provide paths with the following flags to all_run.sh:
+    There are two device model files:
 
-    -v : path for vpr.xml file
-    -o : path for openfpga.xml file
-    -f : path for fixed_sim_openfpga.xml file
-    -r : path for repack_design_constrint.xml file
-    -b : path for bitstream_annotation.xml file
+        1) tool_10x8.conf for GEMINI_COMPACT_10x8
+        2) tool_82x68.conf for GEMINI_COMPACT_82x68
 
-All of the files should be provided incase of providing these flags.
+    We are providing paths to the architecture files in these two files.
 
 ### Submodules:
 
 Clone the repo with command: git clone git@github.com:RapidSilicon/ArchBench.git
+
+Once you clone the repo, you should initialize the openfpga_pd_castor_rs repo using this command: 
+
+        cd openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
  
-There is make file that clones sub_repo openfpga-pd-castor-rs repo and checkout on main branch. To run make file, run the command: make init_submodule
+There is make file that clones sub_repo openfpga-pd-castor-rs repo and checkout on main branch.

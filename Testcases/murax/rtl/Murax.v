@@ -3263,7 +3263,7 @@ module MuraxSimpleBusRam (
   assign io_bus_cmd_ready = _zz_5;
   assign _zz_6 = _zz_2[9:0];
   initial begin
-    $readmemb("Murax.v_toplevel_system_ram_ram_symbol0.bin",ram_symbol0);
+    $readmemb("Murax_v_toplevel_system_ram_ram_symbol0.bin",ram_symbol0);
     $readmemb("Murax.v_toplevel_system_ram_ram_symbol1.bin",ram_symbol1);
     $readmemb("Murax.v_toplevel_system_ram_ram_symbol2.bin",ram_symbol2);
     $readmemb("Murax.v_toplevel_system_ram_ram_symbol3.bin",ram_symbol3);

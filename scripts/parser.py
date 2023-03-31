@@ -142,11 +142,11 @@ def parse_log_files(files, log_line_keys_map):
             ###bitstream.log###
             # Looping through each line in the log file
             if file == "bitstream_sim.log":
+                bitstream_tb_dir=os.path.isdir('sim/bitstream_tb')
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line
-                        bitstream_tb_dir=os.path.isdir('sim/bitstream_tb')
                         if bitstream_tb_dir:
                             if log_line_keyword in line:
                                 # Checking the file name and updating the value of the log line key accordingly
@@ -162,11 +162,11 @@ def parse_log_files(files, log_line_keys_map):
             ###post_route.log###
             # Looping through each line in the log file
             if file == "post_route_sim.log":
+                post_route_tb_dir=os.path.isdir('sim/post_route_tb')
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line
-                        post_route_tb_dir=os.path.isdir('sim/post_route_tb')
                         if post_route_tb_dir:
                             if log_line_keyword in line:
                                 # Checking the file name and updating the value of the log line key accordingly
