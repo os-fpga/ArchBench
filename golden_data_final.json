@@ -1,59 +1,106 @@
 {
-    "lut_ff_mux": {
+    "design137_50_37_top": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "1",
-            "LUTs": "1",
+            "Runtime": "2514 sec",
+            "DFFs": "17889",
+            "LUTs": "16604",
             "BRAMs": "0",
             "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "571",
+            "Fmax": "146.513 MHz",
+            "LUT_CLB_ratio": "29.07880910683012",
+            "CLB_percentage_used": "13.108356290174472",
+            "FLE_Percentage_used": "13.07105142332415",
+            "Wirelength_Percentage_used": "3.3912825213899076",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "1538209 ms",
+            "Packer_time": "72765 ms",
+            "Placer_time": "213 ms",
+            "Router_time": "152143 ms",
+            "Bitstream_time": "410534 ms"
+        }
+    },
+    "mux_8_1": {
+        "bitstream_sim.log": {
+            "Status": "Fail"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "14 sec",
+            "DFFs": "0",
+            "LUTs": "3",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
             "CLBs": "1",
-            "Fmax": "261.773 MHz",
-            "LUT_CLB_ratio":"1.0",
-            "CLB_percentage_used":"2.7777777777777777",
-            "FLE_Percentage_used": "0.3472222222222222",
-            "Wirelength_Percentage_used": "0.07628367003367004"
+            "Fmax": "219.503 MHz",
+            "LUT_CLB_ratio": "3.0",
+            "CLB_percentage_used": "2.7777777777777777",
+            "FLE_Percentage_used": "1.0416666666666667",
+            "Wirelength_Percentage_used": "0.23674242424242425",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "548 ms",
-            "Router_time": "1093 ms"
+            "Synthesis_time": "5725 ms",
+            "Packer_time": "538 ms",
+            "Placer_time": "148 ms",
+            "Router_time": "1095 ms",
+            "Bitstream_time": "3392 ms"
         }
     },
-    "aes_1cycle_1stage": {
+    "mux_8_1_a": {
         "bitstream_sim.log": {
             "Status": "Fail"
         },
         "post_route_sim.log": {
-            "Status": "Fail"
+            "Status": "Pass"
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "389",
-            "LUTs": "12032",
+            "Runtime": "13 sec",
+            "DFFs": "0",
+            "LUTs": "3",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "1433",
-            "Fmax": "19.7345 MHz",
-            "LUT_CLB_ratio": "8.396371249127704",
-            "CLB_percentage_used": "32.897153351698805",
-            "FLE_Percentage_used": "31.729224058769514",
-            "Wirelength_Percentage_used": "11.527268494266922"
+            "Adder_Carry": "0",
+            "CLBs": "1",
+            "Fmax": "210.451 MHz",
+            "LUT_CLB_ratio": "3.0",
+            "CLB_percentage_used": "2.7777777777777777",
+            "FLE_Percentage_used": "1.0416666666666667",
+            "Wirelength_Percentage_used": "0.2709385521885522",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "50077 ms",
-            "Router_time": "184319 ms"
+            "Synthesis_time": "6011 ms",
+            "Packer_time": "507 ms",
+            "Placer_time": "124 ms",
+            "Router_time": "1055 ms",
+            "Bitstream_time": "3374 ms"
         }
     },
-    "AES_DECRYPT_v2": {
+    "motion_estimator": {
         "bitstream_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "post_route_sim.log": {
             "Status": "Fail"
@@ -61,77 +108,98 @@
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "337",
-            "LUTs": "1335",
+            "Runtime": "1141 sec",
+            "DFFs": "899",
+            "LUTs": "1700",
+            "BRAMs": "23",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "177",
+            "Fmax": "156.697 MHz",
+            "LUT_CLB_ratio": "9.6045197740113",
+            "CLB_percentage_used": "4.0633608815427",
+            "FLE_Percentage_used": "4.049012855831037",
+            "Wirelength_Percentage_used": "2.4514725568942435",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "259771 ms",
+            "Packer_time": "46017 ms",
+            "Placer_time": "237 ms",
+            "Router_time": "159539 ms",
+            "Bitstream_time": "367720 ms"
+        }
+    },
+    "ucsb_152_tap_fir": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "1691 sec",
+            "DFFs": "13468",
+            "LUTs": "8179",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "163",
-            "Fmax": "157.913 MHz",
-            "LUT_CLB_ratio": "8.190184049079754",
-            "CLB_percentage_used": "3.7419651056014693",
-            "FLE_Percentage_used": "3.5095270890725434",
-            "Wirelength_Percentage_used": "1.1369299662417787"
+            "Adder_Carry": "2595",
+            "CLBs": "1387",
+            "Fmax": "140.261 MHz",
+            "LUT_CLB_ratio": "5.89689978370584",
+            "CLB_percentage_used": "31.841138659320478",
+            "FLE_Percentage_used": "31.82105142332415",
+            "Wirelength_Percentage_used": "11.53354359466853",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "51506 ms",
-            "Router_time": "263279 ms"
+            "Synthesis_time": "656902 ms",
+            "Packer_time": "90627 ms",
+            "Placer_time": "228 ms",
+            "Router_time": "198917 ms",
+            "Bitstream_time": "365483 ms"
         }
     },
-    "bch_configurable":{
+    "design49_10_200_top": {
         "bitstream_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "5040",
-            "LUTs": "16956",
-            "BRAMs": "1",
-            "DSPs": "0",
-            "CLBs": "1970",
-            "Fmax": "126.505 MHz",
-            "LUT_CLB_ratio": "8.607106598984771,",
-            "CLB_percentage_used": "45.22497704315886",
-            "FLE_Percentage_used": "44.146005509641874",
-            "Wirelength_Percentage_used": "17.44450628601362"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "121374 ms",
-            "Router_time": "271922 ms"
-        }
-    },
-    "cic_decimator":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "167",
-            "LUTs": "291",
+            "Runtime": "1251 sec",
+            "DFFs": "2710",
+            "LUTs": "2250",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "29",
-            "Fmax": "192.384 MHz",
-            "LUT_CLB_ratio": "10.03448275862069",
-            "CLB_percentage_used": "0.6657483930211203",
-            "FLE_Percentage_used": "0.6255739210284664",
-            "Wirelength_Percentage_used": "0.1585599644956638"
+            "Adder_Carry": "0",
+            "CLBs": "188",
+            "Fmax": "174.594 MHz",
+            "LUT_CLB_ratio": "11.96808510638298",
+            "CLB_percentage_used": "4.315886134067952",
+            "FLE_Percentage_used": "4.287190082644628",
+            "Wirelength_Percentage_used": "0.7134516326174263",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "56863 ms",
-            "Router_time": "304995 ms"
+            "Synthesis_time": "438069 ms",
+            "Packer_time": "45225 ms",
+            "Placer_time": "166 ms",
+            "Router_time": "153746 ms",
+            "Bitstream_time": "323984 ms"
         }
     },
-    "cic_integrator":{
+    "design153_60_60_top": {
         "bitstream_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "post_route_sim.log": {
             "Status": "Fail"
@@ -139,571 +207,329 @@
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "129",
-            "LUTs": "229",
+            "Runtime": "1410 sec",
+            "DFFs": "4784",
+            "LUTs": "3396",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "25",
-            "Fmax": "183.415 MHz",
-            "LUT_CLB_ratio": "9.16",
-            "CLB_percentage_used": "0.573921028466483",
-            "FLE_Percentage_used": "0.4935720844811754",
-            "Wirelength_Percentage_used": "0.15205750538385426"
+            "Adder_Carry": "0",
+            "CLBs": "74",
+            "Fmax": "143.568 MHz",
+            "LUT_CLB_ratio": "45.891891891891895",
+            "CLB_percentage_used": "1.6988062442607896",
+            "FLE_Percentage_used": "1.693067033976125",
+            "Wirelength_Percentage_used": "0.43029909493044644",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "56577 ms",
-            "Router_time": "308080 ms"
+            "Synthesis_time": "668956 ms",
+            "Packer_time": "28881 ms",
+            "Placer_time": "146 ms",
+            "Router_time": "132551 ms",
+            "Bitstream_time": "292667 ms"
         }
     },
-    "cordic":{
+    "sha_top": {
         "bitstream_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "765",
-            "LUTs": "1795",
+            "Runtime": "2922 sec",
+            "DFFs": "8645",
+            "LUTs": "25189",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "262",
-            "Fmax": "106.703 MHz",
-            "LUT_CLB_ratio": "6.851145038167939",
-            "CLB_percentage_used": "6.014692378328742",
-            "FLE_Percentage_used": "4.648760330578512",
-            "Wirelength_Percentage_used": "1.354193949711891"
+            "Adder_Carry": "2304",
+            "CLBs": "2717",
+            "Fmax": "50.92 MHz",
+            "LUT_CLB_ratio": "9.270887007729113",
+            "CLB_percentage_used": "62.37373737373737",
+            "FLE_Percentage_used": "62.365128558310374",
+            "Wirelength_Percentage_used": "25.838999112391594",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "64090 ms",
-            "Router_time": "307013 ms"
+            "Synthesis_time": "1668126 ms",
+            "Packer_time": "79454 ms",
+            "Placer_time": "156 ms",
+            "Router_time": "244314 ms",
+            "Bitstream_time": "363167 ms"
         }
     },
-    "design3_5_5_top":{
+    "wb_conmax": {
         "bitstream_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
+            "Runtime": "1794 sec",
+            "DFFs": "2978",
+            "LUTs": "9376",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1170",
+            "Fmax": "98.9413 MHz",
+            "LUT_CLB_ratio": "8.013675213675214",
+            "CLB_percentage_used": "26.859504132231404",
+            "FLE_Percentage_used": "26.85376492194674",
+            "Wirelength_Percentage_used": "10.701183356614866",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "959693 ms",
+            "Packer_time": "56754 ms",
+            "Placer_time": "307051 ms",
+            "Router_time": "133587 ms",
+            "Bitstream_time": "303130 ms"
+        }
+    },
+    "design3_5_5_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "53 sec",
             "DFFs": "373",
-            "LUTs": "157",
+            "LUTs": "150",
             "BRAMs": "0",
             "DSPs": "0",
+            "Adder_Carry": "0",
             "CLBs": "30",
-            "Fmax": "149.045 MHz",
-            "LUT_CLB_ratio": "5.233333333333333",
+            "Fmax": "225.191 MHz",
+            "LUT_CLB_ratio": "5.0",
             "CLB_percentage_used": "83.33333333333334",
-            "FLE_Percentage_used": "81.59722222222223",
-            "Wirelength_Percentage_used": "8.677925084175085"
+            "FLE_Percentage_used": "80.90277777777777",
+            "Wirelength_Percentage_used": "8.472748316498317",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "1043 ms",
-            "Router_time": "1495 ms"
+            "Synthesis_time": "36676 ms",
+            "Packer_time": "1745 ms",
+            "Placer_time": "165 ms",
+            "Router_time": "2418 ms",
+            "Bitstream_time": "6368 ms"
         }
     },
-    "design136_40_35_top":{
+    "design151_40_40_top": {
         "bitstream_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "post_route_sim.log": {
             "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "2389 sec",
+            "DFFs": "18510",
+            "LUTs": "20291",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1700",
+            "Fmax": "107.488 MHz",
+            "LUT_CLB_ratio": "11.935882352941176",
+            "CLB_percentage_used": "39.02662993572085",
+            "FLE_Percentage_used": "39.02376033057851",
+            "Wirelength_Percentage_used": "10.309171468482626",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "1269817 ms",
+            "Packer_time": "69390 ms",
+            "Placer_time": "156 ms",
+            "Router_time": "160400 ms",
+            "Bitstream_time": "563546 ms"
+        }
+    },
+    "b19": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "3909 sec",
+            "DFFs": "5753",
+            "LUTs": "23991",
+            "BRAMs": "0",
+            "DSPs": "14",
+            "Adder_Carry": "2996",
+            "CLBs": "2786",
+            "Fmax": "50.3106 MHz",
+            "LUT_CLB_ratio": "8.61127063890883",
+            "CLB_percentage_used": "63.957759412304874",
+            "FLE_Percentage_used": "63.94915059687787",
+            "Wirelength_Percentage_used": "26.09786973982888",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "2842106 ms",
+            "Packer_time": "100929 ms",
+            "Placer_time": "186 ms",
+            "Router_time": "172118 ms",
+            "Bitstream_time": "339240 ms"
+        }
+    },
+    "AES_DECRYPT": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "1440 sec",
+            "DFFs": "337",
+            "LUTs": "1327",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "150",
+            "Fmax": "150.76 MHz",
+            "LUT_CLB_ratio": "8.846666666666666",
+            "CLB_percentage_used": "3.443526170798898",
+            "FLE_Percentage_used": "3.429178145087236",
+            "Wirelength_Percentage_used": "1.2089572056341307",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "654091 ms",
+            "Packer_time": "27835 ms",
+            "Placer_time": "175 ms",
+            "Router_time": "143964 ms",
+            "Bitstream_time": "324953 ms"
+        }
+    },
+    "design168_45_40_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "1729 sec",
+            "DFFs": "14027",
+            "LUTs": "12920",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "222",
+            "Fmax": "160.261 MHz",
+            "LUT_CLB_ratio": "58.1981981981982",
+            "CLB_percentage_used": "5.096418732782369",
+            "FLE_Percentage_used": "5.090679522497704",
+            "Wirelength_Percentage_used": "1.3259559979046622",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "932645 ms",
+            "Packer_time": "39170 ms",
+            "Placer_time": "154 ms",
+            "Router_time": "129824 ms",
+            "Bitstream_time": "343227 ms"
+        }
+    },
+    "fft_fir_filter": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
         },
         "raptor.log": {
             "Status": "Fail",
-            "error_msg": null,
-            "DFFs": "28864",
-            "LUTs": "30711",
+            "error_msg": "SYN: Design fft_fir_filter_02_24 synthesis failed",
+            "Runtime": "1848 sec",
+            "DFFs": "0",
+            "LUTs": "14047",
             "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "2520",
-            "Fmax": "114.297 MHz",
-            "LUT_CLB_ratio": "12.186904761904762",
-            "CLB_percentage_used": "57.85123966942148",
-            "FLE_Percentage_used": "57.7020202020202",
-            "Wirelength_Percentage_used": "14.004750887608404"
+            "DSPs": "4",
+            "Adder_Carry": "0",
+            "CLBs": "0",
+            "Fmax": "0",
+            "LUT_CLB_ratio": "0",
+            "CLB_percentage_used": "0",
+            "FLE_Percentage_used": "0",
+            "Wirelength_Percentage_used": "0",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "156821 ms",
-            "Router_time": "324779 ms"
+            "Synthesis_time": "1838879 ms",
+            "Packer_time": "0",
+            "Placer_time": "0",
+            "Router_time": "0",
+            "Bitstream_time": "0"
         }
     },
-    "design137_50_37_top":{
+    "rom": {
         "bitstream_sim.log": {
-            "Status": "Fail"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "Fail"
+            "Status": "Pass"
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "17894",
-            "LUTs": "16608",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "574",
-            "Fmax": "104.28 MHz",
-            "LUT_CLB_ratio": "28.933797909407666",
-            "CLB_percentage_used": "13.177226813590451",
-            "FLE_Percentage_used": "13.114095500459136",
-            "Wirelength_Percentage_used": "3.3949657324951983"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "92168 ms",
-            "Router_time": "259986 ms"
-        }
-    },
-    "design150_30_40_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "17324",
-            "LUTs": "17652",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "705",
-            "Fmax": "106.642 MHz",
-            "LUT_CLB_ratio": "25.038297872340426",
-            "CLB_percentage_used": "16.18457300275482",
-            "FLE_Percentage_used": "16.13578971533517",
-            "Wirelength_Percentage_used": "4.014745576508934"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "106150 ms",
-            "Router_time": "288737 ms"
-        }
-    },
-    "design151_40_40_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "18516",
-            "LUTs": "20296",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1706",
-            "Fmax": "98.4292 MHz",
-            "LUT_CLB_ratio": "11.8968347010551",
-            "CLB_percentage_used": "39.164370982552796,",
-            "FLE_Percentage_used": "39.09550045913682",
-            "Wirelength_Percentage_used": "10.054211410860834"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "118402 ms",
-            "Router_time": "301248 ms"
-        }
-    },
-    "design152_50_45_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "5654",
-            "LUTs": "4205",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "72",
-            "Fmax": "122.699 MHz",
-            "LUT_CLB_ratio": "58.40277777777778",
-            "CLB_percentage_used": "1.6528925619834711",
-            "FLE_Percentage_used": "1.6155876951331496",
-            "Wirelength_Percentage_used": "0.39987849950526744"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "62705 ms",
-            "Router_time": "258889 ms"
-        }
-    },
-    "design153_60_60_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "4782",
-            "LUTs": "3398",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "78",
-            "Fmax": "125.888 MHz",
-            "LUT_CLB_ratio": "43.56410256410256",
-            "CLB_percentage_used": "1.790633608815427",
-            "FLE_Percentage_used": "1.721763085399449",
-            "Wirelength_Percentage_used": "0.42211418136313367"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "66119 ms",
-            "Router_time": "295726 ms"
-        }
-    },
-    "design168_45_40_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "14028",
-            "LUTs": "12936",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "258",
-            "Fmax": "109.587 MHz",
-            "LUT_CLB_ratio": "50.13953488372093",
-            "CLB_percentage_used": "5.922865013774105",
-            "FLE_Percentage_used": "5.871212121212121",
-            "Wirelength_Percentage_used": "1.4718293463709913"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "84164 ms",
-            "Router_time": "288473 ms"
-        }
-    },
-    "design34_70_70_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "3095",
-            "LUTs": "818",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "91",
-            "Fmax": "108.941 MHz",
-            "LUT_CLB_ratio": "8.989010989010989",
-            "CLB_percentage_used": "2.089072543617998",
-            "FLE_Percentage_used": "2.054637281910009",
-            "Wirelength_Percentage_used": "0.4569455357662534"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "41735 ms",
-            "Router_time": "215349 ms"
-        }
-    },
-    "design49_10_200_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "2710",
-            "LUTs": "2257",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "189",
-            "Fmax": "149.984 MHz",
-            "LUT_CLB_ratio": "11.941798941798941",
-            "CLB_percentage_used": "4.338842975206612",
-            "FLE_Percentage_used": "4.2957988980716255",
-            "Wirelength_Percentage_used": "0.6350583493393865"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "70714 ms",
-            "Router_time": "311710 ms"
-        }
-    },
-    "design67_15_45_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "600",
-            "LUTs": "102",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "28",
-            "Fmax": "110.715 MHz",
-            "LUT_CLB_ratio": "3.642857142857143",
-            "CLB_percentage_used": "77.77777777777779",
-            "FLE_Percentage_used": "75.34722222222223",
-            "Wirelength_Percentage_used": "9.219802188552189"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "2569 ms",
-            "Router_time": "3838 ms"
-        }
-    },
-    "design87_33_50_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "55509",
-            "LUTs": "53509",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "3488",
-            "Fmax": "119.097 MHz",
-            "LUT_CLB_ratio": "15.340883027522937",
-            "CLB_percentage_used": "80.0734618916437",
-            "FLE_Percentage_used": "80.00459136822774",
-            "Wirelength_Percentage_used": "9.522965048600199"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "245322 ms",
-            "Router_time": "420665 ms"
-        }
-    },
-    "design88_3_3_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "491",
-            "LUTs": "316",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "36",
-            "Fmax": "170.278 MHz",
-            "LUT_CLB_ratio": "8.777777777777779",
-            "CLB_percentage_used": "100.0",
-            "FLE_Percentage_used": "93.75",
-            "Wirelength_Percentage_used": "5.942234848484849"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "3639 ms",
-            "Router_time": "4118 ms"
-        }
-    },
-    "motion_estimator":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "899",
-            "LUTs": "1714",
-            "BRAMs": "23",
-            "DSPs": "0",
-            "CLBs": "248",
-            "Fmax": "120.191 MHz",
-            "LUT_CLB_ratio": "6.911290322580645",
-            "CLB_percentage_used": "5.693296602387512",
-            "FLE_Percentage_used": "4.241276400367309",
-            "Wirelength_Percentage_used": "2.7017490250858507"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "63230 ms",
-            "Router_time": "299386 ms"
-        }
-    },
-    "rom":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "3",
-            "LUTs": "0",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1",
-            "Fmax": "177.156 MHz",
-            "LUT_CLB_ratio": "0.0",
-            "CLB_percentage_used": "2.7777777777777777",
-            "FLE_Percentage_used": "1.7361111111111112",
-            "Wirelength_Percentage_used": "0.23148148148148148"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "1714 ms",
-            "Router_time": "4497 ms"
-        }
-    },
-    "sha_top":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "8645",
-            "LUTs": "22880",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "2474",
-            "Fmax": "44.0049 MHz",
-            "LUT_CLB_ratio": "9.248181083265965",
-            "CLB_percentage_used": "56.795224977043155",
-            "FLE_Percentage_used": "56.01469237832874",
-            "Wirelength_Percentage_used": "23.021660919038474"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "95224 ms",
-            "Router_time": "226275 ms"
-        }
-    },
-    "ucsb_152_tap_fir":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "13467",
-            "LUTs": "8202",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1401",
-            "Fmax": "118.359 MHz",
-            "LUT_CLB_ratio": "5.854389721627409",
-            "CLB_percentage_used": "32.162534435261705",
-            "FLE_Percentage_used": "31.838269054178145",
-            "Wirelength_Percentage_used": "11.402312147139282"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "118680 ms",
-            "Router_time": "249318 ms"
-        }
-    },
-    "vexriscv_axi_ram":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "2330",
-            "LUTs": "2633",
-            "BRAMs": "192",
-            "DSPs": "24",
-            "CLBs": "404",
-            "Fmax": "84.9512 MHz",
-            "LUT_CLB_ratio": "6.517326732673268",
-            "CLB_percentage_used": "9.274563820018365",
-            "FLE_Percentage_used": "9.016299357208448",
-            "Wirelength_Percentage_used": "4.1111001978930215"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "75168 ms",
-            "Router_time": "260083 ms"
-        }
-    },
-    "wb_conmax":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "2978",
-            "LUTs": "9385",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1205",
-            "Fmax": "94.0051 MHz",
-            "LUT_CLB_ratio": "7.788381742738589",
-            "CLB_percentage_used": "27.66299357208448",
-            "FLE_Percentage_used": "27.017332415059688",
-            "Wirelength_Percentage_used": "9.688118415691752"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "91450 ms",
-            "Router_time": "184484 ms"
-        }
-    },
-    "unsigned_multiply":{
-        "bitstream_sim.log": {
-            "Status": "Fail"
-        },
-        "post_route_sim.log": {
-            "Status": "Fail"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
+            "Runtime": "14 sec",
             "DFFs": "0",
             "LUTs": "0",
-            "BRAMs": "0",
-            "DSPs": "1",
-            "CLBs": "2",
-            "Fmax": "281.845 MHz",
+            "BRAMs": "1",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1",
+            "Fmax": "432.3 MHz",
             "LUT_CLB_ratio": "0.0",
-            "CLB_percentage_used": "5.555555555555555",
+            "CLB_percentage_used": "2.7777777777777777",
             "FLE_Percentage_used": "0.6944444444444444",
-            "Wirelength_Percentage_used": "0.42613636363636365"
+            "Wirelength_Percentage_used": "0.22095959595959597",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "1316 ms",
-            "Router_time": "3618 ms"
+            "Synthesis_time": "1566 ms",
+            "Packer_time": "959 ms",
+            "Placer_time": "207 ms",
+            "Router_time": "2017 ms",
+            "Bitstream_time": "5567 ms"
         }
     },
     "add_1bit": {
         "bitstream_sim.log": {
-            "Status": "Pass"
+            "Status": "Fail"
         },
         "post_route_sim.log": {
             "Status": "Pass"
@@ -711,20 +537,93 @@
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
+            "Runtime": "13 sec",
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
             "DSPs": "0",
+            "Adder_Carry": "0",
             "CLBs": "1",
-            "Fmax": "265.465 MHz",
-            "LUT_CLB_ratio":"1.0",
-            "CLB_percentage_used":"2.7777777777777777",
+            "Fmax": "256.42 MHz",
+            "LUT_CLB_ratio": "1.0",
+            "CLB_percentage_used": "2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Wirelength_Percentage_used": "0.07628367003367004"
+            "Wirelength_Percentage_used": "0.07365319865319865",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "509 ms",
-            "Router_time": "1084 ms"
+            "Synthesis_time": "5612 ms",
+            "Packer_time": "529 ms",
+            "Placer_time": "135 ms",
+            "Router_time": "1103 ms",
+            "Bitstream_time": "3271 ms"
+        }
+    },
+    "shift_register": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "14 sec",
+            "DFFs": "8",
+            "LUTs": "10",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "2",
+            "Fmax": "386.522 MHz",
+            "LUT_CLB_ratio": "5.0",
+            "CLB_percentage_used": "5.555555555555555",
+            "FLE_Percentage_used": "3.125",
+            "Wirelength_Percentage_used": "0.34459175084175087",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "6064 ms",
+            "Packer_time": "548 ms",
+            "Placer_time": "125 ms",
+            "Router_time": "1140 ms",
+            "Bitstream_time": "3394 ms"
+        }
+    },
+    "and2": {
+        "bitstream_sim.log": {
+            "Status": "Fail"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "13 sec",
+            "DFFs": "0",
+            "LUTs": "1",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1",
+            "Fmax": "256.42 MHz",
+            "LUT_CLB_ratio": "1.0",
+            "CLB_percentage_used": "2.7777777777777777",
+            "FLE_Percentage_used": "0.3472222222222222",
+            "Wirelength_Percentage_used": "0.07365319865319865",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "5492 ms",
+            "Packer_time": "501 ms",
+            "Placer_time": "134 ms",
+            "Router_time": "1115 ms",
+            "Bitstream_time": "3323 ms"
         }
     },
     "and8": {
@@ -737,25 +636,197 @@
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
+            "Runtime": "14 sec",
             "DFFs": "0",
             "LUTs": "2",
             "BRAMs": "0",
             "DSPs": "0",
+            "Adder_Carry": "0",
             "CLBs": "1",
-            "Fmax": "233.759 MHz",
-            "LUT_CLB_ratio":"2.0",
-            "CLB_percentage_used":"2.7777777777777777",
+            "Fmax": "220.634 MHz",
+            "LUT_CLB_ratio": "2.0",
+            "CLB_percentage_used": "2.7777777777777777",
             "FLE_Percentage_used": "0.6944444444444444",
-            "Wirelength_Percentage_used": "0.1210016835016835"
+            "Wirelength_Percentage_used": "0.13152356902356901",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "548 ms",
-            "Router_time": "1024 ms"
+            "Synthesis_time": "5720 ms",
+            "Packer_time": "518 ms",
+            "Placer_time": "134 ms",
+            "Router_time": "1218 ms",
+            "Bitstream_time": "3429 ms"
+        }
+    },
+    "design40_100_100_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "4956 sec",
+            "DFFs": "4182",
+            "LUTs": "1117",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "124",
+            "Fmax": "126.024 MHz",
+            "LUT_CLB_ratio": "9.008064516129032",
+            "CLB_percentage_used": "2.846648301193756",
+            "FLE_Percentage_used": "2.835169880624426",
+            "Wirelength_Percentage_used": "0.6883967027530411",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "4315450 ms",
+            "Packer_time": "27298 ms",
+            "Placer_time": "135 ms",
+            "Router_time": "113014 ms",
+            "Bitstream_time": "262294 ms"
+        }
+    },
+    "design87_33_50_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "4045 sec",
+            "DFFs": "55509",
+            "LUTs": "53509",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "3485",
+            "Fmax": "130.08 MHz",
+            "LUT_CLB_ratio": "15.354088952654232",
+            "CLB_percentage_used": "80.00459136822772",
+            "FLE_Percentage_used": "79.99598255280074",
+            "Wirelength_Percentage_used": "11.171724943251267",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "654602 ms",
+            "Packer_time": "163606 ms",
+            "Placer_time": "135 ms",
+            "Router_time": "305214 ms",
+            "Bitstream_time": "2461783 ms"
+        }
+    },
+    "design150_30_40_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "1945 sec",
+            "DFFs": "17324",
+            "LUTs": "17568",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "699",
+            "Fmax": "116.324 MHz",
+            "LUT_CLB_ratio": "25.13304721030043",
+            "CLB_percentage_used": "16.046831955922865",
+            "FLE_Percentage_used": "16.03822314049587",
+            "Wirelength_Percentage_used": "3.987508003026599",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "1099402 ms",
+            "Packer_time": "52879 ms",
+            "Placer_time": "186 ms",
+            "Router_time": "146809 ms",
+            "Bitstream_time": "354052 ms"
+        }
+    },
+    "design67_15_45_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "373 sec",
+            "DFFs": "600",
+            "LUTs": "102",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "28",
+            "Fmax": "172.117 MHz",
+            "LUT_CLB_ratio": "3.642857142857143",
+            "CLB_percentage_used": "77.77777777777779",
+            "FLE_Percentage_used": "75.0",
+            "Wirelength_Percentage_used": "9.569654882154882",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "358732 ms",
+            "Packer_time": "1317 ms",
+            "Placer_time": "176 ms",
+            "Router_time": "1875 ms",
+            "Bitstream_time": "6273 ms"
+        }
+    },
+    "design88_3_3_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "31 sec",
+            "DFFs": "491",
+            "LUTs": "316",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "34",
+            "Fmax": "308.875 MHz",
+            "LUT_CLB_ratio": "9.294117647058824",
+            "CLB_percentage_used": "94.44444444444444",
+            "FLE_Percentage_used": "92.70833333333333",
+            "Wirelength_Percentage_used": "6.007996632996633",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "14500 ms",
+            "Packer_time": "1363 ms",
+            "Placer_time": "196 ms",
+            "Router_time": "3060 ms",
+            "Bitstream_time": "6709 ms"
         }
     },
     "or_1bit": {
         "bitstream_sim.log": {
-            "Status": "Pass"
+            "Status": "Fail"
         },
         "post_route_sim.log": {
             "Status": "Pass"
@@ -763,228 +834,654 @@
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
+            "Runtime": "13 sec",
             "DFFs": "0",
             "LUTs": "1",
             "BRAMs": "0",
             "DSPs": "0",
+            "Adder_Carry": "0",
             "CLBs": "1",
-            "Fmax": "265.465 MHz",
-            "LUT_CLB_ratio":"1.0",
-            "CLB_percentage_used":"2.7777777777777777",
+            "Fmax": "256.42 MHz",
+            "LUT_CLB_ratio": "1.0",
+            "CLB_percentage_used": "2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Wirelength_Percentage_used": "0.07628367003367004"
+            "Wirelength_Percentage_used": "0.07365319865319865",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "498 ms",
-            "Router_time": "1257 ms"
+            "Synthesis_time": "5543 ms",
+            "Packer_time": "486 ms",
+            "Placer_time": "135 ms",
+            "Router_time": "1124 ms",
+            "Bitstream_time": "3341 ms"
         }
     },
-    "single_port_ram": {
+    "design34_70_70_top": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "518",
-            "LUTs": "246",
+            "Runtime": "3001 sec",
+            "DFFs": "2913",
+            "LUTs": "633",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "69",
-            "Fmax": "102.405 MHz",
-            "LUT_CLB_ratio":"0.0",
-            "CLB_percentage_used":"0.04591368227731864",
-            "FLE_Percentage_used": "1.3888888888888888",
-            "Wirelength_Percentage_used": "0.3430842936965252"
+            "Adder_Carry": "0",
+            "CLBs": "72",
+            "Fmax": "149.915 MHz",
+            "LUT_CLB_ratio": "8.791666666666666",
+            "CLB_percentage_used": "1.6528925619834711",
+            "FLE_Percentage_used": "1.6356749311294765",
+            "Wirelength_Percentage_used": "0.3605454426401257",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "21947 ms",
-            "Router_time": "90814 ms"
+            "Synthesis_time": "2120740 ms",
+            "Packer_time": "30370 ms",
+            "Placer_time": "145 ms",
+            "Router_time": "168140 ms",
+            "Bitstream_time": "316586 ms"
         }
     },
-    "shift_register": {
+    "murax": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "N/A"
+            "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": "cannot open file 'Murax.v_toplevel_system_ram_ram_symbol0.bin' (VERI-1012)",
+            "Runtime": "1166 sec",
+            "DFFs": "2389",
+            "LUTs": "2037",
+            "BRAMs": "2",
+            "DSPs": "0",
+            "Adder_Carry": "64",
+            "CLBs": "338",
+            "Fmax": "120.073 MHz",
+            "LUT_CLB_ratio": "6.0266272189349115",
+            "CLB_percentage_used": "7.75941230486685",
+            "FLE_Percentage_used": "7.667584940312213",
+            "Wirelength_Percentage_used": "2.800604592282172",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "218102 ms",
+            "Packer_time": "38224 ms",
+            "Placer_time": "155 ms",
+            "Router_time": "194473 ms",
+            "Bitstream_time": "405568 ms"
+        }
+    },
+    "fully_pipelined_128_aes_algorithm": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "8",
-            "LUTs": "10",
+            "Runtime": "2917 sec",
+            "DFFs": "2700",
+            "LUTs": "11349",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "1",
-            "Fmax": "270.262 MHz",
-            "LUT_CLB_ratio":"5.0",
-            "CLB_percentage_used":"5.555555555555555",
-            "FLE_Percentage_used": "2.7777777777777777",
-            "Wirelength_Percentage_used": "0.38404882154882153"
+            "Adder_Carry": "0",
+            "CLBs": "1293",
+            "Fmax": "151.748 MHz",
+            "LUT_CLB_ratio": "8.777262180974478",
+            "CLB_percentage_used": "29.6831955922865",
+            "FLE_Percentage_used": "29.674586776859503",
+            "Wirelength_Percentage_used": "10.767663043478262",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "611 ms",
-            "Router_time": "1175 ms"
+            "Synthesis_time": "2175468 ms",
+            "Packer_time": "38521 ms",
+            "Placer_time": "358 ms",
+            "Router_time": "128237 ms",
+            "Bitstream_time": "288593 ms"
         }
     },
-    "MultiplierLUT": {
+    "cic_decimator": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "Pass"
+            "Status": "Fail"
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
+            "Runtime": "777 sec",
+            "DFFs": "167",
+            "LUTs": "290",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "17",
+            "CLBs": "27",
+            "Fmax": "234.734 MHz",
+            "LUT_CLB_ratio": "10.74074074074074",
+            "CLB_percentage_used": "0.6198347107438017",
+            "FLE_Percentage_used": "0.6054866850321395",
+            "Wirelength_Percentage_used": "0.16274336476340143",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "31983 ms",
+            "Packer_time": "34030 ms",
+            "Placer_time": "197 ms",
+            "Router_time": "152152 ms",
+            "Bitstream_time": "293913 ms"
+        }
+    },
+    "dec": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Fail",
+            "error_msg": "SYN: Design eh2_dec_02_24 synthesis failed",
+            "Runtime": "817 sec",
             "DFFs": "0",
-            "LUTs": "4",
+            "LUTs": "12846",
             "BRAMs": "0",
             "DSPs": "0",
-            "CLBs": "1",
-            "Fmax": "486.15 MHz",
-            "LUT_CLB_ratio":"4.0",
-            "CLB_percentage_used":"2.7777777777777777",
-            "FLE_Percentage_used": "0.6944444444444444",
-            "Wirelength_Percentage_used": "0.13941498316498316"
+            "Adder_Carry": "593",
+            "CLBs": "0",
+            "Fmax": "0",
+            "LUT_CLB_ratio": "0",
+            "CLB_percentage_used": "0",
+            "FLE_Percentage_used": "0",
+            "Wirelength_Percentage_used": "0",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "589 ms",
-            "Router_time": "1183 ms"
+            "Synthesis_time": "815287 ms",
+            "Packer_time": "0",
+            "Placer_time": "0",
+            "Router_time": "0",
+            "Bitstream_time": "0"
         }
     },
-    "mux_8_1": {
+    "unsigned_multiply": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
+            "Runtime": "13 sec",
             "DFFs": "0",
-            "LUTs": "1",
+            "LUTs": "0",
             "BRAMs": "0",
-            "DSPs": "0",
+            "DSPs": "1",
+            "Adder_Carry": "0",
             "CLBs": "1",
-            "Fmax": "532.771 MHz",
-            "LUT_CLB_ratio":"3.0",
-            "CLB_percentage_used":"2.7777777777777777",
+            "Fmax": "154.682 MHz",
+            "LUT_CLB_ratio": "0.0",
+            "CLB_percentage_used": "2.7777777777777777",
             "FLE_Percentage_used": "0.3472222222222222",
-            "Wirelength_Percentage_used": "0.06050084175084175"
+            "Wirelength_Percentage_used": "0.3340698653198653",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "569 ms",
-            "Router_time": "1073 ms"
-        }
-    },
-    "and2": {
-        "bitstream_sim.log": {
-            "Status": "Pass"
-        },
-        "post_route_sim.log": {
-            "Status": "Pass"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "0",
-            "LUTs": "1",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1",
-            "Fmax": "260.465 MHz",
-            "LUT_CLB_ratio":"1.0",
-            "CLB_percentage_used":"2.7777777777777777",
-            "FLE_Percentage_used": "0.3472222222222222",
-            "Wirelength_Percentage_used": "0.07628367003367004"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "629 ms",
-            "Router_time": "1277 ms"
-        }
-    },
-    "mux_8_1_a": {
-        "bitstream_sim.log": {
-            "Status": "N/A"
-        },
-        "post_route_sim.log": {
-            "Status": "N/A"
-        },
-        "raptor.log": {
-            "Status": "Pass",
-            "error_msg": null,
-            "DFFs": "0",
-            "LUTs": "3",
-            "BRAMs": "0",
-            "DSPs": "0",
-            "CLBs": "1",
-            "Fmax": "420.258 MHz",
-            "LUT_CLB_ratio":"3.0",
-            "CLB_percentage_used":"2.7777777777777777",
-            "FLE_Percentage_used": "1.0416666666666667",
-            "Wirelength_Percentage_used": "0.1762415824915825"
-        },
-        "raptor_perf.log": {
-            "Packer_time": "539 ms",
-            "Router_time": "1116 ms"
+            "Synthesis_time": "401 ms",
+            "Packer_time": "759 ms",
+            "Placer_time": "146 ms",
+            "Router_time": "1959 ms",
+            "Bitstream_time": "5786 ms"
         }
     },
     "up5bit_counter": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
+            "Runtime": "13 sec",
             "DFFs": "5",
             "LUTs": "5",
             "BRAMs": "0",
             "DSPs": "0",
+            "Adder_Carry": "0",
             "CLBs": "1",
-            "Fmax": "263.428 MHz",
-            "LUT_CLB_ratio":"5.0",
-            "CLB_percentage_used":"2.7777777777777777",
+            "Fmax": "508.243 MHz",
+            "LUT_CLB_ratio": "5.0",
+            "CLB_percentage_used": "2.7777777777777777",
             "FLE_Percentage_used": "1.3888888888888888",
-            "Wirelength_Percentage_used": "0.1736111111111111"
+            "Wirelength_Percentage_used": "0.12889309764309764",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
         },
         "raptor_perf.log": {
-            "Packer_time": "508 ms",
-            "Router_time": "1105 ms"
+            "Synthesis_time": "5855 ms",
+            "Packer_time": "552 ms",
+            "Placer_time": "134 ms",
+            "Router_time": "1125 ms",
+            "Bitstream_time": "3390 ms"
         }
     },
-    "AES_DECRYPT": {
+    "bch_configurable": {
         "bitstream_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "post_route_sim.log": {
-            "Status": "N/A"
+            "Status": null
         },
         "raptor.log": {
             "Status": "Pass",
             "error_msg": null,
-            "DFFs": "337",
-            "LUTs": "1313",
-            "BRAMs": "0",
+            "Runtime": "2527 sec",
+            "DFFs": "5040",
+            "LUTs": "17000",
+            "BRAMs": "1",
             "DSPs": "0",
-            "CLBs": "156",
-            "Fmax": "146.71 MHz",
-            "LUT_CLB_ratio": "8.31875",
-            "CLB_percentage_used": "3.6730945821854912",
-            "FLE_Percentage_used": "3.4205693296602386",
-            "Wirelength_Percentage_used": "1.0359372271695477"
+            "Adder_Carry": "0",
+            "CLBs": "1930",
+            "Fmax": "133.997 MHz",
+            "LUT_CLB_ratio": "8.808290155440414",
+            "CLB_percentage_used": "44.30670339761249",
+            "FLE_Percentage_used": "44.26939853076217",
+            "Wirelength_Percentage_used": "18.072925761015075",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
         },
         "raptor_perf.log": {
-            "Packer_time": "29945 ms",
-            "Router_time": "101499"
+            "Synthesis_time": "1525852 ms",
+            "Packer_time": "98683 ms",
+            "Placer_time": "823 ms",
+            "Router_time": "153281 ms",
+            "Bitstream_time": "306477 ms"
+        }
+    },
+    "MultiplierLUT": {
+        "bitstream_sim.log": {
+            "Status": "Fail"
+        },
+        "post_route_sim.log": {
+            "Status": "Pass"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "14 sec",
+            "DFFs": "0",
+            "LUTs": "4",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1",
+            "Fmax": "260.482 MHz",
+            "LUT_CLB_ratio": "4.0",
+            "CLB_percentage_used": "2.7777777777777777",
+            "FLE_Percentage_used": "0.6944444444444444",
+            "Wirelength_Percentage_used": "0.13152356902356901",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "5879 ms",
+            "Packer_time": "527 ms",
+            "Placer_time": "145 ms",
+            "Router_time": "1149 ms",
+            "Bitstream_time": "3456 ms"
+        }
+    },
+    "design136_40_35_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "3280 sec",
+            "DFFs": "29047",
+            "LUTs": "31030",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "2525",
+            "Fmax": "121.536 MHz",
+            "LUT_CLB_ratio": "12.28910891089109",
+            "CLB_percentage_used": "57.96602387511478",
+            "FLE_Percentage_used": "57.94019742883379",
+            "Wirelength_Percentage_used": "15.115852904371108",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "1591517 ms",
+            "Packer_time": "106481 ms",
+            "Placer_time": "144 ms",
+            "Router_time": "182705 ms",
+            "Bitstream_time": "957406 ms"
+        }
+    },
+    "cic_integrator": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "891 sec",
+            "DFFs": "129",
+            "LUTs": "197",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "19",
+            "Fmax": "202.388 MHz",
+            "LUT_CLB_ratio": "10.368421052631579",
+            "CLB_percentage_used": "0.43617998163452715",
+            "FLE_Percentage_used": "0.4247015610651974",
+            "Wirelength_Percentage_used": "0.12682068855130668",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "23721 ms",
+            "Packer_time": "29632 ms",
+            "Placer_time": "154 ms",
+            "Router_time": "159485 ms",
+            "Bitstream_time": "381864 ms"
+        }
+    },
+    "lut_ff_mux": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "13 sec",
+            "DFFs": "1",
+            "LUTs": "1",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1",
+            "Fmax": "532.377 MHz",
+            "LUT_CLB_ratio": "1.0",
+            "CLB_percentage_used": "2.7777777777777777",
+            "FLE_Percentage_used": "0.3472222222222222",
+            "Wirelength_Percentage_used": "0.06050084175084175",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "5791 ms",
+            "Packer_time": "489 ms",
+            "Placer_time": "138 ms",
+            "Router_time": "1319 ms",
+            "Bitstream_time": "3368 ms"
+        }
+    },
+    "AES_DECRYPT_v2": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "1359 sec",
+            "DFFs": "337",
+            "LUTs": "1347",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "154",
+            "Fmax": "167.99 MHz",
+            "LUT_CLB_ratio": "8.746753246753247",
+            "CLB_percentage_used": "3.535353535353535",
+            "FLE_Percentage_used": "3.5324839302112028",
+            "Wirelength_Percentage_used": "1.1754900034922298",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "471372 ms",
+            "Packer_time": "37861 ms",
+            "Placer_time": "206 ms",
+            "Router_time": "174220 ms",
+            "Bitstream_time": "360775 ms"
+        }
+    },
+    "aes_1cycle_1stage": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "3665 sec",
+            "DFFs": "389",
+            "LUTs": "11929",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1369",
+            "Fmax": "17.0913 MHz",
+            "LUT_CLB_ratio": "8.713659605551497",
+            "CLB_percentage_used": "31.427915518824612",
+            "FLE_Percentage_used": "31.42791551882461",
+            "Wirelength_Percentage_used": "12.305972076712647",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "2696752 ms",
+            "Packer_time": "58252 ms",
+            "Placer_time": "503 ms",
+            "Router_time": "219753 ms",
+            "Bitstream_time": "378292 ms"
+        }
+    },
+    "canny_edge_detection": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "984 sec",
+            "DFFs": "4146",
+            "LUTs": "3183",
+            "BRAMs": "18",
+            "DSPs": "0",
+            "Adder_Carry": "1318",
+            "CLBs": "482",
+            "Fmax": "177.79 MHz",
+            "LUT_CLB_ratio": "6.6037344398340245",
+            "CLB_percentage_used": "11.065197428833793",
+            "FLE_Percentage_used": "11.053719008264462",
+            "Wirelength_Percentage_used": "3.7322296432105233",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "212669 ms",
+            "Packer_time": "38240 ms",
+            "Placer_time": "176 ms",
+            "Router_time": "127504 ms",
+            "Bitstream_time": "301450 ms"
+        }
+    },
+    "design152_50_45_top": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "1502 sec",
+            "DFFs": "5654",
+            "LUTs": "4220",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "72",
+            "Fmax": "110.592 MHz",
+            "LUT_CLB_ratio": "58.611111111111114",
+            "CLB_percentage_used": "1.6528925619834711",
+            "FLE_Percentage_used": "1.6471533516988062",
+            "Wirelength_Percentage_used": "0.4511706245270939",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "683814 ms",
+            "Packer_time": "45399 ms",
+            "Placer_time": "186 ms",
+            "Router_time": "121196 ms",
+            "Bitstream_time": "351716 ms"
+        }
+    },
+    "vexriscv_axi_ram": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": "system function call 'random' is not supported (VERI-1141)",
+            "Runtime": "1582 sec",
+            "DFFs": "2323",
+            "LUTs": "3482",
+            "BRAMs": "32",
+            "DSPs": "4",
+            "Adder_Carry": "194",
+            "CLBs": "498",
+            "Fmax": "119.443 MHz",
+            "LUT_CLB_ratio": "6.991967871485944",
+            "CLB_percentage_used": "11.432506887052343",
+            "FLE_Percentage_used": "11.415289256198347",
+            "Wirelength_Percentage_used": "5.009985594552122",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "697498 ms",
+            "Packer_time": "46467 ms",
+            "Placer_time": "170 ms",
+            "Router_time": "175829 ms",
+            "Bitstream_time": "351563 ms"
+        }
+    },
+    "single_port_ram": {
+        "bitstream_sim.log": {
+            "Status": null
+        },
+        "post_route_sim.log": {
+            "Status": null
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "9 sec",
+            "DFFs": "0",
+            "LUTs": "0",
+            "BRAMs": "1",
+            "DSPs": "0",
+            "Adder_Carry": "0",
+            "CLBs": "1",
+            "Fmax": "450.084 MHz",
+            "LUT_CLB_ratio": "0.0",
+            "CLB_percentage_used": "2.7777777777777777",
+            "FLE_Percentage_used": "0.6944444444444444",
+            "Wirelength_Percentage_used": "0.3630050505050505",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_10x8"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "288 ms",
+            "Packer_time": "539 ms",
+            "Placer_time": "134 ms",
+            "Router_time": "1166 ms",
+            "Bitstream_time": "3432 ms"
+        }
+    },
+    "cordic": {
+        "bitstream_sim.log": {
+            "Status": "Fail"
+        },
+        "post_route_sim.log": {
+            "Status": "Fail"
+        },
+        "raptor.log": {
+            "Status": "Pass",
+            "error_msg": null,
+            "Runtime": "956 sec",
+            "DFFs": "765",
+            "LUTs": "1795",
+            "BRAMs": "0",
+            "DSPs": "0",
+            "Adder_Carry": "1071",
+            "CLBs": "256",
+            "Fmax": "134.786 MHz",
+            "LUT_CLB_ratio": "7.01171875",
+            "CLB_percentage_used": "5.876951331496786",
+            "FLE_Percentage_used": "4.617194674012856",
+            "Wirelength_Percentage_used": "1.3548760258425003",
+            "Fabric_netlist_version": "v1.6.49",
+            "device": "GEMINI_COMPACT_82x68"
+        },
+        "raptor_perf.log": {
+            "Synthesis_time": "72733 ms",
+            "Packer_time": "28988 ms",
+            "Placer_time": "185 ms",
+            "Router_time": "122621 ms",
+            "Bitstream_time": "448971 ms"
         }
     }
 }
