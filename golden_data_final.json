@@ -899,7 +899,7 @@
         },
         "raptor.log": {
             "Status": "Pass",
-            "error_msg": "cannot open file 'Murax.v_toplevel_system_ram_ram_symbol0.bin' (VERI-1012)",
+            "error_msg": null,
             "Runtime": "1166 sec",
             "DFFs": "2389",
             "LUTs": "2037",
@@ -998,7 +998,7 @@
         },
         "raptor.log": {
             "Status": "Fail",
-            "error_msg": "SYN: Design eh2_dec_02_24 synthesis failed",
+            "error_msg": null,
             "Runtime": "817 sec",
             "DFFs": "0",
             "LUTs": "12846",
