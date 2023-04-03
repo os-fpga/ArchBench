@@ -1,0 +1,38 @@
+/*******************************************************************************
+Copyright (c) 2022 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+
+Portions of Raptor Design Suite are utilized under the following third-party copyright notices:
+
+(c) Copyright 1999 - 2022 Verific Design Automation Inc. All rights reserved.
+
+Parallax Static Timing Analyzer Copyright (c) 2021, Parallax Software, Inc. All rights reserved.
+*********************************************************************************/
+
+Version    : 0.5.40
+Git Hash   : 5b7f2d8
+Built      : Apr  2 2023
+Built type : Engineering
+Log Time   : Mon Apr  3 06:33:46 2023 GMT
+
+[ 11:33:46 ] Analysis has started
+[ 11:33:46 ] Command: /nfs_eda_sw/softwares/Raptor/instl_dir/04_02_2023_09_15_01/bin/analyze -f /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/test/ArchBench/Testcases/filt_ppi/filt_ppi_golden/filt_ppi/filt_ppi_analyzer.cmd
+[ 11:33:46 ] Duration: 177 ms. Max utilization: 91 MB
+[ 11:33:46 ] Synthesize has started
+[ 11:33:46 ] Command: /nfs_eda_sw/softwares/Raptor/instl_dir/04_02_2023_09_15_01/bin/yosys -s filt_ppi.ys -l filt_ppi_synth.log
+[ 11:42:03 ] Duration: 496821 ms. Max utilization: 752 MB
+[ 11:42:03 ] Packing has started
+[ 11:42:03 ] Command: /nfs_eda_sw/softwares/Raptor/instl_dir/04_02_2023_09_15_01/bin/vpr /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/test/ArchBench/openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/FPGA82x68_gemini_compact_pnr/fabric_task/flow_inputs/k6n8_vpr_annotated.xml filt_ppi_post_synth.v --sdc_file filt_ppi_openfpga.sdc --route_chan_width 192 --suppress_warnings check_rr_node_warnings.log,check_rr_node --clock_modeling ideal --timing_report_npaths 100 --absorb_buffer_luts off --skip_sync_clustering_and_routing_results on --constant_net_method route --timing_report_detail detailed --post_place_timing_report filt_ppi_post_place_timing.rpt --device castor82x68_heterogeneous --allow_unrelated_clustering on --post_synth_netlist_unconn_inputs gnd --gen_post_synthesis_netlist on --allow_dangling_combinational_nodes on --place_delta_delay_matrix_calculation_method dijkstra --pack
