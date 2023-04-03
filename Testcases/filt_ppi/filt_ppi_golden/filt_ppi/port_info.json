@@ -1,0 +1,70 @@
+[
+    {
+        "ports": [
+            {
+                "direction": "Input",
+                "name": "i_rst_an",
+                "range": {
+                    "lsb": 0,
+                    "msb": 0
+                },
+                "type": "WIRE"
+            },
+            {
+                "direction": "Input",
+                "name": "i_ena",
+                "range": {
+                    "lsb": 0,
+                    "msb": 0
+                },
+                "type": "WIRE"
+            },
+            {
+                "direction": "Input",
+                "name": "i_clk",
+                "range": {
+                    "lsb": 0,
+                    "msb": 0
+                },
+                "type": "WIRE"
+            },
+            {
+                "direction": "Input",
+                "name": "i_fclk",
+                "range": {
+                    "lsb": 0,
+                    "msb": 0
+                },
+                "type": "WIRE"
+            },
+            {
+                "direction": "Input",
+                "name": "i_data",
+                "range": {
+                    "lsb": 0,
+                    "msb": 7
+                },
+                "type": "WIRE"
+            },
+            {
+                "direction": "Output",
+                "name": "o_data",
+                "range": {
+                    "lsb": 0,
+                    "msb": 25
+                },
+                "type": "WIRE"
+            },
+            {
+                "direction": "Output",
+                "name": "o_sclk",
+                "range": {
+                    "lsb": 0,
+                    "msb": 0
+                },
+                "type": "WIRE"
+            }
+        ],
+        "topModule": "filt_ppi"
+    }
+]
