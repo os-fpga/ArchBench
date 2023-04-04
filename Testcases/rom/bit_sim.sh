@@ -73,6 +73,7 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
+echo "synth_options -no_bram">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
@@ -124,16 +125,16 @@ else
 fi
 
 
-bram_sim=`find $library -wholename "*/genesis2/brams_sim.v"`    
-cell_path=`find $library -wholename "*/genesis2/cells_sim.v"`
-dsp_sim=`find $library -wholename "*/genesis2/dsp_sim.v"`
-dsp_map=`find $library -wholename "*/genesis2/dsp_map.v"`
-dsp_final_map=`find $library -wholename "*/genesis2/dsp_final_map.v"`
+bram_sim=`find $library -wholename "*/genesis3/brams_sim.v"`    
+cell_path=`find $library -wholename "*/genesis3/cells_sim.v"`
+dsp_sim=`find $library -wholename "*/genesis3/dsp_sim.v"`
+dsp_map=`find $library -wholename "*/genesis3/dsp_map.v"`
+dsp_final_map=`find $library -wholename "*/genesis3/dsp_final_map.v"`
 lut_map=`find $library -wholename "*/common/simlib.v"`
-TDP18K_FIFO=`find $library -wholename "*/genesis2/TDP18K_FIFO.v"`
-ufifo_ctl=`find $library -wholename "*/genesis2/ufifo_ctl.v"`
-sram1024x18=`find $library -wholename "*/genesis2/sram1024x18.v"`
-primitive=`find $library -wholename "*/genesis2/primitives.v"`
+TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
+ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
+sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
+primitive=`find $library -wholename "*/genesis3/primitives.v"`
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
