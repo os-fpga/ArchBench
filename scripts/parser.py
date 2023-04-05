@@ -171,7 +171,7 @@ def parse_log_files(files, log_line_keys_map):
                             if log_line_keyword in line:
                                 # Checking the file name and updating the value of the log line key accordingly
                                     if log_line_key == 'Status':
-                                        data[file][log_line_key] = 'Fail' if line.split(log_line_keyword)[1].split('\n')[0] == "Simulation Failed" else 'Pass'
+                                        data[file][log_line_key] = 'Fail' if line.split(log_line_keyword)[1].split('\n')[0] == "Failed" else 'Pass'
                                     elif log_line_key == 'Memory':
                                         data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()
                                     elif log_line_key == 'Runtime':
