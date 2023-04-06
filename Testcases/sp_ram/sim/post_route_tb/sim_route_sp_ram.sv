@@ -25,14 +25,14 @@ module sim_route_sp_ram;
 							data[2],
 							data[1],
 							data[0],
-							q[7],
-							q[6],
-							q[5],
-							q[4],
-							q[3],
-							q[2],
-							q[1],
-							q[0]
+							q_netlist[7],
+							q_netlist[6],
+							q_netlist[5],
+							q_netlist[4],
+							q_netlist[3],
+							q_netlist[2],
+							q_netlist[1],
+							q_netlist[0]
 );
 
 always #1 clk = ~clk;
