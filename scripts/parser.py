@@ -241,7 +241,7 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = str(CLBs)+", margin:"+str(CLBs_margin)
                 # parsing the percentage of fle used from raptor.log
                 for line in lines[start_pb_type_usage+1:]:
-                    if "fle            " in line:
+                    if "fle          " in line:
                         fle_used=line.split()[2].strip()
                 for line in lines[blocks_of_type_clb:]:
                     if "blocks of type: clb" in line:
