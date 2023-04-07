@@ -18,7 +18,7 @@
         "Fmax": " Fmax: ",
         "LUT_CLB_ratio": "LUT/CLB",
         "CLB_percentage_used":"percent_clbs_used",
-        "FLE_Percentage_used": " fle            ",
+        "FLE_Percentage_used": " fle          ",
         "Wirelength_Percentage_used": "X - Directed channels:",
         "Fabric_netlist_version": "Netlist Version:",
         "device": "Device:"
