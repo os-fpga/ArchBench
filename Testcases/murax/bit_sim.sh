@@ -59,6 +59,8 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 
+python3 ../../scripts/init_path_update.py $design_name
+
 cd $design_name\_golden
 
 echo "create_design murax_symbiflow_02_24">raptor.tcl
