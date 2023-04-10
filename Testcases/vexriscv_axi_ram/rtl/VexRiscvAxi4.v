@@ -5188,7 +5188,7 @@ module JtagBridge (
   );
   initial begin
   `ifndef SYNTHESIS
-    jtag_tap_fsm_state = {1{$random}};
+    jtag_tap_fsm_state =  4'd4; //{1{$random}};
   `endif
   end
 
@@ -5688,7 +5688,7 @@ module FlowCCByToggle (
   );
   initial begin
   `ifndef SYNTHESIS
-    inputArea_target = $urandom;
+    inputArea_target = 1'b1; //$urandom;
   `endif
   end
 
