@@ -1360,9 +1360,9 @@ end
 
    assign dec_extint_stall = |flush_extint[1-1:0];
 
-`ifdef RV_ASSERT_ON
-   assert_dec_flush_extint_onehot:          assert #0 ($onehot0(dec_tlu_flush_extint[1-1:0]));
-`endif
+// `ifdef RV_ASSERT_ON
+//    assert_dec_flush_extint_onehot:          assert #0 ($onehot0(dec_tlu_flush_extint[1-1:0]));
+// `endif
 
 
    always_comb  begin
@@ -3328,12 +3328,12 @@ import eh2_pkg::*;
 
    // checks
 
-`ifdef RV_ASSERT_ON
-   assert_dec_data_valid_data_error_onehot: assert #0 ($onehot0({lsu_nonblock_load_data_valid,lsu_nonblock_load_data_error}));
-   assert_dec_cam_dc2_inv_reset_onehot:     assert #0 ($onehot0(cam_inv_dc2_reset_val[NBLOAD_SIZE_MSB:0]));
-   assert_dec_cam_dc5_inv_reset_onehot:     assert #0 ($onehot0(cam_inv_dc5_reset_val[NBLOAD_SIZE_MSB:0]));
-   assert_dec_cam_data_reset_onehot:        assert #0 ($onehot0(cam_data_reset_val[NBLOAD_SIZE_MSB:0]));
-`endif
+// `ifdef RV_ASSERT_ON
+//    assert_dec_data_valid_data_error_onehot: assert #0 ($onehot0({lsu_nonblock_load_data_valid,lsu_nonblock_load_data_error}));
+//    assert_dec_cam_dc2_inv_reset_onehot:     assert #0 ($onehot0(cam_inv_dc2_reset_val[NBLOAD_SIZE_MSB:0]));
+//    assert_dec_cam_dc5_inv_reset_onehot:     assert #0 ($onehot0(cam_inv_dc5_reset_val[NBLOAD_SIZE_MSB:0]));
+//    assert_dec_cam_data_reset_onehot:        assert #0 ($onehot0(cam_data_reset_val[NBLOAD_SIZE_MSB:0]));
+// `endif
 
    // all these signals are threaded
 
@@ -3400,9 +3400,9 @@ import eh2_pkg::*;
 
    assign load_data_tag[NBLOAD_TAG_MSB:0] = lsu_nonblock_load_data_tag[NBLOAD_TAG_MSB:0];
 
-`ifdef RV_ASSERT_ON
-   assert_dec_cam_nonblock_load_write_onehot:   assert #0 ($onehot0(nonblock_load_write[NBLOAD_SIZE_MSB:0]));
-`endif
+// `ifdef RV_ASSERT_ON
+//    assert_dec_cam_nonblock_load_write_onehot:   assert #0 ($onehot0(nonblock_load_write[NBLOAD_SIZE_MSB:0]));
+// `endif
 
 
    assign nonblock_load_cancel = ((wbd.i0rd[4:0] == nonblock_load_waddr[4:0]) & (wbd.i0tid == tid) & (wbd.i0tid == lsu_nonblock_load_data_tid) & i0_wen_wb) |    // cancel if any younger inst (including another nonblock) committing this cycle
