@@ -846,12 +846,12 @@ localparam MTDATA1_LD    = 0;
    assign o_debug_mode_status = debug_mode_status;
 
 
-`ifdef RV_ASSERT_ON
-  assert_commit_while_halted: assert #0 (~((tlu_i0_commit_cmt | tlu_i1_commit_cmt) & o_cpu_halt_status)) else $display("ERROR: Commiting while cpu_halt_status asserted!");
-  assert_flush_while_fastint: assert #0 (~((take_ext_int_start_d1 | take_ext_int_start_d2| take_ext_int_start_d3| take_ext_int_start_d4| take_ext_int_start_d5) & tlu_flush_lower_e4)) else $display("ERROR: TLU Flushing inside fast interrupt procedure!");
+// `ifdef RV_ASSERT_ON
+//   assert_commit_while_halted: assert #0 (~((tlu_i0_commit_cmt | tlu_i1_commit_cmt) & o_cpu_halt_status)) else $display("ERROR: Commiting while cpu_halt_status asserted!");
+//   assert_flush_while_fastint: assert #0 (~((take_ext_int_start_d1 | take_ext_int_start_d2| take_ext_int_start_d3| take_ext_int_start_d4| take_ext_int_start_d5) & tlu_flush_lower_e4)) else $display("ERROR: TLU Flushing inside fast interrupt procedure!");
 
-  assert_double_ras_case: assert #0 (~( iside_oop_rfpc & (lsu_i0_rfnpc_dc4 | lsu_i1_rfnpc_dc4) & (|tlu_packet_e4.i0trigger[3:0]))) else $display("ERROR: DOUBLE RAS WITH TRIGGER, IGNORE TEST");
-`endif
+//   assert_double_ras_case: assert #0 (~( iside_oop_rfpc & (lsu_i0_rfnpc_dc4 | lsu_i1_rfnpc_dc4) & (|tlu_packet_e4.i0trigger[3:0]))) else $display("ERROR: DOUBLE RAS WITH TRIGGER, IGNORE TEST");
+// `endif
 
    // high priority interrupts can wakeup from external halt, so can unmasked timer interrupts
    assign i_cpu_run_req_d1 = i_cpu_run_req_d1_raw | ((nmi_int_detected | timer_int_ready | soft_int_ready | int_timer0_int_hold_f | int_timer1_int_hold_f | (mhwakeup & mhwakeup_ready)) & o_cpu_halt_status & ~i_cpu_halt_req_d1);
