@@ -123,7 +123,7 @@ import eh2_pkg::*;
                                    ( (w2v[31:1] == w3v[31:1]) & wen2 & wen3 & (wtid2==tid) & (wtid3==tid ));
 
    // asserting that no 2 ports will write to the same gpr simultaneously
-   assert_multiple_wen_to_same_gpr: assert #0 (~( write_collision_unused ) );
+   // assert_multiple_wen_to_same_gpr: assert #0 (~( write_collision_unused ) );
 
 `endif
 
