@@ -52,6 +52,7 @@ cd $main_path
 
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
+strategy=delay
 
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
@@ -89,11 +90,12 @@ echo "add_design_file ../rtl/generic_muxfx.v">>raptor.tcl
 echo "add_design_file ../rtl/gfmul.sv">>raptor.tcl
 echo "add_design_file ../rtl/wrapper.v">>raptor.tcl
 echo "add_design_file ../rtl/wrapper_top.v">>raptor.tcl
-echo "set_top_module wrapper_top">>raptor.tcl
+echo "set_top_module wrapper">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
-echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl  
+echo "add_constraint_file ../constrs_1/aes_decrypt.sdc">>raptor.tcl 
+echo "pin_loc_assign_method free">>raptor.tcl 
 echo "analyze">>raptor.tcl   
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  

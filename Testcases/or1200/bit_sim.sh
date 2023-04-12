@@ -60,24 +60,21 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 
-python3 ../../scripts/init_path_update.py $design_name
-
 cd $design_name\_golden
 
-echo "create_design murax_symbiflow_02_24">raptor.tcl
+echo "create_design ${design_name}_top">raptor.tcl
 echo "target_device GEMINI_COMPACT_82x68">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
-echo "add_library_path ../rtl">>raptor.tcl  
-echo "add_design_file ../rtl/murax_symbiflow.v">>raptor.tcl
-echo "set_top_module murax_symbiflow">>raptor.tcl
+echo "add_library_path ../rtl">>raptor.tcl 
+echo "add_design_file ../rtl/${design_name}_top.v">>raptor.tcl
+echo "set_top_module ${design_name}_top">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "analyze">>raptor.tcl
-echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl  
 echo "pin_loc_assign_method free">>raptor.tcl  
-echo "add_constraint_file ../constraints.sdc">>raptor.tcl
+echo "add_constraint_file ../constraints.sdc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
