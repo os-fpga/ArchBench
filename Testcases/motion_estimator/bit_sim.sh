@@ -52,6 +52,7 @@ cd $main_path
 
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
+strategy=delay
 
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
@@ -92,6 +93,8 @@ echo "set_top_module me_top">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "analyze">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl  
+echo "pin_loc_assign_method free">>raptor.tcl  
+echo "add_constraint_file ../constraints.sdc">>raptor.tcl  
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
