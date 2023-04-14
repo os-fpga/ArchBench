@@ -303,7 +303,7 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()      
                             elif log_line_key == 'Runtime':
                                 data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
-                            elif log_line_key == 'total_luts':
+                            elif log_line_key == 'LUTs':
                                 # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
                                 LUTs=int(line.split(log_line_keyword)[1].strip().split()[0])
                                 LUTs_margin=read_config_test_margins("LUTs_margin")           #to dump margin in parsed_data.json
@@ -313,7 +313,7 @@ def parse_log_files(files, log_line_keys_map):
 #                   The code first checks if the log line key
 #                   is equal to "DSPs" and "DFFs" 
 #                   and the file is raptor.log.
-                        if log_line_key == 'dsp':
+                        if log_line_key == 'DSPs':
                             #the code splits the log line keyword by commas and loops through the resulting list of keywords.
                             dsp_keywords = log_line_keyword.split(',')
                             for dsp_keyword in dsp_keywords:
@@ -351,7 +351,7 @@ def parse_log_files(files, log_line_keys_map):
                                     DFFs_margin=read_config_test_margins("DFFs_margin")
                                     data[file][log_line_key] = "0, margin:"+str(DFFs_margin)
 # wirelength_Percentage_used instead of metal_Percentage_used    
-                        elif log_line_key == 'brams':
+                        elif log_line_key == 'BRAMs':
                             brams_keywords = log_line_keyword.split(',')
                             for brams_keyword in brams_keywords:
                                 if brams_keyword in line:
@@ -380,7 +380,7 @@ def parse_log_files(files, log_line_keys_map):
                 for line in lines[start_fmax:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if log_line_keyword in line:
-                            if log_line_key == 'fmax':
+                            if log_line_key == 'Fmax':
                                 fmax=line.split()[-2]
                                 fmax_freq=line.split()[-1]
                                 frequency=fmax+" "+fmax_freq
@@ -389,7 +389,7 @@ def parse_log_files(files, log_line_keys_map):
                                 str_fmax=str(frequency)+", margin:"+str(fmax_margin)
                                 data[file][log_line_key] = str_fmax
                         else:
-                            if log_line_key == 'fmax':
+                            if log_line_key == 'Fmax':
                                 fmax_margin=read_config_test_margins("fmax_margin")
                                 str_fmax=str(frequency)+", margin:"+str(fmax_margin)
                                 data[file][log_line_key] = str_fmax 
