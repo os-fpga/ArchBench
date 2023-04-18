@@ -39,9 +39,7 @@ fi
 
 cd $main_path
 
-[ -d SRC ] && rm -fr SRC
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
-[ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
 # [ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
 # [ -f post_route_sim.log ] && rm -fr post_route_sim.log
 [ -f raptor.log ] && rm -fr raptor.log
