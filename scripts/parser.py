@@ -416,31 +416,22 @@ def parse_log_files(files, log_line_keys_map):
                         synth_start = i
                         synth_time_with_dot=lines[synth_start+2].strip().split()[4]+" "+lines[synth_start+2].strip().split()[5]
                         synth_time=synth_time_with_dot[0:-1]
-                        break
-                for i in range(len(lines)):
-                    if "Packing has started" in lines[i]:
+                    if "--pack\n" in lines[i]:
                         start_print_stats = i
-                        packer_time_with_dot=lines[start_print_stats+2].strip().split()[4]+" "+lines[start_print_stats+2].strip().split()[5]
+                        packer_time_with_dot=lines[start_print_stats+1].strip().split()[4]+" "+lines[start_print_stats+1].strip().split()[5]
                         packer_time=packer_time_with_dot[0:-1]
-                        break
-                for i in range(len(lines)):
-                    if "Route has started" in lines[i]:
-                        start_print_stats = i
-                        router_time_with_dot=lines[start_print_stats+2].strip().split()[4]+" "+lines[start_print_stats+2].strip().split()[5]
-                        router_time=router_time_with_dot[0:-1]
-                        break
-                for i in range(len(lines)):
-                    if "Placement has started" in lines[i]:
+                    if "--place\n" in lines[i]:
                         placement_start_line = i
-                        placer_time_with_dor=lines[placement_start_line+2].strip().split()[4]+" "+lines[placement_start_line+2].strip().split()[5]
+                        placer_time_with_dor=lines[placement_start_line+1].strip().split()[4]+" "+lines[placement_start_line+1].strip().split()[5]
                         placer_time=placer_time_with_dor[0:-1]
-                        break
-                for i in range(len(lines)):
+                    if "--route\n" in lines[i]:
+                        route_print_stats = i
+                        router_time_with_dot=lines[route_print_stats+1].strip().split()[4]+" "+lines[route_print_stats+1].strip().split()[5]
+                        router_time=router_time_with_dot[0:-1]
                     if "GenerateBitstream has started" in lines[i]:
                         bitstream_start_line = i
                         bitstream_time_with_dot=lines[bitstream_start_line+2].strip().split()[4]+" "+lines[bitstream_start_line+2].strip().split()[5]
                         bitstream_time=bitstream_time_with_dot[0:-1]
-                        break
                 for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                     if log_line_key == 'Synthesis_time':
                         # data[file][log_line_key] = str(packer_time)
