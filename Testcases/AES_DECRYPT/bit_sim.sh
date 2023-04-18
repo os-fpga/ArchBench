@@ -39,9 +39,7 @@ fi
 
 cd $main_path
 
-[ -d SRC ] && rm -fr SRC
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
-[ -f $design_name\_custom.openfpga ] && rm -fr $design_name\_custom.openfpga
 # [ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
 # [ -f post_route_sim.log ] && rm -fr post_route_sim.log
 [ -f raptor.log ] && rm -fr raptor.log
@@ -90,7 +88,7 @@ echo "add_design_file ../rtl/generic_muxfx.v">>raptor.tcl
 echo "add_design_file ../rtl/gfmul.sv">>raptor.tcl
 echo "add_design_file ../rtl/wrapper.v">>raptor.tcl
 echo "add_design_file ../rtl/wrapper_top.v">>raptor.tcl
-echo "set_top_module wrapper">>raptor.tcl
+echo "set_top_module wrapper_top">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
