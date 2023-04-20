@@ -192,5 +192,7 @@ cd $main_path
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 
+tail -n100 raptor.log > raptor_tail.log
+
 python3 ../../scripts/parser.py 
 
