@@ -207,7 +207,8 @@ def parse_log_files(files, log_line_keys_map):
                     if "Fmax: " in lines[i]:
                         start_fmax = i
                         break
-
+            
+                error_list=[]
                 for line in lines:
                     # Looping through each key and keyword in the log_line_keys_map for this log file
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
@@ -215,7 +216,58 @@ def parse_log_files(files, log_line_keys_map):
                         if log_line_keyword in line:
                             # Checking the file name and updating the value of the log line key accordingly
                             if log_line_key == 'error_msg':
-                                data[file][log_line_key] = line.split(log_line_keyword)[1].strip() 
+                                error_list.append(line.split(log_line_keyword)[1].strip())
+                                if ("SYN:" in error_list[-1]):
+                                    if len(error_list) == 1:
+                                        error_message=error_list[0]+"."
+                                        data[file][log_line_key]=' '.join(error_message)
+                                    else:
+                                        error_message=error_list[-1]+".",error_list[-2]
+                                        data[file][log_line_key]=' '.join(error_message)
+                                elif ("PAC:" in error_list[-1]):
+                                    if len(error_list) == 1:
+                                        error_message=error_list[0]+"."
+                                        data[file][log_line_key]=' '.join(error_message)
+                                    else:
+                                        error_message=error_list[-1]+".",error_list[-2]
+                                        data[file][log_line_key]=' '.join(error_message)
+                                elif ("PLC:" in error_list[-1]):
+                                    if len(error_list) == 1:
+                                        error_message=error_list[0]+"."
+                                        data[file][log_line_key]=' '.join(error_message)
+                                    else:
+                                        error_message=error_list[-1]+".",error_list[-2]
+                                        data[file][log_line_key]=' '.join(error_message)
+                                elif ("RTE:" in error_list[-1]):
+                                    if len(error_list) == 1:
+                                        error_message=error_list[0]+"."
+                                        data[file][log_line_key]=' '.join(error_message)
+                                    else:
+                                        error_message=error_list[-1]+".",error_list[-2]
+                                        data[file][log_line_key]=' '.join(error_message)
+                                elif ("TMN:" in error_list[-1]):
+                                    if len(error_list) == 1:
+                                        error_message=error_list[0]+"."
+                                        data[file][log_line_key]=' '.join(error_message)
+                                    else:
+                                        error_message=error_list[-1]+".",error_list[-2]
+                                        data[file][log_line_key]=' '.join(error_message)
+                                elif ("PWR:" in error_list[-1]):
+                                    if len(error_list) == 1:
+                                        error_message=error_list[0]+"."
+                                        data[file][log_line_key]=' '.join(error_message)
+                                    else:
+                                        error_message=error_list[-1]+".",error_list[-2]
+                                        data[file][log_line_key]=' '.join(error_message)
+                                elif ("BIT:" in error_list[-1]):
+                                    if len(error_list) == 1:
+                                        error_message=error_list[0]+"."
+                                        data[file][log_line_key]=' '.join(error_message)
+                                    else:
+                                        error_message=error_list[-1]+".",error_list[-2]
+                                        data[file][log_line_key]=' '.join(error_message)
+                                else:
+                                    data[file][log_line_key]=line.split(log_line_keyword)[1].strip()
                             elif log_line_key == 'Status':
                                 data[file][log_line_key] = 'Pass' if ' '.join(line.split(log_line_keyword)[1].split(" ")[i] for i in [2,3,4]).split('\n')[0] == "bitstream is generated" else 'Fail'
                             if log_line_key == 'Fabric_netlist_version':
