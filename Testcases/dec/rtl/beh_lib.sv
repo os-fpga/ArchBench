@@ -15,6 +15,8 @@
 
 // all flops call the rvdff flop
 
+`define RV_FPGA_OPTIMIZE
+
 
 module rvdff #( parameter WIDTH=1 )
    (
