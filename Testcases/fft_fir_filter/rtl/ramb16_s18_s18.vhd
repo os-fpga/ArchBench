@@ -67,13 +67,14 @@ end RAMB16_S18_S18;
 
 architecture BEH of RAMB16_S18_S18 is
 	
-	type mem is array (0 to 1023) of std_logic_vector (17 downto 0);							  
+	type mem is array (0 to 1024) of std_logic_vector (17 downto 0);							  
 	signal adra,adrb:std_logic_vector (9 downto 0):=(others=>'0');	   						  
 	signal data_a,data_b:std_logic_vector (17 downto 0);
 	signal wea_1,web_1: STD_LOGIC; 
+	signal ram: mem:=(others=>"000000000000000000") ;
 begin  
-	process(clka,ssra,clkb,ssrb,adra,adrb,wea,web,dia,dib)  
-		variable ram: mem:=(others=>"000000000000000000") ;	
+	process(clka,ssra,clkb,ssrb,adra,adrb,wea,web,dia,dib,wea_1,data_a,web_1,data_b,ram)  
+		--variable ram: mem:=(others=>"000000000000000000") ;	
 		variable ia,ib: integer;	   
 		variable a,b:std_logic_vector (17 downto 0);
 	begin
@@ -83,17 +84,21 @@ begin
 		a:=	 ram(ia); 
 		dopa<=a(17 downto 16);
 		doa <= a(15 downto 0); 
-		if wea_1 = '1' then
-			ram(ia) :=data_a;           
+		if clka = '1' and clka'event then
+		if wea = '1' then
+			ram(ia) <=data_a;           
+		end if;
 		end if;	 	
 		
 		
 		ib:= conv_integer(To_X01(adrb));  		                 
 		b:=	 ram(ib); 
 		dopb<=b(17 downto 16);
-		dob <= b(15 downto 0);  
-		if web_1 = '1' then
-			ram(ib) := data_b;           
+		dob <= b(15 downto 0); 
+		if clka = '1' and clka'event then 
+		if web = '1' then
+			ram(ib) <= data_b;           
+		end if;
 		end if;
 			
 		if ssra = '1' then 
