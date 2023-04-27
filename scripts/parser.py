@@ -219,50 +219,50 @@ def parse_log_files(files, log_line_keys_map):
                                 error_list.append(line.split(log_line_keyword)[1].strip())
                                 if ("SYN:" in error_list[-1]):
                                     if len(error_list) == 1:
-                                        error_message=error_list[0]+"."
-                                        data[file][log_line_key]=' '.join(error_message)
+                                        data[file][log_line_key]=error_list[0]
+                                        # data[file][log_line_key]=' '.join(error_message)
                                     else:
                                         error_message=error_list[-1]+".",error_list[-2]
                                         data[file][log_line_key]=' '.join(error_message)
                                 elif ("PAC:" in error_list[-1]):
                                     if len(error_list) == 1:
-                                        error_message=error_list[0]+"."
-                                        data[file][log_line_key]=' '.join(error_message)
+                                        data[file][log_line_key]=error_list[0]
+                                        # data[file][log_line_key]=' '.join(error_message)
                                     else:
                                         error_message=error_list[-1]+".",error_list[-2]
                                         data[file][log_line_key]=' '.join(error_message)
                                 elif ("PLC:" in error_list[-1]):
                                     if len(error_list) == 1:
-                                        error_message=error_list[0]+"."
-                                        data[file][log_line_key]=' '.join(error_message)
+                                        data[file][log_line_key]=error_list[0]
+                                        # data[file][log_line_key]=' '.join(error_message)
                                     else:
                                         error_message=error_list[-1]+".",error_list[-2]
                                         data[file][log_line_key]=' '.join(error_message)
                                 elif ("RTE:" in error_list[-1]):
                                     if len(error_list) == 1:
-                                        error_message=error_list[0]+"."
-                                        data[file][log_line_key]=' '.join(error_message)
+                                        data[file][log_line_key]=error_list[0]
+                                        # data[file][log_line_key]=error_message
                                     else:
                                         error_message=error_list[-1]+".",error_list[-2]
                                         data[file][log_line_key]=' '.join(error_message)
                                 elif ("TMN:" in error_list[-1]):
                                     if len(error_list) == 1:
-                                        error_message=error_list[0]+"."
-                                        data[file][log_line_key]=' '.join(error_message)
+                                        data[file][log_line_key]=error_list[0]
+                                        # data[file][log_line_key]=' '.join(error_message)
                                     else:
                                         error_message=error_list[-1]+".",error_list[-2]
                                         data[file][log_line_key]=' '.join(error_message)
                                 elif ("PWR:" in error_list[-1]):
                                     if len(error_list) == 1:
-                                        error_message=error_list[0]+"."
-                                        data[file][log_line_key]=' '.join(error_message)
+                                        data[file][log_line_key]=error_list[0]
+                                        # data[file][log_line_key]=' '.join(error_message)
                                     else:
                                         error_message=error_list[-1]+".",error_list[-2]
                                         data[file][log_line_key]=' '.join(error_message)
                                 elif ("BIT:" in error_list[-1]):
                                     if len(error_list) == 1:
-                                        error_message=error_list[0]+"."
-                                        data[file][log_line_key]=' '.join(error_message)
+                                        data[file][log_line_key]=error_list[0]
+                                        # data[file][log_line_key]=' '.join(error_message)
                                     else:
                                         error_message=error_list[-1]+".",error_list[-2]
                                         data[file][log_line_key]=' '.join(error_message)
