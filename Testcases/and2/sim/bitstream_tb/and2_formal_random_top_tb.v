@@ -4,42 +4,41 @@
 
 module and2_top_formal_verification_random_tb;
 	reg clock0;
-	wire [0:7] clk;
 
 	reg a;
 	reg b;
 	wire c;
-	
-wire [0:2303] gfpga_pad_QL_PREIO_A2F;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A_DEF0;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A_DEF1;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
-wire [0:9] ccff_head;
-wire [0:9] ccff_tail;
-bit global_resetn;
-wire scan_en;
-wire scan_mode;
-wire prog_clock;
 
+	wire [0:7] clk;
+	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
+	wire [0:9] ccff_head;
+	wire [0:9] ccff_tail;
+	bit global_resetn;
+	wire scan_en;
+	wire scan_mode;
+	wire prog_clock;
+	wire [0:2] rwm;
+	
 	fpga_top U0_formal_verification (
 		clk[0:7],
 		global_resetn,
 		scan_en,
 		scan_mode,
 		prog_clock,
+		rwm[0:2],
 		gfpga_pad_QL_PREIO_A2F[0:2303],
 		gfpga_pad_QL_PREIO_F2A[0:2303],
-		gfpga_pad_QL_PREIO_F2A_DEF0[0:2303],
-		gfpga_pad_QL_PREIO_F2A_DEF1[0:2303],
 		gfpga_pad_QL_PREIO_F2A_CLK[0:2303],
 		ccff_head[0:9],
 		ccff_tail[0:9]);
-
+	
 	assign prog_clock = 1'b0;
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
 	assign scan_mode = 1'b0;
+	assign rwm[0:2] = 3'b011;
 	assign clk[0] = clock0;
 	assign clk[1] = 1'b0;
 	assign clk[2] = 1'b0;
@@ -58,10 +57,10 @@ wire prog_clock;
 	end
 	`include "../and2/PinMapping.v"
 
-initial begin
+	initial begin
 	`include "../../bitstream_text.txt"
-	// config_enable[0] = 1'b1;
-	// CFG_DONE[0] = 1'b1;
+	// config_enable = 1'b1;
+	// CFG_DONE = 1'b1;
 	// global_resetn=1'b0;
 
 	a = 1'b0;
