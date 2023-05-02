@@ -42,6 +42,14 @@ initial begin
 	@(negedge clk);
 	compare();
 
+	repeat(500)@(posedge clk) begin
+		a=$random;
+		b=$random;
+		display_stimulus();
+		@(negedge clk);
+		compare();
+	end
+
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
