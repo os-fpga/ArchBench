@@ -15,7 +15,7 @@ module add_1bit_top_formal_verification_random_tb;
 	wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
 	wire [0:9] ccff_head;
 	wire [0:9] ccff_tail;
-	wire global_resetn;
+	bit global_resetn;
 	wire scan_en;
 	wire scan_mode;
 	wire prog_clock;
@@ -35,7 +35,7 @@ module add_1bit_top_formal_verification_random_tb;
 			ccff_tail[0:9]);
 	
 		assign prog_clock[0] = 1'b0;
-		assign global_resetn[0] = 1'b0;
+		// assign global_resetn[0] = 1'b0;
 		assign scan_en[0] = 1'b0;
 		assign scan_mode[0] = 1'b0;
 		assign rwm[0:2] = 3'b011;
@@ -63,9 +63,8 @@ module add_1bit_top_formal_verification_random_tb;
 		// CFG_DONE=1'b1;
 		a = 1'b0;
 		b = 1'b0;
-		global_resetn=1'b0;
 		#5;
-		global_resetn=1'b1;
+		global_resetn<=1'b1;
 		#15
 		if (c === 0)
 		  $display("Status: Test Passed");
