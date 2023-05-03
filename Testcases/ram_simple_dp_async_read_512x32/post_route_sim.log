@@ -1,0 +1,291 @@
+
+Warning-[DEBUG_DEP] Option will be deprecated
+  The option '-debug_all' will be deprecated in a future release.  Please use 
+  '-debug_acc+all+dmptf -debug_region+cell+encrypt' instead.
+
+                         Chronologic VCS (TM)
+       Version S-2021.09-SP2_Full64 -- Wed May  3 13:05:28 2023
+
+                    Copyright (c) 1991 - 2022 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+
+Warning-[LCA_FEATURES_ENABLED] Usage warning
+  LCA features enabled by '-lca' argument on the command line.  For more 
+  information regarding list of LCA features please refer to Chapter "LCA 
+  features" in the VCS Release Notes
+
+
+Warning-[DEBUG_DEP] Option will be deprecated
+  The option '-debug_all' will be deprecated in a future release.  Please use 
+  '-debug_acc+all -debug_region+cell+encrypt' instead.
+
+INFO: SCL_RECONNECT_ATTEMPTS value set to 3
+Parsing design file '/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/cells_sim.v'
+Parsing design file '/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v'
+Parsing design file '/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/TDP18K_FIFO.v'
+Parsing design file '/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/ufifo_ctl.v'
+Parsing design file '/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/sram1024x18.v'
+Parsing design file '/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v'
+Parsing design file '/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/primitives.v'
+Parsing design file '../../rtl/ram_simple_dp_async_read_512x32.v'
+Parsing design file '../ram_simple_dp_async_read_512x32/ram_simple_dp_async_read_512x32_post_synthesis.v'
+Top Level Modules:
+       dff
+       dffn
+       sdff
+       sdffn
+       dffr
+       dffnr
+       dffe
+       dffne
+       sdffre
+       sdffnre
+       dffnre
+       latch
+       latchn
+       latchr
+       latchnr
+       fa_1bit
+       TDP_BRAM18
+       BRAM2x18_TDP
+       BRAM2x18_SDP
+       _$_mem_v2_asymmetric
+       RS_DSP_MULT
+       RS_DSP_MULT_REGIN
+       RS_DSP_MULT_REGOUT
+       RS_DSP_MULT_REGIN_REGOUT
+       RS_DSP_MULTADD
+       RS_DSP_MULTADD_REGIN
+       RS_DSP_MULTADD_REGOUT
+       RS_DSP_MULTADD_REGIN_REGOUT
+       RS_DSP_MULTACC
+       RS_DSP_MULTACC_REGIN
+       RS_DSP_MULTACC_REGOUT
+       RS_DSP_MULTACC_REGIN_REGOUT
+       dsp_t1_20x18x64_cfg_ports
+       DFF
+       mux
+       adder
+       multiply
+       single_port_ram
+       dual_port_ram
+       ram_simple_dp_async_read_512x32
+       ram_simple_dp_async_read_512x32_post_route
+TimeScale is 1 ps / 1 ps
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 122
+RS_DSP_MULT, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 163
+RS_DSP_MULT_REGIN, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b),  .clk (clk),  .lreset (lreset));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 206
+RS_DSP_MULT_REGOUT, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b),  .clk (clk),  .lreset (lreset));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 249
+RS_DSP_MULT_REGIN_REGOUT, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b),  .clk (clk),  .lreset (lreset));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 524
+RS_DSP_MULTACC, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .load_acc (load_acc),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b),  .clk (clk),  .lreset (lreset),  .saturate_enable (saturate_enable),  .shift_right (shift_right),  .round (round),  .subtract (subtract));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 578
+RS_DSP_MULTACC_REGIN, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .load_acc (load_acc),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b),  .clk (clk),  .lreset (lreset),  .saturate_enable (saturate_enable),  .shift_right (shift_right),  .round (round),  .subtract (subtract));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 636
+RS_DSP_MULTACC_REGOUT, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .load_acc (load_acc),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b),  .clk (clk),  .lreset (lreset),  .saturate_enable (saturate_enable),  .shift_right (shift_right),  .round (round),  .subtract (subtract));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/dsp_sim.v, 694
+RS_DSP_MULTACC_REGIN_REGOUT, "RS_DSP #(.MODE_BITS({COEFF_0, COEFF_1, COEFF_2, COEFF_3, output_select, register_inputs})) dsp( .a (a),  .b (b),  .z (z),  .dly_b (dly_b),  .feedback (feedback),  .load_acc (load_acc),  .unsigned_a (unsigned_a),  .unsigned_b (unsigned_b),  .clk (clk),  .lreset (lreset),  .saturate_enable (saturate_enable),  .shift_right (shift_right),  .round (round),  .subtract (subtract));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v, 982
+" RS_TDP36K #({1'b1, 11'd10, 11'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0, 12'd10, 12'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0}, , , , , , , , , , , , , , , , , , , , , , , , {INIT0[(0 * 18432)+:18432], INIT1[(0 * 18432)+:18432]}, , , , , , ) genblk1.bram_2x18k( .WDATA_A1 (PORT_A1_WDATA),  .RDATA_A1 (PORT_A1_RDATA),  .ADDR_A1 (PORT_A1_ADDR),  .CLK_A1 (PORT_A1_CLK),  .REN_A1 (PORT_A1_REN),  .WEN_A1 (PORT_A1_WEN),  .BE_A1 (PORT_A1_BE),  .WDATA_A2 (PORT_A2_WDATA),  .RDATA_A2 (PORT_A2_RDATA),  .ADDR_A2 (PORT_A2_ADDR),  .CLK_A2 (PORT_A2_CLK),  .REN_A2 (PORT_A2_REN),  .WEN_A2 (PORT_A2_WEN),  .BE_A2 (PORT_A2_BE),  .WDATA_B1 (PORT_B1_WDATA),  .RDATA_B1 (PORT_B1_RDATA),  .ADDR_B1 (PORT_B1_ADDR),  .CLK_B1 (PORT_B1_CLK),  .REN_B1 (PORT_B1_REN), ... "
+  The following 14-bit expression is connected to 15-bit port "ADDR_A1" of 
+  module "RS_TDP36K", instance "genblk1.bram_2x18k".
+  Expression: PORT_A1_ADDR
+  Instantiated module defined at: 
+  "/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v",
+  113
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v, 982
+" RS_TDP36K #({1'b1, 11'd10, 11'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0, 12'd10, 12'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0}, , , , , , , , , , , , , , , , , , , , , , , , {INIT0[(0 * 18432)+:18432], INIT1[(0 * 18432)+:18432]}, , , , , , ) genblk1.bram_2x18k( .WDATA_A1 (PORT_A1_WDATA),  .RDATA_A1 (PORT_A1_RDATA),  .ADDR_A1 (PORT_A1_ADDR),  .CLK_A1 (PORT_A1_CLK),  .REN_A1 (PORT_A1_REN),  .WEN_A1 (PORT_A1_WEN),  .BE_A1 (PORT_A1_BE),  .WDATA_A2 (PORT_A2_WDATA),  .RDATA_A2 (PORT_A2_RDATA),  .ADDR_A2 (PORT_A2_ADDR),  .CLK_A2 (PORT_A2_CLK),  .REN_A2 (PORT_A2_REN),  .WEN_A2 (PORT_A2_WEN),  .BE_A2 (PORT_A2_BE),  .WDATA_B1 (PORT_B1_WDATA),  .RDATA_B1 (PORT_B1_RDATA),  .ADDR_B1 (PORT_B1_ADDR),  .CLK_B1 (PORT_B1_CLK),  .REN_B1 (PORT_B1_REN), ... "
+  The following 14-bit expression is connected to 15-bit port "ADDR_B1" of 
+  module "RS_TDP36K", instance "genblk1.bram_2x18k".
+  Expression: PORT_B1_ADDR
+  Instantiated module defined at: 
+  "/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v",
+  113
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v, 1393
+" RS_TDP36K #({1'b1, 11'd10, 11'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0, 12'd10, 12'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0}, , , , , , , , , , , , , , , , , , , , , , , , {INIT0[(0 * 18432)+:18432], INIT1[(0 * 18432)+:18432]}, , , , , , ) genblk2.bram_2x18k( .WDATA_A1 (PORT_A1_WDATA),  .RDATA_A1 (PORT_A1_RDATA),  .ADDR_A1 (PORT_A1_ADDR),  .CLK_A1 (PORT_A1_CLK),  .REN_A1 (PORT_A1_REN),  .WEN_A1 (PORT_A1_WEN),  .BE_A1 (PORT_A1_BE),  .WDATA_A2 (PORT_A2_WDATA),  .RDATA_A2 (PORT_A2_RDATA),  .ADDR_A2 (PORT_A2_ADDR),  .CLK_A2 (PORT_A2_CLK),  .REN_A2 (PORT_A2_REN),  .WEN_A2 (PORT_A2_WEN),  .BE_A2 (PORT_A2_BE),  .WDATA_B1 (PORT_B1_WDATA),  .RDATA_B1 (PORT_B1_RDATA),  .ADDR_B1 (PORT_B1_ADDR),  .CLK_B1 (PORT_B1_CLK),  .REN_B1 (PORT_B1_REN), ... "
+  The following 14-bit expression is connected to 15-bit port "ADDR_A1" of 
+  module "RS_TDP36K", instance "genblk2.bram_2x18k".
+  Expression: PORT_A1_ADDR
+  Instantiated module defined at: 
+  "/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v",
+  113
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v, 1393
+" RS_TDP36K #({1'b1, 11'd10, 11'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0, 12'd10, 12'd10, 4'b0, MODE_18, MODE_18, MODE_18, MODE_18, 1'b0}, , , , , , , , , , , , , , , , , , , , , , , , {INIT0[(0 * 18432)+:18432], INIT1[(0 * 18432)+:18432]}, , , , , , ) genblk2.bram_2x18k( .WDATA_A1 (PORT_A1_WDATA),  .RDATA_A1 (PORT_A1_RDATA),  .ADDR_A1 (PORT_A1_ADDR),  .CLK_A1 (PORT_A1_CLK),  .REN_A1 (PORT_A1_REN),  .WEN_A1 (PORT_A1_WEN),  .BE_A1 (PORT_A1_BE),  .WDATA_A2 (PORT_A2_WDATA),  .RDATA_A2 (PORT_A2_RDATA),  .ADDR_A2 (PORT_A2_ADDR),  .CLK_A2 (PORT_A2_CLK),  .REN_A2 (PORT_A2_REN),  .WEN_A2 (PORT_A2_WEN),  .BE_A2 (PORT_A2_BE),  .WDATA_B1 (PORT_B1_WDATA),  .RDATA_B1 (PORT_B1_RDATA),  .ADDR_B1 (PORT_B1_ADDR),  .CLK_B1 (PORT_B1_CLK),  .REN_B1 (PORT_B1_REN), ... "
+  The following 14-bit expression is connected to 15-bit port "ADDR_B1" of 
+  module "RS_TDP36K", instance "genblk2.bram_2x18k".
+  Expression: PORT_B1_ADDR
+  Instantiated module defined at: 
+  "/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v",
+  113
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v, 1803
+" RS_TDP36K #({1'b0, 11'd10, 11'd10, 4'b0, MODE_36, MODE_36, MODE_36, MODE_36, 1'b0, 12'd10, 12'd10, 4'b0, MODE_36, MODE_36, MODE_36, MODE_36, 1'b0}, , , , , , , , , , , , , , , , , , , , , , , , INIT[(0 * 36864)+:36864], , , , , , ) genblk1.bram_asymmetric( .WDATA_A1 (18'h3ffff),  .WDATA_A2 (18'h3ffff),  .RDATA_A1 (RD_DATA_TOTAL[17:0]),  .RDATA_A2 (RD_DATA_TOTAL[35:18]),  .ADDR_A1 (RD_ADDR_15),  .ADDR_A2 (RD_ADDR_15),  .CLK_A1 (RD_CLK),  .CLK_A2 (RD_CLK),  .REN_A1 (RD_EN),  .REN_A2 (RD_EN),  .WEN_A1 (1'b0),  .WEN_A2 (1'b0),  .BE_A1 ({RD_EN, RD_EN}),  .BE_A2 ({RD_EN, RD_EN}),  .WDATA_B1 (WR_DATA[17:0]),  .WDATA_B2 (WR_DATA[35:18]),  .RDATA_B1 (DOBDO[17:0]),  .RDATA_B2 (DOBDO[35:18]),  .ADDR_B1 (WR_ADDR_15),  .ADDR_B2 (WR_ADDR_15),  .CLK_B1 (WR_CLK),  .CL ... "
+  The following 15-bit expression is connected to 14-bit port "ADDR_A2" of 
+  module "RS_TDP36K", instance "genblk1.bram_asymmetric".
+  Expression: RD_ADDR_15
+  Instantiated module defined at: 
+  "/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v",
+  113
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v, 1803
+" RS_TDP36K #({1'b0, 11'd10, 11'd10, 4'b0, MODE_36, MODE_36, MODE_36, MODE_36, 1'b0, 12'd10, 12'd10, 4'b0, MODE_36, MODE_36, MODE_36, MODE_36, 1'b0}, , , , , , , , , , , , , , , , , , , , , , , , INIT[(0 * 36864)+:36864], , , , , , ) genblk1.bram_asymmetric( .WDATA_A1 (18'h3ffff),  .WDATA_A2 (18'h3ffff),  .RDATA_A1 (RD_DATA_TOTAL[17:0]),  .RDATA_A2 (RD_DATA_TOTAL[35:18]),  .ADDR_A1 (RD_ADDR_15),  .ADDR_A2 (RD_ADDR_15),  .CLK_A1 (RD_CLK),  .CLK_A2 (RD_CLK),  .REN_A1 (RD_EN),  .REN_A2 (RD_EN),  .WEN_A1 (1'b0),  .WEN_A2 (1'b0),  .BE_A1 ({RD_EN, RD_EN}),  .BE_A2 ({RD_EN, RD_EN}),  .WDATA_B1 (WR_DATA[17:0]),  .WDATA_B2 (WR_DATA[35:18]),  .RDATA_B1 (DOBDO[17:0]),  .RDATA_B2 (DOBDO[35:18]),  .ADDR_B1 (WR_ADDR_15),  .ADDR_B2 (WR_ADDR_15),  .CLK_B1 (WR_CLK),  .CL ... "
+  The following 15-bit expression is connected to 14-bit port "ADDR_B2" of 
+  module "RS_TDP36K", instance "genblk1.bram_asymmetric".
+  Expression: WR_ADDR_15
+  Instantiated module defined at: 
+  "/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/brams_sim.v",
+  113
+  Use +lint=PCWM for more details.
+
+Starting vcs inline pass...
+
+46 modules and 0 UDP read.
+recompiling module dff
+recompiling module dffn
+recompiling module sdff
+recompiling module sdffn
+recompiling module dffr
+recompiling module dffnr
+recompiling module dffe
+recompiling module dffne
+recompiling module sdffre
+recompiling module sdffnre
+recompiling module dffre
+recompiling module dffnre
+recompiling module latch
+recompiling module latchn
+recompiling module latchr
+recompiling module latchnr
+recompiling module fa_1bit
+recompiling module TDP_BRAM18
+recompiling module RS_TDP36K
+recompiling module BRAM2x18_TDP
+recompiling module BRAM2x18_SDP
+recompiling module _$_mem_v2_asymmetric
+recompiling module TDP18K_FIFO
+recompiling module RS_DSP_MULT
+recompiling module RS_DSP_MULT_REGIN
+recompiling module RS_DSP_MULT_REGOUT
+recompiling module RS_DSP_MULT_REGIN_REGOUT
+recompiling module RS_DSP_MULTADD
+recompiling module RS_DSP_MULTADD_REGIN
+recompiling module RS_DSP_MULTADD_REGOUT
+recompiling module RS_DSP_MULTADD_REGIN_REGOUT
+recompiling module RS_DSP_MULTACC
+recompiling module RS_DSP_MULTACC_REGIN
+recompiling module RS_DSP_MULTACC_REGOUT
+recompiling module RS_DSP_MULTACC_REGIN_REGOUT
+recompiling module dsp_t1_20x18x64_cfg_ports
+recompiling module LUT_K
+recompiling module DFF
+recompiling module fpga_interconnect
+recompiling module mux
+recompiling module adder
+recompiling module multiply
+recompiling module single_port_ram
+recompiling module dual_port_ram
+recompiling module ram_simple_dp_async_read_512x32
+recompiling module ram_simple_dp_async_read_512x32_post_route
+All of 46 modules done
+INFO: SCL_RECONNECT_ATTEMPTS value set to 3
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv ]; then chmod a-x ../simv; fi
+g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir -Wl,-rpath=/nfs_cadtools/synopsys/vcs_all/S-2021.09-SP2/linux64/lib -L/nfs_cadtools/synopsys/vcs_all/S-2021.09-SP2/linux64/lib  -Wl,-rpath-link=./  /usr/lib64/libnuma.so.1   objs/amcQw_d.o   _17275_archive_1.so  SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o           -lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -luclinative /nfs_cadtools/synopsys/vcs_all/S-2021.09-SP2/linux64/lib/vcs_tls.o   -Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive          /nfs_cadtools/synopsys/vcs_all/S-2021.09-SP2/linux64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+CPU time: 26.855 seconds to compile + 6.158 seconds to elab + .573 seconds to link
+Verdi KDB elaboration done and the database successfully generated: 0 error(s), 0 warning(s)
+Chronologic VCS simulator copyright 1991-2021
+Contains Synopsys proprietary information.
+Compiler version S-2021.09-SP2_Full64; Runtime version S-2021.09-SP2_Full64;  May  3 13:06 2023
+INFO: SCL_RECONNECT_ATTEMPTS value set to 3
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1000 ps
+CPU Time:      0.530 seconds;       Data structure size:  10.2Mb
+Wed May  3 13:06:04 2023
+
+Total RunTime: 37 sec
