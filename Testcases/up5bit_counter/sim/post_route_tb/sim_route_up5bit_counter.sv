@@ -19,13 +19,13 @@ always #1 clk = ~clk;
 
 initial begin
     clk = 1'b0;
-	reset=0;
+	reset=1;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
 	compare();
 
-	reset=1;
+	reset=0;
 	repeat(50)@(posedge clk) begin
 		@(negedge clk);
 		display_stimulus();
@@ -33,10 +33,10 @@ initial begin
 		compare();
 	end
 
-	reset=0;
+	reset=1;
 	repeat(5)@(posedge clk);
 
-	reset=1;
+	reset=0;
 	repeat(50)@(posedge clk) begin
 		@(negedge clk);
 		display_stimulus();
