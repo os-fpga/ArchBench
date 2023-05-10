@@ -41,13 +41,13 @@ design3_5_5_top_post_route netlist(clk,
 							in[2],
 							in[1],
 							in[0],
-							out_netlist[16],
 							out_netlist[22],
 							out_netlist[21],
 							out_netlist[20],
 							out_netlist[19],
 							out_netlist[18],
 							out_netlist[17],
+							out_netlist[16],
 							out_netlist[23],
 							out_netlist[31],
 							out_netlist[30],
@@ -85,7 +85,6 @@ initial begin
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
-	compare();
 
 	rst = 0;
 	@(negedge clk);

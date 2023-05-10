@@ -10,8 +10,8 @@ module full_adder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     
         
     always @ (posedge clk) begin
-        if (!rst)
-            cin <= 1;
+        if (rst)
+            cin <= 0;
         else
             cin <= 1;
     end
@@ -29,27 +29,29 @@ module full_adder #(parameter WIDTH=32)(
     input rst,
     input cin,
     input [WIDTH-1:0] data_in,
-    output reg [WIDTH-1:0] data_out,
-    output reg cout
+    output [WIDTH-1:0] data_out,
+    output cout
     );
     
     reg [15:0] a,b;
     reg c;
+
+    // assign cout = 0;
+    // assign data_out = 0;
     
     always @(posedge clk) begin
         if (rst) begin
             a<=0;
             b<=0;
             c<=0;
-            cout <= 0;
-            data_out <= 0;
         end else begin
             a <= data_in[15:0];
             b <= data_in[31:16];
             c <= cin;
-            data_out <= a^b^c;
-            cout <= (a & b)|(c & b)|(a & c);
-        end
-            
+        end  
     end
+
+        assign data_out = a^b^c;
+        assign cout = (a & b)|(c & b)|(a & c);
+          
 endmodule
