@@ -8,59 +8,58 @@ module sim_route_dffre_inst;
 	integer mismatch=0;
 
 dffre_inst golden(.*);
-dffre_inst_post_route netlist(clk,i_Reset,i_Enable,i_D,o_Q);
+dffre_inst_post_route netlist(clk,i_Reset,i_Enable,i_D,o_Q_netlist);
 
-//clock initialization
 initial begin
     clk = 1'b0;
     forever #1 clk = ~clk;
 end
 initial begin
-	i_Reset=1;
     i_D=1;
-	// b=0;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
 	compare();
 
-	i_Reset=0;
-	// b=0;
+	i_Reset=1;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
 	compare();
 
 	i_Enable=0;
-	// b=1;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
 	compare();
 
 	i_Enable=1;
-	// b=1;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
 	compare();
 
 	i_D=0;
-	// b=1;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
 	compare();
 
 	i_D=1;
-	// b=1;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
 	compare();
 
-    repeat(10)@(negedge clk);
+    repeat(100)@(negedge clk) begin
+		i_D=$random;
+		@(negedge clk);
+		display_stimulus();
+		@(negedge clk);
+		compare();
+	end
 
+	repeat(5)@(negedge clk);
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
@@ -85,6 +84,6 @@ endtask
 
 initial begin
     $dumpfile("tb.vcd");
-    $dumpvars;
+    $dumpvars(0,sim_route_dffre_inst);
 end
 endmodule
