@@ -53,7 +53,8 @@ tool_name="vcs"
 
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
-library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
+library=${raptor_path/$lib_fix_path//share/yosys/rapidsilicon}
+primitive_library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 
@@ -131,7 +132,7 @@ lut_map=`find $library -wholename "*/common/simlib.v"`
 TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
-primitive=`find $library -wholename "*/genesis3/primitives.v"`
+primitive=`find $primitive_library -wholename "*/genesis3/primitives.v"`
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
