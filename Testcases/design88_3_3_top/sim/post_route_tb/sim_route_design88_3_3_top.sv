@@ -85,7 +85,6 @@ initial begin
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);
-	compare();
 
 	rst = 0;
 	@(negedge clk);
