@@ -48,7 +48,16 @@ initial begin
 	@(negedge clk);
 	compare();
 
-    mux_sel=0;
+	repeat(100)@(negedge clk) begin
+		mux_sel=$random;
+		in=$random;
+		@(negedge clk);
+		display_stimulus();
+		@(negedge clk);
+		compare();
+	end
+
+	repeat(5)@(negedge clk);
 
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
