@@ -51,9 +51,12 @@ cd $main_path
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
 
+sed -i -e "s|MEM_FILE_PATH|$PWD/rtl|g" rtl/rom.v
+
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
-library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
+library=${raptor_path/$lib_fix_path//share/yosys/rapidsilicon}
+primitive_library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 
@@ -71,7 +74,7 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
-echo "set_limits bram 0">>raptor.tcl
+# echo "set_limits bram 0">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
@@ -132,7 +135,7 @@ lut_map=`find $library -wholename "*/common/simlib.v"`
 TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
-primitive=`find $library -wholename "*/genesis3/primitives.v"`
+primitive=`find $primitive_library -wholename "*/genesis3/primitives.v"`
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
