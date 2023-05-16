@@ -1,6 +1,6 @@
 module rom_post_route_tb;
   bit clk;
-  bit [7:0] address;
+  bit [9:0] address;
   wire [7:0] data,data_netlist;
 
   integer mismatch=0;
@@ -8,6 +8,8 @@ module rom_post_route_tb;
   
   rom golden (.clk(clk),.address(address),.data(data));
   rom_post_route netlist (clk,
+                          address[9],
+                          address[8],
                           address[7],
                           address[6],
                           address[5],

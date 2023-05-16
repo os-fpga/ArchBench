@@ -1,6 +1,6 @@
 module rom (
 input clk, 
-input [7:0] address,
+input [9:0] address,
 output reg [7:0] data
 );
 
