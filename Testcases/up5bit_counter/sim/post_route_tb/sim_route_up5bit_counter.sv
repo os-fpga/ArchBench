@@ -26,7 +26,7 @@ initial begin
 	compare();
 
 	reset=0;
-	repeat(50)@(posedge clk) begin
+	repeat(50)@(negedge clk) begin
 		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
@@ -34,17 +34,17 @@ initial begin
 	end
 
 	reset=1;
-	repeat(5)@(posedge clk);
+	repeat(5)@(negedge clk);
 
 	reset=0;
-	repeat(50)@(posedge clk) begin
+	repeat(50)@(negedge clk) begin
 		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
 	end
 
-	repeat(10)@(posedge clk);
+	repeat(10)@(negedge clk);
 
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
@@ -72,4 +72,13 @@ initial begin
     $dumpfile("tb.vcd");
     $dumpvars(0,sim_route_up5bit_counter);
 end
+
+initial begin
+    $fsdbDumpfile("waves.fsdb");
+    $fsdbDumpvars(0,"+struct","+mda","+all");
+
+    // $vcdplusfile("I_BUF_tb.vpd");
+    // $vcdpluson(0,I_BUF_tb);
+  end
+
 endmodule
