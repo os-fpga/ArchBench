@@ -151,7 +151,7 @@ while read line; do
         then
             rm -fr tb.vcd
         fi
-        if [[ $line == *"ERROR: SIM: Simulation Failed"* ]]
+        if [[ $line == *"Error: Simulation Failed"* ]]
         then
             vcd2fst tb.vcd tb.fst --compress
             rm -fr tb.vcd
