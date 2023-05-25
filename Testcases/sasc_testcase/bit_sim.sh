@@ -51,6 +51,8 @@ cd $main_path
 design_path=`find . -type f -iname "$design_name.v"`
 tool_name="vcs"
 
+sed -i -e "s|MEM_FILE_PATH|$PWD/rtl|g" rtl/rom.v
+
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/yosys/rapidsilicon}
@@ -66,12 +68,12 @@ echo "target_device GEMINI_COMPACT_10x8">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
-echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
-echo "set_top_module $design_name">>raptor.tcl
+echo "add_design_file ../rtl/sasc.v">>raptor.tcl
+echo "set_top_module sasc">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
-echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
+echo "add_constraint_file ../constraints.sdc">>raptor.tcl
 echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
