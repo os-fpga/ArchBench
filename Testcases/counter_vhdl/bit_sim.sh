@@ -77,11 +77,11 @@ echo "set_top_testbench tb_counters">>raptor.tcl
 echo "analyze">>raptor.tcl
 echo "# RTL Simulation">>raptor.tcl
 echo "simulation_options "ghdl" "simulation" "--stop-time=1000ns"">>raptor.tcl
-# echo "simulate "rtl" "ghdl" syn_tb_rtl.fst">>raptor.tcl
+echo "simulate "rtl" "ghdl" syn_tb_rtl.fst">>raptor.tcl
 echo "# Synthesis">>raptor.tcl
 echo "pnr_netlist_lang vhdl">>raptor.tcl
 echo "synthesize $strategy">>raptor.tcl
-# echo "simulate "gate" "ghdl" syn_tb_gate.fst">>raptor.tcl
+echo "simulate "gate" "ghdl" syn_tb_gate.fst">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
