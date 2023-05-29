@@ -5,6 +5,8 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 
+tool_name="vcs" #vcs,iverilog
+
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
@@ -49,7 +51,6 @@ cd $main_path
 # python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
 design_path=`find . -type f -iname "$design_name.v"`
-tool_name="vcs"
 
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
@@ -132,12 +133,20 @@ TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
+# primitive="/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/ArchBench/Testcases/and2/post_route/primitives.v"
 
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
 start_post_route=`date +%s`
-timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
-./simv | tee -a post_route_sim.log
+if [[ $tool_name == "vcs" ]]
+    then
+    timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+    ./simv | tee -a post_route_sim.log
+fi
+if [[ $tool_name == "iverilog" ]]
+    then
+    iverilog -g2012 -o $design_name $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path -y $main_path/rtl && vvp ./$design_name && mv $design tb.vcd | tee post_route_sim.log
+fi
 end_post_route=`date +%s`
 runtime_post_route=$((end_post_route-start_post_route))
 echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
