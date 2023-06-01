@@ -46,7 +46,6 @@ initial begin
 		a=$random;
 		b=$random;
 		display_stimulus();
-		@(negedge clk);
 		compare();
 	end
 
