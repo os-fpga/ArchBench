@@ -16,14 +16,13 @@ MultiplierLUT_post_route netlist(b[1],b[0],a[1],a[0],z[3],z[2],z[1],z[0]);
 //clock initialization
 initial begin
     clk = 1'b0;
-    forever #5 clk = ~clk;
+    forever #1 clk = ~clk;
 end
 initial begin
 	a=2'b0;
 	b=2'b0;
 	display_stimulus();
 	@(negedge clk);
-	compare();
 	a=2'b00;
 	b=2'b10;
 	display_stimulus();
@@ -49,6 +48,12 @@ initial begin
 	display_stimulus();
 	@(negedge clk);
 	compare();
+	repeat(1000)@(negedge clk) begin
+		a=$random;
+		b=$random;
+		display_stimulus();
+		compare();
+	end
 
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
