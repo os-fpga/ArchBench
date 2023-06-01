@@ -71,8 +71,7 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
-echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
-echo "pnr_options --post_synth_netlist_unconn_inputs gnd">>raptor.tcl 
+echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl  
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
@@ -137,7 +136,7 @@ primitive=`find $library -wholename "*/genesis3/primitives.v"`
 [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
 [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
 start_post_route=`date +%s`
-timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64  -debug_all +define+fsdb -debug_acc+all -kdb -lca +define+A | tee post_route_sim.log
+timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v -full64  -debug_all +define+fsdb -debug_acc+all -kdb -lca +define+A | tee post_route_sim.log
 ./simv | tee -a post_route_sim.log
 end_post_route=`date +%s`
 runtime_post_route=$((end_post_route-start_post_route))
