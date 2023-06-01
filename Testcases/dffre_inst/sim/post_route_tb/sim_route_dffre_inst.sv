@@ -51,7 +51,7 @@ initial begin
 	@(negedge clk);
 	compare();
 
-    repeat(100)@(negedge clk) begin
+    repeat(1000)@(negedge clk) begin
 		i_D=$random;
 		@(negedge clk);
 		display_stimulus();

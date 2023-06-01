@@ -5,7 +5,7 @@ module sim_route_up5bit_counter;
     reg clk;
 	integer mismatch=0;
 
-up5bit_counter golden(.*);
+up5bit_counter golden(out,clk,reset);
 up5bit_counter_post_route netlist(clk,
 								reset,
 								out_netlist[4],
@@ -73,12 +73,12 @@ initial begin
     $dumpvars(0,sim_route_up5bit_counter);
 end
 
-initial begin
-    $fsdbDumpfile("waves.fsdb");
-    $fsdbDumpvars(0,"+struct","+mda","+all");
+// initial begin
+//     $fsdbDumpfile("waves.fsdb");
+//     $fsdbDumpvars(0,"+struct","+mda","+all");
 
-    // $vcdplusfile("I_BUF_tb.vpd");
-    // $vcdpluson(0,I_BUF_tb);
-  end
+//     // $vcdplusfile("I_BUF_tb.vpd");
+//     // $vcdpluson(0,I_BUF_tb);
+//   end
 
 endmodule

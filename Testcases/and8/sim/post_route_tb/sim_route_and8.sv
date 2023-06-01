@@ -1,12 +1,5 @@
 module sim_route_and8;
     bit [7:0] a;
-	// bit [1] a;
-	// bit [2] a;
-	// bit [3] a;
-	// bit [4] a;
-	// bit [5] a;
-	// bit [6] a;
-	// bit [7] a;
     wire b,b_netlist;
 
     reg clk;
@@ -15,11 +8,11 @@ module sim_route_and8;
 and8 golden(.*);
 and8_post_route netlist(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],b_netlist);
 
-//clock initialization
 initial begin
     clk = 1'b0;
-    forever #5 clk = ~clk;
+    forever #1 clk = ~clk;
 end
+
 initial begin
 	a[7:0]=0;
 	@(negedge clk);
@@ -74,6 +67,12 @@ initial begin
 	display_stimulus();
 	@(negedge clk);
 	compare();
+
+	repeat(3000)@(negedge clk) begin
+		a=$random;
+		display_stimulus();
+		compare();
+	end
 
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
