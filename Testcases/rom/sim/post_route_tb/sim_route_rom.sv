@@ -55,7 +55,7 @@ module rom_post_route_tb;
   endtask
   
   initial begin
-    $dumpfile("rom_formal.vcd");
+    $dumpfile("tb.vcd");
     $dumpvars(0, rom_post_route_tb);
 end
 
