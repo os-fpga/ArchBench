@@ -8,7 +8,7 @@ module sim_route_lut_ff_mux;
     // reg clk;
 	integer mismatch=0;
 
-lut_ff_mux golden(.*);
+lut_ff_mux golden(in,clk,rst,mux_sel,Q);
 lut_ff_mux_post_route netlist(clk,rst,mux_sel,in[3],in[2],in[1],in[0],q_netlist);
 
 always #1 clk = ~clk;

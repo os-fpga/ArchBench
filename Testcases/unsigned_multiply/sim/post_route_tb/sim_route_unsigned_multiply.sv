@@ -7,7 +7,7 @@ module sim_route_unsigned_multiply;
     reg clk;
 	integer mismatch=0;
 
-unsigned_multiply golden(.*);
+unsigned_multiply golden(dataa,datab,dataout);
 unsigned_multiply_post_route netlist(datab[4],
 							datab[3],
 							datab[2],
