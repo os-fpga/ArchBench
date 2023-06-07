@@ -5,6 +5,8 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 
+device=GEMINI_COMPACT_82x68
+
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
@@ -16,8 +18,22 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_82x68.conf ]; then # tool.conf
-    source $main_path/../tool_82x68.conf
+if [[ $# -eq 1 ]]; then
+    device=$1
+    if [ "$device" == "GEMINI_COMPACT_10x8" ]; then
+        source $main_path/../tool_10x8.conf
+    elif [ "$device" == "GEMINI_COMPACT_62x44" ]; then
+        source $main_path/../tool_62x44.conf
+    elif [ "$device" == "GEMINI_COMPACT_82x68" ]; then
+        source $main_path/../tool_82x68.conf
+    else
+        source $main_path/../../scripts/empty.conf
+    fi
+else
+    if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
+        source $main_path/../tool_10x8.conf
+        echo "Running with bit_sim.sh variables"
+    fi
 fi
 
 cd $xml_root/openfpga-pd-castor-rs 
@@ -60,8 +76,8 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 cd $design_name\_golden
 
 echo "create_design ucsb_152_tap_fir02_24">raptor.tcl
-echo "target_device GEMINI_COMPACT_82x68">>raptor.tcl
-[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
+echo "target_device $device">>raptor.tcl
+[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_design_file ../rtl/ucsb_152_tap_fir.v">>raptor.tcl
