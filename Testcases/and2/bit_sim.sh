@@ -6,6 +6,8 @@ main_path=$PWD
 design_name=${PWD##*/}
 simulator_name="iverilog" #vcs,iverilog
 
+device=GEMINI_COMPACT_10x8
+
 tool_name="vcs" #vcs,iverilog
 
 xml_root=`git rev-parse --show-toplevel`
@@ -19,8 +21,22 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
-    source $main_path/../tool_10x8.conf
+if [[ $# -eq 1 ]]; then
+    device=$1
+    if [ "$device" == "GEMINI_COMPACT_10x8" ]; then
+        source $main_path/../tool_10x8.conf
+    elif [ "$device" == "GEMINI_COMPACT_62x44" ]; then
+        source $main_path/../tool_62x44.conf
+    elif [ "$device" == "GEMINI_COMPACT_82x68" ]; then
+        source $main_path/../tool_82x68.conf
+    else
+        source $main_path/../../scripts/empty.conf
+    fi
+else
+    if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
+        source $main_path/../tool_10x8.conf
+        echo "Running with bit_sim.sh variables"
+    fi
 fi
 
 cd $xml_root/openfpga-pd-castor-rs 
@@ -65,8 +81,8 @@ iverilog_path="${raptor_path:0:49}"
 cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
-echo "target_device GEMINI_COMPACT_10x8">>raptor.tcl
-[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
+echo "target_device $device">>raptor.tcl
+[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
