@@ -63,7 +63,7 @@ python3 ../../scripts/init_path_update.py $design_name
 cd $design_name\_golden
 
 echo "create_design murax_symbiflow_02_24">raptor.tcl
-echo "target_device GEMINI_COMPACT_82x68">>raptor.tcl
+echo "target_device GEMINI_COMPACT_104x68">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
