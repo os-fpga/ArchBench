@@ -16,8 +16,8 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_82x68.conf ]; then # tool.conf
-    source $main_path/../tool_82x68.conf
+if [ -f $main_path/../tool_62x44.conf ]; then # tool.conf
+    source $main_path/../tool_62x44.conf
 fi
 
 cd $xml_root/openfpga-pd-castor-rs 
@@ -59,17 +59,19 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 
 cd $design_name\_golden
 
-echo "create_design smithwaterman_02_24">raptor.tcl
-echo "target_device GEMINI_COMPACT_104x68">>raptor.tcl
+echo "create_design $design_name">raptor.tcl
+echo "target_device GEMINI_COMPACT_62x44">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
-echo "add_design_file ../rtl/smithwaterman.v">>raptor.tcl
-echo "set_top_module smithwaterman">>raptor.tcl
+echo "add_library_ext .v .sv">>raptor.tcl 
+echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
+echo "set_top_module $design_name">>raptor.tcl
+# echo "set_device_size castor62x44_heterogeneous">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
-echo "analyze">>raptor.tcl
+echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
@@ -182,4 +184,6 @@ mv ./$design_name\_golden/raptor_perf.log .
 tail -n100 raptor.log > raptor_tail.log
 
 python3 ../../scripts/parser.py 
+
+sed -i 's/GEMINI_COMPACT_82x68/castor62x44_heterogeneous/' parsed_data.json
 
