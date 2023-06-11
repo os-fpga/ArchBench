@@ -8,7 +8,7 @@ design_name=${PWD##*/}
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
-if [ -f $xml_root/openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/FPGA62x44_gemini_compact_pnr/fabric_task/flow_inputs/k6n8_vpr_annotated.xml ]; then
+if [ -f $xml_root/openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/FPGA104x68_gemini_compact_pnr/fabric_task/flow_inputs/k6n8_vpr_annotated.xml ]; then
     echo "No need to update submodule"
 else
     echo -e "openfpga-pd-castor-rs is not initialized. Please inilialize it using below command:\ncd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags"
@@ -16,8 +16,8 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_62x44.conf ]; then # tool.conf
-    source $main_path/../tool_62x44.conf
+if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
+    source $main_path/../tool_104x68.conf
 fi
 
 cd $xml_root/openfpga-pd-castor-rs 
@@ -60,14 +60,13 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
-echo "target_device GEMINI_COMPACT_62x44">>raptor.tcl
+echo "target_device GEMINI_COMPACT_104x68">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
-# echo "set_device_size castor62x44_heterogeneous">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
