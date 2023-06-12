@@ -15,7 +15,7 @@ module sim_route_mux_8_1;
     reg clk;
 	integer mismatch=0;
 
-mux_8_1 golden(D0, D1, D2, D3, D4, D5, D6, D7, S0, S1, S2, out);
+mux_8_1 golden(.D0(D0),.D1(D1),.D2(D2),.D3(D3),.D4(D4),.D5(D5),.D6(D6),.D7(D7),.S0(S0),.S1(S1),.S2(S2),.out(out));
 mux_8_1_post_route netlist(D0,D1,D2,D3,D4,D5,D6,D7,S0,S1,S2,out_netlist);
 
 //clock initialization
