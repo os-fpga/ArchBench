@@ -370,8 +370,11 @@ def parse_log_files(files, log_line_keys_map):
                             dsp_keywords = log_line_keyword.split(',')
                             for dsp_keyword in dsp_keywords:
                                 if dsp_keyword in line:
-                                    for var in line.split(dsp_keyword)[1].strip().split():
-                                    # Applying error - handling method
+                                    if ":" in line:
+                                        pass
+                                    else:
+                                        for var in line.split(dsp_keyword)[1].strip().split():
+                                        # Applying error - handling method
                                             try:
                                                 # DSPs_margin=read_config_test_margins("DSPs_margin")           #to dump margin in parsed_data.json
                                                 sum_dsps = sum_dsps + int(var)
@@ -388,8 +391,11 @@ def parse_log_files(files, log_line_keys_map):
                             dffs_keywords = log_line_keyword.split(',')
                             for dffs_keyword in dffs_keywords:
                                 if dffs_keyword in line:
-                                    for var in line.split(dffs_keyword)[1].strip().split():
-                                    # Applying error - handling method
+                                    if ":" in line:
+                                        pass
+                                    else:
+                                        for var in line.split(dffs_keyword)[1].strip().split():
+                                        # Applying error - handling method
                                             try:
                                                 # try converting to integer
                                                 # DFFs_margin=read_config_test_margins("DFFs_margin")           #to dump margin in parsed_data.json
@@ -407,8 +413,11 @@ def parse_log_files(files, log_line_keys_map):
                             brams_keywords = log_line_keyword.split(',')
                             for brams_keyword in brams_keywords:
                                 if brams_keyword in line:
-                                    for var in line.split(brams_keyword)[1].strip().split():
-                                    # Applying error - handling method
+                                    if ":" in line:
+                                        pass
+                                    else:
+                                        for var in line.split(brams_keyword)[1].strip().split():
+                                        # Applying error - handling method
                                             try:
                                                 # try converting to integer
                                                 # BRAMs_margin=read_config_test_margins("BRAMs_margin")           #to dump margin in parsed_data.json
@@ -472,7 +481,7 @@ def parse_log_files(files, log_line_keys_map):
                         start_print_stats = i
                         packer_time_with_dot=lines[start_print_stats+1].strip().split()[4]+" "+lines[start_print_stats+1].strip().split()[5]
                         packer_time=packer_time_with_dot[0:-1]
-                    if "--place\n" in lines[i]:
+                    if "--place " in lines[i] or "--place\n" in lines[i]:
                         placement_start_line = i
                         placer_time_with_dor=lines[placement_start_line+1].strip().split()[4]+" "+lines[placement_start_line+1].strip().split()[5]
                         placer_time=placer_time_with_dor[0:-1]
