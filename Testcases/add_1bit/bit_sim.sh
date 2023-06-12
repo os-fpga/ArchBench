@@ -6,7 +6,7 @@ main_path=$PWD
 design_name=${PWD##*/}
 simulator_name="iverilog" #vcs,iverilog
 
-device="GEMINI_COMPACT_10x8"
+device=GEMINI_COMPACT_10x8
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
