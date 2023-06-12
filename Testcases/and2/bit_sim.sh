@@ -6,6 +6,8 @@ main_path=$PWD
 design_name=${PWD##*/}
 simulator_name="iverilog" #vcs,iverilog
 
+device=GEMINI_COMPACT_10x8
+
 tool_name="vcs" #vcs,iverilog
 
 xml_root=`git rev-parse --show-toplevel`
