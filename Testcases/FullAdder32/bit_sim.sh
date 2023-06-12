@@ -5,6 +5,8 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 
+device=GEMINI_COMPACT_10x8
+
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
