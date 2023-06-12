@@ -29,6 +29,8 @@ if [[ $# -eq 1 ]]; then
         source $main_path/../tool_62x44.conf
     elif [ "$device" == "GEMINI_COMPACT_82x68" ]; then
         source $main_path/../tool_82x68.conf
+    elif [ "$device" == "GEMINI_COMPACT_104x68" ]; then
+        source $main_path/../tool_104x68.conf
     else
         source $main_path/../../scripts/empty.conf
     fi
