@@ -18,8 +18,30 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
-    source $main_path/../tool_104x68.conf
+given_device=$1
+if [ $# -eq 1 ] && [ "$given_device" == "Multiple_Devices" ]; then     #These changes are made to get device_name from CGA. In case of golden regression device_name is Multiple. If device name is multiple then it means it is golden regression and regression will use device_name mentioned in the script. 
+    if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
+        source $main_path/../tool_104x68.conf
+        echo "Running with device_name from CGA"
+    fi
+elif [ $# -eq 1 ] && [ $given_device != "Multiple_Devices" ]; then
+    if [ "$given_device" == "GEMINI_COMPACT_10x8" ]; then
+        source $main_path/../tool_10x8.conf
+    elif [ "$given_device" == "GEMINI_COMPACT_62x44" ]; then
+        source $main_path/../tool_62x44.conf
+    elif [ "$given_device" == "GEMINI_COMPACT_82x68" ]; then
+        source $main_path/../tool_82x68.conf
+    elif [ "$given_device" == "GEMINI_COMPACT_104x68" ]; then
+        source $main_path/../tool_104x68.conf
+    else
+        source $main_path/../../scripts/empty.conf
+        device=$given_device
+    fi
+else
+    if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
+        source $main_path/../tool_104x68.conf
+        echo "Running with bit_sim.sh variables"
+    fi
 fi
 
 cd $xml_root/openfpga-pd-castor-rs 
