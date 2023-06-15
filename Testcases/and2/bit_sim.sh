@@ -8,7 +8,8 @@ simulator_name="iverilog" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
-tool_name="vcs" #vcs,iverilog
+given_device=$1
+echo "Passed device is $given_device">device.txt
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
@@ -21,7 +22,6 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-given_device=$1
 if [ $# -eq 1 ] && [ "$given_device" == "Multiple_Devices" ]; then     #These changes are made to get device_name from CGA. In case of golden regression device_name is Multiple. If device name is multiple then it means it is golden regression and regression will use device_name mentioned in the script. 
     if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
         source $main_path/../tool_10x8.conf
@@ -78,6 +78,7 @@ cd $main_path
 # python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
 design_path=`find . -type f -iname "$design_name.v"`
+tool_name="vcs" #vcs,iverilog
 
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
