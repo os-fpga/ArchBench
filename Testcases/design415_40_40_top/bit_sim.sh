@@ -188,3 +188,5 @@ tail -n100 raptor.log > raptor_tail.log
 
 python3 ../../scripts/parser.py 
 
+sed -i 's/GEMINI_COMPACT_82x68/castor62x44_heterogeneous/' parsed_data.json
+
