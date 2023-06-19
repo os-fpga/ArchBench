@@ -65,9 +65,11 @@ fi
 cd $main_path
 
 [ -d $design_name\_golden ] && rm -fr $design_name\_golden
-# [ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
-# [ -f post_route_sim.log ] && rm -fr post_route_sim.log
+[ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
+[ -f post_route_sim.log ] && rm -fr post_route_sim.log
 [ -f raptor.log ] && rm -fr raptor.log
+[ -f raptor_tail.log ] && rm -fr raptor_tail.log
+[ -f parsed_data.json ] && rm -fr parsed_data.json
 [ -f raptor_perf.log ] && rm -fr raptor_perf.log
 [ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
 
@@ -224,8 +226,8 @@ echo -e "Device: $device">>raptor.log
 # echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
 
 cd $main_path
-# mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log .
-# mv ./$design_name\_golden/$design_name\_vcs_post_route_files/post_route_sim.log .
+[ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
+[ -f $design_name\_golden/$design_name\_vcs_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 
