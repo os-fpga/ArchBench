@@ -42,9 +42,10 @@ initial begin
 	@(negedge clk);
 	compare();
 
-	repeat(500)@(posedge clk) begin
+	repeat(500)@(negedge clk) begin
 		a=$random;
 		b=$random;
+		@(negedge clk);
 		display_stimulus();
 		compare();
 	end
