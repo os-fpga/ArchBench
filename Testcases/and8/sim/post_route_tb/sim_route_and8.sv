@@ -70,6 +70,7 @@ initial begin
 
 	repeat(3000)@(negedge clk) begin
 		a=$random;
+		@(negedge clk)
 		display_stimulus();
 		compare();
 	end

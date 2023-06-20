@@ -83,7 +83,7 @@ tool_name="vcs"
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
-iverilog_path="${raptor_path:0:49}"
+[[ "$raptor_path" == *"latest"* ]] && iverilog_path="${raptor_path:0:49}" || iverilog_path="${raptor_path:0:62}"
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 
