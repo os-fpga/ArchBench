@@ -5,7 +5,7 @@ module FullAdder32 #(parameter WIDTH=32) (
     output [WIDTH-1:0] sum,
     output cout
 );
-    wire [WIDTH-1:0] carry;
+    wire [WIDTH:0] carry;
 
     assign carry[0] = cin;
   
