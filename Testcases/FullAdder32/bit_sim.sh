@@ -4,6 +4,7 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
+simulator_name="iverilog" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
@@ -58,6 +59,7 @@ tool_name="vcs"
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
+[[ "$raptor_path" == *"latest"* ]] && iverilog_path="${raptor_path:0:49}" || iverilog_path="${raptor_path:0:62}"
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 
@@ -82,7 +84,7 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
-[ -z "$vpr_file_path" ] && echo "bitstream enable_simulation">>raptor.tcl || echo "bitstream">>raptor.tcl 
+[ -z "$vpr_file_path" ] && echo "bitstream enable_simulation">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl 
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
@@ -136,14 +138,28 @@ ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
 
-[ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
-[ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
-start_post_route=`date +%s`
-timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
-./simv | tee -a post_route_sim.log
-end_post_route=`date +%s`
-runtime_post_route=$((end_post_route-start_post_route))
-echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+if [[ $simulator_name == "vcs" ]]
+then
+    [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
+    [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
+    start_post_route=`date +%s`
+    timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+    ./simv | tee -a post_route_sim.log
+    end_post_route=`date +%s`
+    runtime_post_route=$((end_post_route-start_post_route))
+    echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+fi
+
+if [[ $simulator_name == "iverilog" ]]
+then
+    [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
+    [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
+    start_post_route=`date +%s`
+    $iverilog_path/HDL_simulator/iverilog/bin/iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path -y $main_path/rtl && $iverilog_path/HDL_simulator/iverilog/bin/vvp ./$design_name | tee post_route_sim.log
+    end_post_route=`date +%s`
+    runtime_post_route=$((end_post_route-start_post_route))
+    echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+fi
 
 while read line; do
         if [[ $line == *"All Comparison Matched"* ]]
