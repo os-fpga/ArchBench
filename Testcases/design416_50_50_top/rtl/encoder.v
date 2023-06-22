@@ -8,7 +8,7 @@ output reg [WIDTH-1:0] data_out
 
 reg [WIDTH-1:0 ] data_out_wire;
 
-always@(posedge clk)
+always@(negedge clk)
 begin 
 if(rst)
 data_out<=0;
