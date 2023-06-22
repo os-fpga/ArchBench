@@ -11,7 +11,7 @@ wire [7:0] data_out_wire;
 
 assign data_out_wire[7:0] = ((~data_in[7:0]) | (~data_in[15:8]));
 
-always@(posedge clk)
+always@(negedge clk)
 begin
 if (rst)
 begin 
