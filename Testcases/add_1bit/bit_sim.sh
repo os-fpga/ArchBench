@@ -8,7 +8,7 @@ simulator_name="iverilog" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
-given_device=$1
+given_device=$2
 echo "Passed device is $given_device">device.txt
 
 xml_root=`git rev-parse --show-toplevel`
