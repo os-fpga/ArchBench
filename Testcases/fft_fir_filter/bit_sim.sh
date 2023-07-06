@@ -18,8 +18,30 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
-    source $main_path/../tool_104x68.conf
+given_device=$2
+if [ "$given_device" == "Multiple_Devices" ]; then     #These changes are made to get device_name from CGA. In case of golden regression device_name is Multiple. If device name is multiple then it means it is golden regression and regression will use device_name mentioned in the script. 
+    if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
+        source $main_path/../tool_104x68.conf
+        echo "Running with device_name from CGA"
+    fi
+elif [ $given_device != "Multiple_Devices" ]; then
+    if [ "$given_device" == "GEMINI_COMPACT_10x8" ]; then
+        source $main_path/../tool_10x8.conf
+    elif [ "$given_device" == "GEMINI_COMPACT_62x44" ]; then
+        source $main_path/../tool_62x44.conf
+    elif [ "$given_device" == "GEMINI_COMPACT_82x68" ]; then
+        source $main_path/../tool_82x68.conf
+    elif [ "$given_device" == "GEMINI_COMPACT_104x68" ]; then
+        source $main_path/../tool_104x68.conf
+    else
+        source $main_path/../../scripts/empty.conf
+        device=$given_device
+    fi
+else
+    if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
+        source $main_path/../tool_104x68.conf
+        echo "Running with bit_sim.sh variables"
+    fi
 fi
 
 cd $xml_root/openfpga-pd-castor-rs 
@@ -64,8 +86,8 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 cd $design_name\_golden
 
 echo "create_design fft_fir_filter_02_24">raptor.tcl
-echo "target_device GEMINI_COMPACT_104x68">>raptor.tcl
-[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
+echo "target_device $device">>raptor.tcl
+[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_design_file ../rtl/control_i.vhd">>raptor.tcl
