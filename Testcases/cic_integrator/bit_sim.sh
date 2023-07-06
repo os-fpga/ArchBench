@@ -8,7 +8,6 @@ design_name=${PWD##*/}
 device=GEMINI_COMPACT_104x68
 
 given_device=$2
-echo "Passed device is $given_device">device.txt
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
