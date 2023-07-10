@@ -5,7 +5,7 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 
-device="1GE124-L"
+device_name="1GE124-L"
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
@@ -87,7 +87,7 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
-echo "target_device 1GE124-L">>raptor.tcl
+echo "target_device $device_name">>raptor.tcl
 # [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
@@ -140,7 +140,7 @@ runtime_raptor=$((end_raptor-start_raptor))
 echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
 raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
-echo -e "Device: $device">>raptor.log
+echo -e "Device: $device_name">>raptor.log
 
 # string="_post_route"
 # while read line; do
