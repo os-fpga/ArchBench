@@ -113,6 +113,7 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "pnr_options --place_algorithm congestion_aware --congest_tradeoff 160">>raptor.tcl
+echo "pnr_options --alpha_clustering 0.01">>raptor.tcl
 echo "analyze">>raptor.tcl
 # echo "pin_loc_assign_method free">>raptor.tcl  
 echo "add_constraint_file ../constraint.sdc">>raptor.tcl  
