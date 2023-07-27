@@ -65,14 +65,14 @@ fi
 
 cd $main_path
 
-# [ -d $design_name\_golden ] && rm -fr $design_name\_golden
-# [ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
-# [ -f post_route_sim.log ] && rm -fr post_route_sim.log
-# [ -f raptor.log ] && rm -fr raptor.log
-# [ -f raptor_tail.log ] && rm -fr raptor_tail.log
-# [ -f parsed_data.json ] && rm -fr parsed_data.json
-# [ -f raptor_perf.log ] && rm -fr raptor_perf.log
-# [ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
+[ -d $design_name\_golden ] && rm -fr $design_name\_golden
+[ -f bitstream_sim.log ] && rm -fr bitstream_sim.log
+[ -f post_route_sim.log ] && rm -fr post_route_sim.log
+[ -f raptor.log ] && rm -fr raptor.log
+[ -f raptor_tail.log ] && rm -fr raptor_tail.log
+[ -f parsed_data.json ] && rm -fr parsed_data.json
+[ -f raptor_perf.log ] && rm -fr raptor_perf.log
+[ -f bitstream_text.txt ] && rm -fr bitstream_text.txt
 
 # python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
@@ -111,14 +111,14 @@ echo "power">>raptor.tcl
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
-# start_raptor=`date +%s`
-# raptor --batch --script raptor.tcl 
-# end_raptor=`date +%s`
-# runtime_raptor=$((end_raptor-start_raptor))
-# echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
-# raptor --version>>raptor.log
-# echo -e "Netlist Version: $xml_version">>raptor.log
-# echo -e "Device: $device">>raptor.log
+start_raptor=`date +%s`
+raptor --batch --script raptor.tcl 
+end_raptor=`date +%s`
+runtime_raptor=$((end_raptor-start_raptor))
+echo -e "\nTotal RunTime: $runtime_raptor sec">>raptor.log
+raptor --version>>raptor.log
+echo -e "Netlist Version: $xml_version">>raptor.log
+echo -e "Device: $device">>raptor.log
 
 string="_post_route"
 while read line; do
@@ -208,7 +208,7 @@ cd ..
 # fi
 # cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
 
-# python3 ../../../../scripts/force.py $design_name
+python3 ../../../../scripts/force.py $design_name
 
 start_bitstream=`date +%s`
 # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
@@ -220,13 +220,14 @@ echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
 cd $main_path
 bitstreams_folder_path=`find $main_path/../../Rigel/DV/subsystem_level -type d -name "tests" -exec realpath {} \;`
 testbench_folder_path=`find $main_path/../../Rigel/DV/subsystem_level -type d -name "directed" -exec realpath {} \;`
-# [ -d $bitstreams_folder_path/bitstreams ] && cp -R $design_name\_golden/$design_name $bitstreams_folder_path/bitstreams || (mkdir -p $bitstreams_folder_path/bitstreams && cp -R $design_name\_golden/$design_name $bitstreams_folder_path/bitstreams)
-# cp -R $main_path/sim/bitstream_tb/add_1bit_1GE100_ES1.sv $testbench_folder_path/unit
+[ -d $bitstreams_folder_path/bitstreams ] && cp -R $design_name\_golden/$design_name $bitstreams_folder_path/bitstreams || (mkdir -p $bitstreams_folder_path/bitstreams && cp -R $design_name\_golden/$design_name $bitstreams_folder_path/bitstreams)
+cp -R $main_path/sim/bitstream_tb/add_1bit_1GE100_ES1.sv $testbench_folder_path/unit
 cd $bitstreams_folder_path/../..
 fabric_verif_env_path=$PWD
-make run TEST=and2 SIZE=104x68 NETLIST=SRCphys
-echo $fabric_verif_env_path
-exit
+make run TEST=$design_name SIZE=104x68 NETLIST=SRCphys
+# echo $fabric_verif_env_path
+# exit
+cd $main_path
 [ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
 [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 mv ./$design_name\_golden/raptor.log .
