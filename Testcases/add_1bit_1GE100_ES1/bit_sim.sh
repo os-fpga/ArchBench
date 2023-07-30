@@ -239,6 +239,8 @@ mv ./$design_name\_golden/raptor_perf.log .
 
 tail -n100 raptor.log > raptor_tail.log
 
+sed -i "s/TEST_PASSED/Status: Test Passed/" bitstream_sim.log
+
 python3 ../../scripts/parser.py 
 
 end_grand_runtime=`date +%s`
