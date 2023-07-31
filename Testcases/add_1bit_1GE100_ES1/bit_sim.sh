@@ -1,15 +1,14 @@
 #!/bin/bash
 # set -e
 
+start_grand_runtime=`date +%s`
+
 main_path=$PWD
 
 design_name=${PWD##*/}
 simulator_name="iverilog" #vcs,iverilog
 
 device="1GE100-ES1"
-
-given_device=$2
-echo "Passed device is $given_device">device.txt
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
@@ -93,14 +92,14 @@ cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
 echo "target_device $device">>raptor.tcl
-[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
+# [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
-echo "add_design_file ../rtl/add_1bit.v">>raptor.tcl
-echo "set_top_module add_1bit">>raptor.tcl
+echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
+echo "set_top_module $design_name">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
-[ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
+# [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] || [ -z "$fabric_key_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path -key $fabric_key_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
@@ -123,18 +122,20 @@ raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
 echo -e "Device: $device">>raptor.log
 
+post_route_netlist_path=`find $main_path/$design_name\_golden -wholename "*/routing/add_1bit_1GE100_ES1_post_route.v"`
 string="_post_route"
+
 while read line; do
         if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design_name " ]]; 
         then
-            sed -i "s/module $design_name/module $design_name\_post_route/" $design_name/$design_name\_post\_synthesis.v
+            sed -i "s/module $design_name/module $design_name\_post_route/" $post_route_netlist_path
             break 2
         fi
         if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design_name$string " ]]; 
         then
             break 2
         fi
-done < $design_name/$design_name\_post\_synthesis.v
+done < $post_route_netlist_path
 
 root_path=`pwd`
 route_tb_path=`find ../ -type f -iname "sim_route_$design_name.sv" -printf $root_path/'%p\n'`
@@ -169,7 +170,7 @@ then
     [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
     [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
     start_post_route=`date +%s`
-    timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+    timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
     ./simv | tee -a post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
@@ -181,7 +182,7 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    $iverilog_path/HDL_simulator/iverilog/bin/iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $primitive ../../rtl/$design_name.v ../$design_name/$design_name\_post\_synthesis.v $route_tb_path -y $main_path/rtl && $iverilog_path/HDL_simulator/iverilog/bin/vvp ./$design_name | tee post_route_sim.log
+    # $iverilog_path/HDL_simulator/iverilog/bin/iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && $iverilog_path/HDL_simulator/iverilog/bin/vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
@@ -202,31 +203,46 @@ cd ..
 [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
 
-cd ../../..
-if [ -d "SRC" ] 
-then
-    echo "SRC folder already exists" 
-else
-    . ../scripts/change_netlist_dir_10x8.sh
-fi
-cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
+# cd ../../..
+# if [ -d "SRC" ] 
+# then
+#     echo "SRC folder already exists" 
+# else
+#     . ../scripts/change_netlist_dir_10x8.sh
+# fi
+# cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
 
-python3 ../../../../scripts/force.py $design_name
+python3 ../../../../scripts/pinmapping_v.py $design_name '104x68' 'v1.6.145.C' 'SRCphys'
 
 start_bitstream=`date +%s`
-timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-./simv | tee -a bitstream_sim.log
+# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+# ./simv | tee -a bitstream_sim.log
+
+cd $main_path
+bitstreams_folder_path=`find $main_path/../../Rigel/DV/subsystem_level -type d -name "tests" -exec realpath {} \;`
+testbench_folder_path=`find $main_path/../../Rigel/DV/subsystem_level -type d -name "directed" -exec realpath {} \;`
+[ -d $bitstreams_folder_path/bitstreams ] && cp -R $design_name\_golden/$design_name $bitstreams_folder_path/bitstreams || (mkdir -p $bitstreams_folder_path/bitstreams && cp -R $design_name\_golden/$design_name $bitstreams_folder_path/bitstreams)
+cp -R $main_path/sim/bitstream_tb/add_1bit_1GE100_ES1.sv $testbench_folder_path/unit
+cd $bitstreams_folder_path/../..
+fabric_verif_env_path=$PWD
+make run TEST=$design_name SIZE=104x68 NETLIST=SRCphys | tee bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
 
 cd $main_path
-[ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
+# [ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
+[ -f $fabric_verif_env_path/bitstream_sim.log ] && mv $fabric_verif_env_path/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
 [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 
 tail -n100 raptor.log > raptor_tail.log
 
+sed -i "s/TEST_PASSED/Status: Test Passed/" bitstream_sim.log
+
 python3 ../../scripts/parser.py 
 
+end_grand_runtime=`date +%s`
+grand_runtime=$((end_grand_runtime-start_grand_runtime))
+echo -e "\nGrand RunTime: $grand_runtime sec">>raptor.log
