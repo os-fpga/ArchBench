@@ -1,1 +1,0 @@
-`define OUT_WIDTH 32
