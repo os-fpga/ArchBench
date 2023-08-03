@@ -274,7 +274,16 @@ def parse_log_files(files, log_line_keys_map):
                                 data[file][log_line_key] = line.split()[2]
                             if log_line_key == 'device':
                                 data[file][log_line_key]=line.split()[-1]
-                            
+                        if log_line_keyword in line:
+                            if log_line_key == 'Plc_Fmax':
+                                pfmax=line.split()[-2]
+                                pfmax_freq=line.split()[-1]
+                                pfrequency=pfmax+" "+pfmax_freq
+                                # data[file][log_line_key]=pfrequency
+                                pfmax_margin=read_config_test_margins("fmax_margin")           #to dump margin in parsed_data.json
+                                str_pfmax=str(pfrequency)+", margin:"+str(pfmax_margin)
+                                data[file][log_line_key] = str_pfmax
+
                 for line in lines[start_pb_usage+1:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         # Checking if the keyword is in the current line

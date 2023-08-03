@@ -225,6 +225,7 @@ testbench_folder_path=`find $main_path/../../Rigel/DV/subsystem_level -type d -n
 cp -R $main_path/sim/bitstream_tb/add_1bit_1GE100_ES1.sv $testbench_folder_path/unit
 cd $bitstreams_folder_path/../..
 fabric_verif_env_path=$PWD
+pip3 install -r requirements.txt
 make run TEST=$design_name SIZE=104x68 NETLIST=SRCphys | tee bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
