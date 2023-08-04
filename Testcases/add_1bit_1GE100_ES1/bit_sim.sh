@@ -122,7 +122,8 @@ raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
 echo -e "Device: $device">>raptor.log
 
-post_route_netlist_path=`find $main_path/$design_name\_golden -wholename "*/routing/add_1bit_1GE100_ES1_post_route.v"`
+post_route_netlist_path=`find $main_path -wholename "*/routing/$design_name\_post_route.v"`
+
 string="_post_route"
 
 while read line; do
