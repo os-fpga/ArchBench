@@ -4,6 +4,7 @@
 start_grand_runtime=`date +%s`
 
 main_path=$PWD
+module load fpga_tools/raptor/latest
 
 design_name=${PWD##*/}
 simulator_name="iverilog" #vcs,iverilog
