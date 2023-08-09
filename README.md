@@ -24,3 +24,17 @@ Once you clone the repo, you should initialize the openfpga_pd_castor_rs repo us
     cd openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags
  
 There is make file that clones sub_repo openfpga-pd-castor-rs repo and checkout on main branch.
+
+### test.config:
+
+There are two flags in test.config of each testcase which differentiates the Functional regression and QoR regression. Details are as following:
+
+    reg_type=1   means QoR   
+    reg_type=2   means Functional Verification
+    stage_id=1   means yosys
+    stage_id=2   means VPR (fmax)
+    stage_id=3   means both yosys/VPR
+    stage_id=4   means Functional Verification
+ 
+stage_id=1 means just synthesis, 4 mean Funtional Verification and else mean VPR
+

@@ -102,6 +102,7 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
 # echo "set_limits bram 0">>raptor.tcl
+echo "pin_loc_assign_method free">>raptor.tcl
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
