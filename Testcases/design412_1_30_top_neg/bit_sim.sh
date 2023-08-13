@@ -78,6 +78,8 @@ cd $main_path
 design_path=`find $main_path -type f -iname "$design_name.v"`
 tool_name="vcs"
 
+sed -i -e "s|MEM_FILE_PATH|$PWD/rtl|g" rtl/single_port_ram_top.v
+
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
