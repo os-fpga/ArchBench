@@ -25,7 +25,7 @@
         "device": "Device:"
     },
     "raptor_perf.log": {
-        "Synthesis_time":"Synthesize has started",
+        "Synthesis_time":"/bin/yosys",
         "Packer_time":"Packing has started",
         "Placer_time":"Placement has started",
         "Router_time":"Route has started",

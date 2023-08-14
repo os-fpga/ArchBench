@@ -482,9 +482,9 @@ def parse_log_files(files, log_line_keys_map):
             bitstream_time=0
             if file == "raptor_perf.log":
                 for i in range(len(lines)):
-                    if "Synthesize has started" in lines[i]:
+                    if "/bin/yosys" in lines[i]:
                         synth_start = i
-                        synth_time_with_dot=lines[synth_start+2].strip().split()[4]+" "+lines[synth_start+2].strip().split()[5]
+                        synth_time_with_dot=lines[synth_start+1].strip().split()[4]+" "+lines[synth_start+1].strip().split()[5]
                         synth_time=synth_time_with_dot[0:-1]
                     if "--pack\n" in lines[i]:
                         start_print_stats = i
