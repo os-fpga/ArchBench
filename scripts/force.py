@@ -5,7 +5,7 @@ import os.path
 design_name= sys.argv[1]
 netlist="SRC"
 
-PinMapping =  f"../{design_name}/PinMapping.xml"
+PinMapping =  f"../{design_name}/run_1/synth_1_1/impl_1_1/bitstream/PinMapping.xml"
 check_pin_mapping = os.path.isfile(PinMapping)
 
 pf = open(f"../{design_name}/PinMapping.v", 'w')
@@ -30,11 +30,11 @@ pf.close()
 
 output_file = open("../../bitstream_text.txt", "w")
 
-file_path=(f'../{design_name}/fabric_bitstream.xml')
+file_path=(f'../{design_name}/run_1/synth_1_1/impl_1_1/bitstream/fabric_bitstream.xml')
 check_xml_bitstream = os.path.isfile(file_path)
 
 if check_xml_bitstream:
-    with open(f"../{design_name}/fabric_bitstream.xml",'r') as f:
+    with open(f"../{design_name}/run_1/synth_1_1/impl_1_1/bitstream/fabric_bitstream.xml",'r') as f:
         for line in f:
             if "path=" in line:
                 path=line.split('"')[5]
