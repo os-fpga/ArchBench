@@ -16,7 +16,7 @@
         "Adder_Carry": " adder_carry           ",
         "CLBs": " clb           ",
         "Plc_Fmax":"Placement estimated critical path delay",
-        "Fmax": " Fmax: ",
+        "fmax_clock1": " Fmax: ",
         "LUT_CLB_ratio": "LUT/CLB",
         "CLB_percentage_used":"percent_clbs_used",
         "FLE_Percentage_used": " fle          ",
