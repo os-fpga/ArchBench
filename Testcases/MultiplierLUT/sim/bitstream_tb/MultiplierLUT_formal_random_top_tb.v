@@ -5,53 +5,52 @@
 module MultiplierLUT_top_formal_verification_random_tb;
 
 	reg clock0;
-	reg [3:0] clk;
 
 	reg [1:0] b;
 	reg [1:0] a;
 	
 	wire [3:0] z;
-	wire [0:639] gfpga_pad_QL_PREIO_A2F;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF0;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF1;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_CLK;
-	wire [0:9] ccff_head;
-	wire [0:9] ccff_tail;
-	wire test_en;
+	
+	wire [0:15] clk;
+	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
+	wire [0:513] bl_config_region_0;
+	wire [0:406] wl_config_region_0;
+	bit global_resetn;
+	wire scan_en;
 	wire scan_mode;
-	wire scan_clk;
-	// wire [0:0] config_enable;
-	wire prog_clock;
-	// wire [0:0] CFG_DONE;
-	wire global_resetn;
-	
-		fpga_top U0_formal_verification (
-			clk,
-			test_en,
-			scan_mode,
-			scan_clk,
-			prog_clock,
-			global_resetn,
-			gfpga_pad_QL_PREIO_A2F[0:639],
-			gfpga_pad_QL_PREIO_F2A[0:639],
-			gfpga_pad_QL_PREIO_F2A_DEF0[0:639],
-			gfpga_pad_QL_PREIO_F2A_DEF1[0:639],
-			gfpga_pad_QL_PREIO_F2A_CLK[0:639],
-			ccff_head[0:9],
-			ccff_tail[0:9]);
-	
-		// assign config_enable = 1'b0;
-		assign prog_clock = 1'b0;
-		// assign CFG_DONE = 1'b1;
-		assign test_en = 1'b0;
-		assign scan_mode = 1'b0;
-		assign scan_clk = 1'b0;
-		assign global_resetn = 1'b1;
-		assign clk[0] = clock0;
-		assign clk[1] = 1'b0;
-		assign clk[2] = 1'b0;
-		assign clk[3] = 1'b0;
+
+	fpga_top U0_formal_verification (
+		.clk(clk[0:15]),
+		.global_resetn(global_resetn),
+		.scan_en(scan_en),
+		.scan_mode(scan_mode),
+		.gfpga_pad_QL_PREIO_A2F(gfpga_pad_QL_PREIO_A2F[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A(gfpga_pad_QL_PREIO_F2A[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A_CLK(gfpga_pad_QL_PREIO_F2A_CLK[0:2303]),
+		.bl_config_region_0(bl_config_region_0[0:513]),
+		.wl_config_region_0(wl_config_region_0[0:406]));
+
+	// assign global_resetn = 1'b0;
+	assign scan_en = 1'b0;
+	assign scan_mode = 1'b0;
+	assign clk[0] = clock0;
+	assign clk[1] = 1'b0;
+	assign clk[2] = 1'b0;
+	assign clk[3] = 1'b0;
+	assign clk[4] = 1'b0;
+	assign clk[5] = 1'b0;
+	assign clk[6] = 1'b0;
+	assign clk[7] = 1'b0;
+	assign clk[8] = 1'b0;
+	assign clk[9] = 1'b0;
+	assign clk[10] = 1'b0;
+	assign clk[11] = 1'b0;
+	assign clk[12] = 1'b0;
+	assign clk[13] = 1'b0;
+	assign clk[14] = 1'b0;
+	assign clk[15] = 1'b0;
 		
 	initial begin
 		clock0 <= 1'b0;
@@ -69,6 +68,8 @@ module MultiplierLUT_top_formal_verification_random_tb;
 
 		a <= 2'b00;
 		b <= 2'b00;
+		#5
+		global_resetn=1'b1;
 		#5;
 		if (z==0)
 			$display("Status: Test Passed");
