@@ -1,6 +1,6 @@
 module sim_route_sp_ram;
 	bit [7:0] data;
-	bit [5:0] addr;
+	bit [3:0] addr;
 	bit we;
     wire [7:0] q,q_netlist;
     reg clk;
@@ -12,8 +12,8 @@ module sim_route_sp_ram;
 	sp_ram_post_route netlist(
 							we,
 							clk,
-							addr[5],
-							addr[4],
+							// addr[5],
+							// addr[4],
 							addr[3],
 							addr[2],
 							addr[1],
@@ -47,7 +47,7 @@ initial begin
 	@(negedge clk);
 	compare();
 	
-	for (integer i=0; i<64; i=i+1) begin
+	for (integer i=0; i<16; i=i+1) begin
 		addr=i;
 		data=$random;
 		@(negedge clk);
@@ -57,7 +57,7 @@ initial begin
 	end
 
 	we=0;
-	for (integer i=0; i<64; i=i+1) begin
+	for (integer i=0; i<16; i=i+1) begin
 		addr=i;
 		@(negedge clk);
 		display_stimulus();
