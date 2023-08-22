@@ -1,10 +1,10 @@
 module rom (
 input clk, 
-input [9:0] address,
+input [5:0] address,
 output reg [7:0] data
 );
 
-reg [7:0] mem [1023:0]; 
+reg [7:0] mem [63:0];
 
 initial $readmemb("MEM_FILE_PATH/memory_file.mem", mem); 
 
