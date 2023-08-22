@@ -24,7 +24,7 @@ def read_config_test_margins(flag):
     Placer_time_margin=0
     Router_time_margin=0
     Bitstram_time_margin=0
-    fmax_margin=0
+    fmax_clock1_margin=0
     LUTs_CLBs_ratio_margin=0
     adder_carry_margin=0
     with open("test.config") as conf:
@@ -58,8 +58,8 @@ def read_config_test_margins(flag):
                 Router_time_margin=contents[i].split('"')[1]
             if  "Bitstram_time_margin"in contents[i]:
                 Bitstram_time_margin=contents[i].split('"')[1]
-            if "fmax_margin" in contents[i]:
-                fmax_margin=contents[i].split('"')[1]
+            if "fmax_clock1_margin" in contents[i]:
+                fmax_clock1_margin=contents[i].split('"')[1]
             if "LUTs_CLBs_ratio_margin" in contents[i]:
                 LUTs_CLBs_ratio_margin=contents[i].split('"')[1]
         if flag=="DFFs_margin":
@@ -90,8 +90,8 @@ def read_config_test_margins(flag):
             return Router_time_margin
         if flag=="Bitstram_time_margin":
             return Bitstram_time_margin
-        if flag=="fmax_margin":
-            return fmax_margin
+        if flag=="fmax_clock1_margin":
+            return fmax_clock1_margin
         if flag=="LUTs_CLBs_ratio_margin":
             return LUTs_CLBs_ratio_margin
 
@@ -450,17 +450,17 @@ def parse_log_files(files, log_line_keys_map):
                 for line in lines[start_fmax:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if log_line_keyword in line:
-                            if log_line_key == 'Fmax':
+                            if log_line_key == 'fmax_clock1':
                                 fmax=line.split()[-2]
                                 fmax_freq=line.split()[-1]
                                 frequency=fmax+" "+fmax_freq
                                 # data[file][log_line_key]=frequency
-                                fmax_margin=read_config_test_margins("fmax_margin")           #to dump margin in parsed_data.json
+                                fmax_margin=read_config_test_margins("fmax_clock1_margin")           #to dump margin in parsed_data.json
                                 str_fmax=str(frequency)+", margin:"+str(fmax_margin)
                                 data[file][log_line_key] = str_fmax
                         else:
-                            if log_line_key == 'Fmax':
-                                fmax_margin=read_config_test_margins("fmax_margin")
+                            if log_line_key == 'fmax_clock1':
+                                fmax_margin=read_config_test_margins("fmax_clock1_margin")
                                 str_fmax=str(frequency)+", margin:"+str(fmax_margin)
                                 data[file][log_line_key] = str_fmax 
 
