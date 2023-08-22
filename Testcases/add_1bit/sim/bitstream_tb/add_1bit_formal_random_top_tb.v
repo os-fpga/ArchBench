@@ -18,12 +18,6 @@ module add_1bit_top_formal_verification_random_tb;
 	wire scan_en;
 	wire scan_mode;
 
-// ----- FPGA fabric instanciation -------
-	// and2_top_formal_verification FPGA_DUT(
-	// 	.a(a),
-	// 	.b(b),
-	// 	.c(c)
-	// );
 	fpga_top U0_formal_verification (
 		.clk(clk[0:15]),
 		.global_resetn(global_resetn),
@@ -35,7 +29,6 @@ module add_1bit_top_formal_verification_random_tb;
 		.bl_config_region_0(bl_config_region_0[0:513]),
 		.wl_config_region_0(wl_config_region_0[0:406]));
 
-// ----- Begin Connect Global ports of FPGA top module -----
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
 	assign scan_mode = 1'b0;
