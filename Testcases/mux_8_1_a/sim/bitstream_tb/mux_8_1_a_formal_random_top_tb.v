@@ -19,65 +19,60 @@ module mux_8_1_a_top_formal_verification_random_tb;
 
 	wire [0:0] out;
 	
-	wire [0:3] clk;
-	wire [0:0] global_reset;
-	wire [0:0] scan_reset;
-	wire [0:639] gfpga_pad_QL_PREIO_A2F;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF0;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF1;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_CLK;
-	wire [0:9] ccff_head;
-	wire [0:9] ccff_tail;
-	wire [0:0] test_en;
-	wire [0:0] scan_mode;
-	wire [0:0] scan_clk;
-	bit [0:0] config_enable;
-	wire [0:0] prog_clock;
-	bit [0:0] CFG_DONE;
-	
+	wire [0:15] clk;
+	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
+	wire [0:513] bl_config_region_0;
+	wire [0:406] wl_config_region_0;
+	bit global_resetn;
+	wire scan_en;
+	wire scan_mode;
+
 	fpga_top U0_formal_verification (
-		clk[0:3],
-		global_reset[0],
-		scan_reset[0],
-		test_en[0],
-		scan_mode[0],
-		scan_clk[0],
-		config_enable[0],
-		prog_clock[0],
-		CFG_DONE[0],
-		gfpga_pad_QL_PREIO_A2F[0:639],
-		gfpga_pad_QL_PREIO_F2A[0:639],
-		gfpga_pad_QL_PREIO_F2A_DEF0[0:639],
-		gfpga_pad_QL_PREIO_F2A_DEF1[0:639],
-		gfpga_pad_QL_PREIO_F2A_CLK[0:639],
-		ccff_head[0:9],
-		ccff_tail[0:9]);
-		
-	assign prog_clock[0] = 1'b0;
-	assign test_en[0] = 1'b0;
-	assign scan_mode[0] = 1'b0;
-	assign scan_clk[0] = 1'b0;
+		.clk(clk[0:15]),
+		.global_resetn(global_resetn),
+		.scan_en(scan_en),
+		.scan_mode(scan_mode),
+		.gfpga_pad_QL_PREIO_A2F(gfpga_pad_QL_PREIO_A2F[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A(gfpga_pad_QL_PREIO_F2A[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A_CLK(gfpga_pad_QL_PREIO_F2A_CLK[0:2303]),
+		.bl_config_region_0(bl_config_region_0[0:513]),
+		.wl_config_region_0(wl_config_region_0[0:406]));
+
+	// assign global_resetn = 1'b0;
+	assign scan_en = 1'b0;
+	assign scan_mode = 1'b0;
 	assign clk[0] = clock0;
 	assign clk[1] = 1'b0;
 	assign clk[2] = 1'b0;
 	assign clk[3] = 1'b0;
-	assign global_reset[0] = 1'b1;
-	assign scan_reset[0] = 1'b1;
+	assign clk[4] = 1'b0;
+	assign clk[5] = 1'b0;
+	assign clk[6] = 1'b0;
+	assign clk[7] = 1'b0;
+	assign clk[8] = 1'b0;
+	assign clk[9] = 1'b0;
+	assign clk[10] = 1'b0;
+	assign clk[11] = 1'b0;
+	assign clk[12] = 1'b0;
+	assign clk[13] = 1'b0;
+	assign clk[14] = 1'b0;
+	assign clk[15] = 1'b0;
 		
 	initial begin
-		clock0[0] <= 1'b0;
+		clock0 <= 1'b0;
 		while(1) begin
 			#1
-			clock0[0] <= !clock0[0];
+			clock0 <= !clock0;
 		end
 	end
 	
 	`include "../mux_8_1_a/PinMapping.v"
 	initial begin
 		`include "../../bitstream_text.txt"
-		config_enable[0]=1'b1;
-		CFG_DONE[0]=1'b1;
+		// config_enable[0]=1'b1;
+		// CFG_DONE[0]=1'b1;
 
 		D0 <= 1'b0;
 		D1 <= 1'b1;
@@ -91,6 +86,9 @@ module mux_8_1_a_top_formal_verification_random_tb;
 		S0 <= 1'b0;
 		S1 <= 1'b0;
 		S2 <= 1'b0;
+
+		#5
+		global_resetn=1'b1;
 
 		#5;
 		if(out==0)
