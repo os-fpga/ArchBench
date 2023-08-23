@@ -180,7 +180,7 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    $iverilog_path/HDL_simulator/iverilog/bin/iverilog -Wtimescale=1ns/1ps -g2012 -DIVERILOG=1 -o $design_name $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && $iverilog_path/HDL_simulator/iverilog/bin/vvp ./$design_name | tee post_route_sim.log
+    iverilog -Wtimescale=1ns/1ps -g2012 -DIVERILOG=1 -o $design_name $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
