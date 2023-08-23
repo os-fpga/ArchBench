@@ -1,21 +1,12 @@
-//-------------------------------------------
-//	FPGA Synthesizable Verilog Netlist
-//	Description: FPGA Verilog Testbench for Formal Top-level netlist of Design: mux_8_1
-//	Author: Xifan TANG
-//	Organization: University of Utah
-//	Date: Mon Mar 20 15:53:57 2023
-//-------------------------------------------
-//----- Time scale -----
 `timescale 1ns / 1ps
 
-//----- Default net type -----
+
 `default_nettype none
 
 module mux_8_1_top_formal_verification_random_tb;
-// ----- Default clock port is added here since benchmark does not contain one -------
-	reg [3:0] clk;
 
-// ----- Shared inputs -------
+	reg clock0;
+
 	reg D0;
 	reg D1;
 	reg D2;
@@ -27,81 +18,59 @@ module mux_8_1_top_formal_verification_random_tb;
 	reg S0;
 	reg S1;
 	reg S2;
-
-// ----- FPGA fabric outputs -------
+	
 	wire out;
-
-// ----- FPGA fabric instanciation -------
-	// mux_8_1_top_formal_verification FPGA_DUT(
-	// 	D0,
-	// 	D1,
-	// 	D2,
-	// 	D3,
-	// 	D4,
-	// 	D5,
-	// 	D6,
-	// 	D7,
-	// 	S0,
-	// 	S1,
-	// 	S2,
-	// 	out_gfpga
-	// );
-	wire [0:639] gfpga_pad_QL_PREIO_A2F;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF0;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_DEF1;
-	wire [0:639] gfpga_pad_QL_PREIO_F2A_CLK;
-	wire [0:9] ccff_head;
-	wire [0:9] ccff_tail;
-	wire [0:0] test_en;
-	wire [0:0] scan_mode;
-	wire [0:0] scan_clk;
-	// wire [0:0] config_enable;
-	wire [0:0] prog_clock;
-	// wire [0:0] CFG_DONE;
-	wire global_resetn;
 	
-	// ----- FPGA top-level module to be capsulated -----
-		fpga_top U0_formal_verification (
-			clk,
-			test_en,
-			scan_mode,
-			scan_clk,
-			prog_clock,
-			global_resetn,
-			gfpga_pad_QL_PREIO_A2F[0:639],
-			gfpga_pad_QL_PREIO_F2A[0:639],
-			gfpga_pad_QL_PREIO_F2A_DEF0[0:639],
-			gfpga_pad_QL_PREIO_F2A_DEF1[0:639],
-			gfpga_pad_QL_PREIO_F2A_CLK[0:639],
-			ccff_head[0:9],
-			ccff_tail[0:9]);
-	
-	// ----- Begin Connect Global ports of FPGA top module -----
-		// assign config_enable = 1'b0;
-		assign prog_clock = 1'b0;
-		// assign CFG_DONE = 1'b1;
-		assign test_en = 1'b0;
-		assign scan_mode = 1'b0;
-		assign scan_clk = 1'b0;
-		assign global_resetn = 1'b1;
-// ----- End FPGA Fabric Instanication -------
+	wire [0:15] clk;
+	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
+	wire [0:513] bl_config_region_0;
+	wire [0:406] wl_config_region_0;
+	bit global_resetn;
+	wire scan_en;
+	wire scan_mode;
 
-// ----- Clock 'clk' Initialization -------
+	fpga_top U0_formal_verification (
+		.clk(clk[0:15]),
+		.global_resetn(global_resetn),
+		.scan_en(scan_en),
+		.scan_mode(scan_mode),
+		.gfpga_pad_QL_PREIO_A2F(gfpga_pad_QL_PREIO_A2F[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A(gfpga_pad_QL_PREIO_F2A[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A_CLK(gfpga_pad_QL_PREIO_F2A_CLK[0:2303]),
+		.bl_config_region_0(bl_config_region_0[0:513]),
+		.wl_config_region_0(wl_config_region_0[0:406]));
+
+	// assign global_resetn = 1'b0;
+	assign scan_en = 1'b0;
+	assign scan_mode = 1'b0;
+	assign clk[0] = clock0;
+	assign clk[1] = 1'b0;
+	assign clk[2] = 1'b0;
+	assign clk[3] = 1'b0;
+	assign clk[4] = 1'b0;
+	assign clk[5] = 1'b0;
+	assign clk[6] = 1'b0;
+	assign clk[7] = 1'b0;
+	assign clk[8] = 1'b0;
+	assign clk[9] = 1'b0;
+	assign clk[10] = 1'b0;
+	assign clk[11] = 1'b0;
+	assign clk[12] = 1'b0;
+	assign clk[13] = 1'b0;
+	assign clk[14] = 1'b0;
+	assign clk[15] = 1'b0;
+
 		initial begin
-			clk[0] <= 1'b0;
-			clk[1] <= 1'b0;
-			clk[2] <= 1'b0;
-			clk[3] <= 1'b0;
+			clock0 <= 1'b0;
 			while(1) begin
 				#1
-				clk[0] <= !clk[0];
-				clk[1] <= !clk[1];
-				clk[2] <= !clk[2];
-				clk[3] <= !clk[3];
+				clock0 <= !clock0;
 			end
 		end
 		`include "../mux_8_1/PinMapping.v"
+
 		initial begin
 			`include "../../bitstream_text.txt"
 			// config_enable[0]=1'b1;
@@ -120,8 +89,11 @@ module mux_8_1_top_formal_verification_random_tb;
 			S0 <= 1'b0;
 			S1 <= 1'b0;
 			S2 <= 1'b0;
+
 			#5;
-			if(out==0)
+			global_resetn = 1'b1;
+			#5;
+			if(out==1)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
@@ -130,7 +102,7 @@ module mux_8_1_top_formal_verification_random_tb;
 			S1 <= 1'b0;
 			S2 <= 1'b0;
 			#5;
-			if(out==1)
+			if(out==0)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
@@ -139,7 +111,7 @@ module mux_8_1_top_formal_verification_random_tb;
 			S1 <= 1'b1;
 			S2 <= 1'b0;
 			#5;
-			if(out==0)
+			if(out==1)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
@@ -148,7 +120,7 @@ module mux_8_1_top_formal_verification_random_tb;
 			S1 <= 1'b1;
 			S2 <= 1'b0;
 			#5;
-			if(out==1)
+			if(out==0)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
@@ -157,7 +129,7 @@ module mux_8_1_top_formal_verification_random_tb;
 			S1 <= 1'b0;
 			S2 <= 1'b1;
 			#5;
-			if(out==0)
+			if(out==1)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
@@ -166,7 +138,7 @@ module mux_8_1_top_formal_verification_random_tb;
 			S1 <= 1'b0;
 			S2 <= 1'b1;
 			#5;
-			if(out==1)
+			if(out==0)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
@@ -175,7 +147,7 @@ module mux_8_1_top_formal_verification_random_tb;
 			S1 <= 1'b1;
 			S2 <= 1'b1;
 			#5;
-			if(out==0)
+			if(out==1)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
@@ -184,33 +156,21 @@ module mux_8_1_top_formal_verification_random_tb;
 			S1 <= 1'b1;
 			S2 <= 1'b1;
 			#5;
-			if(out==1)
+			if(out==0)
 				$display("Status: Test Passed");
 			else
 				$display("Status: Test Failed");
 			#10;
+			$display("Simulation completed");
 			$finish;
 	end
 
-// ----- Begin output waveform to VCD file-------
 	initial begin
 		$dumpfile("mux_8_1.vcd");
 		$dumpvars(1, mux_8_1_top_formal_verification_random_tb);
 	end
-// ----- END output waveform to VCD file -------
-
-// initial begin
-// 	$timeformat(-9, 2, "ns", 20);
-// 	$display("Simulation start");
-// // ----- Can be changed by the user for his/her need -------
-// 	#20
-// 	$display("Simulation Succeed");
-// 	$finish;
-// end
 
 endmodule
-// ----- END Verilog module for mux_8_1_top_formal_verification_random_tb -----
 
-//----- Default net type -----
 `default_nettype none
 
