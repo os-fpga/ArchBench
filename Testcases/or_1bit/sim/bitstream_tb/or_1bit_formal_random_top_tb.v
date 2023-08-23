@@ -9,38 +9,46 @@ module or_1bit_top_formal_verification_random_tb;
 	reg b;
 	wire c;
 	
-wire [0:7] clk;
-wire [0:2303] gfpga_pad_QL_PREIO_A2F;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
-wire [0:9] ccff_head;
-wire [0:9] ccff_tail;
-bit global_resetn;
-wire scan_en;
-wire scan_mode;
-wire prog_clock;
-wire [0:2] rwm;
+	wire [0:15] clk;
+	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
+	wire [0:513] bl_config_region_0;
+	wire [0:406] wl_config_region_0;
+	bit global_resetn;
+	wire scan_en;
+	wire scan_mode;
 
 	fpga_top U0_formal_verification (
-		clk[0:7],
-		global_resetn,
-		scan_en,
-		scan_mode,
-		prog_clock,
-		rwm[0:2],
-		gfpga_pad_QL_PREIO_A2F[0:2303],
-		gfpga_pad_QL_PREIO_F2A[0:2303],
-		gfpga_pad_QL_PREIO_F2A_CLK[0:2303],
-		ccff_head[0:9],
-		ccff_tail[0:9]);
+		.clk(clk[0:15]),
+		.global_resetn(global_resetn),
+		.scan_en(scan_en),
+		.scan_mode(scan_mode),
+		.gfpga_pad_QL_PREIO_A2F(gfpga_pad_QL_PREIO_A2F[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A(gfpga_pad_QL_PREIO_F2A[0:2303]),
+		.gfpga_pad_QL_PREIO_F2A_CLK(gfpga_pad_QL_PREIO_F2A_CLK[0:2303]),
+		.bl_config_region_0(bl_config_region_0[0:513]),
+		.wl_config_region_0(wl_config_region_0[0:406]));
 
-	assign prog_clock = 1'b0;
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
 	assign scan_mode = 1'b0;
-	assign rwm[0:2] = 3'b011;
 	assign clk[0] = clock0;
-	assign clk[1:7] = 7'b0;
+	assign clk[1] = 1'b0;
+	assign clk[2] = 1'b0;
+	assign clk[3] = 1'b0;
+	assign clk[4] = 1'b0;
+	assign clk[5] = 1'b0;
+	assign clk[6] = 1'b0;
+	assign clk[7] = 1'b0;
+	assign clk[8] = 1'b0;
+	assign clk[9] = 1'b0;
+	assign clk[10] = 1'b0;
+	assign clk[11] = 1'b0;
+	assign clk[12] = 1'b0;
+	assign clk[13] = 1'b0;
+	assign clk[14] = 1'b0;
+	assign clk[15] = 1'b0;
 	
 	initial begin
 		clock0 <= 1'b0;

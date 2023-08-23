@@ -179,7 +179,7 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    $iverilog_path/HDL_simulator/iverilog/bin/iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && $iverilog_path/HDL_simulator/iverilog/bin/vvp ./$design_name | tee post_route_sim.log
+    iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
@@ -212,8 +212,10 @@ cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_fil
 python3 ../../../../scripts/force.py $design_name
 
 start_bitstream=`date +%s`
-timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-./simv | tee -a bitstream_sim.log
+# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+# ./simv | tee -a bitstream_sim.log
+iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+vvp ./$design_name | tee bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
