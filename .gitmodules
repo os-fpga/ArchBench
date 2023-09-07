@@ -1,6 +1,3 @@
 [submodule "openfpga-pd-castor-rs"]
 	path = openfpga-pd-castor-rs
 	url = git@github.com:RapidSilicon/openfpga-pd-castor-rs.git
-[submodule "Rigel"]
-	path = Rigel
-	url = git@github.com:RapidSilicon/Rigel.git
