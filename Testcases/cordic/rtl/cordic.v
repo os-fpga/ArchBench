@@ -172,12 +172,37 @@ module signed_shifter (
   input wire [`ITERATION_BITS-1:0] i,
   input wire signed [`XY_BITS:0] D,
   output reg signed [`XY_BITS:0] Q );
-  integer j;
+
   always @ * begin
     Q = D;
-    for(j=0;j<i;j=j+1) Q = (Q >> 1) | (D[`XY_BITS] << `XY_BITS);
   end
+
+  // Generate loop to perform the shift
+  generate
+    genvar j;
+    for (j = 0; j < `ITERATION_BITS; j = j + 1) begin
+      always @(*) begin
+        if (rst) begin
+          Q <= 0;
+        end else if (j < i) begin
+          Q <= (Q >> 1) | (D[`XY_BITS] << `XY_BITS);
+        end
+      end
+    end
+  endgenerate
+
 endmodule
+//replaced below module with above because i in for loop is not constant
+// module signed_shifter (
+//   input wire [`ITERATION_BITS-1:0] i,
+//   input wire signed [`XY_BITS:0] D,
+//   output reg signed [`XY_BITS:0] Q );
+//   integer j;
+//   always @ * begin
+//     Q = D;
+//     for(j=0;j<i;j=j+1) Q = (Q >> 1) | (D[`XY_BITS] << `XY_BITS);
+//   end
+// endmodule
 /*  Rotator
   This module is the heart of the CORDIC computer and implements the CORDIC algorithm.
   Input values x_i, y_i, and z_i are micro computed based on the iteration step
