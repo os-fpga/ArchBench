@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.std_logic_arith.all;
 use IEEE.STD_LOGIC_UNSIGNED.ALL; 
-use IEEE.math_real."log2";
+use IEEE.math_real.all;
 
 entity filterV is
   generic (
