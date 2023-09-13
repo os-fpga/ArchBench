@@ -8,7 +8,6 @@ module sim_route_design67_15_45_top;
 
 design67_15_45_top golden(clk, rst, in, out);
 design67_15_45_top_post_route netlist(clk,
-				
 				rst,
 				in[7] ,
 				in[6] ,
@@ -21,11 +20,11 @@ design67_15_45_top_post_route netlist(clk,
 				out_netlist[7] ,
 				out_netlist[6] ,
 				out_netlist[3] ,
-				out_netlist[2] ,
 				out_netlist[1] ,
 				out_netlist[0] ,
 				out_netlist[5] ,
 				out_netlist[4] ,
+				out_netlist[2] ,
 				out_netlist[31] ,
 				out_netlist[30] ,
 				out_netlist[29] ,
