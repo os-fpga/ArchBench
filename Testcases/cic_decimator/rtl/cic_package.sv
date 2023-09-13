@@ -6,7 +6,7 @@ function longint nchoosek;
     longint tmp;
     longint i;
     begin
-        tmp = 1.0;
+        tmp = 1;
         for (i=1;i<=(n-k);i++)
             tmp = tmp*(k+i)/i;
         nchoosek = tmp;
@@ -35,7 +35,7 @@ function longint h;
     begin
         c_stop = k/(R*M);
         if ((j>=1)&&(j<=N)) begin
-            tmp=0.0;
+            tmp=0;
             for (i=0;i<=c_stop;i++) begin
                 if (i%2)
                     tmp = tmp - nchoosek(N,i)*nchoosek(N-j+k-R*M*i,k-R*M*i);
@@ -61,7 +61,7 @@ function longint F;
     longint tmp;
     longint i;
     begin
-        tmp = 0.0;
+        tmp = 0;
         if (j<=M)
             c_stop=(((R*G-1)*M)+j-1);
         else
