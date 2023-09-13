@@ -10,14 +10,6 @@ module sim_route_sp_ram;
 	sp_ram golden(data,addr,we,clk,q);
 
 	sp_ram_post_route netlist(
-							we,
-							clk,
-							// addr[5],
-							// addr[4],
-							addr[3],
-							addr[2],
-							addr[1],
-							addr[0],
 							data[7],
 							data[6],
 							data[5],
@@ -26,6 +18,12 @@ module sim_route_sp_ram;
 							data[2],
 							data[1],
 							data[0],
+							addr[3],
+							addr[2],
+							addr[1],
+							addr[0],
+							we,
+							clk,
 							q_netlist[7],
 							q_netlist[6],
 							q_netlist[5],
