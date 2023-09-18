@@ -8,7 +8,7 @@ module dffre_inst (
 	output o_Q 
 	);
 
-	dffre inst(
+	DFFRE inst(
 		.D(i_D),
 		.R(i_Reset),
 		.E(i_Enable),
