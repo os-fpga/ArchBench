@@ -8,26 +8,27 @@ module sim_route_unsigned_multiply;
 	integer mismatch=0;
 
 unsigned_multiply golden(dataa,datab,dataout);
-unsigned_multiply_post_route netlist(datab[4],
-							datab[3],
-							datab[2],
-							datab[1],
-							datab[0],
-							dataa[4],
-							dataa[3],
-							dataa[2],
-							dataa[1],
+unsigned_multiply_post_route netlist(
 							dataa[0],
-							dataout_netlist[9],
-							dataout_netlist[8],
-							dataout_netlist[7],
-							dataout_netlist[6],
-							dataout_netlist[5],
-							dataout_netlist[4],
-							dataout_netlist[3],
-							dataout_netlist[2],
+							dataa[1],
+							dataa[2],
+							dataa[3],
+							dataa[4],
+							datab[0],
+							datab[1],
+							datab[2],
+							datab[3],
+							datab[4],
+							dataout_netlist[0],
 							dataout_netlist[1],
-							dataout_netlist[0]
+							dataout_netlist[2],
+							dataout_netlist[3],
+							dataout_netlist[4],
+							dataout_netlist[5],
+							dataout_netlist[6],
+							dataout_netlist[7],
+							dataout_netlist[8],
+							dataout_netlist[9]
 );
 
 always #5 clk = ~clk;
