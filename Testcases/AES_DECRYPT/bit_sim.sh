@@ -108,7 +108,7 @@ echo "add_design_file ../rtl/Sbox.sv">>raptor.tcl
 echo "add_design_file ../rtl/SubWord.sv">>raptor.tcl
 echo "add_design_file ../rtl/aes_decrypt128.sv">>raptor.tcl
 echo "add_design_file ../rtl/aes_decrypt192.sv">>raptor.tcl
-echo "add_design_file ../rtl/aes_decrypt256.SV">>raptor.tcl
+# echo "add_design_file ../rtl/aes_decrypt256.SV">>raptor.tcl
 echo "add_design_file ../rtl/aes_decrypt256.sv">>raptor.tcl
 echo "add_design_file ../rtl/decrypt.sv">>raptor.tcl
 echo "add_design_file ../rtl/generic_muxfx.v">>raptor.tcl

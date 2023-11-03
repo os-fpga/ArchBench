@@ -51,7 +51,7 @@ wire integer S_coef2 [C_THREAD_NUM-1:0];
 //element multiplication in Galois Field
 function [C_PRIMPOLY_ORDER-1:0] F_var_upgrade;
 input [C_PRIMPOLY_ORDER-1:0] S_mult;
-input integer S_times;
+integer S_times;
 integer i;
 reg [C_PRIMPOLY_ORDER-1:0] S_temp;
 reg [C_PRIMPOLY_ORDER-1:0] S_temp2;
