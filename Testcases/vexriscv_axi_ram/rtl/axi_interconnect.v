@@ -220,6 +220,7 @@ parameter M_BASE_ADDR_INT = M_BASE_ADDR ? M_BASE_ADDR : calcBaseAddrs(0);
 integer i, j;
 
 // check configuration
+// synthesis translate_off
 initial begin
     if (M_REGIONS < 1 || M_REGIONS > 16) begin
         $error("Error: M_REGIONS must be between 1 and 16 (instance %m)");
@@ -232,7 +233,7 @@ initial begin
             $finish;
         end
     end
-
+    
     $display("Addressing configuration for axi_interconnect instance %m");
     for (i = 0; i < M_COUNT*M_REGIONS; i = i + 1) begin
         if (M_ADDR_WIDTH[i*32 +: 32]) begin
@@ -289,7 +290,7 @@ initial begin
         end
     end
 end
-
+// synthesis translate_on
 localparam [2:0]
     STATE_IDLE = 3'd0,
     STATE_DECODE = 3'd1,

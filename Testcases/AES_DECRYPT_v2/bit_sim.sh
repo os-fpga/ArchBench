@@ -94,7 +94,7 @@ echo "add_library_ext .v .sv">>raptor.tcl
 echo "add_design_file -SV_2012 ../rtl/aes_decrypt128.sv">>raptor.tcl
 echo "add_design_file -SV_2012 ../rtl/aes_decrypt192.sv">>raptor.tcl
 echo "add_design_file -SV_2012 ../rtl/aes_decrypt256.sv">>raptor.tcl
-echo "add_design_file -SV_2012 ../rtl/aes_decrypt256.SV">>raptor.tcl
+# echo "add_design_file -SV_2012 ../rtl/aes_decrypt256.SV">>raptor.tcl
 echo "add_design_file -SV_2012 ../rtl/decrypt.sv">>raptor.tcl
 echo "add_design_file -SV_2012 ../rtl/generic_muxfx.v">>raptor.tcl
 echo "add_design_file -SV_2012 ../rtl/gfmul.sv">>raptor.tcl
