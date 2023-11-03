@@ -120,7 +120,7 @@ input red;
 integer i,j,k;
 integer pointer;
 reg [2**C_PRIMPOLY_ORDER-2:0] S_flag;
-reg [C_PRIMPOLY_ORDER-1:0] S_temp [C_GEN_WIDTH:0]; //every reg is C_PRIMPOLY_ORDER width, represent a element 
+reg [C_PRIMPOLY_ORDER-1:0] S_temp; //every reg is C_PRIMPOLY_ORDER width, represent a element 
 reg [C_PRIMPOLY_ORDER-1:0] S_temp2;
 begin
 	F_GEN_POLY = 0;
