@@ -7,13 +7,6 @@ module and8_top_formal_verification_random_tb;
 	reg clock0;
 
 	reg [7:0] a;
-	// reg a[6];
-	// reg a[5];
-	// reg a[4];
-	// reg a[3];
-	// reg a[2];
-	// reg a[1];
-	// reg a[0];
 
 	wire b;
 

@@ -1,24 +1,12 @@
-//-------------------------------------------
-//	FPGA Synthesizable Verilog Netlist
-//	Description: FPGA Verilog Testbench for Formal Top-level netlist of Design: up5bit_counter
-//	Author: Xifan TANG
-//	Organization: University of Utah
-//	Date: Wed May  3 16:14:45 2023
-//-------------------------------------------
-//----- Time scale -----
 `timescale 1ns / 1ps
 
-//----- Default net type -----
 `default_nettype none
 
 module up5bit_counter_top_formal_verification_random_tb;
-// ----- Default clock port is added here since benchmark does not contain one -------
 	reg clock0;
 
-// ----- Shared inputs -------
 	reg reset;
 
-// ----- FPGA fabric outputs -------
 	wire [4:0] out;
 	integer i;
 	reg [4:0] counter_model=5'b00001;
@@ -69,7 +57,7 @@ module up5bit_counter_top_formal_verification_random_tb;
 	assign clk[13] = clock0;
 	assign clk[14] = clock0;
 	assign clk[15] = clock0;
-// ----- Clock 'clk' Initialization -------
+	
 	initial begin
 		clock0 <= 1'b0;
 		while(1) begin
@@ -78,10 +66,6 @@ module up5bit_counter_top_formal_verification_random_tb;
 		end
 	end
 
-// ----- Begin reset signal generation -----
-// ----- End reset signal generation -----
-
-// ----- Input Initialization -------
 	`include "../up5bit_counter/PinMapping.v"
 
 	initial begin
@@ -107,31 +91,13 @@ module up5bit_counter_top_formal_verification_random_tb;
 	end
 		$finish;
 	end
-
-// ----- Input Stimulus -------
-	// always@(negedge clock0) begin
-	// 	reset <= $random;
-	// end
-
-// ----- Begin output waveform to VCD file-------
+	
 	initial begin
 		$dumpfile("up5bit_counter.vcd");
 		$dumpvars(0, up5bit_counter_top_formal_verification_random_tb);
 	end
-// ----- END output waveform to VCD file -------
-
-// initial begin
-// 	$timeformat(-9, 2, "ns", 20);
-// 	$display("Simulation start");
-// // ----- Can be changed by the user for his/her need -------
-// 	#20
-// 	$display("Simulation Succeed");
-// 	$finish;
-// end
 
 endmodule
-// ----- END Verilog module for up5bit_counter_top_formal_verification_random_tb -----
 
-//----- Default net type -----
 `default_nettype none
 
