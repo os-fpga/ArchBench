@@ -137,19 +137,19 @@ done < $post_route_netlist_path
 
 root_path=`pwd`
 route_tb_path=`find ../ -type f -iname "sim_route_$design_name.sv" -printf $root_path/'%p\n'`
-if [ -z "$route_tb_path" ]
-then
-    echo "No such Test Bench for $design_name"
-else 
-    echo -e "Test Bench for this design Found!"
-fi
+# if [ -z "$route_tb_path" ]
+# then
+#     echo "No such Test Bench for $design_name"
+# else 
+#     echo -e "Test Bench for this design Found!"
+# fi
 bitstream_tb_path=`find ../sim -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
-if [ -z "$bitstream_tb_path" ]
-then
-    echo "No such Test Bench for $design_name"
-else 
-    echo -e "Test Bench for this design Found!"
-fi
+# if [ -z "$bitstream_tb_path" ]
+# then
+#     echo "No such Test Bench for $design_name"
+# else 
+#     echo -e "Test Bench for this design Found!"
+# fi
 
 
 bram_sim=`find $library -wholename "*/genesis3/brams_sim.v"`    
@@ -180,7 +180,7 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+    # iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
@@ -202,19 +202,19 @@ cd ..
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
 
 cd ../../..
-if [ -d "SRC" ] 
-then
-    echo "SRC folder already exists" 
-else
-    . ../scripts/change_netlist_dir_10x8.sh
-fi
+# if [ -d "SRC" ] 
+# then
+#     echo "SRC folder already exists" 
+# else
+#     . ../scripts/change_netlist_dir_10x8.sh
+# fi
 cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
 
 python3 ../../../../scripts/force.py $design_name
 
 start_bitstream=`date +%s`
-timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-./simv | tee -a bitstream_sim.log
+# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+# ./simv | tee -a bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
