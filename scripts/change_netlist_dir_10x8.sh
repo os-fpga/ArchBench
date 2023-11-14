@@ -6,8 +6,8 @@
 # cp -R /nfs_project/castor/DV/from_arbutus/augusts25_23/v1.6.79/k6n8_TSMC16nm_7.5T/FPGA10x8_gemini_compact_pnr/fabric_task/run001/k6n8_vpr/top/MIN_ROUTE_CHAN_WIDTH/SRC/ ./SRC
 # cp -R /nfs_project/castor/DV/from_arbutus/augusts25_23/v1.6.79/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ ./SRC/CustomModules
 
-cp -R /nfs_project/castor/DV/fabric_release/v1.6.145.C/k6n8_TSMC16nm_7.5T/FPGA10x8_gemini_compact_latch_pnr/_run_dir/SRC/ ./SRC
-cp -R /nfs_project/castor/DV/fabric_release/v1.6.145.C/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ ./SRC/CustomModules
+cp -R /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/FPGA10x8_gemini_compact_latch_pnr/_run_dir/SRC/ ./SRC
+cp -R /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ ./SRC/CustomModules
 
 sed -i s'/include \"/include \"..\/..\/..\/SRC\//' ./SRC/fabric_netlists.v
 sed -i s'/`include \"..\/..\/..\/SRC\/.\/SRC\/sc_verilog\//\/\/`include "..\/..\/sim\//' ./SRC/fabric_netlists.v
