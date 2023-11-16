@@ -1,5 +1,5 @@
-`include "mod_n_counter.v"
 `include "decoder_top.v"
+`include "mod_n_counter.v"
 `include "paritygenerator_top.v"
 
 module design137_50_37_top #(parameter WIDTH=32,CHANNEL=50) (clk, rst, in, out);
