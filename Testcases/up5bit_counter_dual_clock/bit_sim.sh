@@ -98,8 +98,8 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
-echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl
-echo "pin_loc_assign_method free">>raptor.tcl
+echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl  
+echo "add_constraint_file ../pin_constraints.pin">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
@@ -107,7 +107,7 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
-[ -z "$vpr_file_path" ] && echo "bitstream enable_simulation">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl 
+[ -z "$vpr_file_path" ] && echo "bitstream enable_simulation write_xml pb_pin_fixup">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl 
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
@@ -162,13 +162,14 @@ TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
+DFFRE=`find $library -wholename "*/RS_PRIMITIVES/sim_models/verilog/DFFRE.v"`
 
 if [[ $simulator_name == "vcs" ]]
 then
-    [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
-    [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
+    [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
+    [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+    timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v -full64  -debug_all +define+fsdb -debug_acc+all -kdb -lca +define+A | tee post_route_sim.log
     ./simv | tee -a post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
@@ -180,7 +181,7 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    iverilog -g2012 -DIVERILOG=1 -o $design_name $cell_path $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+    iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
@@ -215,6 +216,8 @@ python3 ../../../../scripts/force.py $design_name
 start_bitstream=`date +%s`
 # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 # ./simv | tee -a bitstream_sim.log
+iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+vvp ./$design_name | tee bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
@@ -222,8 +225,8 @@ echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
 cd $main_path
 [ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
 [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
-mv ./$design_name\_golden/raptor.log .
-mv ./$design_name\_golden/raptor_perf.log .
+[ -f $design_name\_golden/raptor.log ] && mv ./$design_name\_golden/raptor.log .
+[ -f $design_name\_golden/raptor_perf.log ] && mv ./$design_name\_golden/raptor_perf.log .
 
 tail -n100 raptor.log > raptor_tail.log
 

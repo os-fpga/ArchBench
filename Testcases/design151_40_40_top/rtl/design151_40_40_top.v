@@ -2,7 +2,7 @@
 `include "shift_reg_top.v"
 `include "mod_n_counter.v"
 `include "decoder_top.v"
-`include "parity_generator_top.v"
+`include "paritygenerator_top.v"
 
 module design151_40_40_top #(parameter WIDTH=32,CHANNEL=40) (clk, rst, in, out);
 
