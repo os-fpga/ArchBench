@@ -24,7 +24,6 @@ sed -i '17s/^/`include \"..\/..\/..\/SRC\/CustomModules\/QL_IOFF_dti.v\"\n/' ./S
 sed -i '18s/^/`include \"..\/..\/..\/SRC\/CustomModules\/QL_XOR_MUX2_dti.v\"\n/' ./SRC/fabric_netlists.v
 # sed -i '19s/^/`include \"..\/..\/..\/SRC\/CustomModules\/GC_FF_dti.v\"\n/' ./SRC/fabric_netlists.v
 sed -i '21s/^/`include \"..\/..\/..\/SRC\/CustomModules\/RS_CCFF_dti.v\"\n/' ./SRC/fabric_netlists.v
-sed -i '16s/^/`include "..\/..\/sim\/tcbn16ffcllbwp7d5t16p96cpd.v"\n/' ./SRC/fabric_netlists.v
 sed -i '14s/^/`include \"\/cadlib\/gemini\/TSMC16NMFFC\/library\/std_cells\/dti\/7p5t\/rev_220704\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid_fe_views_svt\/220704_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p1_rapid\/verilog\/dti_tm16ffc_90c_7p5t_stdcells_rev1p0p0.v\"\n/' ./SRC/fabric_netlists.v
 sed -i '15s/^/`include \"\/cadlib\/virgo\/TSMC16NMFFC\/library\/std_cells\/dti\/7p5t\/rev_181022\/221018_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p8_rapid_fe_views_lvt\/221018_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p8_rapid\/verilog_lvt\/dti_tm16ffc_lvt_90c_7p5t_stdcells_rev1p0p0.v\"\n/' ./SRC/fabric_netlists.v
 sed -i '16s/^/`include \"\/cadlib\/virgo\/TSMC16NMFFC\/library\/std_cells\/dti\/7p5t\/rev_181022\/221018_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p8_rapid_fe_views_hvt\/221018_dti_tm16ffc_90c_7p5t_stdcells_rev1p0p8_rapid\/verilog_hvt\/dti_tm16ffc_hvt_90c_7p5t_stdcells_rev1p0p0.v\"\n/' ./SRC/fabric_netlists.v
