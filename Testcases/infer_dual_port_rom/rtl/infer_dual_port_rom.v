@@ -9,7 +9,7 @@ module infer_dual_port_rom
 	// Declare the ROM variable
 	reg [DATA_WIDTH-1:0] rom[2**ADDR_WIDTH-1:0];
 
-	initial $readmemh("/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/test/ArchBench/Testcases/infer_dual_port_rom/rtl/memory_test.mem",rom);  //reg [DATA_WIDTH-1:0] rom[2**ADDR_WIDTH-1:0];
+	initial $readmemh("memory_test.mem",rom);  //reg [DATA_WIDTH-1:0] rom[2**ADDR_WIDTH-1:0];
 
 	always @ (posedge clk)
 	begin
