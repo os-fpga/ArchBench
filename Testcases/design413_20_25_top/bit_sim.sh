@@ -7,6 +7,7 @@ design_name=${PWD##*/}
 
 device=GEMINI_COMPACT_104x68
 
+given_device=$2
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
@@ -18,7 +19,6 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-given_device=$2
 if [ "$given_device" == "Multiple_Devices" ]; then     #These changes are made to get device_name from CGA. In case of golden regression device_name is Multiple. If device name is multiple then it means it is golden regression and regression will use device_name mentioned in the script. 
     if [ -f $main_path/../tool_104x68.conf ]; then # tool.conf
         source $main_path/../tool_104x68.conf
@@ -87,7 +87,7 @@ cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
 echo "target_device $device">>raptor.tcl
-[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "">>raptor.tcl || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
+[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
