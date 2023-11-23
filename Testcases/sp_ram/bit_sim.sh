@@ -8,6 +8,7 @@ simulator_name="vcs" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
+given_device=$2
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
@@ -19,7 +20,6 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-given_device=$2
 if [ "$given_device" == "Multiple_Devices" ]; then     #These changes are made to get device_name from CGA. In case of golden regression device_name is Multiple. If device name is multiple then it means it is golden regression and regression will use device_name mentioned in the script. 
     if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
         source $main_path/../tool_10x8.conf
