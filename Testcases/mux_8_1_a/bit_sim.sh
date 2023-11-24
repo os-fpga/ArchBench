@@ -5,9 +5,10 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 simulator_name="iverilog" #vcs,iverilog
-
+bitstream_simulation=true
 device=GEMINI_COMPACT_10x8
 
+given_device=$2
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
@@ -19,7 +20,6 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-given_device=$2
 if [ "$given_device" == "Multiple_Devices" ]; then     #These changes are made to get device_name from CGA. In case of golden regression device_name is Multiple. If device name is multiple then it means it is golden regression and regression will use device_name mentioned in the script. 
     if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
         source $main_path/../tool_10x8.conf
@@ -106,7 +106,7 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
-[ -z "$vpr_file_path" ] && echo "bitstream enable_simulation">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl 
+[ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl    # enable_simulation
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
@@ -211,14 +211,17 @@ cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_fil
 
 python3 ../../../../scripts/force.py $design_name
 
-start_bitstream=`date +%s`
-# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-# ./simv | tee -a bitstream_sim.log
-iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
-vvp ./$design_name | tee bitstream_sim.log
-end_bitstream=`date +%s`
-runtime_bitstream=$((end_bitstream-start_bitstream))
-echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
+if [[ $bitstream_simulation == true ]]
+then
+    start_bitstream=`date +%s`
+    # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+    # ./simv | tee -a bitstream_sim.log
+    iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+    vvp ./$design_name | tee bitstream_sim.log
+    end_bitstream=`date +%s`
+    runtime_bitstream=$((end_bitstream-start_bitstream))
+    echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
+fi
 
 cd $main_path
 [ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log

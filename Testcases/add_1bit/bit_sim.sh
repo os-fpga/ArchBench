@@ -5,11 +5,11 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 simulator_name="iverilog" #vcs,iverilog
-
+bitstream_simulation=true
 device=GEMINI_COMPACT_10x8
 
 given_device=$2
-echo "Passed device is $given_device">device.txt
+# echo "Passed device is $given_device">device.txt
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
@@ -213,14 +213,17 @@ cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_fil
 
 python3 ../../../../scripts/force.py $design_name
 
-start_bitstream=`date +%s`
-# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-# ./simv | tee -a bitstream_sim.log
-iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
-vvp ./$design_name | tee bitstream_sim.log
-end_bitstream=`date +%s`
-runtime_bitstream=$((end_bitstream-start_bitstream))
-echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
+if [[ $bitstream_simulation == true ]]
+then
+    start_bitstream=`date +%s`
+    # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+    # ./simv | tee -a bitstream_sim.log
+    iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+    vvp ./$design_name | tee bitstream_sim.log
+    end_bitstream=`date +%s`
+    runtime_bitstream=$((end_bitstream-start_bitstream))
+    echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
+fi
 
 cd $main_path
 [ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
