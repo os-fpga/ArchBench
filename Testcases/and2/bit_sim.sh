@@ -11,6 +11,15 @@ device=GEMINI_COMPACT_10x8
 given_device=$2
 echo "Passed device is $given_device">device.txt
 
+cd ..
+if [ -d "SRC" ] 
+then
+    echo "SRC folder already exists" 
+else
+    . ../scripts/change_netlist_dir_10x8.sh
+fi
+cd $main_path
+
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
 
