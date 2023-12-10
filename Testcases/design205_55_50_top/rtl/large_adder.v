@@ -27,7 +27,7 @@ add_out_reg_1<=(data_in[WIDTH-1:WIDTH-16] - data_in[WIDTH-16-1:0]);
 add_out_reg_2<=(data_in[WIDTH-1:WIDTH-16] + data_in[WIDTH-16-1:0]);
 end
 end
-assign data_out = add_out_reg_0 * add_out_reg_1 + add_out_reg_2;
+assign data_out = add_out_reg_0 - add_out_reg_1 + add_out_reg_2;
 
 endmodule
 
