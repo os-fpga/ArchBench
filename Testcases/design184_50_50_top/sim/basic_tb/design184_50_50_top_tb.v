@@ -1,11 +1,11 @@
 // `timescale 1ns / 1ps
 
-module design186_70_60_top_tb #(parameter WIDTH=32, CHANNEL=70); 
+module design184_50_50_top_tb #(parameter WIDTH=32, CHANNEL=50); 
     reg clock,reset;
 	reg [WIDTH-1:0] inpt;
 	wire [WIDTH-1:0] outpt;
     
-    design186_70_60_top #(.WIDTH(WIDTH),.CHANNEL(CHANNEL)) dut (.clk(clock),.rst(reset),.in(inpt),.out(outpt));
+    design184_50_50_top #(.WIDTH(WIDTH),.CHANNEL(CHANNEL)) dut (.clk(clock),.rst(reset),.in(inpt),.out(outpt));
 
     initial begin
         clock=0;
