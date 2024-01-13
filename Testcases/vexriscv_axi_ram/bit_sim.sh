@@ -90,6 +90,7 @@ echo "target_device $device">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
+echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file -V_2001 ../rtl/vex_soc.v">>raptor.tcl
 echo "set_top_module vex_soc">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
