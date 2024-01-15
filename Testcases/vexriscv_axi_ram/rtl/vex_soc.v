@@ -2,14 +2,29 @@
 Top-level module for the Vexriscv SoC with AXI RAM and AXI Interconnect
 */
 module vex_soc (
-    input wire      reset,
-    input wire      clk,
-    output wire                    s_axi_arready,
-    output wire [8-1:0]    s_axi_rid,
-    output wire [32-1:0]  s_axi_rdata,
+    input wire                  reset,
+    input wire                  clk,
+    input wire                  vexriscv_jtag_tck,
+    input wire                  vexriscv_jtag_tdi,
+    input wire                  vexriscv_jtag_tms,
+    output wire   	            vexriscv_jtag_tdo,
+    output wire                 s_axi_arready,
+    output wire [8-1:0]         s_axi_rid,
+    output wire [32-1:0]        s_axi_rdata,
     output wire [1:0]             s_axi_rresp,
     output wire                   s_axi_rlast,
-    output wire                   s_axi_rvalid
+    output wire                   s_axi_rvalid,
+    output wire                   s_axi_rvalid,
+    output wire                   s_axi_wready,
+    output wire                   s_axi_awready,
+    output wire      [7:0]        s_axi_bid,
+    output wire      [1:0]        s_axi_bresp,
+    output wire                   s_axi_bvalid,
+    output wire	      	          ram_s_axi_awready,
+    output wire	      	          ram_s_axi_wready,
+    output wire	[7:0] 	          ram_s_axi_bid,
+    output wire	[1:0] 	          ram_s_axi_bresp,
+    output wire	      	          ram_s_axi_bvalid
 );
     wire   	      	vexriscv_dBusAxi_ar_ready;
     wire   	      	vexriscv_dBusAxi_aw_ready;
@@ -34,6 +49,7 @@ module vex_soc (
     reg    	      	vexriscv_jtag_tdi = 1'd0;
     reg    	      	vexriscv_jtag_tms = 1'd0;
     wire   	      	vexriscv_reset;
+    wire    [7:0]   axi4_s00_axi_awid;
     wire 	[2:0] 	vexriscv_dBusAxi_ar_payload_size;
     wire 	[3:0] 	vexriscv_dBusAxi_ar_payload_qos;
     wire 	[7:0] 	vexriscv_dBusAxi_ar_payload_id;
@@ -87,8 +103,12 @@ module vex_soc (
     wire		vexriscv_dBusAxi_b_payload_user;
     wire		vexriscv_dBusAxi_ar_payload_user;
     wire		vexriscv_dBusAxi_r_payload_user;
-    wire   	      	vexriscv5;
-    wire   	      	vexriscv6;
+    wire   	 [3:0]     	vexriscv6;
+    wire   	 [3:0]     	vexriscv7;
+    wire   	      	vexriscv8;
+    wire        [3:0]   axi4_m00_axi_awqos;
+    wire        [3:0]   axi4_m00_axi_awregion;
+    wire                axi4_m00_axi_awuser;
     wire     	[7:0]  	axi4_m00_axi_awid;
     wire     	[31:0] 	axi4_m00_axi_awaddr;
     wire     	[7:0]   axi4_m00_axi_awlen;
@@ -102,6 +122,7 @@ module vex_soc (
     wire     	[31:0]  axi4_m00_axi_wdata;
     wire     	[3:0]   axi4_m00_axi_wstrb;
     wire      	       	axi4_m00_axi_wlast;
+    wire      	       	axi4_m00_axi_wuser;
     wire             	axi4_m00_axi_wvalid;
     wire            	axi4_m00_axi_wready;
     wire    	[7:0]   axi4_m00_axi_bid;
@@ -116,6 +137,9 @@ module vex_soc (
     wire             	axi4_m00_axi_arlock;
     wire     	[3:0]   axi4_m00_axi_arcache;
     wire     	[2:0]   axi4_m00_axi_arprot;
+    wire     	[3:0]   axi4_m00_axi_arqos;
+    wire     	[3:0]   axi4_m00_axi_arregion;
+    wire             	axi4_m00_axi_aruser;
     wire             	axi4_m00_axi_arvalid;
     wire            	axi4_m00_axi_arready;
     wire    	[7:0]   axi4_m00_axi_rid;
@@ -138,15 +162,10 @@ module vex_soc (
     reg 	[3:0] 	ram_s_axi_awcache; 
     reg 	[2:0] 	ram_s_axi_awprot; 
     reg 	      	ram_s_axi_awvalid; 
-    wire	      	ram_s_axi_awready; 
     reg 	[31:0]	ram_s_axi_wdata; 
     reg 	[3:0] 	ram_s_axi_wstrb; 
     reg 	      	ram_s_axi_wlast; 
-    reg 	      	ram_s_axi_wvalid; 
-    wire	      	ram_s_axi_wready; 
-    wire	[7:0] 	ram_s_axi_bid; 
-    wire	[1:0] 	ram_s_axi_bresp; 
-    wire	      	ram_s_axi_bvalid; 
+    reg 	      	ram_s_axi_wvalid;  
     reg 	      	ram_s_axi_bready; 
     reg 	[7:0] 	ram_s_axi_arid; 
     reg 	[31:0]	ram_s_axi_araddr; 
@@ -237,7 +256,7 @@ VexRiscvAxi4 cpu(
 	.iBusAxi_ar_payload_size		(vexriscv_iBusAxi_ar_payload_size),
 	.iBusAxi_ar_valid			(vexriscv_iBusAxi_ar_valid),
 	.iBusAxi_r_ready			(vexriscv_iBusAxi_r_ready),
-	.jtag_tdo				(vexriscv5),
+	.jtag_tdo				(vexriscv_jtag_tdo),
 	.debug_resetOut				(vexriscv8));
 
 
@@ -417,7 +436,13 @@ axi_ram_per ram_periph(
     .s_axi_rvalid				(axi4_m00_axi_rvalid),
     .s_axi_rready				(axi4_m00_axi_rready));
     
-    assign axi_arready= axi4_m00_axi_arready;
+    assign s_axi_wready = axi4_m00_axi_wready;
+    assign s_axi_awready = axi4_m00_axi_awready;
+    assign s_axi_bid = axi4_m00_axi_bid;
+    assign s_axi_bresp = axi4_m00_axi_bresp;
+    assign s_axi_bvalid = axi4_m00_axi_bvalid;
+    assign s_axi_arready = axi4_m00_axi_arready;
+    assign s_axi_arready= axi4_m00_axi_arready;
     assign s_axi_rid =	axi4_m00_axi_rid;
     assign s_axi_rdata = axi4_m00_axi_rdata;
        assign  s_axi_rresp = axi4_m00_axi_rresp;

@@ -369,9 +369,9 @@ always @(posedge clk) begin
 end
 
 
-//initial begin
-//	$readmemh("rtl/AXI_RAM_32.hex", mem);
-//end
+initial begin
+	$readmemh("AXI_RAM_32.hex", mem);
+end
 
 endmodule
 
