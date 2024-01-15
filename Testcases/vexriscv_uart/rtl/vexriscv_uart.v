@@ -25,7 +25,11 @@ module vexriscv_uart (
 	output wire [7:0] serial_source_data,
 	input  wire serial_sink_valid,
 	output wire serial_sink_ready,
-	input  wire [7:0] serial_sink_data
+	input  wire [7:0] serial_sink_data,
+	input wire main_vexriscv6,
+	input wire main_vexriscv4,
+	input wire main_vexriscv3,
+	output wire main_vexriscv5
 );
 
 
@@ -4557,7 +4561,7 @@ end
 // Port 0 | Read: Sync  | Write: ---- | 
 reg [31:0] rom[0:5721];
 initial begin
-	$readmemh("INIT_PATH/sim_rom.init", rom);
+	$readmemh("sim_rom.init", rom);
 end
 reg [31:0] rom_dat0;
 always @(posedge sys_clk_1) begin
@@ -4572,7 +4576,7 @@ assign main_simsoc_dat_r = rom_dat0;
 // Port 0 | Read: Sync  | Write: Sync | Mode: Write-First | Write-Granularity: 8 
 reg [31:0] sram[0:2047];
 initial begin
-	$readmemh("INIT_PATH/sim_sram.init", sram);
+	$readmemh("sim_sram.init", sram);
 end
 reg [10:0] sram_adr0;
 always @(posedge sys_clk_1) begin
@@ -4595,7 +4599,7 @@ assign main_ram_dat_r = sram[sram_adr0];
 // Port 0 | Read: Sync  | Write: ---- | 
 reg [7:0] mem[0:36];
 initial begin
-	$readmemh("INIT_PATH/sim_mem.init", mem);
+	$readmemh("sim_mem.init", mem);
 end
 reg [5:0] mem_adr0;
 always @(posedge sys_clk_1) begin
