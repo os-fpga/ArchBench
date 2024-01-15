@@ -9,8 +9,8 @@ module vex_soc (
     input wire                  vexriscv_jtag_tms,
     output wire   	            vexriscv_jtag_tdo,
     output wire                 s_axi_arready,
-    output wire [8-1:0]         s_axi_rid,
-    output wire [32-1:0]        s_axi_rdata,
+    output wire [7:0]         s_axi_rid,
+    output wire [31:0]        s_axi_rdata,
     output wire [1:0]             s_axi_rresp,
     output wire                   s_axi_rlast,
     output wire                   s_axi_rvalid,
@@ -45,9 +45,9 @@ module vex_soc (
     wire    	      	vexriscv_iBusAxi_r_payload_last;
     wire    	[1:0] 	vexriscv_iBusAxi_r_payload_resp;
     wire    	      	vexriscv_iBusAxi_r_valid;
-    reg    	      	vexriscv_jtag_tck = 1'd0;
-    reg    	      	vexriscv_jtag_tdi = 1'd0;
-    reg    	      	vexriscv_jtag_tms = 1'd0;
+    // reg    	      	vexriscv_jtag_tck = 1'd0;
+    // reg    	      	vexriscv_jtag_tdi = 1'd0;
+    // reg    	      	vexriscv_jtag_tms = 1'd0;
     wire   	      	vexriscv_reset;
     wire    [7:0]   axi4_s00_axi_awid;
     wire 	[2:0] 	vexriscv_dBusAxi_ar_payload_size;
@@ -95,7 +95,7 @@ module vex_soc (
     wire   	      	vexriscv_dBusAxi_w_last;
     wire   	      	vexriscv_dBusAxi_w_valid;
     wire   	      	vexriscv_iBusAxi_ar_payload_id;
-    wire   	      	vexriscv_jtag_tdo;
+    // wire   	      	vexriscv_jtag_tdo;
     wire	[3:0] 	vexriscv_dBusAxi_ar_payload_region;
     wire   	      	vexriscv_dBusAxi_w_payload_last;
     wire   		vexriscv_dBusAxi_aw_payload_user;

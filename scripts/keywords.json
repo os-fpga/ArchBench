@@ -13,7 +13,7 @@
         "LUTs": " Number of LUTs:    ",
         "BRAMs": " RS_TDP36K       , TDP36K       ",
         "DSPs": " DSP38       , RS_DSP       , RS_DSP_MULT       , RS_DSP_MULT_REGIN       , RS_DSP_MULT_REGOUT       , RS_DSP_MULT_REGIN_REGOUT       , RS_DSP_MULTADD       , RS_DSP_MULTADD_REGIN       , RS_DSP_MULTADD_REGOUT       , RS_DSP_MULTADD_REGIN_REGOUT       , RS_DSP_MULTACC       , RS_DSP_MULTACC_REGIN       , RS_DSP_MULTACC_REGOUT       , RS_DSP_MULTACC_REGIN_REGOUT       ",
-        "Adder_Carry": " Number of CARRY ADDERs:     , adder_carry           ",
+        "Adder_Carry": " Number of CARRY ADDERs:   ",
         "CLBs": " clb           ",
         "Plc_Fmax":"Placement estimated critical path delay",
         "fmax_clock1": " Fmax: ",

@@ -401,12 +401,8 @@ def parse_log_files(files, log_line_keys_map):
                             for dffs_keyword in dffs_keywords:
                                 if dffs_keyword in line:
                                     if ":" in line:
-                                        pass
-                                    else:
                                         for var in line.split(dffs_keyword)[1].strip().split():
-                                        # Applying error - handling method
                                             try:
-                                                # try converting to integer
                                                 # DFFs_margin=read_config_test_margins("DFFs_margin")           #to dump margin in parsed_data.json
                                                 sum_dffs = sum_dffs + int(var)
                                                 # data[file][log_line_key] = str(sum_dffs)
@@ -414,6 +410,19 @@ def parse_log_files(files, log_line_keys_map):
                                                 data[file][log_line_key] = str_sum_dff
                                             except ValueError:
                                                 data[file][log_line_key] = "0"
+                                    else:
+                                        pass #COMMENTED BELOW PART BECAUSE NOW WE HAVE "Number of REGs:" IN LOG FILE
+                                        # for var in line.split(dffs_keyword)[1].strip().split():
+                                        # # Applying error - handling method
+                                        #     try:
+                                        #         # try converting to integer
+                                        #         # DFFs_margin=read_config_test_margins("DFFs_margin")           #to dump margin in parsed_data.json
+                                        #         sum_dffs = sum_dffs + int(var)
+                                        #         # data[file][log_line_key] = str(sum_dffs)
+                                        #         str_sum_dff= str(sum_dffs)+", margin:"+str(DFFs_margin)           #to dump margin in parsed_data.json
+                                        #         data[file][log_line_key] = str_sum_dff
+                                        #     except ValueError:
+                                        #         data[file][log_line_key] = "0"
                                 if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
                                     DFFs_margin=read_config_test_margins("DFFs_margin")
                                     data[file][log_line_key] = "0, margin:"+str(DFFs_margin)
@@ -442,7 +451,7 @@ def parse_log_files(files, log_line_keys_map):
                             # data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split()[0]
                         elif log_line_key == 'Adder_Carry':
                             if log_line_keyword in line:
-                                str_adder_carry=line.split()[1]+", margin:"+str(read_config_test_margins("adder_carry_margin"))
+                                str_adder_carry=line.split()[4]+", margin:"+str(read_config_test_margins("adder_carry_margin"))
                                 data[file][log_line_key] = str_adder_carry 
                             if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
                                 # BRAMs_marin=
