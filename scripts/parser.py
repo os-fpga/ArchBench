@@ -27,6 +27,7 @@ def read_config_test_margins(flag):
     fmax_clock1_margin=0
     LUTs_CLBs_ratio_margin=0
     adder_carry_margin=0
+    carry_chain_margin=0
     with open("test.config") as conf:
         contents = conf.readlines()
         for i in range(len(contents)):
@@ -42,6 +43,8 @@ def read_config_test_margins(flag):
                 CLBs_margin=contents[i].split('"')[1]
             if "adder_carry" in contents[i]:
                 adder_carry_margin=contents[i].split('"')[1]
+            if "carry_chain" in contents[i]:
+                carry_chain_margin=contents[i].split('"')[1]
             if "CLB_percentage_used_margin" in contents[i]:
                 CLB_percentage_used_margin=contents[i].split('"')[1]
             if "FLE_Percentage_used_margin" in contents[i]:
@@ -74,6 +77,8 @@ def read_config_test_margins(flag):
             return CLBs_margin
         if flag=="adder_carry_margin":
             return adder_carry_margin
+        if flag=="carry_chain_margin":
+            return carry_chain_margin
         if flag=="CLB_percentage_used_margin":
             return CLB_percentage_used_margin
         if flag=="FLE_Percentage_used_margin":
@@ -456,6 +461,12 @@ def parse_log_files(files, log_line_keys_map):
                             if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
                                 # BRAMs_marin=
                                 data[file][log_line_key] = "0, margin:"+str(read_config_test_margins("adder_carry_margin"))   
+                        elif log_line_key == 'Carry_Chain':
+                            if log_line_keyword in line:
+                                str_carry_chain=line.split()[4]+", margin:"+str(read_config_test_margins("carry_chain_margin"))
+                                data[file][log_line_key] = str_carry_chain 
+                            if data[file][log_line_key] == "0":           #to dump margin in parsed_data.json
+                                data[file][log_line_key] = "0, margin:"+str(read_config_test_margins("carry_chain_margin"))   
                 for line in lines[start_fmax:]:
                     for log_line_key, log_line_keyword in log_line_keys_map[file].items():
                         if log_line_keyword in line:
