@@ -162,7 +162,7 @@ TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
-DSP38=`find $library -wholename "*/RS_PRIMITIVES/sim_models/verilog/DSP38.v"`
+DSP38=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DSP38.v"`
 
 if [[ $simulator_name == "vcs" ]]
 then
