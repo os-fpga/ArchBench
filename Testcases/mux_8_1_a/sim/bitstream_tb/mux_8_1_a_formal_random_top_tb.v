@@ -30,15 +30,15 @@ module mux_8_1_a_top_formal_verification_random_tb;
 	wire scan_mode;
 
 	fpga_top U0_formal_verification (
-		.clk(clk[0:15]),
-		.global_resetn(global_resetn),
-		.scan_en(scan_en),
-		.scan_mode(scan_mode),
-		.gfpga_pad_QL_PREIO_A2F(gfpga_pad_QL_PREIO_A2F[0:2303]),
-		.gfpga_pad_QL_PREIO_F2A(gfpga_pad_QL_PREIO_F2A[0:2303]),
-		.gfpga_pad_QL_PREIO_F2A_CLK(gfpga_pad_QL_PREIO_F2A_CLK[0:2303]),
-		.bl_config_region_0(bl_config_region_0[0:513]),
-		.wl_config_region_0(wl_config_region_0[0:406]));
+		clk[0:15],
+		global_resetn,
+		scan_en,
+		scan_mode,
+		gfpga_pad_QL_PREIO_A2F[0:2303],
+		gfpga_pad_QL_PREIO_F2A[0:2303],
+		gfpga_pad_QL_PREIO_F2A_CLK[0:2303],
+		bl_config_region_0[0:513],
+		wl_config_region_0[0:406]);
 
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
