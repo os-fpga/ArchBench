@@ -46,7 +46,7 @@ module and8_top_formal_verification_random_tb;
 	assign clk[12] = 1'b0;
 	assign clk[13] = 1'b0;
 	assign clk[14] = 1'b0;
-	assign clk[15] = 1'b0
+	assign clk[15] = 1'b0;
 
 	initial begin
 		clock0 <= 1'b0;
