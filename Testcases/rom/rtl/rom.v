@@ -1,12 +1,12 @@
 module rom (
 input clk, 
-input [5:0] address,
+input [6:0] address,
 output reg [7:0] data
 );
 
-reg [7:0] mem [63:0];
+reg [7:0] mem [127:0];
 
-initial $readmemb("MEM_FILE_PATH/memory_file.mem", mem); 
+initial $readmemb("memory_file.mem", mem); 
 
 always @(posedge clk) begin
    data <= mem[address];
