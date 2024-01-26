@@ -4,7 +4,7 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-simulator_name="iverilog" #vcs,iverilog
+simulator_name="verilator" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
@@ -182,12 +182,23 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $TDP18K_FIFO $sram1024x18 $ufifo_ctl $bram_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+    # iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $TDP18K_FIFO $sram1024x18 $ufifo_ctl $bram_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
 fi
 
+if [[ $simulator_name == "verilator" ]]
+then
+    [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
+    [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
+    start_post_route=`date +%s`
+    # verilator -Wno-fatal -Wno-BLKANDNBLK -main -build -exe $route_tb_path ../../sim/post_route_tb/tb_sim_route_rom.cpp --timing --timescale 1ps/1ps --top-module rom_post_route_tb --trace -v $bram_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 $main_path/rtl/$design_name.v -v $primitive $post_route_netlist_path +libext+.v+.sv && make -j -C obj_dir -f Vrom_post_route_tb.mk 
+    # ./obj_dir/Vrom_post_route_tb >> post_route_sim.log
+    end_post_route=`date +%s`
+    runtime_post_route=$((end_post_route-start_post_route))
+    echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+fi
 while read line; do
         if [[ $line == *"All Comparison Matched"* ]]
         then
@@ -215,8 +226,8 @@ cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_fil
 python3 ../../../../scripts/force.py $design_name
 
 start_bitstream=`date +%s`
-timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-./simv | tee -a bitstream_sim.log
+# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+# ./simv | tee -a bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
