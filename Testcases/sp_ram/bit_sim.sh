@@ -100,6 +100,7 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl
 # echo "pin_loc_assign_method free">>raptor.tcl
+echo "synth_options -new_tdp36k">>raptor.tcl
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl
 # echo "global_placement">>raptor.tcl
@@ -162,14 +163,16 @@ TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
-DFFRE=`find $library -wholename "*/RS_PRIMITIVES/sim_models/verilog/DFFRE.v"`
+DFFRE=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DFFRE.v"`
+TDP_RAM36K=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/TDP_RAM36K.v"`
+rs_tdp36k=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models_internal/primitives_mapping/BRAM/rs_tdp36k_post_pnr_mapping.v"`
 
 if [[ $simulator_name == "vcs" ]]
 then
     [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
     [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
     start_post_route=`date +%s`
-    timeout 4m vcs -sverilog -timescale=1ns/1ps $sram1024x18 $ufifo_ctl $TDP18K_FIFO $bram_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+    timeout 4m vcs -sverilog -timescale=1ns/1ps $TDP_RAM36K $rs_tdp36k $DFFRE $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
     ./simv | tee -a post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
