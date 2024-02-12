@@ -4,7 +4,7 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-simulator_name="vcs" #vcs,iverilog
+simulator_name="iverilog" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
@@ -184,7 +184,7 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    iverilog -Wtimescale=1ns/1ps -g2012 -DIVERILOG=1 -o $design_name $sram1024x18 $ufifo_ctl $TDP18K_FIFO $bram_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+    iverilog -Wtimescale=1ns/1ps -g2012 -DIVERILOG=1 -o $design_name $TDP_RAM36K $rs_tdp36k $DFFRE $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
