@@ -1,0 +1,66 @@
+import sys
+import os
+
+def extract_signal_names_from_file(file_path):
+    signal_declarations = []
+    with open(file_path, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith("input") or line.startswith("output"):
+                signal_declarations.append(line.split('\\')[1])
+            # if line.startswith("output"):
+            #     print(line.split('\\')[1])
+    signal_names = []
+    for declaration in signal_declarations:
+        signal_names.extend(declaration.split()[1:])
+    return signal_declarations
+
+design_name=sys.argv[1]
+
+verilog_file_path = design_name+"/run_1/synth_1_1/impl_1_1_1/routing/"+design_name+"_post_route.v"
+
+signal_names = extract_signal_names_from_file(verilog_file_path)
+
+files_in_subdirectory = os.listdir("../sim/post_route_tb/")
+
+if len(files_in_subdirectory) == 1:
+    testbench_file_name = files_in_subdirectory[0]
+else:
+    print("sim/post_route folder contain multiple files. Keep only testbench in this folder")
+
+with open("../sim/post_route_tb/"+testbench_file_name, "r") as f:
+    testbench_content = f.readlines()
+
+for i, line in enumerate(testbench_content):
+    if "wire" in line:
+        if "[" not in line:
+            design_output=line.strip().split(' ')[1].split(',')[0]
+            netlist_output=line.strip().split(' ')[1].split(',')[1].split(';')[0]
+            break
+        else:
+            design_output=line.strip().split(' ')[2].split(',')[0]
+            netlist_output=line.strip().split(' ')[2].split(',')[1].split(';')[0]
+            break
+
+renamed_signal_list = [item.replace(design_output,netlist_output) for item in signal_names]
+
+renamed_signal_list.reverse()
+
+insert_line_index = None
+for i, line in enumerate(testbench_content):
+    if design_name+"_post_route netlist(" in line:
+        insert_line_index = i + 1  
+        break
+
+if insert_line_index is not None and insert_line_index < len(testbench_content):
+    next_line = testbench_content[insert_line_index].strip()
+    if next_line == "" or next_line.endswith(";"):
+        for item in renamed_signal_list:
+            testbench_content.insert(insert_line_index, item.strip() + "\n")
+        with open("../sim/post_route_tb/"+testbench_file_name, "w") as f:
+            f.writelines(testbench_content)
+    else:
+        print("Instance Ports in PNR Testbench are Already Updated")
+else:
+    print("PNR Netlist Instance Not Found In PNR Testbench")
+
