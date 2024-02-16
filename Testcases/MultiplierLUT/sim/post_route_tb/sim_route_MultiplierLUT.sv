@@ -1,17 +1,13 @@
-// `include "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/test/MultiplierLUT/rtl/MultiplierLUT.v"
-// `include "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/test/MultiplierLUT/MultiplierLUT_golden/MultiplierLUT/MultiplierLUT_post_synthesis.v"
-
 module sim_route_MultiplierLUT;
     bit [1:0] a,b;
-	// bit [1:0] b;
-    wire [3:0] z, z_rtl;
-	// wire [3:0] z_rtl;
+    wire [3:0] z,z_netlist;
 
     reg clk;
 	integer mismatch=0;
 
-MultiplierLUT golden(.a(a),.b(b),.z(z_rtl));
-MultiplierLUT_post_route netlist(b[0],b[1],a[0],a[1],z[0],z[1],z[2],z[3]);
+MultiplierLUT golden(.a(a),.b(b),.z(z));
+MultiplierLUT_post_route netlist(
+);
 
 //clock initialization
 initial begin
@@ -66,17 +62,17 @@ end
 
 task compare();
  	$display("*** Comparing ***");
-  	if(z !== z_rtl) begin
-    	$display("Data Mismatch. Golden: %0d, Netlist: %0d, Time: %0t", z_rtl, z, $time);
+  	if(z !== z_netlist) begin
+    	$display("Data Mismatch. Golden: %0d, Netlist: %0d, Time: %0t", z_netlist, z, $time);
     	mismatch = mismatch+1;
  	end
   	else
-  		$display("Data Matched. Golden: %0d, Netlist: %0d, Time: %0t", z_rtl, z, $time);
+  		$display("Data Matched. Golden: %0d, Netlist: %0d, Time: %0t", z_netlist, z, $time);
 endtask
 
 task display_stimulus();
 	$display ($time,," Test stimulus is: a=%0d b=%0d", a, b);
-	$display ($time,," Test stimulus is: z_rtl=%0d z=%0d", z_rtl, z);
+	$display ($time,," Test stimulus is: z_netlist=%0d z=%0d", z_netlist, z);
 endtask
 
 initial begin
