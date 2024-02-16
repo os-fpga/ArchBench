@@ -6,7 +6,8 @@ module sim_route_and8;
 	integer mismatch=0;
 
 and8 golden(a,b);
-and8_post_route netlist(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],b_netlist);
+and8_post_route netlist(
+);
 
 initial begin
     clk = 1'b0;

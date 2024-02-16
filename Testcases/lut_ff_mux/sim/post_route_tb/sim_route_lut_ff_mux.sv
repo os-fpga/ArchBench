@@ -3,13 +3,14 @@ module sim_route_lut_ff_mux;
     bit clk;
     bit rst;
     bit mux_sel;
-    wire Q,q_netlist;
+    wire Q, q_netlist;
 
     // reg clk;
 	integer mismatch=0;
 
 lut_ff_mux golden(.in(in),.clk(clk),.rst(rst),.mux_sel(mux_sel),.Q(Q));
-lut_ff_mux_post_route netlist(clk,in[0],in[1],in[2],in[3],rst,mux_sel,q_netlist);
+lut_ff_mux_post_route netlist(
+);
 
 always #1 clk = ~clk;
 

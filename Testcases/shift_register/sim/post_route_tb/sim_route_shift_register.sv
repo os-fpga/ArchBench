@@ -8,32 +8,13 @@ module sim_route_shift_register;
   bit reset;
   bit [1:0] ctrl;
   bit [N-1:0] data;
-  wire [N-1:0] q_reg_rtl,q_reg;
+  wire [N-1:0] q_reg,q_reg_netlist;
 
   integer mismatch=0;
 
-  shift_register #(.N(N)) shift_register_dut (.clk (clk),.reset(reset),.ctrl(ctrl),.data(data),.q_reg(q_reg_rtl));
-  shift_register_post_route netlist (clk,
-                                    reset,
-                                    ctrl[0],
-                                    ctrl[1],
-                                    data[0],
-                                    data[1],
-                                    data[2],
-                                    data[3],
-                                    data[4],
-                                    data[5],
-                                    data[6],
-                                    data[7],
-                                    q_reg[0],
-                                    q_reg[1],
-                                    q_reg[2],
-                                    q_reg[3],
-                                    q_reg[4],
-                                    q_reg[5],
-                                    q_reg[6],
-                                    q_reg[7]
-                                    );
+  shift_register #(.N(N)) shift_register_dut (.clk (clk),.reset(reset),.ctrl(ctrl),.data(data),.q_reg(q_reg));
+  shift_register_post_route netlist(
+);
 
   always #5  clk = !clk;
      
@@ -81,16 +62,16 @@ end
 
 task compare();
  	$display("*** Comparing ***");
-  	if(q_reg_rtl !== q_reg) begin
-    	$display("Data Mismatch. Golden: %0d, Netlist: %0d, Time: %0t", q_reg_rtl, q_reg, $time);
+  	if(q_reg !== q_reg_netlist) begin
+    	$display("Data Mismatch. Golden: %0d, Netlist: %0d, Time: %0t", q_reg, q_reg_netlist, $time);
     	mismatch = mismatch+1;
  	end
   	else
-  		$display("Data Matched. Golden: %0d, Netlist: %0d, Time: %0t", q_reg_rtl, q_reg, $time);
+  		$display("Data Matched. Golden: %0d, Netlist: %0d, Time: %0t", q_reg, q_reg_netlist, $time);
 endtask
 
 task display_stimulus();
-	$display ($time,," Test stimulus is: a=%0d b=%0d", q_reg_rtl, q_reg);
+	$display ($time,," Test stimulus is: q_reg=%0d q_reg_netlist=%0d", q_reg, q_reg_netlist);
 endtask
 
 initial begin

@@ -6,13 +6,7 @@ module sim_route_up5bit_counter;
 	integer mismatch=0;
 
 up5bit_counter golden(out,clk,reset);
-up5bit_counter_post_route netlist(clk,
-								reset,
-								out_netlist[0],
-								out_netlist[1],
-								out_netlist[2],
-								out_netlist[3],
-								out_netlist[4]
+up5bit_counter_post_route netlist(
 );
 
 always #1 clk = ~clk;

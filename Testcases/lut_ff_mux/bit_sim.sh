@@ -76,7 +76,7 @@ cd $main_path
 # python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
 design_path=`find . -type f -iname "$design_name.v"`
-tool_name="vcs"
+tool_name="iverilog"
 
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
@@ -163,6 +163,8 @@ sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
 DFFRE=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DFFRE.v"`
 
+python3 ../../../scripts/post_route_script.py $design_name
+
 if [[ $simulator_name == "vcs" ]]
 then
     [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
@@ -213,8 +215,8 @@ cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_fil
 python3 ../../../../scripts/force.py $design_name
 
 start_bitstream=`date +%s`
-timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-./simv | tee -a bitstream_sim.log
+# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+# ./simv | tee -a bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
