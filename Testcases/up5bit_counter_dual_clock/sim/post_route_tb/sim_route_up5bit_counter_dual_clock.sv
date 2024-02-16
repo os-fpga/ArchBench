@@ -8,19 +8,6 @@ module sim_route_up5bit_counter_dual_clock;
 
 up5bit_counter_dual_clock golden(out0,out1,clk0,clk1,reset);
 up5bit_counter_dual_clock_post_route netlist(
-clk0 ,
-clk1 ,
-reset ,
-out0_netlist[0],
-out0_netlist[1],
-out0_netlist[2],
-out0_netlist[3],
-out0_netlist[4],
-out1_netlist[0],
-out1_netlist[1],
-out1_netlist[2],
-out1_netlist[3],
-out1_netlist[4]
 );
 
 always #3 clk0 = ~clk0;
