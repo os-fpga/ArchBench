@@ -1,7 +1,7 @@
 module sim_route_design88_3_3_top;
     bit rst;
 	bit [31:0] in;
-    wire [31:0] out,out_netlist;
+    wire [31:0] out, out_netlist;
 
     reg clk;
 	integer mismatch=0;

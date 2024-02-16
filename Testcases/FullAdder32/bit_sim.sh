@@ -163,7 +163,7 @@ ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
 
-# python3 ../../../scripts/post_route_script.py $design_name
+python3 ../../../scripts/post_route_script.py $design_name 2
 
 if [[ $simulator_name == "vcs" ]]
 then
