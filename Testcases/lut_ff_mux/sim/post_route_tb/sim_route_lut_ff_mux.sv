@@ -3,7 +3,7 @@ module sim_route_lut_ff_mux;
     bit clk;
     bit rst;
     bit mux_sel;
-    wire Q,q_netlist;
+    wire Q, q_netlist;
 
     // reg clk;
 	integer mismatch=0;
