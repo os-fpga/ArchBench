@@ -206,7 +206,7 @@ post_route_netlist_path=`find $main_path -wholename "*/routing/$design_name\_pos
 # echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
 
 cd $main_path
-[ -f $design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
+[ -f $design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
 [ -f $design_name\_golden/$design_name\_vcs_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_vcs_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .

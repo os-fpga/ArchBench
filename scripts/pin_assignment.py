@@ -11,6 +11,7 @@ with open(f'../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PinMapping.xml
 root = ET.fromstring(xml_data)
 
 pin_assignments = {}
+output_pin_assignments = []
 
 for io in root.findall('io'):
     name = io.get('name')
@@ -24,13 +25,15 @@ for io in root.findall('io'):
                 pin_assignments[pin] = net
         else:
             pin_assignments[int(pin_range)] = net
+    elif 'gfpga_pad_QL_PREIO_F2A' in name:
+        output_pin_assignments.append(f"assign {net} = {name};\n")
 
 max_pin = max(pin_assignments.keys())
 for pin in range(max_pin + 1):
     if pin not in pin_assignments:
         pin_assignments[pin] = '0'
 
-verilog_file_path = '../../sim/bitstream_tb/unsigned_multiply_formal_random_top_tb.v'
+verilog_file_path = '../../sim/bitstream_tb/'+design_name+'_formal_random_top_tb.v'
 with open(verilog_file_path, 'r') as verilog_file:
     for line in verilog_file:
         match = re.match(r'\t+wire\s+\[(\d+):(\d+)\]\s+gfpga_pad_QL_PREIO_A2F;', line)
@@ -49,3 +52,7 @@ with open(f'../{design_name}/pin_assignments.v', 'w') as verilog_file:
                 verilog_file.write(f"assign gfpga_pad_QL_PREIO_A2F[{pin}:{pin}] = {net};\n")
         else:
             verilog_file.write(f"assign gfpga_pad_QL_PREIO_A2F[{pin}:{pin}] = 0;\n")
+
+with open(f'../{design_name}/pin_assignments.v', 'a') as verilog_file:
+        for i in output_pin_assignments:
+            verilog_file.write(i)

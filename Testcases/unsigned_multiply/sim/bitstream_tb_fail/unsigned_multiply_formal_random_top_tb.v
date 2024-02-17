@@ -15,8 +15,8 @@ module unsigned_multiply_top_formal_verification_random_tb;
 	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
 	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
 	bit [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
-	bit [0:511] bl_config_region_0;
-	bit [0:397] wl_config_region_0;
+	bit [0:513] bl_config_region_0;
+	bit [0:406] wl_config_region_0;
 	bit global_resetn;
 	bit scan_en;
 	bit scan_mode;
@@ -29,8 +29,8 @@ module unsigned_multiply_top_formal_verification_random_tb;
 		gfpga_pad_QL_PREIO_A2F[0:2303],
 		gfpga_pad_QL_PREIO_F2A[0:2303],
 		gfpga_pad_QL_PREIO_F2A_CLK[0:2303],
-		bl_config_region_0[0:511],
-		wl_config_region_0[0:397]);
+		bl_config_region_0[0:513],
+		wl_config_region_0[0:406]);
 
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
