@@ -29,7 +29,6 @@ def extract_signal_names_from_file(file_path):
         signal_names.extend(declaration.split()[1:])
     return signal_declarations
 
-number_of_outputs=1
 design_name=sys.argv[1]
 
 verilog_file_path = design_name+"/run_1/synth_1_1/impl_1_1_1/routing/"+design_name+"_post_route.v"
@@ -46,7 +45,10 @@ else:
 with open("../sim/post_route_tb/"+testbench_file_name, "r") as f:
     testbench_content = f.readlines()
 
-number_of_outputs=int(sys.argv[2])
+if len(sys.argv) >= 3 and sys.argv[2] != "":
+    number_of_outputs = int(sys.argv[2])
+else:
+    number_of_outputs = 0
 
 if number_of_outputs > 1:
     wire_lines = get_wire_lines("../sim/post_route_tb/"+testbench_file_name,number_of_outputs)
