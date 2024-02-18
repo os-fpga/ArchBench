@@ -1,21 +1,16 @@
 `default_nettype none
 
 module FullAdder32_top_formal_verification_random_tb;
-// ----- Default clock port is added here since benchmark does not contain one -------
+
 	reg clock0;
 
-// ----- Shared inputs -------
 	reg [31:0] a;
 	reg [31:0] b;
 	reg cin;
 
-// ----- FPGA fabric outputs -------
 	wire [31:0] sum;
 	wire cout;
 
-// ----- FPGA fabric instanciation -------
-	
-// ----- Local wires for FPGA fabric -----
 	wire [0:15] clk;
 	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
 	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
@@ -26,7 +21,6 @@ module FullAdder32_top_formal_verification_random_tb;
 	wire scan_en;
 	wire scan_mode;
 
-// ----- FPGA top-level module to be capsulated -----
 	fpga_top U0_formal_verification (
 		clk[0:15],
 		global_resetn,
@@ -38,7 +32,6 @@ module FullAdder32_top_formal_verification_random_tb;
 		bl_config_region_0[0:513],
 		wl_config_region_0[0:406]);
 
-// ----- Begin Connect Global ports of FPGA top module -----
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
 	assign scan_mode = 1'b0;
@@ -58,9 +51,7 @@ module FullAdder32_top_formal_verification_random_tb;
 	assign clk[13] = 1'b0;
 	assign clk[14] = 1'b0;
 	assign clk[15] = clock0;
-// ----- End FPGA Fabric Instanication -------
 
-// ----- Clock 'clk' Initialization -------
 	initial begin
 		clock0 <= 1'b0;
 		while(1) begin
@@ -73,18 +64,17 @@ module FullAdder32_top_formal_verification_random_tb;
 
 	initial begin
 	`include "../../bitstream_text.txt"
-		// reset = 1'b1;
 		global_resetn = 1'b0;
 		repeat(2)@(posedge clock0);
 
-        a = 32'hAAAA_AAAA; // Example input value
-        b = 32'h5555_5555; // Example input value
-        cin = 1'b0; // Example input value
+        a = 32'hAAAA_AAAA;
+        b = 32'h5555_5555;
+        cin = 1'b0;
         #10;
         if (a + b + cin == sum) begin
-            $display("TEST PASSED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
         end else begin
-            $display("TEST FAILED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
         end
 		
 		a = 32'h0;
@@ -92,9 +82,9 @@ module FullAdder32_top_formal_verification_random_tb;
         cin = 1'b0;
         #10;
         if (a + b + cin == sum) begin
-            $display("TEST PASSED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
         end else begin
-            $display("TEST FAILED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
         end
 
         a = 32'h0;
@@ -102,26 +92,93 @@ module FullAdder32_top_formal_verification_random_tb;
         cin = 1'b1;
         #10;
         if (a + b + cin == sum) begin
-            $display("TEST PASSED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
         end else begin
-            $display("TEST FAILED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
         end
 
-        // Apply stimulus
+        a = 32'h1;
+        b = 32'h0;
+        cin = 1'b0;
+        #10;
+        if (a + b + cin == sum) begin
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end else begin
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end
+
+        a = 32'h0;
+        b = 32'h1;
+        cin = 1'b0;
+        #10;
+        if (a + b + cin == sum) begin
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end else begin
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end
+
+        a = 32'h1;
+        b = 32'h1;
+        cin = 1'b1;
+        #10;
+        if (a + b + cin == sum) begin
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end else begin
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end
+
+        a = 32'h80000000;
+        b = 32'h0;
+        cin = 1'b0;
+        #10;
+        if (a + b + cin == sum) begin
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end else begin
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end
+
+        a = 32'h0;
+        b = 32'h80000000;
+        cin = 1'b0;
+        #10;
+        if (a + b + cin == sum) begin
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end else begin
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end
+
+        a = 32'h0;
+        b = 32'h80000000;
+        cin = 1'b1;
+        #10;
+        if (a + b + cin == sum) begin
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end else begin
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end
+
+        a = 32'h80000000;
+        b = 32'h80000000;
+        cin = 1'b1;
+        #10;
+        if (a + b + cin == sum) begin
+            $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end else begin
+            $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+        end
+
         repeat(50) begin
             #1 a = $random;
             #1 b = $random;
             #1 cin = $random;
             #10;
-            // Self-checking
             if (a + b + cin == sum) begin
-                $display("TEST PASSED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+                $display("Status: Test Passed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
             end else begin
-                $display("TEST FAILED: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
+                $display("Status: Test Failed: a = %h, b = %h, cin = %b, sum = %h, cout = %b", a, b, cin, sum, cout);
             end
         end
 
-        // Stop simulation
         $finish;
     end
 	
@@ -132,5 +189,4 @@ module FullAdder32_top_formal_verification_random_tb;
 
 
 endmodule
-// ----- END Verilog module for FullAdder32_top_formal_verification_random_tb -----
 
