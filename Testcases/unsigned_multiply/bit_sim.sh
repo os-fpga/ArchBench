@@ -162,7 +162,11 @@ TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
 ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
+DSP19X2=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DSP19X2.v"`
 DSP38=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DSP38.v"`
+rs_dsp=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models_internal/primitives_mapping/DSP/rs_dsp_multxxx_post_pnr_mapping.v"`
+
+python3 ../../../scripts/post_route_script.py $design_name
 
 if [[ $simulator_name == "vcs" ]]
 then
@@ -181,7 +185,7 @@ then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
     start_post_route=`date +%s`
-    iverilog -g2012 -DIVERILOG=1 -o $design_name $DSP38 $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+    iverilog -g2012 -DIVERILOG=1 -o $design_name $rs_dsp $DSP38 $DSP19X2 $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
@@ -212,7 +216,7 @@ fi
 cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
 
 python3 ../../../../scripts/force.py $design_name
-python3 ../../../../scripts/pin_assignment.py $design_name
+# python3 ../../../../scripts/pin_assignment.py $design_name
 
 start_bitstream=`date +%s`
 # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
