@@ -4,7 +4,7 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-simulator_name="verilator" #vcs,iverilog
+simulator_name="iverilog" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
@@ -76,7 +76,7 @@ cd $main_path
 # python3 ../../scripts/gen_openfpga_script.py $design_name $vpr_file $openfpga_file $fixed_sim_openfpga_file $repack_design_constraint_file $bitstream_annotation_file $default
 
 design_path=`find . -type f -iname "$design_name.v"`
-tool_name="vcs"
+tool_name="iverilog"
 
 sed -i -e "s|MEM_FILE_PATH|$PWD/rtl|g" rtl/rom.v
 
@@ -164,6 +164,10 @@ ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
 sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
 primitive=`find $library -wholename "*/genesis3/primitives.v"`
 DFFRE=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DFFRE.v"`
+TDP_RAM18KX2=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/TDP_RAM18KX2.v"`
+rs_tdp36k=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models_internal/primitives_mapping/BRAM/rs_tdp36k_post_pnr_mapping.v"`
+
+python3 ../../../scripts/post_route_script.py $design_name
 
 if [[ $simulator_name == "vcs" ]]
 then
@@ -181,8 +185,9 @@ if [[ $simulator_name == "iverilog" ]]
 then
     [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
     [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
+    cp ../../rtl/memory_file.mem .
     start_post_route=`date +%s`
-    # iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $TDP18K_FIFO $sram1024x18 $ufifo_ctl $bram_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+    iverilog -g2012 -DIVERILOG=1 -o $design_name $TDP_RAM18KX2 $rs_tdp36k $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
     end_post_route=`date +%s`
     runtime_post_route=$((end_post_route-start_post_route))
     echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
