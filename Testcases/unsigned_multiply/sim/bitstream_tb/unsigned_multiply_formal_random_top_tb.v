@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 `default_nettype none
 
 module unsigned_multiply_top_formal_verification_random_tb;
