@@ -9,6 +9,11 @@ module sim_route_dffre_inst;
 
 dffre_inst golden(clk,i_Reset,i_Enable,i_D,o_Q );
 dffre_inst_post_route netlist(
+clk ,
+i_Reset ,
+i_Enable ,
+i_D ,
+o_Q_netlist
 );
 
 initial begin

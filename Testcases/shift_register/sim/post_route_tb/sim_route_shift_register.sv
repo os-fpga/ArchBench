@@ -14,6 +14,26 @@ module sim_route_shift_register;
 
   shift_register #(.N(N)) shift_register_dut (.clk (clk),.reset(reset),.ctrl(ctrl),.data(data),.q_reg(q_reg));
   shift_register_post_route netlist(
+clk ,
+reset ,
+ctrl[0] ,
+ctrl[1] ,
+data[0] ,
+data[1] ,
+data[2] ,
+data[3] ,
+data[4] ,
+data[5] ,
+data[6] ,
+data[7] ,
+q_reg_netlist[0] ,
+q_reg_netlist[1] ,
+q_reg_netlist[2] ,
+q_reg_netlist[3] ,
+q_reg_netlist[4] ,
+q_reg_netlist[5] ,
+q_reg_netlist[6] ,
+q_reg_netlist[7]
 );
 
   always #5  clk = !clk;
