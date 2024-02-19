@@ -8,22 +8,6 @@ module rom_post_route_tb;
   
   rom golden (.clk(clk),.address(address),.data(data));
   rom_post_route netlist(
-clk ,
-address[0] ,
-address[1] ,
-address[2] ,
-address[3] ,
-address[4] ,
-address[5] ,
-address[6] ,
-data_netlist[0] ,
-data_netlist[1] ,
-data_netlist[2] ,
-data_netlist[3] ,
-data_netlist[4] ,
-data_netlist[5] ,
-data_netlist[6] ,
-data_netlist[7]
 );
 
   always #1 clk = !clk;
