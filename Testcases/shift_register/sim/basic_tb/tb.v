@@ -26,56 +26,6 @@ module shift_register_tb;
 
 always #1  clock0 = ! clock0 ;
 
-// initial begin
-//     clock0<=0;
-//     reset<=0;
-//     ctrl<=0;
-//     data<=0;
-
-    // repeat(10)@(negedge clock0);
-    // reset<=1;
-
-    // repeat(10)@(negedge clock0);
-    // reset<=0;
-
-    // // ctrl<=1;
-    // repeat(10)@(negedge clock0) begin
-    //     data=$random();
-    // end
-
-    // ctrl<=1;
-    // repeat(10)@(negedge clock0) begin
-    //     data=$random();
-    //     @(negedge clock0);
-    //     if (q_reg === {data[N-1], s_reg[N-1:1]}) begin
-    //         $display("Status: Test Passed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //     end
-    //     else begin
-    //         $display("Status: Test Failed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //     end
-    // end
-
-    // ctrl<=0;
-    // repeat(10)@(negedge clock0) begin
-    //     data=$random();
-    // end
-
-    // ctrl<=2;
-    // repeat(10)@(negedge clock0) begin
-    //     data=$random();
-    // end
-
-    // ctrl<=0;
-    // repeat(10)@(negedge clock0) begin
-    //     data=$random();
-    // end
-
-    // ctrl<=3;
-    // repeat(10)@(negedge clock0) begin
-    //     data=$random();
-    // end
-
-
     initial begin
         clock0 = 0;
         reset = 0;
@@ -286,30 +236,6 @@ always #1  clock0 = ! clock0 ;
             end
         end
     endtask
-    // Check output behavior
-    // always @(posedge clock0) begin
-    //     case(ctrl)
-    //         1: begin // Right shift
-    //             if(q_reg !== {1'b0, data[N-1:1]}) $display("Status: Test Failed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //             else $display("Status: Test Passed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //         end
-    //         2: begin // Left shift
-    //             if(q_reg !== {data[N-2:0], 1'b0}) $display("Status: Test Failed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //             else $display("Status: Test Passed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //         end
-    //         3: begin // Load data
-    //             if(q_reg !== data) $display("Status: Test Failed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //             else $display("Status: Test Passed: %0t q_reg: %0b, expected_output: %0b", $time, q_reg, {data[N-1], s_reg[N-1:1]});
-    //         end
-    //     endcase
-    // end
-
-
-
-    // #100;
-    // $finish;
-
-// end
 
 initial begin
     $dumpfile("wave.vcd");
