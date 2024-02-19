@@ -35,20 +35,20 @@ module dffre_inst_top_formal_verification_random_tb;
 		assign scan_en = 1'b0;
 		assign scan_mode = 1'b0;
 		assign clk[0] = clock0;
-		assign clk[1] = 1'b0;
-		assign clk[2] = 1'b0;
-		assign clk[3] = 1'b0;
-		assign clk[4] = 1'b0;
-		assign clk[5] = 1'b0;
-		assign clk[6] = 1'b0;
-		assign clk[7] = 1'b0;
-		assign clk[8] = 1'b0;
-		assign clk[9] = 1'b0;
-		assign clk[10] = 1'b0;
-		assign clk[11] = 1'b0;
-		assign clk[12] = 1'b0;
-		assign clk[13] = 1'b0;
-		assign clk[14] = 1'b0;
+		assign clk[1] = clock0;
+		assign clk[2] = clock0;
+		assign clk[3] = clock0;
+		assign clk[4] = clock0;
+		assign clk[5] = clock0;
+		assign clk[6] = clock0;
+		assign clk[7] = clock0;
+		assign clk[8] = clock0;
+		assign clk[9] = clock0;
+		assign clk[10] = clock0;
+		assign clk[11] = clock0;
+		assign clk[12] = clock0;
+		assign clk[13] = clock0;
+		assign clk[14] = clock0;
 		assign clk[15] = clock0;
 
 	initial begin
@@ -66,6 +66,8 @@ module dffre_inst_top_formal_verification_random_tb;
 		i_Reset <= 1'b0;
 		i_Enable <= 1'b0;
 		i_D <= 1'b0;
+
+		#10 global_resetn = 1'b1;
 	
 		#20 i_Reset = 1;
 	
@@ -107,7 +109,7 @@ module dffre_inst_top_formal_verification_random_tb;
 	
 	initial begin
 		#30;
-		if (i_Reset == 0 || o_Q === 0) begin
+		if (!i_Reset || !o_Q) begin
 			$display("Status: Test Passed: i_Reset = %b, o_Q = %b", i_Reset, o_Q);
 		end
 		else
@@ -116,8 +118,8 @@ module dffre_inst_top_formal_verification_random_tb;
 
 	always @(negedge clock0) begin
 		#20;
-		if (i_Reset == 0) begin
-			if (o_Q === 0) begin
+		if (!i_Reset) begin
+			if (!o_Q) begin
 				$display("Status: Test Passed: i_Reset = %b, o_Q = %b", i_Reset, o_Q);
 			end
 			else begin
@@ -140,7 +142,7 @@ module dffre_inst_top_formal_verification_random_tb;
 
 	initial begin
 		$dumpfile("dffre_inst_formal.vcd");
-		$dumpvars(1, dffre_inst_top_formal_verification_random_tb);
+		$dumpvars(0, dffre_inst_top_formal_verification_random_tb);
 	end
 
 endmodule

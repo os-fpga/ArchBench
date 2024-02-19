@@ -1,6 +1,7 @@
 `default_nettype none
 
 module sp_ram_top_formal_verification_random_tb;
+
 	parameter ADDR_WIDTH          = 10;
 	parameter DATA_WIDTH          = 32;
 	parameter SIZE            	  = 1024;
@@ -18,37 +19,27 @@ module sp_ram_top_formal_verification_random_tb;
 	int error=0;
 	int pass=0;
 
-wire [0:15] clk;
-wire [0:2303] gfpga_pad_QL_PREIO_A2F;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A;
-wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
-wire [0:513] bl_config_region_0;
-wire [0:406] wl_config_region_0;
-bit global_resetn;
-wire scan_en;
-wire scan_mode;
+	wire [0:15] clk;
+	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
+	wire [0:2303] gfpga_pad_QL_PREIO_F2A_CLK;
+	wire [0:513] bl_config_region_0;
+	wire [0:406] wl_config_region_0;
+	bit global_resetn;
+	wire scan_en;
+	wire scan_mode;
 
 	fpga_top U0_formal_verification (
-		.clk(clk[0:15]),
-		.global_resetn(global_resetn),
-		.scan_en(scan_en),
-		.scan_mode(scan_mode),
-		.gfpga_pad_QL_PREIO_A2F(gfpga_pad_QL_PREIO_A2F[0:2303]),
-		.gfpga_pad_QL_PREIO_F2A(gfpga_pad_QL_PREIO_F2A[0:2303]),
-		.gfpga_pad_QL_PREIO_F2A_CLK(gfpga_pad_QL_PREIO_F2A_CLK[0:2303]),
-		.bl_config_region_0(bl_config_region_0[0:513]),
-		.wl_config_region_0(wl_config_region_0[0:406]));
+		clk[0:15],
+		global_resetn,
+		scan_en,
+		scan_mode,
+		gfpga_pad_QL_PREIO_A2F[0:2303],
+		gfpga_pad_QL_PREIO_F2A[0:2303],
+		gfpga_pad_QL_PREIO_F2A_CLK[0:2303],
+		bl_config_region_0[0:513],
+		wl_config_region_0[0:406]);
 
-	assign gfpga_pad_QL_PREIO_A2F [0:77] = 0;
-	assign gfpga_pad_QL_PREIO_A2F [79:143] = 0;
-	assign gfpga_pad_QL_PREIO_A2F [145:154] = 0;
-	assign gfpga_pad_QL_PREIO_A2F [156:221] = 0;
-	assign gfpga_pad_QL_PREIO_A2F [223:791] = 0;
-	assign gfpga_pad_QL_PREIO_A2F [808:863] = 0;
-	assign gfpga_pad_QL_PREIO_A2F [880:1007] = 0;
-	assign gfpga_pad_QL_PREIO_A2F [1016:2303] = 0;
-	assign bl_config_region_0 [0:513] = 0;
-	assign wl_config_region_0 [0:406] = 0;
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
 	assign scan_mode = 1'b0;
@@ -68,7 +59,7 @@ wire scan_mode;
 	assign clk[13] = clock0;
 	assign clk[14] = clock0;
 	assign clk[15] = clock0;
-	
+
 	initial begin
 		clock0 <= 1'b0;
 		while(1) begin
@@ -77,7 +68,7 @@ wire scan_mode;
 		end
 	end
 
-	`include "../sp_ram/PinMapping.v"
+	`include "../shift_register/pin_assignments.v"
 
 	initial begin
 		`include "../../bitstream_text.txt"
@@ -91,8 +82,8 @@ wire scan_mode;
 		// we=1;
 
 		for (int i = 0; i<SIZE; i++) begin
-			wdata = $urandom_range(0, ((2**DATA_WIDTH)-1));
-			address = $urandom_range(0, ((2**DATA_WIDTH)-1));
+			wdata = $random();              // $urandom_range(0, ((2**DATA_WIDTH)-1));
+			address = $random();            // $urandom_range(0, ((2**DATA_WIDTH)-1));
 			memory[address] = wdata;
 			//write
 			write(address, wdata);
@@ -101,6 +92,7 @@ wire scan_mode;
 			compare(address, rd_data);
 		end
 
+		#10;
 		$finish;
 	end
 
@@ -123,17 +115,17 @@ wire scan_mode;
 	
     function void compare(reg[ADDR_WIDTH-1:0] exp_addr, reg [DATA_WIDTH-1:0] cap_data);
 		if (cap_data !== memory[exp_addr]) begin
-			$display("FAIL:: @%0t ADDR: %0d, Expected Data: %0h, Actual Data: %0h", $time, exp_addr, memory[exp_addr], cap_data); 
+			$display("Status: Test Failed: @%0t ADDR: %0d, Expected Data: %0h, Actual Data: %0h", $time, exp_addr, memory[exp_addr], cap_data); 
 			error++;
 		end
 		else begin
-			$display("TEST PASSED: @%0t ADDR: %0d, Expected Data: %0h, Actual Data: %0h", $time, exp_addr, memory[exp_addr], cap_data); 
+			$display("Status: Test Passed: @%0t ADDR: %0d, Expected Data: %0h, Actual Data: %0h", $time, exp_addr, memory[exp_addr], cap_data); 
 			pass++;
 		end 
 	endfunction
 
 	initial begin
-		$dumpfile("wave.vcd");
+		$dumpfile("sp_ram_formal.vcd");
 		$dumpvars(0, sp_ram_top_formal_verification_random_tb);
 	end
 
