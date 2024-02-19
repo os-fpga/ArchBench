@@ -106,7 +106,7 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
-[ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream">>raptor.tcl    # enable_simulation
+[ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl    # enable_simulation
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
@@ -217,6 +217,8 @@ python3 ../../../../scripts/force.py $design_name
 start_bitstream=`date +%s`
 # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
 # ./simv | tee -a bitstream_sim.log
+iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+vvp ./$design_name | tee bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log

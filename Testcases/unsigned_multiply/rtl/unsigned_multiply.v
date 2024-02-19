@@ -1,6 +1,3 @@
-// Quartus II Verilog Template
-// Unsigned multiply
-
 module unsigned_multiply
 #(parameter WIDTH=5)
 (
