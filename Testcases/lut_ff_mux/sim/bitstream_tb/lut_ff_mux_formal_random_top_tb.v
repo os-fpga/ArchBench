@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 `default_nettype none
 
 module lut_ff_mux_top_formal_verification_random_tb;
