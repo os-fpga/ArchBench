@@ -83,11 +83,11 @@ module unsigned_multiply_top_formal_verification_random_tb;
 			#10;
 			@(posedge clock0)
 			if(dataout_tb !== dataout) begin
-				$display("TEST FAILED: @%0t dataa: %0d, datab: %0d, dataout: %0d, dataout_tb: %0d", $time, dataa, datab, dataout, dataout_tb); 
+				$display("Status: Test Failed: @%0t dataa: %0d, datab: %0d, dataout: %0d, dataout_tb: %0d", $time, dataa, datab, dataout, dataout_tb); 
 				error = error + 1;
 			end
 			else
-				$display("TEST PASSED: @%0t dataa: %0d, datab: %0d, dataout: %0d, dataout_tb: %0d", $time, dataa, datab, dataout, dataout_tb); 
+				$display("Status: Test Passed: @%0t dataa: %0d, datab: %0d, dataout: %0d, dataout_tb: %0d", $time, dataa, datab, dataout, dataout_tb); 
 		end
 		repeat(10)@(negedge clock0);
 		$finish;
