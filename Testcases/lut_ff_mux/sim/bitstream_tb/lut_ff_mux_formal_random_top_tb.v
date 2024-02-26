@@ -67,7 +67,7 @@ module lut_ff_mux_top_formal_verification_random_tb;
 			clock0 <= !clock0;
 		end
 	end
-	`include "../lut_ff_mux/PinMapping.v"
+	`include "../lut_ff_mux/pin_assignments.v"
 
 // ----- Begin reset signal generation -----
 // ----- End reset signal generation -----

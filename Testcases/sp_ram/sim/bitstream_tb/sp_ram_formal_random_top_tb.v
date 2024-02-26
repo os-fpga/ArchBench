@@ -70,7 +70,7 @@ module sp_ram_top_formal_verification_random_tb;
 		end
 	end
 
-	`include "../shift_register/pin_assignments.v"
+	`include "../sp_ram/pin_assignments.v"
 
 	initial begin
 		`include "../../bitstream_text.txt"
