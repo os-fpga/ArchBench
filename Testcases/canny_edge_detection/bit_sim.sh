@@ -122,9 +122,8 @@ echo "power">>raptor.tcl
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
-export TMPDIR=$PWD
-
 start_raptor=`date +%s`
+export TMPDIR=$PWD
 raptor --batch --script raptor.tcl 
 end_raptor=`date +%s`
 runtime_raptor=$((end_raptor-start_raptor))

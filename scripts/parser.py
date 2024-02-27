@@ -1,12 +1,10 @@
-#Owner: Abdul Hameed Akram
+#Owner: Zaheer Ahmad
 #Dated: 30/01/2023
 #Description: This code reads in a list of log files and a mapping of keywords for each file. 
 #             It then processes each file and extracts information based on the keywords provided 
 #             in the keywords.json. The extracted information is stored in a dictionary and 
 #             written to a json file called "parsed_data.json".
 
-
-# Importing the json module
 import json
 import os
 

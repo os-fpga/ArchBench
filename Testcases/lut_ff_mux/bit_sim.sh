@@ -213,6 +213,7 @@ fi
 cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
 
 python3 ../../../../scripts/force.py $design_name
+python3 ../../../../scripts/pin_assignment.py $design_name
 
 start_bitstream=`date +%s`
 # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
