@@ -3,18 +3,14 @@
 `default_nettype none
 
 module lut_ff_mux_top_formal_verification_random_tb;
-// ----- Default clock port is added here since benchmark does not contain one -------
 	reg clock0;
 
-// ----- Shared inputs -------
 	reg [3:0] in;
 	reg rst;
 	reg mux_sel;
 
-// ----- FPGA fabric outputs -------
 	wire Q;
 
-// ----- Local wires for FPGA fabric -----
 	wire [0:15] clk;
 	wire [0:2303] gfpga_pad_QL_PREIO_A2F;
 	wire [0:2303] gfpga_pad_QL_PREIO_F2A;
@@ -24,8 +20,7 @@ module lut_ff_mux_top_formal_verification_random_tb;
 	bit global_resetn;
 	wire scan_en;
 	wire scan_mode;
-	
-// ----- FPGA top-level module to be capsulated -----
+
 	fpga_top U0_formal_verification (
 		clk[0:15],
 		global_resetn,
@@ -37,29 +32,26 @@ module lut_ff_mux_top_formal_verification_random_tb;
 		bl_config_region_0[0:513],
 		wl_config_region_0[0:406]);
 
-// ----- Begin Connect Global ports of FPGA top module -----
 	// assign global_resetn = 1'b0;
 	assign scan_en = 1'b0;
 	assign scan_mode = 1'b0;
 	assign clk[0] = clock0;
-	assign clk[1] = 1'b0;
-	assign clk[2] = 1'b0;
-	assign clk[3] = 1'b0;
-	assign clk[4] = 1'b0;
-	assign clk[5] = 1'b0;
-	assign clk[6] = 1'b0;
-	assign clk[7] = 1'b0;
-	assign clk[8] = 1'b0;
-	assign clk[9] = 1'b0;
-	assign clk[10] = 1'b0;
-	assign clk[11] = 1'b0;
-	assign clk[12] = 1'b0;
-	assign clk[13] = 1'b0;
-	assign clk[14] = 1'b0;
-	assign clk[15] = 1'b0;
-// ----- End FPGA Fabric Instanication -------
+	assign clk[1] = clock0;
+	assign clk[2] = clock0;
+	assign clk[3] = clock0;
+	assign clk[4] = clock0;
+	assign clk[5] = clock0;
+	assign clk[6] = clock0;
+	assign clk[7] = clock0;
+	assign clk[8] = clock0;
+	assign clk[9] = clock0;
+	assign clk[10] = clock0;
+	assign clk[11] = clock0;
+	assign clk[12] = clock0;
+	assign clk[13] = clock0;
+	assign clk[14] = clock0;
+	assign clk[15] = clock0;
 
-// ----- Clock 'clk' Initialization -------
 	initial begin
 		clock0 <= 1'b0;
 		while(1) begin
@@ -69,10 +61,6 @@ module lut_ff_mux_top_formal_verification_random_tb;
 	end
 	`include "../lut_ff_mux/pin_assignments.v"
 
-// ----- Begin reset signal generation -----
-// ----- End reset signal generation -----
-
-// ----- Input Initialization -------
 	initial begin
 		`include "../../bitstream_text.txt"
 		in <= 4'b0;
@@ -439,22 +427,10 @@ module lut_ff_mux_top_formal_verification_random_tb;
         end
     endtask
 
-// ----- Begin output waveform to VCD file-------
 	initial begin
 		$dumpfile("lut_ff_mux_formal.vcd");
 		$dumpvars(1, lut_ff_mux_top_formal_verification_random_tb);
 	end
-// ----- END output waveform to VCD file -------
-
-// initial begin
-// 	$timeformat(-9, 2, "ns", 20);
-// 	$display("Simulation start");
-// // ----- Can be changed by the user for his/her need -------
-// 	#20
-// 	$display("Simulation Succeed");
-// 	$finish;
-// end
 
 endmodule
-// ----- END Verilog module for lut_ff_mux_top_formal_verification_random_tb -----
 
