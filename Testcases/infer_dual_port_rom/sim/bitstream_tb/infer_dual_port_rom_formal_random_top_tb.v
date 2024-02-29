@@ -2,13 +2,16 @@
 
 module infer_dual_port_rom_top_formal_verification_random_tb;
 
-	reg clock0;
-	reg [9:0] addr_a;
-	reg [9:0] addr_b;
+	localparam  DATA_WIDTH = 12;
+	localparam  ADDR_WIDTH = 10;
 
-	wire [11:0] q_a;
-	wire [11:0] q_b;
-	reg [11:0] expected_data;
+	reg clock0;
+	reg [ADDR_WIDTH-1:0] addr_a;
+	reg [ADDR_WIDTH-1:0] addr_b;
+
+	wire [DATA_WIDTH-1:0] q_a;
+	wire [DATA_WIDTH-1:0] q_b;
+	reg [DATA_WIDTH-1:0] expected_data [0:(1<<ADDR_WIDTH)-1];
 
 	wire [0:15] clk;
 	wire [0:2303] gfpga_pad_QL_PREIO_A2F;

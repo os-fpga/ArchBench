@@ -2,10 +2,13 @@
 
 module rom_top_formal_verification_random_tb;
 
+	localparam  DATA_WIDTH = 8;
+	localparam  ADDR_WIDTH = 7;
+
 	reg clock0;
-	reg [6:0] address;
-	wire [7:0] data;
-	reg [7:0] expected_data;
+	reg [ADDR_WIDTH-1:0] address;
+	wire [DATA_WIDTH-1:0] data;
+	reg [DATA_WIDTH-1:0] expected_data [0:(1<<ADDR_WIDTH)-1];
 
 	integer i;
 
