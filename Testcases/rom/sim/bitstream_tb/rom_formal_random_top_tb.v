@@ -54,7 +54,7 @@ module rom_top_formal_verification_random_tb;
 		assign clk[15] = clock0;
 
 	initial begin
-		$readmemh("../../rtl/memory_file.mem", expected_data);
+		$readmemb("../../rtl/memory_file.mem", expected_data);
 	end
 
 	initial begin
