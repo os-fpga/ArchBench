@@ -6,7 +6,7 @@ module sim_route_or_1bit;
 	integer mismatch=0;
 
 or_1bit golden(a,b,c);
-or_1bit_post_route netlist(
+fabric_or_1bit_post_route netlist(
 );
 
 //clock initialization

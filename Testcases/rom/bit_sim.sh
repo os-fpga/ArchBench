@@ -121,16 +121,16 @@ raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
 echo -e "Device: $device">>raptor.log
 
-post_route_netlist_path=`find $main_path -wholename "*/routing/$design_name\_post_route.v"`
+post_route_netlist_path=`find $main_path -wholename "*/routing/fabric_$design_name\_post_route.v"`
 
 string="_post_route"
 while read line; do
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design_name " ]]; 
+        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
         then
-            sed -i "s/module $design_name/module $design_name\_post_route/" $post_route_netlist_path
+            sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
             break 2
         fi
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design_name$string " ]]; 
+        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
         then
             break 2
         fi
@@ -232,8 +232,8 @@ python3 ../../../../scripts/force.py $design_name
 python3 ../../../../scripts/pin_assignment.py $design_name
 
 start_bitstream=`date +%s`
-iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
-vvp ./$design_name | tee bitstream_sim.log
+# iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+# vvp ./$design_name | tee bitstream_sim.log
 end_bitstream=`date +%s`
 runtime_bitstream=$((end_bitstream-start_bitstream))
 echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log

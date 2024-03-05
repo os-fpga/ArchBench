@@ -7,7 +7,7 @@ module sim_route_up5bit_counter_dual_clock;
 	integer mismatch=0;
 
 up5bit_counter_dual_clock golden(out0,out1,clk0,clk1,reset);
-up5bit_counter_dual_clock_post_route netlist(
+fabric_up5bit_counter_dual_clock_post_route netlist(
 );
 
 always #3 clk0 = ~clk0;

@@ -8,7 +8,7 @@ module sim_route_dffre_inst;
 	integer mismatch=0;
 
 dffre_inst golden(clk,i_Reset,i_Enable,i_D,o_Q );
-dffre_inst_post_route netlist(
+fabric_dffre_inst_post_route netlist(
 );
 
 initial begin

@@ -31,7 +31,7 @@ def extract_signal_names_from_file(file_path):
 
 design_name=sys.argv[1]
 
-verilog_file_path = design_name+"/run_1/synth_1_1/impl_1_1_1/routing/"+design_name+"_post_route.v"
+verilog_file_path = design_name+"/run_1/synth_1_1/impl_1_1_1/routing/fabric_"+design_name+"_post_route.v"
 
 signal_names = extract_signal_names_from_file(verilog_file_path)
 
@@ -79,7 +79,7 @@ renamed_signal_list.reverse()
 
 insert_line_index = None
 for i, line in enumerate(testbench_content):
-    if design_name+"_post_route netlist(" in line:
+    if "fabric_"+design_name+"_post_route netlist(" in line:
         insert_line_index = i + 1  
         break
 

@@ -7,7 +7,7 @@ module sim_route_design3_5_5_top;
 	integer mismatch=0;
 
 design3_5_5_top golden(clk, rst, in, out);
-design3_5_5_top_post_route netlist( 
+fabric_design3_5_5_top_post_route netlist( 
 );
 
 always #1 clk = ~clk;

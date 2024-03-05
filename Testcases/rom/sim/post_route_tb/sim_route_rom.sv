@@ -7,7 +7,7 @@ module rom_post_route_tb;
   integer i=0;
   
   rom golden (.clk(clk),.address(address),.data(data));
-  rom_post_route netlist(
+  fabric_rom_post_route netlist(
 );
 
   always #1 clk = !clk;

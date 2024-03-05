@@ -6,7 +6,10 @@ module sim_route_add_1bit;
 	integer mismatch=0;
 
 add_1bit golden(a,b,c);
-add_1bit_post_route netlist(
+fabric_add_1bit_post_route netlist(
+a ,
+b ,
+c_netlist
 );
 
 //clock initialization

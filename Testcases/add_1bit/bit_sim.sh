@@ -121,16 +121,16 @@ raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
 echo -e "Device: $device">>raptor.log
 
-post_route_netlist_path=`find $main_path -wholename "*/routing/$design_name\_post_route.v"`
+post_route_netlist_path=`find $main_path -wholename "*/routing/fabric_$design_name\_post_route.v"`
 
 string="_post_route"
 while read line; do
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design_name " ]]; 
+        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
         then
-            sed -i "s/module $design_name/module $design_name\_post_route/" $post_route_netlist_path
+            sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
             break 2
         fi
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design_name$string " ]]; 
+        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
         then
             break 2
         fi
