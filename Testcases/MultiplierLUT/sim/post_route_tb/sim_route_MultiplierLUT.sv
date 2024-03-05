@@ -6,7 +6,7 @@ module sim_route_MultiplierLUT;
 	integer mismatch=0;
 
 MultiplierLUT golden(.a(a),.b(b),.z(z));
-MultiplierLUT_post_route netlist(
+fabric_MultiplierLUT_post_route netlist(
 );
 
 //clock initialization

@@ -9,7 +9,7 @@ wire [11:0] q_b,q_b_netlist;
 integer mismatch=0;
 
 infer_dual_port_rom golden (.addr_a(addr_a),.addr_b(addr_b),.clk(clk),.q_a(q_a),.q_b(q_b));
-infer_dual_port_rom_post_route netlist(
+fabric_infer_dual_port_rom_post_route netlist(
 );
 
 always #1 clk = ~clk;

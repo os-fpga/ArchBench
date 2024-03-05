@@ -6,7 +6,7 @@ module sim_route_and2;
 	integer mismatch=0;
 
 and2 golden(a,b,c);
-and2_post_route netlist(
+fabric_and2_post_route netlist(
 );
 
 //clock initialization

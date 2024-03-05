@@ -7,7 +7,7 @@ module sim_route_mux_8_1_a;
 	integer mismatch=0;
 
 mux_8_1_a golden(out,D0, D1, D2, D3, D4, D5, D6, D7, S0, S1, S2);
-mux_8_1_a_post_route netlist(
+fabric_mux_8_1_a_post_route netlist(
 );
 
 //clock initialization

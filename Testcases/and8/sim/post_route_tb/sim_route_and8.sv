@@ -6,7 +6,7 @@ module sim_route_and8;
 	integer mismatch=0;
 
 and8 golden(a,b);
-and8_post_route netlist(
+fabric_and8_post_route netlist(
 );
 
 initial begin
