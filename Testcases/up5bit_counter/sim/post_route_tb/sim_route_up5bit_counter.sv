@@ -5,9 +5,8 @@ module sim_route_up5bit_counter;
     reg clk;
 	integer mismatch=0;
 
-up5bit_counter golden(out,clk,reset);
-fabric_up5bit_counter_post_route netlist(
-);
+up5bit_counter golden(.out(out),.clk(clk),.reset(reset));
+up5bit_counter_post_route netlist(.out(out_netlist),.clk(clk),.reset(reset));
 
 always #1 clk = ~clk;
 

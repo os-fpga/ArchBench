@@ -6,9 +6,8 @@ module sim_route_unsigned_multiply;
     reg clk;
 	integer mismatch=0;
 
-unsigned_multiply golden(dataa,datab,dataout);
-fabric_unsigned_multiply_post_route netlist(
-);
+unsigned_multiply golden(.dataa(dataa),.datab(datab),.dataout(dataout));
+unsigned_multiply_post_route netlist(.dataa(dataa),.datab(datab),.dataout(dataout_netlist));
 
 always #5 clk = ~clk;
 

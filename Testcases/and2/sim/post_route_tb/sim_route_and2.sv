@@ -5,9 +5,8 @@ module sim_route_and2;
     reg clk;
 	integer mismatch=0;
 
-and2 golden(a,b,c);
-fabric_and2_post_route netlist(
-);
+and2 golden(.a(a),.b(b),.c(c));
+and2_post_route netlist(.a(a),.b(b),.c(c_netlist));
 
 //clock initialization
 initial begin

@@ -8,8 +8,7 @@ module sim_route_FullAdder32;
 	integer mismatch=0;
 
 FullAdder32 golden(.a(a),.b(b),.cin(cin),.sum(sum),.cout(cout));
-fabric_FullAdder32_post_route netlist(
-);
+FullAdder32_post_route netlist(.a(a),.b(b),.cin(cin),.sum(sum_netlist),.cout(cout_netlist));
 
 always #1 clk = ~clk;
 	
