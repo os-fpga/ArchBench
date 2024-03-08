@@ -4,7 +4,7 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-simulator_name="iverilog" #vcs,iverilog
+simulator_name="" #vcs,iverilog
 
 device=GEMINI_COMPACT_10x8
 
@@ -95,6 +95,8 @@ echo "add_library_path ../rtl">>raptor.tcl
 echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file ../rtl/$design_name.v">>raptor.tcl
 echo "set_top_module $design_name">>raptor.tcl
+echo "add_simulation_file ../sim/post_route_tb/sim_route_${design_name}.sv">>raptor.tcl 
+echo "set_top_testbench sim_route_${design_name}">>raptor.tcl 
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
@@ -104,7 +106,23 @@ echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
-echo "route">>raptor.tcl  
+echo "route">>raptor.tcl
+echo "# Open the input file in read mode">>raptor.tcl 
+echo "set input_file [open \"$design_name/run_1/synth_1_1/synthesis/wrapper_${design_name}_post_synth.v\" r]">>raptor.tcl 
+echo "# Read the file content">>raptor.tcl 
+echo "set file_content [read \$input_file]">>raptor.tcl 
+echo "# Close the input file after reading">>raptor.tcl 
+echo "close \$input_file">>raptor.tcl 
+echo "set modified_content [string map {\"module $design_name(\" \"module ${design_name}_post_route (\"} \$file_content]">>raptor.tcl 
+echo "# Open the file again, this time in write mode to overwrite the old content">>raptor.tcl 
+echo "set output_file [open \"$design_name/run_1/synth_1_1/synthesis/wrapper_${design_name}_post_synth.v\" w]">>raptor.tcl
+echo "# Write the modified content back to the file">>raptor.tcl 
+echo "puts \$output_file \$modified_content">>raptor.tcl 
+echo "# Close the file">>raptor.tcl 
+echo "close \$output_file">>raptor.tcl 
+echo "puts \"Modification completed.\"">>raptor.tcl 
+echo "simulation_options compilation icarus pnr" >> raptor.tcl
+echo "simulate pnr icarus">>raptor.tcl
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
 [ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream">>raptor.tcl    # enable_simulation
@@ -122,86 +140,96 @@ echo -e "Device: $device">>raptor.log
 
 post_route_netlist_path=`find $main_path -wholename "*/routing/fabric_$design_name\_post_route.v"`
 
-string="_post_route"
-while read line; do
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
-        then
-            sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
-            break 2
-        fi
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
-        then
-            break 2
-        fi
-done < $post_route_netlist_path
+if [ "$simulator_name" == "iverilog" ] || [ "$simulator_name" == "vcs" ]; then 
+    string="_post_route"
+    while read line; do
+            if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
+            then
+                sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
+                break 2
+            fi
+            if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
+            then
+                break 2
+            fi
+    done < $post_route_netlist_path
 
-root_path=`pwd`
-route_tb_path=`find ../ -type f -iname "sim_route_$design_name.sv" -printf $root_path/'%p\n'`
-if [ -z "$route_tb_path" ]
-then
-    echo "No such Test Bench for $design_name"
-else 
-    echo -e "Test Bench for this design Found!"
+    root_path=`pwd`
+    route_tb_path=`find ../ -type f -iname "sim_route_$design_name.sv" -printf $root_path/'%p\n'`
+    if [ -z "$route_tb_path" ]
+    then
+        echo "No such Test Bench for $design_name"
+    else 
+        echo -e "Test Bench for this design Found!"
+    fi
+    bitstream_tb_path=`find ../sim -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
+    if [ -z "$bitstream_tb_path" ]
+    then
+        echo "No such Test Bench for $design_name"
+    else 
+        echo -e "Test Bench for this design Found!"
+    fi
+
+    directory_path=$(dirname $design_path)
+
+    bram_sim=`find $library -wholename "*/genesis3/brams_sim.v"`    
+    cell_path=`find $library -wholename "*/genesis3/cells_sim.v"`
+    dsp_sim=`find $library -wholename "*/genesis3/dsp_sim.v"`
+    dsp_map=`find $library -wholename "*/genesis3/dsp_map.v"`
+    dsp_final_map=`find $library -wholename "*/genesis3/dsp_final_map.v"`
+    lut_map=`find $library -wholename "*/genesis3/simlib.v"`
+    TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
+    ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
+    sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
+    primitive=`find $library -wholename "*/genesis3/primitives.v"`
+    DFFRE=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DFFRE.v"`
+
+    python3 ../../../scripts/post_route_script.py $design_name
+
+    if [[ $simulator_name == "vcs" ]]
+    then
+        [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
+        [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
+        start_post_route=`date +%s`
+        timeout 4m vcs -sverilog -timescale=1ns/1ps $DFFRE $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+        ./simv | tee -a post_route_sim.log
+        end_post_route=`date +%s`
+        runtime_post_route=$((end_post_route-start_post_route))
+        echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+    fi
+
+    if [[ $simulator_name == "iverilog" ]]
+    then
+        [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
+        [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
+        start_post_route=`date +%s`
+        iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+        end_post_route=`date +%s`
+        runtime_post_route=$((end_post_route-start_post_route))
+        echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+    fi
+
+    while read line; do
+            if [[ $line == *"All Comparison Matched"* ]]
+            then
+                rm -fr tb.vcd
+            fi
+            if [[ $line == *"Error: Simulation Failed"* ]]
+            then
+                vcd2fst tb.vcd tb.fst --compress
+                rm -fr tb.vcd
+            fi
+    done < post_route_sim.log
+    # cd ..
 fi
-bitstream_tb_path=`find ../sim -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
-if [ -z "$bitstream_tb_path" ]
-then
-    echo "No such Test Bench for $design_name"
-else 
-    echo -e "Test Bench for this design Found!"
+
+if [ ! -e "../post_route_sim.log" ]; then
+    touch "../post_route_sim.log"
 fi
 
-directory_path=$(dirname $design_path)
-
-bram_sim=`find $library -wholename "*/genesis3/brams_sim.v"`    
-cell_path=`find $library -wholename "*/genesis3/cells_sim.v"`
-dsp_sim=`find $library -wholename "*/genesis3/dsp_sim.v"`
-dsp_map=`find $library -wholename "*/genesis3/dsp_map.v"`
-dsp_final_map=`find $library -wholename "*/genesis3/dsp_final_map.v"`
-lut_map=`find $library -wholename "*/genesis3/simlib.v"`
-TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
-ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
-sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
-primitive=`find $library -wholename "*/genesis3/primitives.v"`
-DFFRE=`find $library -wholename "*/FPGA_PRIMITIVES_MODELS/sim_models/verilog/DFFRE.v"`
-
-python3 ../../../scripts/post_route_script.py $design_name
-
-if [[ $simulator_name == "vcs" ]]
-then
-    [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
-    [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
-    start_post_route=`date +%s`
-    timeout 4m vcs -sverilog -timescale=1ns/1ps $DFFRE $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
-    ./simv | tee -a post_route_sim.log
-    end_post_route=`date +%s`
-    runtime_post_route=$((end_post_route-start_post_route))
-    echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+if [ "$simulator_name" == "" ]; then cp "$design_name/run_1/synth_1_1/impl_1_1_1/simulate_pnr/simulation_pnr.rpt" "../post_route_sim.log"
 fi
 
-if [[ $simulator_name == "iverilog" ]]
-then
-    [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
-    [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
-    start_post_route=`date +%s`
-    iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
-    end_post_route=`date +%s`
-    runtime_post_route=$((end_post_route-start_post_route))
-    echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
-fi
-
-while read line; do
-        if [[ $line == *"All Comparison Matched"* ]]
-        then
-            rm -fr tb.vcd
-        fi
-        if [[ $line == *"Error: Simulation Failed"* ]]
-        then
-            vcd2fst tb.vcd tb.fst --compress
-            rm -fr tb.vcd
-        fi
-done < post_route_sim.log
-# cd ..
 # [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 # [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
 
@@ -225,7 +253,7 @@ done < post_route_sim.log
 
 cd $main_path
 [ -f $design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
-[ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
+# [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 

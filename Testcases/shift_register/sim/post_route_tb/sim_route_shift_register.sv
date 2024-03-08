@@ -13,8 +13,7 @@ module sim_route_shift_register;
   integer mismatch=0;
 
   shift_register #(.N(N)) shift_register_dut (.clk (clk),.reset(reset),.ctrl(ctrl),.data(data),.q_reg(q_reg));
-  fabric_shift_register_post_route netlist(
-);
+  shift_register_post_route netlist(.clk (clk),.reset(reset),.ctrl(ctrl),.data(data),.q_reg(q_reg_netlist));
 
   always #5  clk = !clk;
      

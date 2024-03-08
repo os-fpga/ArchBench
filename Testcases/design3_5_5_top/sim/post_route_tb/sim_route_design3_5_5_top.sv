@@ -6,9 +6,8 @@ module sim_route_design3_5_5_top;
     reg clk;
 	integer mismatch=0;
 
-design3_5_5_top golden(clk, rst, in, out);
-fabric_design3_5_5_top_post_route netlist( 
-);
+design3_5_5_top golden(.clk(clk),.rst(rst),.in(in),.out(out));
+design3_5_5_top_post_route netlist(.clk(clk),.rst(rst),.in(in),.out(out_netlist));
 
 always #1 clk = ~clk;
 

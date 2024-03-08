@@ -7,9 +7,8 @@ module sim_route_sp_ram;
 
 	integer mismatch=0;
 
-	sp_ram golden(data,addr,we,clk,q);
-	fabric_sp_ram_post_route netlist(
-);
+	sp_ram golden(.data(data),.addr(addr),.we(we),.clk(clk),.q(q));
+	sp_ram_post_route netlist(.data(data),.addr(addr),.we(we),.clk(clk),.q(q_netlist));
 
 always #1 clk = ~clk;
 

@@ -7,8 +7,7 @@ module sim_route_design88_3_3_top;
 	integer mismatch=0;
 
 design88_3_3_top golden(.clk(clk),.rst(rst),.in(in),.out(out));
-fabric_design88_3_3_top_post_route netlist(
-);
+design88_3_3_top_post_route netlist(.clk(clk),.rst(rst),.in(in),.out(out_netlist));
 
 always #1 clk = ~clk;
 
