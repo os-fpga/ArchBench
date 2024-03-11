@@ -5,7 +5,7 @@ import os.path
 design_name= sys.argv[1]
 netlist="SRC"
 
-PinMapping =  f"../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PinMapping.xml"
+PinMapping =  f"../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PrimaryPinMapping.xml"
 check_pin_mapping = os.path.isfile(PinMapping)
 
 pf = open(f"../{design_name}/PinMapping.v", 'w')
@@ -25,7 +25,7 @@ if check_pin_mapping:
                 pf.write(f" assign {child.attrib['net']} = {child.attrib['name']};\n")
    
 else:
-    pf.write(f"// PinMapping.xml is not generated for {design_name}")
+    pf.write(f"// PrimaryPinMapping.xml is not generated for {design_name}")
 pf.close()
 
 output_file = open("../../bitstream_text.txt", "w")
