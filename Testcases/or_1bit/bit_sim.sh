@@ -106,7 +106,7 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
-[ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl    # enable_simulation
+[ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml">>raptor.tcl    # enable_simulation
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
@@ -120,19 +120,6 @@ echo -e "Netlist Version: $xml_version">>raptor.log
 echo -e "Device: $device">>raptor.log
 
 post_route_netlist_path=`find $main_path -wholename "*/routing/fabric_$design_name\_post_route.v"`
-
-string="_post_route"
-while read line; do
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
-        then
-            sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
-            break 2
-        fi
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
-        then
-            break 2
-        fi
-done < $post_route_netlist_path
 
 root_path=`pwd`
 route_tb_path=`find ../ -type f -iname "sim_route_$design_name.sv" -printf $root_path/'%p\n'`
@@ -150,6 +137,18 @@ else
     echo -e "Test Bench for this design Found!"
 fi
 
+string="_post_route"
+while read line; do
+        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
+        then
+            sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
+            break 2
+        fi
+        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
+        then
+            break 2
+        fi
+done < $post_route_netlist_path
 
 bram_sim=`find $library -wholename "*/genesis3/brams_sim.v"`    
 cell_path=`find $library -wholename "*/genesis3/cells_sim.v"`
