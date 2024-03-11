@@ -106,7 +106,7 @@ echo "place">>raptor.tcl
 echo "route">>raptor.tcl  
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
-[ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml pb_pin_fixup">>raptor.tcl    # enable_simulation
+[ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml">>raptor.tcl    # enable_simulation
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
