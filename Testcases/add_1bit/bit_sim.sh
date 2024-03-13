@@ -107,7 +107,8 @@ echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
-echo "route">>raptor.tcl echo "# Open the input file in read mode">>raptor.tcl 
+echo "route">>raptor.tcl 
+echo "# Open the input file in read mode">>raptor.tcl 
 echo "set input_file [open \"$design_name/run_1/synth_1_1/synthesis/wrapper_${design_name}_post_synth.v\" r]">>raptor.tcl 
 echo "# Read the file content">>raptor.tcl 
 echo "set file_content [read \$input_file]">>raptor.tcl 
