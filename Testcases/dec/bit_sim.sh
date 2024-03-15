@@ -87,6 +87,21 @@ cd $design_name\_golden
 
 echo "create_design eh2_dec_02_24">raptor.tcl
 echo "target_device $device">>raptor.tcl
+echo "">>raptor.tcl
+echo "# Create or open vpr_constraints.xml file for writing">>raptor.tcl
+echo "set filename \"vpr_constraints.xml\"">>raptor.tcl
+echo "set fileId [open \$filename \"w\"]">>raptor.tcl
+echo "">>raptor.tcl
+echo "# XML content to write">>raptor.tcl
+echo "set xml_content {<vpr_constraints tool_name=\"vpr\">">>raptor.tcl
+echo "</vpr_constraints>}">>raptor.tcl
+echo "">>raptor.tcl
+echo "# Write the XML content to the file">>raptor.tcl
+echo "puts \$fileId \$xml_content">>raptor.tcl
+echo "">>raptor.tcl
+echo "# Close the file">>raptor.tcl
+echo "close \$fileId">>raptor.tcl
+echo "">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  

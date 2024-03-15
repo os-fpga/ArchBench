@@ -4,7 +4,7 @@
 main_path=$PWD
 
 design_name=${PWD##*/}
-simulator_name="iverilog" #vcs,iverilog
+simulator_name="" #vcs,iverilog
 bitstream_simulation=true
 device=GEMINI_COMPACT_10x8
 
@@ -119,9 +119,8 @@ raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
 echo -e "Device: $device">>raptor.log
 
-post_route_netlist_path=`find $main_path -wholename "*/routing/fabric_$design_name\_post_route.v"`
-
 root_path=`pwd`
+post_route_netlist_path=`find $main_path -wholename "*/routing/fabric_$design_name\_post_route.v"`
 route_tb_path=`find ../ -type f -iname "sim_route_$design_name.sv" -printf $root_path/'%p\n'`
 if [ -z "$route_tb_path" ]
 then
@@ -137,68 +136,79 @@ else
     echo -e "Test Bench for this design Found!"
 fi
 
-string="_post_route"
-while read line; do
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
-        then
-            sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
-            break 2
-        fi
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
-        then
-            break 2
-        fi
-done < $post_route_netlist_path
+if [ "$simulator_name" == "iverilog" ] || [ "$simulator_name" == "vcs" ]; then 
+    string="_post_route"
+    while read line; do
+            if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
+            then
+                sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
+                break 2
+            fi
+            if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
+            then
+                break 2
+            fi
+    done < $post_route_netlist_path
 
-bram_sim=`find $library -wholename "*/genesis3/brams_sim.v"`    
-cell_path=`find $library -wholename "*/genesis3/cells_sim.v"`
-dsp_sim=`find $library -wholename "*/genesis3/dsp_sim.v"`
-dsp_map=`find $library -wholename "*/genesis3/dsp_map.v"`
-dsp_final_map=`find $library -wholename "*/genesis3/dsp_final_map.v"`
-lut_map=`find $library -wholename "*/genesis3/simlib.v"`
-TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
-ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
-sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
-primitive=`find $library -wholename "*/genesis3/primitives.v"`
-DFFRE=`find $library -wholename "*/RS_PRIMITIVES/sim_models/verilog/DFFRE.v"`
+    bram_sim=`find $library -wholename "*/genesis3/brams_sim.v"`    
+    cell_path=`find $library -wholename "*/genesis3/cells_sim.v"`
+    dsp_sim=`find $library -wholename "*/genesis3/dsp_sim.v"`
+    dsp_map=`find $library -wholename "*/genesis3/dsp_map.v"`
+    dsp_final_map=`find $library -wholename "*/genesis3/dsp_final_map.v"`
+    lut_map=`find $library -wholename "*/genesis3/simlib.v"`
+    TDP18K_FIFO=`find $library -wholename "*/genesis3/TDP18K_FIFO.v"`
+    ufifo_ctl=`find $library -wholename "*/genesis3/ufifo_ctl.v"`
+    sram1024x18=`find $library -wholename "*/genesis3/sram1024x18.v"`
+    primitive=`find $library -wholename "*/genesis3/primitives.v"`
+    DFFRE=`find $library -wholename "*/RS_PRIMITIVES/sim_models/verilog/DFFRE.v"`
 
-python3 ../../../scripts/post_route_script.py $design_name
+    python3 ../../../scripts/post_route_script.py $design_name
 
-if [[ $simulator_name == "vcs" ]]
-then
-    [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
-    [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
-    start_post_route=`date +%s`
-    timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
-    ./simv | tee -a post_route_sim.log
-    end_post_route=`date +%s`
-    runtime_post_route=$((end_post_route-start_post_route))
-    echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+    if [[ $simulator_name == "vcs" ]]
+    then
+        [ ! -d $design_name\_$tool_name\_post_route_files ] && mkdir $design_name\_$tool_name\_post_route_files
+        [ -d $design_name\_$tool_name\_post_route_files ] && cd $design_name\_$tool_name\_post_route_files
+        start_post_route=`date +%s`
+        timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb | tee post_route_sim.log
+        ./simv | tee -a post_route_sim.log
+        end_post_route=`date +%s`
+        runtime_post_route=$((end_post_route-start_post_route))
+        echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+    fi
+
+    if [[ $simulator_name == "iverilog" ]]
+    then
+        [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
+        [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
+        start_post_route=`date +%s`
+        iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
+        end_post_route=`date +%s`
+        runtime_post_route=$((end_post_route-start_post_route))
+        echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+    fi
+
+    while read line; do
+            if [[ $line == *"All Comparison Matched"* ]]
+            then
+                rm -fr tb.vcd
+            fi
+            if [[ $line == *"Error: Simulation Failed"* ]]
+            then
+                vcd2fst tb.vcd tb.fst --compress
+                rm -fr tb.vcd
+            fi
+    done < post_route_sim.log
+    cd ..
 fi
 
-if [[ $simulator_name == "iverilog" ]]
-then
-    [ ! -d $design_name\_$simulator_name\_post_route_files ] && mkdir $design_name\_$simulator_name\_post_route_files
-    [ -d $design_name\_$simulator_name\_post_route_files ] && cd $design_name\_$simulator_name\_post_route_files
-    start_post_route=`date +%s`
-    iverilog -g2012 -DIVERILOG=1 -o $design_name $DFFRE $primitive ../../rtl/$design_name.v $post_route_netlist_path $route_tb_path -y $main_path/rtl && vvp ./$design_name | tee post_route_sim.log
-    end_post_route=`date +%s`
-    runtime_post_route=$((end_post_route-start_post_route))
-    echo -e "\nTotal RunTime: $runtime_post_route sec">>post_route_sim.log
+if [ ! -e "../post_route_sim.log" ]; then
+    touch "../post_route_sim.log"
 fi
 
-while read line; do
-        if [[ $line == *"All Comparison Matched"* ]]
-        then
-            rm -fr tb.vcd
-        fi
-        if [[ $line == *"Error: Simulation Failed"* ]]
-        then
-            vcd2fst tb.vcd tb.fst --compress
-            rm -fr tb.vcd
-        fi
-done < post_route_sim.log
-cd ..
+if [ "$simulator_name" == "" ]; then cp "$design_name/run_1/synth_1_1/impl_1_1_1/simulate_pnr/simulation_pnr.rpt" "../post_route_sim.log"
+fi
+
+
 [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
 [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
 
@@ -226,7 +236,7 @@ then
 fi
 cd $main_path
 [ -f $design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
-[ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
+# [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 
