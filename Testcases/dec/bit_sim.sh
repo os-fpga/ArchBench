@@ -123,10 +123,11 @@ echo "set_top_module eh2_dec">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "pin_loc_assign_method free">>raptor.tcl
-echo "pnr_options --use_partitioning_in_pack on --number_of_molecules_in_partition 200">>raptor.tcl  
-echo "pnr_options --target_ext_pin_util clb:0.6 dsp:1.0,1.0 bram:1.0,1.0 0.8">>raptor.tcl
+# echo "pnr_options --use_partitioning_in_pack on --number_of_molecules_in_partition 200">>raptor.tcl  
+# echo "pnr_options --target_ext_pin_util clb:0.6 dsp:1.0,1.0 bram:1.0,1.0 0.8">>raptor.tcl
 echo "analyze">>raptor.tcl 
-echo "synthesize $strategy">>raptor.tcl
+echo "synthesize">>raptor.tcl
+echo "pnr_options --use_partitioning_in_pack on --number_of_molecules_in_partition 16 --read_vpr_constraints vpr_constraints.xml">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
