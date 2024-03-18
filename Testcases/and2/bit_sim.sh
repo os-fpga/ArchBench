@@ -112,19 +112,20 @@ echo "set_top_testbench sim_route_${design_name}">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
+echo "add_constraint_file ../pin_mapping.pin">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "place">>raptor.tcl  
 echo "route">>raptor.tcl  
 echo "# Open the input file in read mode">>raptor.tcl 
-echo "set input_file [open \"$design_name/run_1/synth_1_1/synthesis/wrapper_${design_name}_post_synth.v\" r]">>raptor.tcl 
+echo "set input_file [open \"$design_name/run_1/synth_1_1/synthesis/post_pnr_wrapper_${design_name}_post_synth.v\" r]">>raptor.tcl 
 echo "# Read the file content">>raptor.tcl 
 echo "set file_content [read \$input_file]">>raptor.tcl 
 echo "# Close the input file after reading">>raptor.tcl 
 echo "close \$input_file">>raptor.tcl 
 echo "set modified_content [string map {\"module $design_name(\" \"module ${design_name}_post_route (\"} \$file_content]">>raptor.tcl 
 echo "# Open the file again, this time in write mode to overwrite the old content">>raptor.tcl 
-echo "set output_file [open \"$design_name/run_1/synth_1_1/synthesis/wrapper_${design_name}_post_synth.v\" w]">>raptor.tcl
+echo "set output_file [open \"$design_name/run_1/synth_1_1/synthesis/post_pnr_wrapper_${design_name}_post_synth.v\" w]">>raptor.tcl
 echo "# Write the modified content back to the file">>raptor.tcl 
 echo "puts \$output_file \$modified_content">>raptor.tcl 
 echo "# Close the file">>raptor.tcl 

@@ -5,7 +5,7 @@ import os
 
 design_name= sys.argv[1]
 
-with open(f'../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PinMapping.xml', 'r') as file:
+with open(f'../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PrimaryPinMapping.xml', 'r') as file:
     xml_data = file.read()
 
 root = ET.fromstring(xml_data)
