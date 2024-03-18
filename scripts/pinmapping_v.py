@@ -28,7 +28,7 @@ def restructure(design_name,netlist='SRC',ver='v1.6.131',size='10x8',bl='backdoo
 
 def gen_pinmapping(design_name,size='104x68',ver='v1.6.145.C',netlist='SRC'):
     pf = open(f"../{design_name}/PinMapping.v", 'w')
-    PinMapping =  f"../{design_name}/run_1/synth_1_1/impl_1_1/bitstream/PinMapping.xml"
+    PinMapping =  f"../{design_name}/run_1/synth_1_1/impl_1_1/bitstream/PrimaryPinMapping.xml"
     
     PinMappingcsv = f"/nfs_project/castor/castor_release/{ver}/k6n8_TSMC16nm_7.5T/FPGA{size}_gemini_compact_latch_pnr/pinMapping.csv"
     PinMappingSub = f"/nfs_project/castor/castor_release/{ver}/k6n8_TSMC16nm_7.5T/FPGA{size}_gemini_compact_latch_pnr/pinMappingSub.csv"
