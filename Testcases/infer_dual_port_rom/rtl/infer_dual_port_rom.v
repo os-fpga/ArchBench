@@ -9,7 +9,7 @@ module infer_dual_port_rom
 	// Declare the ROM variable
 	reg [DATA_WIDTH-1:0] rom[2**ADDR_WIDTH-1:0];
 
-	initial $readmemh("memory_test.mem",rom);  //reg [DATA_WIDTH-1:0] rom[2**ADDR_WIDTH-1:0];
+	initial $readmemh("MEM_FILE_PATH/memory_test.mem",rom);  //reg [DATA_WIDTH-1:0] rom[2**ADDR_WIDTH-1:0];
 
 	always @ (posedge clk)
 	begin

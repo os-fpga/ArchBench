@@ -118,7 +118,7 @@ echo "puts \$output_file \$modified_content">>raptor.tcl
 echo "# Close the file">>raptor.tcl 
 echo "close \$output_file">>raptor.tcl 
 echo "puts \"Modification completed.\"">>raptor.tcl 
-echo "simulation_options compilation icarus pnr" >> raptor.tcl
+echo "simulation_options simulation icarus pnr" >> raptor.tcl
 echo "simulate pnr icarus">>raptor.tcl
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
