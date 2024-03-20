@@ -130,6 +130,8 @@ echo "power">>raptor.tcl
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
+[ -f ../rtl/infer_dual_port_rom.v ] && sed -i -e "s|MEM_FILE_PATH|$main_path/rtl|g" ../rtl/infer_dual_port_rom.v
+
 start_raptor=`date +%s`
 raptor --batch --script raptor.tcl 
 end_raptor=`date +%s`
@@ -258,7 +260,7 @@ fi
 cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
 
 python3 ../../../../scripts/force.py $design_name
-python3 ../../../../scripts/pin_assignment.py $design_name
+# python3 ../../../../scripts/pin_assignment.py $design_name
 
 start_bitstream=`date +%s`
 # iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log

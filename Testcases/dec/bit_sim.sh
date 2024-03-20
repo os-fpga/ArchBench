@@ -87,21 +87,21 @@ cd $design_name\_golden
 
 echo "create_design eh2_dec_02_24">raptor.tcl
 echo "target_device $device">>raptor.tcl
-echo "">>raptor.tcl
-echo "# Create or open vpr_constraints.xml file for writing">>raptor.tcl
-echo "set filename \"vpr_constraints.xml\"">>raptor.tcl
-echo "set fileId [open \$filename \"w\"]">>raptor.tcl
-echo "">>raptor.tcl
-echo "# XML content to write">>raptor.tcl
-echo "set xml_content {<vpr_constraints tool_name=\"vpr\">">>raptor.tcl
-echo "</vpr_constraints>}">>raptor.tcl
-echo "">>raptor.tcl
-echo "# Write the XML content to the file">>raptor.tcl
-echo "puts \$fileId \$xml_content">>raptor.tcl
-echo "">>raptor.tcl
-echo "# Close the file">>raptor.tcl
-echo "close \$fileId">>raptor.tcl
-echo "">>raptor.tcl
+# echo "">>raptor.tcl
+# echo "# Create or open vpr_constraints.xml file for writing">>raptor.tcl
+# echo "set filename \"vpr_constraints.xml\"">>raptor.tcl
+# echo "set fileId [open \$filename \"w\"]">>raptor.tcl
+# echo "">>raptor.tcl
+# echo "# XML content to write">>raptor.tcl
+# echo "set xml_content {<vpr_constraints tool_name=\"vpr\">">>raptor.tcl
+# echo "</vpr_constraints>}">>raptor.tcl
+# echo "">>raptor.tcl
+# echo "# Write the XML content to the file">>raptor.tcl
+# echo "puts \$fileId \$xml_content">>raptor.tcl
+# echo "">>raptor.tcl
+# echo "# Close the file">>raptor.tcl
+# echo "close \$fileId">>raptor.tcl
+# echo "">>raptor.tcl
 [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
@@ -125,15 +125,16 @@ echo "set_top_module eh2_dec">>raptor.tcl
 echo "pin_loc_assign_method free">>raptor.tcl
 # echo "pnr_options --use_partitioning_in_pack on --number_of_molecules_in_partition 200">>raptor.tcl  
 # echo "pnr_options --target_ext_pin_util clb:0.6 dsp:1.0,1.0 bram:1.0,1.0 0.8">>raptor.tcl
-echo "analyze">>raptor.tcl 
-echo "synthesize">>raptor.tcl
-echo "pnr_options --use_partitioning_in_pack on --number_of_molecules_in_partition 16 --read_vpr_constraints vpr_constraints.xml">>raptor.tcl
-echo "packing">>raptor.tcl  
-echo "global_placement">>raptor.tcl  
-echo "place">>raptor.tcl  
-echo "route">>raptor.tcl  
-echo "sta">>raptor.tcl  
-echo "power">>raptor.tcl
+# echo "analyze">>raptor.tcl 
+# echo "synthesize">>raptor.tcl
+# echo "pnr_options --use_partitioning_in_pack on --number_of_molecules_in_partition 16 --read_vpr_constraints vpr_constraints.xml">>raptor.tcl
+# echo "packing">>raptor.tcl  
+# echo "global_placement">>raptor.tcl  
+# echo "place">>raptor.tcl  
+# echo "route">>raptor.tcl  
+# echo "sta">>raptor.tcl  
+# echo "power">>raptor.tcl
+echo "routability_flow">>raptor.tcl
 [ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream">>raptor.tcl    # enable_simulation
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
