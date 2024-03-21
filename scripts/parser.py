@@ -168,8 +168,6 @@ def parse_log_files(files, log_line_keys_map):
                                         data[file][log_line_key] = line.split(log_line_keyword)[1].strip().split(' peak')[0].strip()
                                     elif log_line_key == 'Runtime':
                                         data[file][log_line_key] = line.split(log_line_keyword)[1].strip()
-                                else:
-                                    data[file][log_line_key] = 'Fail'
                             else:
                                 data[file][log_line_key] = None
             ###post_route.log###
