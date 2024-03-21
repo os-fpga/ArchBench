@@ -137,20 +137,22 @@ raptor --version>>raptor.log
 echo -e "Netlist Version: $xml_version">>raptor.log
 echo -e "Device: $device">>raptor.log
 
+root_path=`pwd`
 post_route_netlist_path=`find $main_path -wholename "*/routing/fabric_$design_name\_post_route.v"`
-
-string="_post_route"
-while read line; do
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name " ]]; 
-        then
-            sed -i "s/module fabric_$design_name/module fabric_$design_name\_post_route/" $post_route_netlist_path
-            break 2
-        fi
-        if [[ $(echo "$line" | cut -d "(" -f1)  == "module fabric_$design_name$string " ]]; 
-        then
-            break 2
-        fi
-done < $post_route_netlist_path
+route_tb_path=`find ../ -type f -iname "sim_route_$design_name.sv" -printf $root_path/'%p\n'`
+if [ -z "$route_tb_path" ]
+then
+    echo "No such Test Bench for $design_name"
+else 
+    echo -e "Test Bench for this design Found!"
+fi
+bitstream_tb_path=`find ../sim -type f -iname "$design_name\_include_netlists.v" -printf $root_path/'%p\n'`
+if [ -z "$bitstream_tb_path" ]
+then
+    echo "No such Test Bench for $design_name"
+else 
+    echo -e "Test Bench for this design Found!"
+fi
 
 if [ "$simulator_name" == "iverilog" ] || [ "$simulator_name" == "vcs" ]; then 
     root_path=`pwd`

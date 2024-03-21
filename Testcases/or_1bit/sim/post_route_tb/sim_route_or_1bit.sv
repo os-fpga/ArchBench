@@ -5,9 +5,8 @@ module sim_route_or_1bit;
     reg clk;
 	integer mismatch=0;
 
-or_1bit golden(a,b,c);
-fabric_or_1bit_post_route netlist(
-);
+or_1bit golden(.a(a),.b(b),.c(c));
+or_1bit_post_route netlist(.a(a),.b(b),.c(c_netlist));
 
 //clock initialization
 initial begin
