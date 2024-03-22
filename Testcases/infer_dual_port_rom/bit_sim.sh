@@ -84,6 +84,7 @@ command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 e
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 primitive_library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
+[[ "$raptor_path" == *"latest"* ]] && iverilog_path="${raptor_path:0:49}/HDL_simulator/iverilog/bin/" || iverilog_path="${raptor_path:0:62}/HDL_simulator/iverilog/bin/"
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 

@@ -92,7 +92,7 @@ tool_name="iverilog" #vcs,iverilog
 command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 echo "First you need to source Raptor"; end_time exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
-[[ "$raptor_path" == *"latest"* ]] && iverilog_path="${raptor_path:0:49}" || iverilog_path="${raptor_path:0:62}"
+[[ "$raptor_path" == *"latest"* ]] && iverilog_path="${raptor_path:0:49}/HDL_simulator/iverilog/bin/" || iverilog_path="${raptor_path:0:62}/HDL_simulator/iverilog/bin/"
 
 [ ! -d $design_name\_golden ] && mkdir $design_name\_golden 
 
@@ -271,8 +271,8 @@ then
     start_bitstream=`date +%s`
     # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
     # ./simv | tee -a bitstream_sim.log
-    iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
-    vvp ./$design_name | tee bitstream_sim.log
+    $iverilog_path/iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+    $iverilog_path/vvp ./$design_name | tee bitstream_sim.log
     end_bitstream=`date +%s`
     runtime_bitstream=$((end_bitstream-start_bitstream))
     echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
