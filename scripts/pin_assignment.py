@@ -6,6 +6,14 @@ import os
 design_name= sys.argv[1]
 
 with open(f'../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PrimaryPinMapping.xml', 'r') as file:
+    lines = file.readlines()
+
+with open(f'../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PrimaryPinMapping.xml', 'w') as file:
+    for line in lines:
+        modified_line = line.replace("$iopadmap$", "")
+        file.write(modified_line)
+
+with open(f'../{design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/PrimaryPinMapping.xml', 'r') as file:
     xml_data = file.read()
 
 root = ET.fromstring(xml_data)
