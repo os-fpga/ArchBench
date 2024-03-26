@@ -128,6 +128,39 @@ def adjust_ios(file_path):
         print("File updated successfully.")
     else:
         print("Pattern not found in the file.")
+    
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    pattern2 = r'\t*(\w+)\s+\[(\d+):(\d+)\]\s+(\w+)\[(\d+)\](\w+);'
+
+    matches2 = list(re.finditer(pattern2, content))
+
+    if matches2:
+        for i in range(len(matches2)):
+            last_match_gfpga = matches2[i]
+            signal = last_match_gfpga.group(1)
+            variable_name = last_match_gfpga.group(4)
+            array_size = last_match_gfpga.group(5)
+            last_charater = last_match_gfpga.group(6)
+
+            if i < len(matches2) - 1:
+                next_match = matches2[i + 1]
+                variable_name_next = next_match.group(4)
+            else:
+                variable_name_next = None
+
+            if variable_name_next == variable_name:
+                content = content.replace(last_match_gfpga.group(0), f'// {last_match_gfpga.group(0)}')
+                # content = content.replace(last_match_gfpga.group(0), f'// {last_match_gfpga.group(0).strip()}')
+            else:
+                content = content.replace(f'{signal} [0:0] {variable_name}[{array_size}]{last_charater};',f'{signal} [{array_size}:0] {variable_name}{last_charater};')
+
+        with open(file_path, 'w') as file:
+            file.write(content)
+        print("File updated successfully.")
+    else:
+        print("Pattern not found in the file.")
 
 def instance_update(file_path):
     def modify_variable_line(match):
@@ -157,7 +190,40 @@ def instance_update(file_path):
                 break
         if not found:
             last_occurrences.append(match)
-    print(last_occurrences)
+    modified_content = re.sub(pattern, modify_variable_line, content)
+
+    with open(file_path, 'w') as file:
+        file.write(modified_content)
+
+    
+    def modify_variable_line(match):
+        variable_name = match.group(1)
+        array_size = match.group(2)
+        variable_last_name = match.group(3)
+        endvar = match.group(4)
+        if any(match.group(0) == entry.group(0) for entry in last_occurrences):
+            return f'\t{variable_name}{variable_last_name}{endvar}'
+        else:
+            return f'// \t{variable_name}[{array_size}]{variable_last_name}{endvar}'
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    pattern = r'\t*(\w+)\[(\d+)\](\w+)([,\n])'
+
+    matches = list(re.finditer(pattern, content))
+    last_occurrences = []
+
+    for match in matches:
+        variable_name = match.group(1)
+        found = False
+        for i, entry in enumerate(last_occurrences):
+            if entry.group(1) == variable_name:
+                last_occurrences[i] = match
+                found = True
+                break
+        if not found:
+            last_occurrences.append(match)
     modified_content = re.sub(pattern, modify_variable_line, content)
 
     with open(file_path, 'w') as file:
@@ -175,7 +241,6 @@ def remove_twodim_array(file_path):
     if matches:
         for i in range(len(matches)):
             all_matches = matches[i]
-            print(all_matches)
             assign = all_matches.group(1)
             pin_name = all_matches.group(2)
             pin_number = all_matches.group(3)
@@ -183,6 +248,21 @@ def remove_twodim_array(file_path):
             input_width = all_matches.group(5)
             two_dm_width = all_matches.group(6)
             content = content.replace(f'{assign} {pin_name}[{pin_number}] = {input}[{input_width}][{two_dm_width}];', f'{assign} {pin_name}[{pin_number}] = {input}[{input_width}];')
+
+    pattern = r'(\w+)\s(\w+)\[(\d+)\]\[(\d+)\]\s*=\s*(\w+)\[(\d+)\];'
+
+    matches = list(re.finditer(pattern, content))
+
+    if matches:
+        for i in range(len(matches)):
+            all_matches = matches[i]
+            assign = all_matches.group(1)
+            input = all_matches.group(2)
+            input_width = all_matches.group(3)
+            two_dm_width = all_matches.group(4)
+            pin_name = all_matches.group(5)
+            pin_number = all_matches.group(6)
+            content = content.replace(f'{assign} {input}[{input_width}][{two_dm_width}] = {pin_name}[{pin_number}];', f'{assign} {input}[{input_width}] = {pin_name}[{pin_number}];')
 
     with open(file_path, 'w') as file:
         file.write(content)

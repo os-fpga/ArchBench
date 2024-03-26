@@ -5,7 +5,8 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 simulator_name="" #vcs,iverilog
-
+internal_bitstream_simulation=false
+external_bitstream_simulation=true
 device=GEMINI_COMPACT_10x8
 
 given_device=$2
@@ -125,7 +126,57 @@ echo "simulation_options compilation icarus pnr" >> raptor.tcl
 echo "simulate pnr icarus">>raptor.tcl
 echo "sta">>raptor.tcl
 echo "power">>raptor.tcl
+if [[ $internal_bitstream_simulation == true ]]
+then
+    echo "bitstream enable_simulation">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "set tb_path \"../sim/bitstream_tb/bitstream_testbench.v\"">>raptor.tcl
+    echo "set openfpga_tb_path \"$design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_formal_random_top_tb.v\"">>raptor.tcl
+    echo "set search_line \"// ----- Can be changed by the user for his/her need -------\"">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "set source_file [open \$tb_path r]">>raptor.tcl
+    echo "set destination_file [open \$openfpga_tb_path r+]">>raptor.tcl
+    echo "set search_string \$search_line">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "set content [read \$source_file]">>raptor.tcl
+    echo "close \$source_file">>raptor.tcl
+    echo "set destination_lines [split [read \$destination_file] \"\n\"]">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "set line_number_to_insert_after -1">>raptor.tcl
+    echo "foreach line \$destination_lines {">>raptor.tcl
+    echo "    if {[string first \$search_string \$line] != -1} {">>raptor.tcl
+    echo "        set line_number_to_insert_after [expr {[lsearch \$destination_lines \$line] + 1}]">>raptor.tcl
+    echo "        break">>raptor.tcl
+    echo "    }">>raptor.tcl
+    echo "}">>raptor.tcl
+    echo "if {\$line_number_to_insert_after > 0} {">>raptor.tcl
+    echo "    set destination_lines [linsert \$destination_lines \$line_number_to_insert_after \$content]">>raptor.tcl
+    echo "} else {">>raptor.tcl
+    echo "    puts "Search string not found in the destination file."">>raptor.tcl
+    echo "}">>raptor.tcl
+    echo "seek \$destination_file 0">>raptor.tcl
+    echo "puts -nonewline \$destination_file [join \$destination_lines \"\n\"]">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "close \$destination_file">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_formal_random_top_tb.v $design_name">>raptor.tcl
+    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_top_formal_verification.v $design_name">>raptor.tcl
+    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_netlists.v $design_name">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "file mkdir $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor.tcl
+    echo "if {[file exists $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/CustomModules]} {">>raptor.tcl
+    echo "    puts \"Destination directory already exists. Skipping the copy operation.\"">>raptor.tcl
+    echo "} else {">>raptor.tcl
+    echo "    file copy -force ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor.tcl
+    echo "}">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "clear_simulation_files">>raptor.tcl
+    echo "add_library_path ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor.tcl
+    echo "">>raptor.tcl
+    echo "simulate \"bitstream_bd\" \"icarus\"">>raptor.tcl
+else
 [ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml">>raptor.tcl    # enable_simulation
+fi
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
@@ -230,33 +281,48 @@ fi
 if [ "$simulator_name" == "" ]; then cp "$design_name/run_1/synth_1_1/impl_1_1_1/simulate_pnr/simulation_pnr.rpt" "../post_route_sim.log"
 fi
 
-[ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
-[ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
-
-cd ../../..
-if [ -d "SRC" ] 
+if [[ $external_bitstream_simulation == true ]]
 then
-    echo "SRC folder already exists" 
+    [ ! -d $design_name\_$tool_name\_bitstream_sim_files ] && mkdir $design_name\_$tool_name\_bitstream_sim_files
+    [ -d $design_name\_$tool_name\_bitstream_sim_files ] && cd $design_name\_$tool_name\_bitstream_sim_files
+
+    cd ../../..
+    if [ -d "SRC" ] 
+    then
+        echo "SRC folder already exists" 
+    else
+        . ../scripts/change_netlist_dir_10x8.sh
+    fi
+    cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
+
+    python3 ../../../../scripts/force.py $design_name
+    python3 ../../../../scripts/pin_assignment.py $design_name
+
+    start_bitstream=`date +%s`
+    # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
+    # ./simv | tee -a bitstream_sim.log
+    $iverilog_path/iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+    $iverilog_path/vvp ./$design_name | tee bitstream_sim.log
+    end_bitstream=`date +%s`
+    runtime_bitstream=$((end_bitstream-start_bitstream))
+    echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
+
+    cd $main_path
+    [ -f $design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
 else
-    . ../scripts/change_netlist_dir_10x8.sh
+    echo "External Bitstream Simulation is Not Enabled"
 fi
-cd $design_name/$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files
 
-python3 ../../../../scripts/force.py $design_name
-python3 ../../../../scripts/pin_assignment.py $design_name
+# [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 
-start_bitstream=`date +%s`
-# timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
-# ./simv | tee -a bitstream_sim.log
-$iverilog_path/iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
-$iverilog_path/vvp ./$design_name | tee bitstream_sim.log
-end_bitstream=`date +%s`
-runtime_bitstream=$((end_bitstream-start_bitstream))
-echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
+if [ ! -e "../bitstream_sim.log" ]; then
+    touch "../bitstream_sim.log"
+fi
+
+if [ internal_bitstream_simulation==true ]; then cp "$design_name/run_1/synth_1_1/impl_1_1_1/simulate_bitstream/simulation_bitstream_back.rpt" "../bitstream_sim.log"
+fi
 
 cd $main_path
-[ -f $design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
-# [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 
