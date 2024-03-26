@@ -59,5 +59,3 @@
       $display("Status: Test Passed");
     else
       $display("Status: Test Failed");
-    #10;
-    $finish;

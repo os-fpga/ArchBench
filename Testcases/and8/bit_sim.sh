@@ -20,7 +20,6 @@ else
 fi
 fixed_sim_path=`which raptor | xargs dirname`
 
-
 given_device=$2
 if [ "$given_device" == "Multiple_Devices" ]; then     #These changes are made to get device_name from CGA. In case of golden regression device_name is Multiple. If device name is multiple then it means it is golden regression and regression will use device_name mentioned in the script. 
     if [ -f $main_path/../tool_10x8.conf ]; then # tool.conf
@@ -176,6 +175,7 @@ then
 else
     [ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream write_xml">>raptor.tcl    # enable_simulation
 fi
+
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
 
 start_raptor=`date +%s`
