@@ -92,6 +92,24 @@ def remove_iopadmap(file_path):
         for i in range(always_line - 1, end_line):
             lines[i] = "//" + lines[i]
 
+    initial_line = None
+    initial_end_line = None
+
+    initial_found = False
+
+    for i, line in enumerate(lines, start=1):
+        if not initial_found and '----- Input Initialization -------' in line:
+            initial_found = True
+            initial_line=i
+        elif initial_found:
+            if 'end' in line:
+                initial_end_line=i
+                break
+
+    if initial_line is not None and initial_end_line is not None:
+        for i in range(initial_line - 1, initial_end_line):
+            lines[i] = "//" + lines[i]
+
     with open(file_path, 'w') as file:
         file.writelines(lines)
     
@@ -282,6 +300,41 @@ def insert_new_lines(file_path,line,new_line):
 
     print("File updated successfully.")
 
+def copy_tasks(file_path):
+    print("Current directory:",os.getcwd())
+    task_path="../sim/bitstream_tb/bitstream_testbech_tasks.v"
+    insert_string="----- END output waveform to VCD file -------"
+    if os.path.exists(task_path):
+        print(f"The file bitstream_testbech_tasks.v exists.")    
+        try:
+            # Read the content of the source file
+            with open(task_path, 'r') as src_file:
+                source_content = src_file.read()
+
+            # Read the content of the destination file
+            with open(file_path, 'r') as dest_file:
+                dest_content = dest_file.read()
+
+            # Find the index of the insert string in the destination file
+            insert_index = dest_content.find(insert_string)
+
+            if insert_index != -1:
+                # Insert the content of the source file after the insert string in the destination file
+                new_content = dest_content[:insert_index + len(insert_string)] + '\n' + source_content + '\n' + dest_content[insert_index + len(insert_string):]
+
+                # Write the updated content back to the destination file
+                with open(file_path, 'w') as dest_file:
+                    dest_file.write(new_content)
+
+                print("Content inserted successfully.")
+            else:
+                print("Insert string not found in the destination file.")
+
+        except FileNotFoundError:
+            print("One or both of the specified files does not exist.")
+    else:
+        print(f"The file bitstream_testbech_tasks.v does not exist.")
+
 def main():
     file_path = sys.argv[1]
     design_name=sys.argv[2]
@@ -290,6 +343,7 @@ def main():
         remove_iopadmap(file_path)
         adjust_ios(file_path)
         instance_update(file_path)
+        copy_tasks(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
         adjust_ios(file_path)
