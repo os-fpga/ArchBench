@@ -1,3 +1,4 @@
+    a=8'b0;
     #5;
     if (b_gfpga==0)
       $display("Status: Test Passed");
