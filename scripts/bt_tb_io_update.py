@@ -301,7 +301,6 @@ def insert_new_lines(file_path,line,new_line):
     print("File updated successfully.")
 
 def copy_tasks(file_path):
-    print("Current directory:",os.getcwd())
     task_path="../sim/bitstream_tb/bitstream_testbech_tasks.v"
     insert_string="----- END output waveform to VCD file -------"
     if os.path.exists(task_path):
@@ -335,6 +334,36 @@ def copy_tasks(file_path):
     else:
         print(f"The file bitstream_testbech_tasks.v does not exist.")
 
+def clk_update(file_path):
+    pattern = r'\$auto\$clkbufmap\.cc:\d+:execute\$\d+'
+
+    replacement = 'clock0'
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    new_content = re.sub(pattern, replacement, content)
+
+    with open(file_path, 'w') as f:
+            f.write(new_content)
+
+def replacement(file_path,pattern,replacement):
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    match = re.search(pattern, content)
+
+    if match:
+        print("Pattern found:", match.group())
+    else:
+        print("Pattern not found in the file.")
+
+    new_content = re.sub(pattern, replacement, content)
+
+    with open(file_path, 'w') as f:
+        f.write(new_content)
+
 def main():
     file_path = sys.argv[1]
     design_name=sys.argv[2]
@@ -344,10 +373,14 @@ def main():
         adjust_ios(file_path)
         instance_update(file_path)
         copy_tasks(file_path)
+        clk_update(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
         adjust_ios(file_path)
         remove_twodim_array(file_path)
+        clk_update(file_path)
+        replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clock0")
+        replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")
     elif file_path.endswith("fabric_netlists.v"):
         inc_upate(file_path,"BIT_SIM/","`include \"")
         rename_p(file_path,"BIT_SIM/./SRC/","SRC/")

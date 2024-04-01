@@ -6,7 +6,7 @@ main_path=$PWD
 design_name=${PWD##*/}
 simulator_name="" #vcs,iverilog
 internal_bitstream_simulation=false
-external_bitstream_simulation=true
+external_bitstream_simulation=false
 device=GEMINI_COMPACT_10x8
 
 given_device=$2
@@ -170,6 +170,7 @@ then
     echo "    file copy -force ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor.tcl
     echo "}">>raptor.tcl
     echo "">>raptor.tcl
+    echo "exec /bin/bash ../sed.sh">>raptor.tcl
     echo "clear_simulation_files">>raptor.tcl
     echo "add_library_path ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor.tcl
     echo "">>raptor.tcl
