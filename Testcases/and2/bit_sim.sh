@@ -139,38 +139,38 @@ echo "power">>raptor.tcl
 if [[ $internal_bitstream_simulation == true ]]
 then
     echo "bitstream enable_simulation">>raptor.tcl
+    # echo "">>raptor.tcl
+    # echo "set tb_path \"../sim/bitstream_tb/bitstream_testbench.v\"">>raptor.tcl
+    # echo "set openfpga_tb_path \"$design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_formal_random_top_tb.v\"">>raptor.tcl
+    # echo "set search_line \"// ----- Can be changed by the user for his/her need -------\"">>raptor.tcl
+    # echo "">>raptor.tcl
+    # echo "set source_file [open \$tb_path r]">>raptor.tcl
+    # echo "set destination_file [open \$openfpga_tb_path r+]">>raptor.tcl
+    # echo "set search_string \$search_line">>raptor.tcl
+    # echo "">>raptor.tcl
+    # echo "set content [read \$source_file]">>raptor.tcl
+    # echo "close \$source_file">>raptor.tcl
+    # echo "set destination_lines [split [read \$destination_file] \"\n\"]">>raptor.tcl
+    # echo "">>raptor.tcl
+    # echo "set line_number_to_insert_after -1">>raptor.tcl
+    # echo "foreach line \$destination_lines {">>raptor.tcl
+    # echo "    if {[string first \$search_string \$line] != -1} {">>raptor.tcl
+    # echo "        set line_number_to_insert_after [expr {[lsearch \$destination_lines \$line] + 1}]">>raptor.tcl
+    # echo "        break">>raptor.tcl
+    # echo "    }">>raptor.tcl
+    # echo "}">>raptor.tcl
+    # echo "if {\$line_number_to_insert_after > 0} {">>raptor.tcl
+    # echo "    set destination_lines [linsert \$destination_lines \$line_number_to_insert_after \$content]">>raptor.tcl
+    # echo "} else {">>raptor.tcl
+    # echo "    puts "Search string not found in the destination file."">>raptor.tcl
+    # echo "}">>raptor.tcl
+    # echo "seek \$destination_file 0">>raptor.tcl
+    # echo "puts -nonewline \$destination_file [join \$destination_lines \"\n\"]">>raptor.tcl
+    # echo "">>raptor.tcl
+    # echo "close \$destination_file">>raptor.tcl
     echo "">>raptor.tcl
-    echo "set tb_path \"../sim/bitstream_tb/bitstream_testbench.v\"">>raptor.tcl
-    echo "set openfpga_tb_path \"$design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_formal_random_top_tb.v\"">>raptor.tcl
-    echo "set search_line \"// ----- Can be changed by the user for his/her need -------\"">>raptor.tcl
-    echo "">>raptor.tcl
-    echo "set source_file [open \$tb_path r]">>raptor.tcl
-    echo "set destination_file [open \$openfpga_tb_path r+]">>raptor.tcl
-    echo "set search_string \$search_line">>raptor.tcl
-    echo "">>raptor.tcl
-    echo "set content [read \$source_file]">>raptor.tcl
-    echo "close \$source_file">>raptor.tcl
-    echo "set destination_lines [split [read \$destination_file] \"\n\"]">>raptor.tcl
-    echo "">>raptor.tcl
-    echo "set line_number_to_insert_after -1">>raptor.tcl
-    echo "foreach line \$destination_lines {">>raptor.tcl
-    echo "    if {[string first \$search_string \$line] != -1} {">>raptor.tcl
-    echo "        set line_number_to_insert_after [expr {[lsearch \$destination_lines \$line] + 1}]">>raptor.tcl
-    echo "        break">>raptor.tcl
-    echo "    }">>raptor.tcl
-    echo "}">>raptor.tcl
-    echo "if {\$line_number_to_insert_after > 0} {">>raptor.tcl
-    echo "    set destination_lines [linsert \$destination_lines \$line_number_to_insert_after \$content]">>raptor.tcl
-    echo "} else {">>raptor.tcl
-    echo "    puts "Search string not found in the destination file."">>raptor.tcl
-    echo "}">>raptor.tcl
-    echo "seek \$destination_file 0">>raptor.tcl
-    echo "puts -nonewline \$destination_file [join \$destination_lines \"\n\"]">>raptor.tcl
-    echo "">>raptor.tcl
-    echo "close \$destination_file">>raptor.tcl
-    echo "">>raptor.tcl
-    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_formal_random_top_tb.v $design_name">>raptor.tcl
-    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_top_formal_verification.v $design_name">>raptor.tcl
+    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_"$design_name"_formal_random_top_tb.v $design_name">>raptor.tcl
+    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_"$design_name"_top_formal_verification.v $design_name">>raptor.tcl
     echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_netlists.v $design_name">>raptor.tcl
     echo "">>raptor.tcl
     echo "file mkdir $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor.tcl
