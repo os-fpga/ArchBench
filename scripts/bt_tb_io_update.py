@@ -367,7 +367,7 @@ def main():
         remove_iopadmap(file_path)
         adjust_ios(file_path)
         instance_update(file_path)
-        copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","// ----- Can be changed by the user for his/her need -------")
+        copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","----- Can be changed by the user for his/her need -------")
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbech_tasks.v","----- END output waveform to VCD file -------")
         clk_update(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
