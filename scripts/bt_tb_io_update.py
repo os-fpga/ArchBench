@@ -300,29 +300,23 @@ def insert_new_lines(file_path,line,new_line):
 
     print("File updated successfully.")
 
-def copy_tasks(file_path):
-    print("Current directory:",os.getcwd())
-    task_path="../sim/bitstream_tb/bitstream_testbech_tasks.v"
-    insert_string="----- END output waveform to VCD file -------"
+def copy_tasks(file_path,task_path,insert_string):
+    # task_path="../sim/bitstream_tb/bitstream_testbech_tasks.v"
+    # insert_string="----- END output waveform to VCD file -------"
     if os.path.exists(task_path):
         print(f"The file bitstream_testbech_tasks.v exists.")    
         try:
-            # Read the content of the source file
             with open(task_path, 'r') as src_file:
                 source_content = src_file.read()
 
-            # Read the content of the destination file
             with open(file_path, 'r') as dest_file:
                 dest_content = dest_file.read()
 
-            # Find the index of the insert string in the destination file
             insert_index = dest_content.find(insert_string)
 
             if insert_index != -1:
-                # Insert the content of the source file after the insert string in the destination file
                 new_content = dest_content[:insert_index + len(insert_string)] + '\n' + source_content + '\n' + dest_content[insert_index + len(insert_string):]
 
-                # Write the updated content back to the destination file
                 with open(file_path, 'w') as dest_file:
                     dest_file.write(new_content)
 
@@ -335,6 +329,36 @@ def copy_tasks(file_path):
     else:
         print(f"The file bitstream_testbech_tasks.v does not exist.")
 
+def clk_update(file_path):
+    pattern = r'\$auto\$clkbufmap\.cc:\d+:execute\$\d+'
+
+    replacement = 'clock0'
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    new_content = re.sub(pattern, replacement, content)
+
+    with open(file_path, 'w') as f:
+            f.write(new_content)
+
+def replacement(file_path,pattern,replacement):
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    match = re.search(pattern, content)
+
+    if match:
+        print("Pattern found:", match.group())
+    else:
+        print("Pattern not found in the file.")
+
+    new_content = re.sub(pattern, replacement, content)
+
+    with open(file_path, 'w') as f:
+        f.write(new_content)
+
 def main():
     file_path = sys.argv[1]
     design_name=sys.argv[2]
@@ -343,11 +367,18 @@ def main():
         remove_iopadmap(file_path)
         adjust_ios(file_path)
         instance_update(file_path)
-        copy_tasks(file_path)
+        copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","----- Can be changed by the user for his/her need -------")
+        copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbech_tasks.v","----- END output waveform to VCD file -------")
+        clk_update(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
         adjust_ios(file_path)
         remove_twodim_array(file_path)
+        if design_name != "up5bit_counter_dual_clock":
+            clk_update(file_path)
+        if design_name in ["shift_register", "dffre_inst", "lut_ff_mux", "sp_ram", "up5bit_counter"]:
+            replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clock0")
+            replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")
     elif file_path.endswith("fabric_netlists.v"):
         inc_upate(file_path,"BIT_SIM/","`include \"")
         rename_p(file_path,"BIT_SIM/./SRC/","SRC/")
