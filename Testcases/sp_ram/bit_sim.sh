@@ -278,23 +278,27 @@ then
     end_bitstream=`date +%s`
     runtime_bitstream=$((end_bitstream-start_bitstream))
     echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
-
-    cd $main_path
-    [ -f $design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log ] && mv ./$design_name\_golden/$design_name\_$tool_name\_bitstream_sim_files/bitstream_sim.log . || echo -e "\n">bitstream_sim.log
 else
     echo "External Bitstream Simulation is Not Enabled"
 fi
 
-# [ -f $design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log ] && mv ./$design_name\_golden/$design_name\_$simulator_name\_post_route_files/post_route_sim.log . || echo -e "\n">post_route_sim.log
-
-if [ ! -e "../bitstream_sim.log" ]; then
-    touch "../bitstream_sim.log"
-fi
-
-if [ internal_bitstream_simulation==true ]; then cp "$design_name/run_1/synth_1_1/impl_1_1_1/simulate_bitstream/simulation_bitstream_back.rpt" "../bitstream_sim.log"
-fi
-
 cd $main_path
+if [[ $internal_bitstream_simulation == true ]]; then
+    if [[ -f ""$design_name"_golden/$design_name/run_1/synth_1_1/impl_1_1_1/simulate_bitstream/simulation_bitstream_back.rpt" ]]; then
+        cp ""$design_name"_golden/$design_name/run_1/synth_1_1/impl_1_1_1/simulate_bitstream/simulation_bitstream_back.rpt" "bitstream_sim.log"
+    else
+        echo -e "simulation_bitstream_back.rpt file not generated\n" > bitstream_sim.log
+    fi
+elif [[ $external_bitstream_simulation == true ]]; then
+    if [[ -f ""$design_name"_golden/"$design_name"_$tool_name\_bitstream_sim_files/bitstream_sim.log" ]]; then
+        mv "./"$design_name"_golden/"$design_name"_$tool_name\_bitstream_sim_files/bitstream_sim.log" "bitstream_sim.log"
+    else
+        echo -e "Bitstream simulation did not run\n" > bitstream_sim.log
+    fi
+else 
+    echo -e "Bitstream simulation not enabled\n" > bitstream_sim.log
+fi
+
 mv ./$design_name\_golden/raptor.log .
 mv ./$design_name\_golden/raptor_perf.log .
 
