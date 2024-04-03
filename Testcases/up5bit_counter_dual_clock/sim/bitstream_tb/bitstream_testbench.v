@@ -12,7 +12,7 @@ module fabric_up5bit_counter_dual_clock_top_formal_verification_random_tb;
 
 	integer i;
 	reg [4:0] counter_model=5'b00000;
-	reg [4:0] counter_model_two=5'b00001;
+	reg [4:0] counter_model_two=5'b00000;
 
 	fabric_up5bit_counter_dual_clock_top_formal_verification FPGA_DUT(
 		clk0,
