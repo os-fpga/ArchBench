@@ -359,6 +359,38 @@ def replacement(file_path,pattern,replacement):
     with open(file_path, 'w') as f:
         f.write(new_content)
 
+
+def replace_pattern_in_file(file_path, pattern, replacement):
+
+    modified_pattern = pattern.replace("$", r"\$")
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    content = re.sub(modified_pattern, replacement, content)
+
+    with open(file_path, 'w') as f:
+        f.write(content)
+
+def multiclock_update(file_path,number_of_clocks):
+    match=[]
+    pattern = r'\$auto\$clkbufmap\.cc:\d+:execute\$\d+'
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    matches = re.findall(pattern, content)
+
+    if matches:
+        print("Patterns found:")
+        for i in matches:
+            match.append(i)
+    else:
+        print("Pattern not found in the file.")
+
+    for i in range(number_of_clocks):
+            replace_pattern_in_file(file_path,match[i],"clock"+str(i))
+
 def main():
     file_path = sys.argv[1]
     design_name=sys.argv[2]
@@ -376,6 +408,9 @@ def main():
         remove_twodim_array(file_path)
         if design_name != "up5bit_counter_dual_clock":
             clk_update(file_path)
+        else:
+            if int(sys.argv[3]) > 1:
+                multiclock_update(file_path,int(sys.argv[3]))
         if design_name in ["shift_register", "dffre_inst", "lut_ff_mux", "sp_ram", "up5bit_counter"]:
             replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clock0")
             replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")

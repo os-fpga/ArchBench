@@ -131,7 +131,7 @@ then
     echo "bitstream enable_simulation">>raptor.tcl
     echo "">>raptor.tcl
     echo "exec python3 ../../../scripts/file_overwrite.py ../sim/bitstream_tb/bitstream_testbench.v $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_"$design_name"_formal_random_top_tb.v">>raptor.tcl
-    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_top_formal_verification.v $design_name">>raptor.tcl
+    echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_"$design_name"_top_formal_verification.v $design_name 2">>raptor.tcl
     echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_netlists.v $design_name">>raptor.tcl
     echo "">>raptor.tcl
     echo "file mkdir $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor.tcl
