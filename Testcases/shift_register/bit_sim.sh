@@ -103,6 +103,7 @@ echo "set_top_testbench sim_route_${design_name}">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl
 echo "pin_loc_assign_method free">>raptor.tcl
+echo "analyze">>raptor.tcl 
 echo "synthesize $strategy">>raptor.tcl
 echo "packing">>raptor.tcl 
 echo "place">>raptor.tcl  
