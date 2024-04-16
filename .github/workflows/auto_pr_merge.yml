@@ -1,0 +1,19 @@
+name: Auto PR Merge
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a multi-line script
+        run: |
+          assigned_user=$(gh pr view  ${{ github.event.pull_request.head.ref }}    --json reviewRequests  --jq '.reviewRequests[0].login')
+          echo "Assigned user: $assigned_user"
+          if [[ $assigned_user == "NadeemYaseen" ]]
+          then
+              gh pr merge ${{ github.event.pull_request.head.ref }} -m -d -t "Auto merge by $assigned_user"
+          fi
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
