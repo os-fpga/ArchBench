@@ -131,6 +131,8 @@ echo "power">>raptor.tcl
 if [[ $internal_bitstream_simulation == true ]]
 then
     echo "bitstream enable_simulation">>raptor.tcl
+    echo "add_simulation_file ${design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_${design_name}_formal_random_top_tb.v">>raptor.tcl 
+    echo "set_top_testbench fabric_${design_name}_top_formal_verification_random_tb">>raptor.tcl
     echo "">>raptor.tcl
     echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_"$design_name"_formal_random_top_tb.v $design_name">>raptor.tcl
     echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_"$design_name"_top_formal_verification.v $design_name">>raptor.tcl
