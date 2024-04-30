@@ -128,6 +128,8 @@ echo "power">>raptor.tcl
 if [[ $internal_bitstream_simulation == true ]]
 then
     echo "bitstream enable_simulation">>raptor.tcl
+    echo "add_simulation_file ${design_name}/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_${design_name}_formal_random_top_tb.v">>raptor.tcl 
+    echo "set_top_testbench fabric_${design_name}_top_formal_verification_random_tb">>raptor.tcl
     echo "">>raptor.tcl
     echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_formal_random_top_tb.v $design_name">>raptor.tcl
     echo "exec python3 ../../../scripts/bt_tb_io_update.py $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design_name\_top_formal_verification.v $design_name">>raptor.tcl
@@ -140,6 +142,7 @@ then
     echo "    file copy -force ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor.tcl
     echo "}">>raptor.tcl
     echo "">>raptor.tcl
+    echo "exec /bin/bash ../sed.sh">>raptor.tcl
     echo "clear_simulation_files">>raptor.tcl
     echo "add_library_path ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor.tcl
     echo "">>raptor.tcl
@@ -264,10 +267,12 @@ then
 
     python3 ../../../../scripts/force.py $design_name
 
+    sed -i '/[.$]/D' ../$design_name/PinMapping.v
+
     start_bitstream=`date +%s`
     # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
     # ./simv | tee -a bitstream_sim.log
-    $iverilog_path/iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
+    $iverilog_path/iverilog -v -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
     $iverilog_path/vvp ./$design_name | tee bitstream_sim.log
     end_bitstream=`date +%s`
     runtime_bitstream=$((end_bitstream-start_bitstream))
