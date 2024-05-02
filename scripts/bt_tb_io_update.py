@@ -411,19 +411,18 @@ def remove_lines_with_two_dollar_signs(filename):
         file.writelines(filtered_lines)
 
 def remove_comma_from_line(file_path):
-    # Read the file
+
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
     modified_lines = []
     found_first_occurrence = False
 
-    # Iterate through lines
     for i, line in enumerate(lines):
-        # Check for first occurrence of );
+
         if not found_first_occurrence and lines[i+1].strip() == ');':
             found_first_occurrence = True
-            # Check if the line contains a comma
+
             # print(line)
             if ',' in lines[i]:
                 # print("in if",lines[i - 1])
@@ -434,10 +433,9 @@ def remove_comma_from_line(file_path):
                 # del lines[i]
                 modified_lines.append(lines[i])
 
-        # Check if the line is not the first occurrence and contains only );
         elif not found_first_occurrence and ');' in line and line.strip() != ');':
             found_first_occurrence = True
-            # Check if the line and the line above contain commas
+
             if ',' in line:
                 # Remove the commas
                 line = line.replace(',', '')
@@ -445,16 +443,23 @@ def remove_comma_from_line(file_path):
 
         modified_lines.append(line)
 
-    # Write the modified lines back to the file
     with open(file_path, 'w') as file:
         file.writelines(modified_lines)
 
-# File path of the file to be processed
-# file_path = 'your_file.txt'
+def replace_auto_in_file(file_path):
 
-# Call the function to remove commas
-# remove_comma_from_line(file_path)
+    with open(file_path, 'r') as file:
+        content = file.read()
 
+    if file_path.endswith("_top_formal_verification.v"):
+        pattern = r'(\$auto\$rs_design_edit\.cc:\d+:execute\$)(\d+)'
+    else:
+        pattern = r'(\$auto\$rs_design_edit\.cc:\d+:execute\$)(\d+_gfpga)'
+
+    modified_content = re.sub(pattern, r'\\\1\2 ', content)
+
+    with open(file_path, 'w') as file:
+        file.write(modified_content)
 
 
 def main():
@@ -468,7 +473,8 @@ def main():
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","----- Can be changed by the user for his/her need -------")
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbech_tasks.v","----- END output waveform to VCD file -------")
         clk_update(file_path)
-        remove_lines_with_two_dollar_signs(file_path)
+        # remove_lines_with_two_dollar_signs(file_path)
+        replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
         adjust_ios(file_path)
@@ -481,8 +487,9 @@ def main():
         if design_name in ["shift_register", "dffre_inst", "lut_ff_mux", "sp_ram", "up5bit_counter"]:
             replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clock0")
             replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")
-        remove_lines_with_two_dollar_signs(file_path)
-        remove_comma_from_line(file_path)
+        # remove_lines_with_two_dollar_signs(file_path)
+        # remove_comma_from_line(file_path)
+        replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_netlists.v"):
         inc_upate(file_path,"BIT_SIM/","`include \"")
         rename_p(file_path,"BIT_SIM/./SRC/","SRC/")
