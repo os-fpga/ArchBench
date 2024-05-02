@@ -21,20 +21,36 @@ if check_pin_mapping:
     tree = ET.parse(PinMapping)
     root = tree.getroot()
     for child in root.iter('io'):
+        innernet = child.attrib['net']
+        print ('Net ' + innernet)
+        if (innernet[0] == '$'):
+          innernet = '\\'+innernet+' '
         if (child.attrib['dir'] == 'input'):
-            if(netlist == 'SRC'):
-                pf.write(f" assign {child.attrib['name']} = {child.attrib['net']};\n")
-            else:
-                pf.write(f" assign {child.attrib['name']} = {child.attrib['net']};\n")
+            pf.write(f" assign {child.attrib['name']} = {innernet};\n")
         elif (child.attrib['dir'] == 'output'):
-            if(netlist == 'SRC'):
-                pf.write(f" assign {child.attrib['net']} = {child.attrib['name']};\n")
-            else:
-                pf.write(f" assign {child.attrib['net']} = {child.attrib['name']};\n")
-   
+            pf.write(f" assign {innernet} = {child.attrib['name']};\n")
 else:
-    pf.write(f"// PrimaryPinMapping.xml is not generated for {design_name}")
+    pf.write(f"// PinMapping.xml is not generated for {design_name}")
 pf.close()
+
+# pf = open(f"../{design_name}/PinMapping.v", 'w')
+# if check_pin_mapping:
+#     tree = ET.parse(PinMapping)
+#     root = tree.getroot()
+#     for child in root.iter('io'):
+#         if (child.attrib['dir'] == 'input'):
+#             if(netlist == 'SRC'):
+#                 pf.write(f" assign {child.attrib['name']} = {child.attrib['net']};\n")
+#             else:
+#                 pf.write(f" assign {child.attrib['name']} = {child.attrib['net']};\n")
+#         elif (child.attrib['dir'] == 'output'):
+#             if(netlist == 'SRC'):
+#                 pf.write(f" assign {child.attrib['net']} = {child.attrib['name']};\n")
+#             else:
+#                 pf.write(f" assign {child.attrib['net']} = {child.attrib['name']};\n")
+# else:
+#     pf.write(f"// PrimaryPinMapping.xml is not generated for {design_name}")
+# pf.close()
 
 output_file = open("../../bitstream_text.txt", "w")
 
