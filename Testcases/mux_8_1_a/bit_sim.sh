@@ -143,7 +143,7 @@ then
     echo "    file copy -force ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design_name/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor.tcl
     echo "}">>raptor.tcl
     echo "">>raptor.tcl
-    echo "clear_simulation_files">>raptor.tcl
+    # echo "clear_simulation_files">>raptor.tcl
     echo "add_library_path ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor.tcl
     echo "">>raptor.tcl
     echo "simulate \"bitstream_bd\" \"icarus\"">>raptor.tcl

@@ -144,7 +144,7 @@ then
     echo "}">>raptor.tcl
     echo "">>raptor.tcl
     echo "exec /bin/bash ../sed.sh">>raptor.tcl
-    echo "clear_simulation_files">>raptor.tcl
+    # echo "clear_simulation_files">>raptor.tcl
     echo "add_library_path ../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor.tcl
     echo "">>raptor.tcl
     echo "simulate \"bitstream_bd\" \"icarus\"">>raptor.tcl
