@@ -449,7 +449,7 @@ def replace_auto_in_file(file_path):
     with open(file_path, 'r') as file:
         content = file.read()
 
-    pattern = r'(\$auto\$[a-zA-Z_]+\.cc:\d+:execute\$\d+)(_[a-zA-Z_]+)?'
+    pattern = r'(\$auto\$[a-zA-Z_]+\.cc:\d+:[a-zA-Z_]+\$\d+)(_[a-zA-Z_]+)?'
 
     modified_content = re.sub(pattern, r'\\\1\2 ', content)
 
