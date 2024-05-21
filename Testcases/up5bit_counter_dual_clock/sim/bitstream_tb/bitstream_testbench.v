@@ -10,9 +10,7 @@ reg [0:0] reset;
 wire [4:0] out1;
 wire [4:0] out0;
 
-wire [0:0] \$auto$rs_design_edit.cc:700:execute$1087_gfpga ;
-wire [0:0] \$auto$rs_design_edit.cc:700:execute$1088_gfpga ;
-wire [0:0] \$auto$rs_design_edit.cc:700:execute$1089_gfpga ;
+//Wires.
 
 integer i;
 reg [4:0] counter_model=5'b00000;
@@ -23,9 +21,7 @@ fabric_up5bit_counter_dual_clock_top_formal_verification FPGA_DUT(
 	clk0,
 	clk1,
 	reset,
-	\$auto$rs_design_edit.cc:700:execute$1087_gfpga ,
-	\$auto$rs_design_edit.cc:700:execute$1088_gfpga ,
-	\$auto$rs_design_edit.cc:700:execute$1089_gfpga ,
+	//Wire_instance.
 	out0,
 	out1
 );
