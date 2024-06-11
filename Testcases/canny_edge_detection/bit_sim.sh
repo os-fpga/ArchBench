@@ -110,7 +110,7 @@ echo "set_top_module top">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 
-echo "synth_options -no_inferred_io">>raptor.tcl
+# echo "synth_options -no_inferred_io">>raptor.tcl
 # echo "analyze">>raptor.tcl 
 # echo "synthesize $strategy">>raptor.tcl
 # echo "packing">>raptor.tcl  
