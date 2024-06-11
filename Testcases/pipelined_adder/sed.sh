@@ -1,0 +1,8 @@
+sed -i "s|// reg \[0:0\] op_a\[0\];|reg \[31:0\] error=0;|g" $(find . -type f -name "fabric_pipelined_adder_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] op_a\[1\];|bit \[\`ADDER_WIDTH - 1:0\] op_a_data\[0:15\];|g" $(find . -type f -name "fabric_pipelined_adder_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] op_a\[2\];|bit \[\`ADDER_WIDTH - 1:0\] op_b_data\[0:15\];|g" $(find . -type f -name "fabric_pipelined_adder_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] op_a\[3\];|bit [\`ADDER_WIDTH - 1:0] pipe[0:5];|g" $(find . -type f -name "fabric_pipelined_adder_formal_random_top_tb.v")
+sed -i "s|//----- Default net type -----|\`define ADDER_WIDTH 26|g" $(find . -type f -name "fabric_pipelined_adder_formal_random_top_tb.v")
+sed -i "s|global_resetn_fm\[0\] = 1'b0;|global_resetn_fm\[0\] = 1'b1;|g" $(find . -type f -name "fabric_pipelined_adder_top_formal_verification.v")
+sed -i "s|clk_fm\[15\] = 1'b0;|clk_fm\[15\] = clock0;|g" $(find . -type f -name "fabric_pipelined_adder_top_formal_verification.v")
+# sed -i "s|dumpvars(1|dumpvars(0|g" $(find . -type f -name "fabric_pipelined_adder_formal_random_top_tb.v")
