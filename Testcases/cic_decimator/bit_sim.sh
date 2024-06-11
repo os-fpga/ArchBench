@@ -97,11 +97,11 @@ echo "add_design_file ../rtl/integrator.sv">>raptor.tcl
 echo "add_design_file ../rtl/cic_d.sv">>raptor.tcl
 echo "set_top_module cic_d">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
-[ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path -repack $repack_design_constraint_path">>raptor.tcl
+[ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "synth_options -effort high">>raptor.tcl
 echo "analyze">>raptor.tcl 
-echo "synthesize $strategy">>raptor.tcl
+echo "synthesize delay">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "global_placement">>raptor.tcl  
 echo "place">>raptor.tcl  
