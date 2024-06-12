@@ -1,3 +1,4 @@
+sed -i "s|//----- Default net type -----|\`timescale 1ns/1ps|g" $(find . -type f -name "fabric_sp_ram_formal_random_top_tb.v")
 sed -i "s|// reg \[0:0\] addr\[0\]|reg [31:0] memory[1023:0]|g" $(find . -type f -name "fabric_sp_ram_formal_random_top_tb.v")
 sed -i "s|// reg \[0:0\] addr\[1\]|bit [31:0] wdata|g" $(find . -type f -name "fabric_sp_ram_formal_random_top_tb.v")
 sed -i "s|// reg \[0:0\] addr\[2\]|reg [31:0] rd_data|g" $(find . -type f -name "fabric_sp_ram_formal_random_top_tb.v")
