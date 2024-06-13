@@ -342,6 +342,18 @@ def clk_update(file_path):
     with open(file_path, 'w') as f:
             f.write(new_content)
 
+    pattern_genblk = r'genblk1\[0\]\.a0\.clock0(?=[,\[0\];])'
+
+    match = re.search(pattern_genblk, content)
+    if match:
+        with open(file_path, 'r') as f:
+            content = f.read()
+
+        new_content = re.sub(pattern_genblk, replacement, content)
+
+        with open(file_path, 'w') as f:
+                f.write(new_content)
+
 def replacement(file_path,pattern,replacement):
 
     with open(file_path, 'r') as f:
@@ -618,6 +630,19 @@ def sort_lines(file_path):
     with open(file_path, 'w') as file:
         file.write(content)
 
+def remove_genblk1a0_occurrences(file_path):
+
+    pattern = r'genblk1\[0\]\.a0\.'
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    match = re.search(pattern, content)
+    if (match):
+        new_content = re.sub(pattern, '', content)
+
+        with open(file_path, 'w') as file:
+            file.write(new_content)
 
 def main():
     file_path = sys.argv[1]
@@ -625,6 +650,7 @@ def main():
 
     if file_path.endswith("fabric_"+design_name+"_formal_random_top_tb.v"):
         remove_iopadmap(file_path)
+        # remove_genblk1a0_occurrences(file_path)
         # sort_lines(file_path)
         adjust_ios(file_path)
         instance_update(file_path)
@@ -635,6 +661,7 @@ def main():
         replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
+        # remove_genblk1a0_occurrences(file_path)
         # sort_lines(file_path)
         # remove_comma_from_last_line(file_path)
         adjust_ios(file_path)
