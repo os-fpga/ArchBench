@@ -7,7 +7,7 @@ design_name=${PWD##*/}
 simulator_name="" #vcs,iverilog
 internal_bitstream_simulation=true
 external_bitstream_simulation=false
-device=GEMINI_COMPACT_10x8
+device=GEMINI_COMPACT_22x4
 
 xml_root=`git rev-parse --show-toplevel`
 cd $xml_root/openfpga-pd-castor-rs 
@@ -90,7 +90,7 @@ cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
 echo "target_device $device">>raptor.tcl
-[ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
+# [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
 echo "add_library_ext .v .sv">>raptor.tcl 
