@@ -89,7 +89,8 @@ library=${raptor_path/$lib_fix_path//share/raptor/sim_models/rapidsilicon}
 cd $design_name\_golden
 
 echo "create_design $design_name">raptor.tcl
-echo "target_device $device">>raptor.tcl
+# echo "target_device $device">>raptor.tcl
+echo "target_device GEMINI_COMPACT_22x4">>raptor.tcl
 # [ -z "$vpr_file_path" ] || [ -z "$openfpga_file_path" ] && echo "" || echo "architecture $vpr_file_path $openfpga_file_path">>raptor.tcl
 echo "add_include_path ../rtl">>raptor.tcl
 echo "add_library_path ../rtl">>raptor.tcl  
@@ -99,7 +100,7 @@ echo "set_top_module $design_name">>raptor.tcl
 echo "add_simulation_file ../sim/post_route_tb/sim_route_${design_name}.sv">>raptor.tcl 
 echo "set_top_testbench sim_route_${design_name}">>raptor.tcl 
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
-[ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path">>raptor.tcl
+# [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl  
 echo "add_constraint_file ../pin_constraints.pin">>raptor.tcl 
