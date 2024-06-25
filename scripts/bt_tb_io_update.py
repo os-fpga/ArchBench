@@ -342,7 +342,7 @@ def clk_update(file_path):
     with open(file_path, 'w') as f:
             f.write(new_content)
 
-    pattern_genblk = r'genblk1\[0\]\.a0\.clock0(?=[,\[0\];])'
+    pattern_genblk = r'genblk1\[0\]\.(\w+)\.clock0(?=[,\[0\];])'
 
     match = re.search(pattern_genblk, content)
     if match:
