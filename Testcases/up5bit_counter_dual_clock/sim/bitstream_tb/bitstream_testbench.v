@@ -91,7 +91,7 @@ initial begin
     join
 
 	#20
-	$display("Simulation Succeed");
+	// $display("Simulation Succeed");
 	$finish;
 end
 
