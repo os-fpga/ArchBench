@@ -667,7 +667,7 @@ def main():
         # remove_comma_from_last_line(file_path)
         adjust_ios(file_path)
         remove_twodim_array(file_path)
-        if design_name != "up5bit_counter_dual_clock":
+        if design_name != "up5bit_counter_dual_clock" and design_name != "dpram_36x1024":
             clk_update(file_path)
         else:
             if int(sys.argv[3]) > 1:
