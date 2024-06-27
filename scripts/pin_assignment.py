@@ -64,3 +64,21 @@ with open(f'../{design_name}/pin_assignments.v', 'w') as verilog_file:
 with open(f'../{design_name}/pin_assignments.v', 'a') as verilog_file:
         for i in output_pin_assignments:
             verilog_file.write(i)
+
+with open(f'../{design_name}/pin_assignments.v', 'r') as file:
+    content = file.readlines()
+
+    assign_pattern = r'assign\s+\$auto\$\w+\.cc:\d+:\w+\$\d+\s+=\s+\w+\[\d+:\d+\];'
+
+    assign_regex = re.compile(assign_pattern)
+
+    modified_content = []
+
+    for line in content:
+        if re.match(assign_regex, line):
+            modified_content.append('// ' + line.strip() + '\n')
+        else:
+            modified_content.append(line)
+
+with open(f'../{design_name}/pin_assignments.v', 'w') as file:
+        file.writelines(modified_content)
