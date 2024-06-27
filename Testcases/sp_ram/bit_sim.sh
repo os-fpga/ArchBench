@@ -275,11 +275,45 @@ then
     python3 ../../../../scripts/force.py $design_name
     python3 ../../../../scripts/pin_assignment.py $design_name
 
+    file1="../../../SRC/fpga_top.v"
+    file2="../../sim/bitstream_tb/initialize.v"
+    marker="// ----- BEGIN Local short connections -----"
+
+    if grep -qF "$marker" "$file1"; then
+        temp_file=$(mktemp)
+
+        replaced=false
+
+        while IFS= read -r line; do
+            if [[ "$line" == *"$marker"* ]]; then
+                cat "$file2" >> "$temp_file"
+                replaced=true
+            else
+                echo "$line" >> "$temp_file"
+            fi
+        done < "$file1"
+
+        if ! $replaced; then
+            echo "Marker '$marker' not found in $file1."
+            rm "$temp_file"
+            exit 1
+        fi
+
+        mv "$temp_file" "$file1"
+
+        rm "$temp_file"
+
+        echo "Marker '$marker' replaced with content of $file2 in $file1."
+    else
+        echo "Marker '$marker' not found in $file1."
+    fi
+
+
     start_bitstream=`date +%s`
     # timeout 20m vcs -sverilog $bitstream_tb_path -full64 -debug_all -lca -kdb | tee bitstream_sim.log
     # ./simv | tee -a bitstream_sim.log
-    $iverilog_path/iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path | tee bitstream_sim.log
-    $iverilog_path/vvp ./$design_name | tee bitstream_sim.log
+    $iverilog_path/iverilog -g2012 -DIVERILOG=1 -o $design_name $bitstream_tb_path -Y .v  -Y .sv -s sp_ram_top_formal_verification_random_tb| tee bitstream_sim.log
+    $iverilog_path/vvp ./$design_name -fst| tee bitstream_sim.log
     end_bitstream=`date +%s`
     runtime_bitstream=$((end_bitstream-start_bitstream))
     echo -e "\nTotal RunTime: $runtime_bitstream sec">>bitstream_sim.log
