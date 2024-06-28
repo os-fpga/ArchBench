@@ -1,0 +1,16 @@
+set_clock_pin -device_clock clk[0] -design_clock design_clk_0
+set_clock_pin -device_clock clk[1] -design_clock design_clk_1
+set_clock_pin -device_clock clk[2] -design_clock design_clk_2
+set_clock_pin -device_clock clk[3] -design_clock design_clk_3
+set_clock_pin -device_clock clk[4] -design_clock design_clk_4
+set_clock_pin -device_clock clk[5] -design_clock design_clk_5
+set_clock_pin -device_clock clk[6] -design_clock design_clk_6
+set_clock_pin -device_clock clk[7] -design_clock design_clk_7
+set_clock_pin -device_clock clk[8] -design_clock design_clk_8
+set_clock_pin -device_clock clk[9] -design_clock design_clk_9
+set_clock_pin -device_clock clk[10] -design_clock design_clk_10
+set_clock_pin -device_clock clk[11] -design_clock design_clk_11
+set_clock_pin -device_clock clk[12] -design_clock design_clk_12
+set_clock_pin -device_clock clk[13] -design_clock design_clk_13
+set_clock_pin -device_clock clk[14] -design_clock design_clk_14
+set_clock_pin -device_clock clk[15] -design_clock design_clk_15

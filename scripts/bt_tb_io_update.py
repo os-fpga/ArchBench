@@ -644,6 +644,30 @@ def remove_genblk1a0_occurrences(file_path):
         with open(file_path, 'w') as file:
             file.write(new_content)
 
+def replace_output(file_path):
+    pattern = r'output\s+\[0:0\]\s+a(\d+)\.cnt_reg\[(\d+)\]'
+    pattern2 = r'assign a(\d+).cnt_reg'
+
+    regex = re.compile(pattern)
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    modified_content = regex.sub(r'output [0:0] cnt\1_reg[\2]', content)
+
+    with open(file_path, 'w') as f:
+        f.write(modified_content)
+
+    regex = re.compile(pattern2)
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    modified_content = regex.sub(r'assign cnt\1_reg', content)
+
+    with open(file_path, 'w') as f:
+        f.write(modified_content)
+
 def main():
     file_path = sys.argv[1]
     design_name=sys.argv[2]
@@ -662,12 +686,14 @@ def main():
         replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
+        if design_name == "multi_clocks":
+            replace_output(file_path)
         # remove_genblk1a0_occurrences(file_path)
         # sort_lines(file_path)
         # remove_comma_from_last_line(file_path)
         adjust_ios(file_path)
         remove_twodim_array(file_path)
-        if design_name != "up5bit_counter_dual_clock" and design_name != "dpram_36x1024":
+        if design_name != "up5bit_counter_dual_clock" and design_name != "dpram_36x1024" and design_name != "multi_clocks":
             clk_update(file_path)
         else:
             if int(sys.argv[3]) > 1:
