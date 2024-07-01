@@ -1,113 +1,29 @@
-set_pin_loc a[0] HR_1_0_0P g2f_rx_in[0]_A
-set_pin_loc a[1] HR_1_0_0P g2f_rx_in[1]_A
-set_pin_loc a[2] HR_1_0_0P g2f_rx_in[2]_A
-set_pin_loc a[3] HR_1_0_0P g2f_rx_in[3]_A
-set_pin_loc a[4] HR_1_0_0P g2f_rx_in[4]_A
-set_pin_loc a[5] HR_1_0_0P g2f_rx_in[5]_A
-set_pin_loc a[6] HR_1_0_0P g2f_rx_in[6]_A
-set_pin_loc a[7] HR_1_0_0P g2f_rx_in[7]_A
-set_pin_loc a[8] HR_1_0_0P g2f_rx_in[8]_A
-set_pin_loc a[9] HR_1_0_0P g2f_rx_in[9]_A
-set_pin_loc a[10] HR_1_2_1P g2f_rx_in[0]_A
-set_pin_loc a[11] HR_1_2_1P g2f_rx_in[1]_A
-set_pin_loc a[12] HR_1_2_1P g2f_rx_in[2]_A
-set_pin_loc a[13] HR_1_2_1P g2f_rx_in[3]_A
-set_pin_loc a[14] HR_1_2_1P g2f_rx_in[4]_A
-set_pin_loc a[15] HR_1_2_1P g2f_rx_in[5]_A
-set_pin_loc a[16] HR_1_2_1P g2f_rx_in[6]_A
-set_pin_loc a[17] HR_1_2_1P g2f_rx_in[7]_A
-set_pin_loc a[18] HR_1_2_1P g2f_rx_in[8]_A
-set_pin_loc a[19] HR_1_2_1P g2f_rx_in[9]_A
-set_pin_loc a[20] HR_1_4_2P g2f_rx_in[0]_A
-set_pin_loc a[21] HR_1_4_2P g2f_rx_in[1]_A
-set_pin_loc a[22] HR_1_4_2P g2f_rx_in[2]_A
-set_pin_loc a[23] HR_1_4_2P g2f_rx_in[3]_A
-set_pin_loc a[24] HR_1_4_2P g2f_rx_in[4]_A
-set_pin_loc a[25] HR_1_4_2P g2f_rx_in[5]_A
-set_pin_loc a[26] HR_1_4_2P g2f_rx_in[6]_A
-set_pin_loc a[27] HR_1_4_2P g2f_rx_in[7]_A
-set_pin_loc a[28] HR_1_4_2P g2f_rx_in[8]_A
-set_pin_loc a[29] HR_1_4_2P g2f_rx_in[9]_A
-set_pin_loc a[30] HR_1_6_3P g2f_rx_in[0]_A
-set_pin_loc a[31] HR_1_6_3P g2f_rx_in[1]_A
+set_pin_loc a[0] HR_1_0_0P
+set_pin_loc a[10] HR_1_2_1P
+set_pin_loc a[20] HR_1_4_2P
+set_pin_loc a[30] HR_1_6_3P
 
-set_mode MODE_RATE_10_A_RX HR_1_0_0P
-set_mode MODE_RATE_10_A_RX HR_1_2_1P
-set_mode MODE_RATE_10_A_RX HR_1_4_2P
-set_mode MODE_BP_DDR_A_RX HR_1_6_3P
+set_mode MODE_BP_SDR_A_RX HR_1_0_0P
+set_mode MODE_BP_SDR_A_RX HR_1_2_1P
+set_mode MODE_BP_SDR_A_RX HR_1_4_2P
+set_mode MODE_BP_SDR_A_RX HR_1_6_3P
 
-set_pin_loc b[0] HR_1_8_4P g2f_rx_in[0]_A
-set_pin_loc b[1] HR_1_8_4P g2f_rx_in[1]_A
-set_pin_loc b[2] HR_1_8_4P g2f_rx_in[2]_A
-set_pin_loc b[3] HR_1_8_4P g2f_rx_in[3]_A
-set_pin_loc b[4] HR_1_8_4P g2f_rx_in[4]_A
-set_pin_loc b[5] HR_1_8_4P g2f_rx_in[5]_A
-set_pin_loc b[6] HR_1_8_4P g2f_rx_in[6]_A
-set_pin_loc b[7] HR_1_8_4P g2f_rx_in[7]_A
-set_pin_loc b[8] HR_1_8_4P g2f_rx_in[8]_A
-set_pin_loc b[9] HR_1_8_4P g2f_rx_in[9]_A
-set_pin_loc b[10] HR_3_0_0P g2f_rx_in[0]_A
-set_pin_loc b[11] HR_3_0_0P g2f_rx_in[1]_A
-set_pin_loc b[12] HR_3_0_0P g2f_rx_in[2]_A
-set_pin_loc b[13] HR_3_0_0P g2f_rx_in[3]_A
-set_pin_loc b[14] HR_3_0_0P g2f_rx_in[4]_A
-set_pin_loc b[15] HR_3_0_0P g2f_rx_in[5]_A
-set_pin_loc b[16] HR_3_0_0P g2f_rx_in[6]_A
-set_pin_loc b[17] HR_3_0_0P g2f_rx_in[7]_A
-set_pin_loc b[18] HR_3_0_0P g2f_rx_in[8]_A
-set_pin_loc b[19] HR_3_0_0P g2f_rx_in[9]_A
-set_pin_loc b[20] HR_3_2_1P g2f_rx_in[0]_A
-set_pin_loc b[21] HR_3_2_1P g2f_rx_in[1]_A
-set_pin_loc b[22] HR_3_2_1P g2f_rx_in[2]_A
-set_pin_loc b[23] HR_3_2_1P g2f_rx_in[3]_A
-set_pin_loc b[24] HR_3_2_1P g2f_rx_in[4]_A
-set_pin_loc b[25] HR_3_2_1P g2f_rx_in[5]_A
-set_pin_loc b[26] HR_3_2_1P g2f_rx_in[6]_A
-set_pin_loc b[27] HR_3_2_1P g2f_rx_in[7]_A
-set_pin_loc b[28] HR_3_2_1P g2f_rx_in[8]_A
-set_pin_loc b[29] HR_3_2_1P g2f_rx_in[9]_A
-set_pin_loc b[30] HR_3_4_2P g2f_rx_in[0]_A
-set_pin_loc b[31] HR_3_4_2P g2f_rx_in[1]_A
+set_pin_loc b[0] HR_1_8_4P
+set_pin_loc b[10] HR_3_0_0P
+set_pin_loc b[20] HR_3_2_1P
+set_pin_loc b[30] HR_3_4_2P
 
-set_mode MODE_RATE_10_A_RX HR_1_8_4P
-set_mode MODE_RATE_10_A_RX HR_3_0_0P
-set_mode MODE_RATE_10_A_RX HR_3_2_1P
-set_mode MODE_BP_DDR_A_RX HR_3_4_2P
+set_mode MODE_BP_SDR_A_RX HR_1_8_4P
+set_mode MODE_BP_SDR_A_RX HR_3_0_0P
+set_mode MODE_BP_SDR_A_RX HR_3_2_1P
+set_mode MODE_BP_SDR_A_RX HR_3_4_2P
 
-set_pin_loc sum[0] HR_3_6_3P f2g_tx_out[0]_A
-set_pin_loc sum[1] HR_3_6_3P f2g_tx_out[1]_A
-set_pin_loc sum[2] HR_3_6_3P f2g_tx_out[2]_A
-set_pin_loc sum[3] HR_3_6_3P f2g_tx_out[3]_A
-set_pin_loc sum[4] HR_3_6_3P f2g_tx_out[4]_A
-set_pin_loc sum[5] HR_3_6_3P f2g_tx_out[5]_A
-set_pin_loc sum[6] HR_3_6_3P f2g_tx_out[6]_A
-set_pin_loc sum[7] HR_3_6_3P f2g_tx_out[7]_A
-set_pin_loc sum[8] HR_3_6_3P f2g_tx_out[8]_A
-set_pin_loc sum[9] HR_3_6_3P f2g_tx_out[9]_A
-set_pin_loc sum[10] HR_3_8_4P f2g_tx_out[0]_A
-set_pin_loc sum[11] HR_3_8_4P f2g_tx_out[1]_A
-set_pin_loc sum[12] HR_3_8_4P f2g_tx_out[2]_A
-set_pin_loc sum[13] HR_3_8_4P f2g_tx_out[3]_A
-set_pin_loc sum[14] HR_3_8_4P f2g_tx_out[4]_A
-set_pin_loc sum[15] HR_3_8_4P f2g_tx_out[5]_A
-set_pin_loc sum[16] HR_3_8_4P f2g_tx_out[6]_A
-set_pin_loc sum[17] HR_3_8_4P f2g_tx_out[7]_A
-set_pin_loc sum[18] HR_3_8_4P f2g_tx_out[8]_A
-set_pin_loc sum[19] HR_3_8_4P f2g_tx_out[9]_A
-set_pin_loc sum[20] HP_1_0_0P f2g_tx_out[0]_A
-set_pin_loc sum[21] HP_1_0_0P f2g_tx_out[1]_A
-set_pin_loc sum[22] HP_1_0_0P f2g_tx_out[2]_A
-set_pin_loc sum[23] HP_1_0_0P f2g_tx_out[3]_A
-set_pin_loc sum[24] HP_1_0_0P f2g_tx_out[4]_A
-set_pin_loc sum[25] HP_1_0_0P f2g_tx_out[5]_A
-set_pin_loc sum[26] HP_1_0_0P f2g_tx_out[6]_A
-set_pin_loc sum[27] HP_1_0_0P f2g_tx_out[7]_A
-set_pin_loc sum[28] HP_1_0_0P f2g_tx_out[8]_A
-set_pin_loc sum[29] HP_1_0_0P f2g_tx_out[9]_A
-set_pin_loc sum[30] HP_1_2_1P f2g_tx_out[0]_A
-set_pin_loc sum[31] HP_1_2_1P f2g_tx_out[1]_A
+set_pin_loc sum[0] HR_3_6_3P
+set_pin_loc sum[10] HR_3_8_4P
+set_pin_loc sum[20] HP_1_0_0P
+set_pin_loc sum[30] HP_1_2_1P
 
-set_mode MODE_RATE_10_A_TX HR_3_6_3P
-set_mode MODE_RATE_10_A_TX HR_3_8_4P
-set_mode MODE_RATE_10_A_TX HP_1_0_0P
-set_mode MODE_BP_DDR_A_TX HP_1_2_1P
+set_mode MODE_BP_SDR_A_RX HR_3_6_3P
+set_mode MODE_BP_SDR_A_RX HR_3_8_4P
+set_mode MODE_BP_SDR_A_RX HP_1_0_0P
+set_mode MODE_BP_SDR_A_RX HP_1_2_1P
