@@ -1,4 +1,4 @@
-# ArchBench
+# ArchBench TEST
 
 Designs to test new architecture are added in this repo. Whenever a change in architecture comes, action will get triggered to test the new changes and allow this pull request to be merged.
 
