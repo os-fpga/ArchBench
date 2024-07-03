@@ -97,14 +97,7 @@ echo "set_top_module $design_name">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
 echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
-echo "analyze">>raptor.tcl 
-echo "synthesize delay">>raptor.tcl
-echo "packing">>raptor.tcl  
-echo "global_placement">>raptor.tcl  
-echo "place">>raptor.tcl  
-echo "route">>raptor.tcl  
-echo "sta">>raptor.tcl  
-echo "power">>raptor.tcl
+echo "routability_flow">>raptor.tcl 
 [ -z "$vpr_file_path" ] && echo "bitstream">>raptor.tcl || echo "bitstream">>raptor.tcl    # enable_simulation
 
 xml_version=`cd $xml_root/openfpga-pd-castor-rs && git describe --tags --abbrev=0`
