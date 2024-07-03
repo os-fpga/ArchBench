@@ -8,14 +8,14 @@ design_name=${PWD##*/}
 device=GEMINI_COMPACT_104x68
 
 xml_root=`git rev-parse --show-toplevel`
-#cd $xml_root/openfpga-pd-castor-rs 
+cd $xml_root/openfpga-pd-castor-rs 
 
-#if [ -f $xml_root/openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/FPGA104x68_gemini_compact_latch_pnr/fabric_task/flow_inputs/k6n8_vpr_annotated.xml ]; then
-#    echo "No need to update submodule"
-#else
-#    echo -e "openfpga-pd-castor-rs is not initialized. Please inilialize it using below command:\ncd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags"
-#    exit 1
-#fi
+if [ -f $xml_root/openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/FPGA104x68_gemini_compact_latch_pnr/fabric_task/flow_inputs/k6n8_vpr_annotated.xml ]; then
+    echo "No need to update submodule"
+else
+    echo -e "openfpga-pd-castor-rs is not initialized. Please inilialize it using below command:\ncd $xml_root/openfpga-pd-castor-rs && git submodule update --init && git checkout main && git pull origin main && git pull origin --tags"
+    exit 1
+fi
 fixed_sim_path=`which raptor | xargs dirname`
 
 given_device=$2
