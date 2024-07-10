@@ -216,7 +216,7 @@ initial begin
         end
         begin
             reset2 = 1;
-            @(negedge clock2);
+            @(negedge clock8);
             for (int i = 0; i < 1; i+=1 )begin
                 reset2 = 0;
                 #1 reset2 = 1;
@@ -224,7 +224,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 2: Reset Failed");
                 end else $display("Status: Test Passed: Counter 2: Reset Sucessful!");
-                repeat(200) @(negedge clock2);
+                repeat(200) @(negedge clock8);
                 if(cnt_reg2_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 2: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg2_gfpga);
@@ -235,7 +235,7 @@ initial begin
         end
         begin
             reset3 = 1;
-            @(negedge clock3);
+            @(negedge clock9);
             for (int i = 0; i < 1; i+=1 )begin
                 reset3 = 0;
                 #1 reset3 = 1;
@@ -243,7 +243,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 3: Reset Failed");
                 end else $display("Status: Test Passed: Counter 3: Reset Sucessful!");
-                repeat(200) @(negedge clock3);
+                repeat(200) @(negedge clock9);
                 if(cnt_reg3_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 3: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg3_gfpga);
@@ -254,7 +254,7 @@ initial begin
         end
         begin
             reset4 = 1;
-            @(negedge clock4);
+            @(negedge clock10);
             for (int i = 0; i < 1; i+=1 )begin
                 reset4 = 0;
                 #1 reset4 = 1;
@@ -262,7 +262,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 4: Reset Failed");
                 end else $display("Status: Test Passed: Counter 4: Reset Sucessful!");
-                repeat(200) @(negedge clock4);
+                repeat(200) @(negedge clock10);
                 if(cnt_reg4_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 4: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg4_gfpga);
@@ -273,7 +273,7 @@ initial begin
         end
         begin
             reset5 = 1;
-            @(negedge clock5);
+            @(negedge clock11);
             for (int i = 0; i < 1; i+=1 )begin
                 reset5 = 0;
                 #1 reset5 = 1;
@@ -281,7 +281,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 5: Reset Failed");
                 end else $display("Status: Test Passed: Counter 5: Reset Sucessful!");
-                repeat(200) @(negedge clock5);
+                repeat(200) @(negedge clock11);
                 if(cnt_reg5_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 5: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg5_gfpga);
@@ -292,7 +292,7 @@ initial begin
         end
         begin
             reset6 = 1;
-            @(negedge clock6);
+            @(negedge clock12);
             for (int i = 0; i < 1; i+=1 )begin
                 reset6 = 0;
                 #1 reset6 = 1;
@@ -300,7 +300,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 6: Reset Failed");
                 end else $display("Status: Test Passed: Counter 6: Reset Sucessful!");
-                repeat(200) @(negedge clock6);
+                repeat(200) @(negedge clock12);
                 if(cnt_reg6_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 6: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg6_gfpga);
@@ -311,7 +311,7 @@ initial begin
         end
         begin
             reset7 = 1;
-            @(negedge clock7);
+            @(negedge clock13);
             for (int i = 0; i < 1; i+=1 )begin
                 reset7 = 0;
                 #1 reset7 = 1;
@@ -319,7 +319,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 7: Reset Failed");
                 end else $display("Status: Test Passed: Counter 7: Reset Sucessful!");
-                repeat(200) @(negedge clock7);
+                repeat(200) @(negedge clock13);
                 if(cnt_reg7_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 7: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg7_gfpga);
@@ -330,7 +330,7 @@ initial begin
         end
         begin
             reset8 = 1;
-            @(negedge clock8);
+            @(negedge clock14);
             for (int i = 0; i < 1; i+=1 )begin
                 reset8 = 0;
                 #1 reset8 = 1;
@@ -338,7 +338,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 8: Reset Failed");
                 end else $display("Status: Test Passed: Counter 8: Reset Sucessful!");
-                repeat(200) @(negedge clock8);
+                repeat(200) @(negedge clock14);
                 if(cnt_reg8_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 8: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg8_gfpga);
@@ -349,7 +349,7 @@ initial begin
         end
         begin
             reset9 = 1;
-            @(negedge clock9);
+            @(negedge clock15);
             for (int i = 0; i < 1; i+=1 )begin
                 reset9 = 0;
                 #1 reset9 = 1;
@@ -357,7 +357,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 9: Reset Failed");
                 end else $display("Status: Test Passed: Counter 9: Reset Sucessful!");
-                repeat(200) @(negedge clock9);
+                repeat(200) @(negedge clock15);
                 if(cnt_reg9_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 9: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg9_gfpga);
@@ -368,7 +368,7 @@ initial begin
         end
         begin
             reset10 = 1;
-            @(negedge clock10);
+            @(negedge clock2);
             for (int i = 0; i < 1; i+=1 )begin
                 reset10 = 0;
                 #1 reset10 = 1;
@@ -376,7 +376,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 10: Reset Failed");
                 end else $display("Status: Test Passed: Counter 10: Reset Sucessful!");
-                repeat(200) @(negedge clock10);
+                repeat(200) @(negedge clock2);
                 if(cnt_reg10_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 10: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg10_gfpga);
@@ -387,7 +387,7 @@ initial begin
         end
         begin
             reset11 = 1;
-            @(negedge clock11);
+            @(negedge clock3);
             for (int i = 0; i < 1; i+=1 )begin
                 reset11 = 0;
                 #1 reset11 = 1;
@@ -395,7 +395,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 11: Reset Failed");
                 end else $display("Status: Test Passed: Counter 11: Reset Sucessful!");
-                repeat(200) @(negedge clock11);
+                repeat(200) @(negedge clock3);
                 if(cnt_reg11_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 11: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg11_gfpga);
@@ -406,7 +406,7 @@ initial begin
         end
         begin
             reset12 = 1;
-            @(negedge clock12);
+            @(negedge clock4);
             for (int i = 0; i < 1; i+=1 )begin
                 reset12 = 0;
                 #1 reset12 = 1;
@@ -414,7 +414,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 12: Reset Failed");
                 end else $display("Status: Test Passed: Counter 12: Reset Sucessful!");
-                repeat(200) @(negedge clock12);
+                repeat(200) @(negedge clock4);
                 if(cnt_reg12_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 12: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg12_gfpga);
@@ -425,7 +425,7 @@ initial begin
         end
         begin
             reset13 = 1;
-            @(negedge clock13);
+            @(negedge clock5);
             for (int i = 0; i < 1; i+=1 )begin
                 reset13 = 0;
                 #1 reset13 = 1;
@@ -433,7 +433,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 13: Reset Failed");
                 end else $display("Status: Test Passed: Counter 13: Reset Sucessful!");
-                repeat(200) @(negedge clock13);
+                repeat(200) @(negedge clock5);
                 if(cnt_reg13_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 13: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg13_gfpga);
@@ -444,7 +444,7 @@ initial begin
         end
         begin
             reset14 = 1;
-            @(negedge clock14);
+            @(negedge clock6);
             for (int i = 0; i < 1; i+=1 )begin
                 reset14 = 0;
                 #1 reset14 = 1;
@@ -452,7 +452,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 14: Reset Failed");
                 end else $display("Status: Test Passed: Counter 14: Reset Sucessful!");
-                repeat(200) @(negedge clock14);
+                repeat(200) @(negedge clock6);
                 if(cnt_reg14_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 14: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg14_gfpga);
@@ -463,7 +463,7 @@ initial begin
         end
         begin
             reset15 = 1;
-            @(negedge clock15);
+            @(negedge clock7);
             for (int i = 0; i < 1; i+=1 )begin
                 reset15 = 0;
                 #1 reset15 = 1;
@@ -471,7 +471,7 @@ initial begin
                     error+=1;
                     $display("Status: Test Failed: Counter 15: Reset Failed");
                 end else $display("Status: Test Passed: Counter 15: Reset Sucessful!");
-                repeat(200) @(negedge clock15);
+                repeat(200) @(negedge clock7);
                 if(cnt_reg15_gfpga !== 200)begin
                     error+=1;
                     $display("Status: Test Failed:: Counter 15: Failed (Expected Output 200 Fabric Output = %d)",cnt_reg15_gfpga);
