@@ -1,18 +1,18 @@
 
     task write(reg[9:0] address, reg[31:0] w_data);
-    @(negedge clock0);
+    @(negedge clk);
     addr = address;
     data = w_data;
     we = 1;
-    @(negedge clock0);
+    @(negedge clk);
     we = 0;
     endtask
 
     task read(reg[9:0] address, output reg [31:0] rd_data);
-    @(negedge clock0);
+    @(negedge clk);
     we = 0;
     addr = address;
-    @(negedge clock0);
+    @(negedge clk);
     rd_data = q_gfpga;
     endtask
 

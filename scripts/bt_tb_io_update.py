@@ -69,6 +69,23 @@ def remove_iopadmap(file_path):
         print("'$iopadmap$' removed from lines in the file.")
     except FileNotFoundError:
         print(f"File '{file_path}' not found.")
+
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    with open(file_path, 'w') as file:
+        for line in lines:
+            modified_line = line.replace("$ibuf_", "")
+            file.write(modified_line)
+
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    with open(file_path, 'w') as file:
+        for line in lines:
+            modified_line = line.replace("$obuf_", "")
+            modified_line_on = modified_line.replace("$clk_buf_", "")
+            file.write(modified_line_on)
     
     # comment the always block
     with open(file_path, 'r') as file:
@@ -386,7 +403,8 @@ def replace_pattern_in_file(file_path, pattern, replacement):
 
 def multiclock_update(file_path,number_of_clocks):
     match=[]
-    pattern = r'\$auto\$clkbufmap\.cc:\d+:execute\$\d+'
+    # pattern = r'\$auto\$clkbufmap\.cc:\d+:execute\$\d+'
+    pattern = r'\$clk_buf_\$ibuf_clock\d+'
 
     with open(file_path, 'r') as f:
         content = f.read()
@@ -400,8 +418,9 @@ def multiclock_update(file_path,number_of_clocks):
     else:
         print("Pattern not found in the file.")
 
-    for i in range(number_of_clocks):
-            replace_pattern_in_file(file_path,match[i],"clock"+str(i))
+    if matches:
+        for i in range(number_of_clocks):
+                replace_pattern_in_file(file_path,match[i],"clock"+str(i))
 
 def remove_lines_with_two_dollar_signs(filename):
 
@@ -699,7 +718,8 @@ def main():
             if int(sys.argv[3]) > 1:
                 multiclock_update(file_path,int(sys.argv[3]))
         if design_name in ["shift_register", "dffre_inst", "lut_ff_mux", "sp_ram", "up5bit_counter"]:
-            replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clock0")
+            replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clk")
+            replacement(file_path,"clock0","clk")
             replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")
         # remove_lines_with_two_dollar_signs(file_path)
         # remove_comma_from_line(file_path)

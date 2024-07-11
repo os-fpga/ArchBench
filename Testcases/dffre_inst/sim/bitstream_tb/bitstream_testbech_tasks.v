@@ -9,7 +9,7 @@
         end
     end
     
-    always @(negedge clock0) begin
+    always @(negedge clk) begin
         #20;
         if (!i_Reset) begin
             if (!o_Q_gfpga) begin
@@ -21,7 +21,7 @@
         end
     end
 
-    always @(negedge clock0) begin
+    always @(negedge clk) begin
         #20;
         if (i_Enable && i_Reset) begin
             if (o_Q_gfpga === i_D) begin

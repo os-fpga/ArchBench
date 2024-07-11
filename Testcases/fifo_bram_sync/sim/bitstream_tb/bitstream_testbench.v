@@ -8,5 +8,5 @@
     @ (negedge clock0);
 
 
-    while (!full_reg_gfpga)  push ();
-    while (!empty_reg_gfpga) pop ();
+    while (!full_gfpga)  push ();
+    while (!empty_gfpga) pop ();

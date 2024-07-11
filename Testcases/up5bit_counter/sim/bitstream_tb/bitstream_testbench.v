@@ -1,10 +1,10 @@
 
     reset = 1'b1;
-    repeat(10)@(posedge clock0);
+    repeat(10)@(posedge clk);
     reset = 1'b0;
 
     for (int i=0; i<2**5; i=i+1)begin
-        @(posedge clock0);
+        @(posedge clk);
         if (counter_model !== out_gfpga) begin
             $display("Status: Test Failed  =>  Model Output = %7b , Fabric Output  = %7b",counter_model,out_gfpga);
         end
