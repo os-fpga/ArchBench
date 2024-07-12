@@ -16,7 +16,7 @@
         #0.5 reset = 0;
         #0.5 reset = 1;
         
-        if (out_gfpga !== {`ADDER_WIDTH{1'b0}})begin
+        if (pr5_gfpga !== {`ADDER_WIDTH{1'b0}})begin
             error+=1;
             $display("Status: Test Failed. Test Cycle %2d: Reset Failure",test_cycle);
         end
@@ -44,11 +44,11 @@
             end
             @(posedge clock0);
             #0.5;
-            if(out_gfpga !== pipe[5]) begin
+            if(pr5_gfpga !== pipe[5]) begin
                 error+=1;
-                $display("Status: Test Failed. Test Cycle %2d: Failure at feed cycle %2d (Observed %h | Expected %h)",test_cycle,feed_cycle,out_gfpga,pipe[5]);
+                $display("Status: Test Failed. Test Cycle %2d: Failure at feed cycle %2d (Observed %h | Expected %h)",test_cycle,feed_cycle,pr5_gfpga,pipe[5]);
             end
             else
-                $display("Status: Test Passed. Test Cycle %2d: Pass at feed cycle %2d (Observed %h | Expected %h)",test_cycle,feed_cycle,out_gfpga,pipe[5]);
+                $display("Status: Test Passed. Test Cycle %2d: Pass at feed cycle %2d (Observed %h | Expected %h)",test_cycle,feed_cycle,pr5_gfpga,pipe[5]);
         end
     end
