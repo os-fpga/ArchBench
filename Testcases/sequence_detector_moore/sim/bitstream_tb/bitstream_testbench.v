@@ -6,7 +6,7 @@
     $display("Reset Asserted!");
     rst = 1;
     repeat(2) @(posedge clock0);
-    if(detect_gfpga !== 0)begin
+    if(state_gfpga[3] !== 0)begin
         $display("Status: Test Failed");
     end
     else
@@ -22,13 +22,13 @@
     @(posedge clock0);
     // $display("%b",q);
     #1;
-    if(detect_gfpga !== check)begin
+    if(state_gfpga[3] !== check)begin
         $display("Status: Test Failed: wrong pattern detected");
         error+=1;
     end
     else
         $display("Status: Test Passed");
-    if(detect_gfpga === 1)count+=1;
+    if(state_gfpga[3] === 1)count+=1;
     value <<= 1;
     end
     $display("Pattern detected %d times",count);
