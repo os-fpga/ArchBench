@@ -1,25 +1,14 @@
-set_clock_pin -device_clock clk[0] -design_clock clk0
-set_clock_pin -device_clock clk[1] -design_clock clk1
+set_pin_loc clk0 HP_1_CC_18_9P
+set_pin_loc clk1 HP_1_CC_38_19P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_0_0P
 set_pin_loc reset HP_1_0_0P
-set_property mode Mode_BP_SDR_A_TX HP_1_2_1P
 set_pin_loc out0[0] HP_1_2_1P
-set_property mode Mode_BP_SDR_A_TX HP_1_4_2P
 set_pin_loc out0[1] HP_1_4_2P
-set_property mode Mode_BP_SDR_A_TX HP_1_6_3P
 set_pin_loc out0[2] HP_1_6_3P
-set_property mode Mode_BP_SDR_A_TX HP_1_8_4P
 set_pin_loc out0[3] HP_1_8_4P
-set_property mode Mode_BP_SDR_A_TX HP_1_10_5P
 set_pin_loc out0[4] HP_1_10_5P
-set_property mode Mode_BP_SDR_A_TX HP_1_12_6P
 set_pin_loc out1[0] HP_1_12_6P
-set_property mode Mode_BP_SDR_A_TX HP_1_14_7P
 set_pin_loc out1[1] HP_1_14_7P
-set_property mode Mode_BP_SDR_A_TX HP_1_16_8P
-set_pin_loc out1[2] HP_1_16_8P
-set_property mode Mode_BP_SDR_A_TX HP_1_20_10P
+set_pin_loc out1[2] HP_1_24_12P
 set_pin_loc out1[3] HP_1_20_10P
-set_property mode Mode_BP_SDR_A_TX HP_1_22_11P
 set_pin_loc out1[4] HP_1_22_11P
