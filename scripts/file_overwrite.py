@@ -17,7 +17,8 @@ import re
 
 def search_and_copy(input_file):
 
-    pattern = r'\$(\w+)\$(\w+)\.cc:(\d+):execute\$(\d+)_gfpga;'
+    # pattern = r'\$(\w+)\$(\w+)\.cc:(\d+):execute\$(\d+)_gfpga;'
+    pattern = r'\$(auto_)(\d+)_gfpga;'
 
     regex = re.compile(pattern)
     list=[]
