@@ -723,7 +723,7 @@ def main():
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbech_tasks.v","----- END output waveform to VCD file -------")
         clk_update(file_path)
         replacement(file_path,"\$display\(\"Simulation Succeed\"","// $display(\"Simulation Succeed\"")
-        remove_lines_with_two_dollar_signs(file_path)
+        # remove_lines_with_two_dollar_signs(file_path)
         replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
