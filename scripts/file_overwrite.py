@@ -15,10 +15,10 @@ def overwrite_file(source_file, destination_file):
 
 import re
 
-def search_and_copy(input_file):
+def search_and_copy(input_file,pattern):
 
     # pattern = r'\$(\w+)\$(\w+)\.cc:(\d+):execute\$(\d+)_gfpga;'
-    pattern = r'\$(auto_)(\d+)_gfpga;'
+    # pattern = r'\$(auto_)(\d+)_gfpga;'
 
     regex = re.compile(pattern)
     list=[]
@@ -31,8 +31,12 @@ def search_and_copy(input_file):
 
     modified_list=[]
     for item in list:
-        modified_item = item.replace('$auto', r'\$auto').replace(';', ' ;')
-        modified_list.append(modified_item)
+        if "auto" in item:
+            modified_item = item.replace('$auto', r'\$auto').replace(';', ' ;')
+            modified_list.append(modified_item)
+        elif "f2g" in item:
+            modified_item = item.replace('$f2g', r'\$f2g').replace(';', ' ;')
+            modified_list.append(modified_item)
 
     second_modified_list=[]
     for item2 in modified_list:
@@ -64,6 +68,8 @@ def update_wires(output_file,modified_list,second_modified_list_two):
     with open(output_file, 'w') as file:
         file.writelines(new_lines)
 
-wire_list,instance_list = search_and_copy(sys.argv[2])
+wire_list,instance_list = search_and_copy(sys.argv[2],r'\$(f2g_tx_oe_A_obuft_const1_)(\d+)_gfpga;')
+wire_list2,instance_list2 = search_and_copy(sys.argv[2],r'\$(auto_)(\d+)_gfpga;')
 overwrite_file(sys.argv[1],sys.argv[2])
 update_wires(sys.argv[2],wire_list,instance_list)
+update_wires(sys.argv[2],wire_list2,instance_list2)
