@@ -5,7 +5,7 @@
 // -------------------------------------------------------------------
 module filt_ppi #(
   parameter gp_idata_width          = 8,                           // Set input data width
-  parameter gp_interpolation_factor = 30,                          // Set number of output channels
+  parameter gp_interpolation_factor = 8,                          // Set number of output channels
   parameter gp_coeff_length         = 53,                          // Set filter coefficient length
   parameter gp_coeff_width          = 16,                          // Set filter coefficient filter bit-width
   parameter gp_tf_df                = 1,                           // Select filter topology 1-> TF | 0-> DF   
