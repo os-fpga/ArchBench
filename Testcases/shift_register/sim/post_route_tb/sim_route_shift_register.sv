@@ -19,37 +19,37 @@ module sim_route_shift_register;
      
   initial begin
       reset = 1;
-      repeat(20)@(negedge clk);
+      repeat(20)@(posedge clk);
       reset=0;
-      @(negedge clk);
+      @(posedge clk);
       compare();
 
       data=8'b01010101;
       ctrl=0;
-      @(negedge clk);
+      @(posedge clk);
       compare();
 
       ctrl=3;
       repeat(100) begin
           data=$random;
-          @(negedge clk);
-          @(negedge clk);
+          @(posedge clk);
+          @(posedge clk);
           compare();
       end
 
       data=8'b10101010;
       ctrl=1;
-      @(negedge clk);
+      @(posedge clk);
       compare();
 
-      repeat(10)@(negedge clk);
+      repeat(10)@(posedge clk);
 
       data=8'b00001111;
       ctrl=2;
-      @(negedge clk);
+      @(posedge clk);
       compare();
 
-      repeat(10)@(negedge clk);
+      repeat(10)@(posedge clk);
 
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
