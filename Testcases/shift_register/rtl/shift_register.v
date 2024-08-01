@@ -10,7 +10,7 @@ module shift_register
 );
 
 reg [N-1:0] s_reg, s_next;
-always @(posedge clk, posedge reset)
+always @(negedge clk, posedge reset)
 begin
     if(reset)
         s_reg <= 0; // clear the content
