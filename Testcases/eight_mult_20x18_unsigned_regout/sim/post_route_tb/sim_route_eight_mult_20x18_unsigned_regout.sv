@@ -1,25 +1,25 @@
-`define EIGHT_MULT_20x18_UNSIGNED_REGOUT 2
+// `define EIGHT_MULT_20x18_UNSIGNED_REGOUT 2
 
 module sim_route_eight_mult_20x18_unsigned_regout;
   bit clk;
   bit reset;
-  bit id;
-  bit [0:19] A;
-  bit [0:17] B;
-  wire [0:37] Y,Y_netlist;
+  // bit id;
+  bit [19:0] A;
+  bit [17:0] B;
+  wire [37:0] Y,Y_netlist;
 
   integer mismatch=0;
   integer i=0;
   
-  eight_mult_20x18_unsigned_regout golden (.clock0(clk),.reset(reset),.id(id),.A(A),.B(B),.Y(Y));
-  eight_mult_20x18_unsigned_regout_post_route netlist(.clock0(clk),.reset(reset),.id(id),.A(A),.B(B),.Y(Y_netlist));
+  eight_mult_20x18_unsigned_regout golden (.clock0(clk),.reset(reset),.A(A),.B(B),.Y(Y));
+  eight_mult_20x18_unsigned_regout_post_route netlist(.clock0(clk),.reset(reset),.A(A),.B(B),.Y(Y_netlist));
 
   always #2 clk = !clk;
   
   initial begin
 
     reset = 0;
-    id = 0;
+    // id = 0;
     A = 0;
     B = 0;
 
@@ -39,11 +39,11 @@ module sim_route_eight_mult_20x18_unsigned_regout;
       A = $urandom_range(2**20 -1,0);
       B = $urandom_range(2**18 -1,0);
       @(posedge clk);
-      for(int j = 0; j < `EIGHT_MULT_20x18_UNSIGNED_REGOUT; j+=1) begin
-				id = j;
+      // for(int j = 0; j < `EIGHT_MULT_20x18_UNSIGNED_REGOUT; j+=1) begin
+				// id = j;
 				@(posedge clk);
         compare(); 
-      end
+      // end
     end
 	  
   	if(mismatch == 0)
