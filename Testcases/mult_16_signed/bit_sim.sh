@@ -5,7 +5,7 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 simulator_name="" #vcs,iverilog
-internal_bitstream_simulation=false
+internal_bitstream_simulation=true
 external_bitstream_simulation=false
 device=GEMINI_COMPACT_10x8
 
@@ -103,7 +103,7 @@ echo "set_top_testbench sim_route_${design_name}">>raptor.tcl
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
-# echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
+echo "add_constraint_file ../clk_constraint.sdc">>raptor.tcl 
 echo "analyze">>raptor.tcl 
 echo "synthesize delay">>raptor.tcl
 echo "packing">>raptor.tcl  

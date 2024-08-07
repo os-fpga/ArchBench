@@ -1,18 +1,18 @@
 `timescale 1ns/1ps
-`define MULT_16_SIGNED 2
+`define MULT_16_SIGNED 1
 
 module sim_route_mult_16_signed;
-  bit a; 
-  bit b;
-  bit id;
-  wire c,c_netlist;
+  bit [15:0] a; 
+  bit [15:0] b;
+  // bit id;
+  wire [31:0] c,c_netlist;
 
   reg clk;
 
   integer mismatch=0;
   
-  mult_16_signed golden (.id(id),.c(c),.a(a),.b(b));
-  mult_16_signed_post_route netlist(.id(id),.c(c_netlist),.a(a),.b(b));
+  mult_16_signed golden (.out(c),.a(a),.b(b));
+  mult_16_signed_post_route netlist(.out(c_netlist),.a(a),.b(b));
 
   always #2 clk = !clk;
   
@@ -21,7 +21,7 @@ module sim_route_mult_16_signed;
     clk = 0;
     a = 0;
     b = 0;
-    id = 0;
+    // id = 0;
 
     repeat(5) @(negedge clk);
     compare();
@@ -30,7 +30,7 @@ module sim_route_mult_16_signed;
 			a = signed'($urandom_range(2**16 -1,0));
 			b = signed'($urandom_range(2**16 -1,0));
 			for(int j = 0; j < `MULT_16_SIGNED; j+=1) begin
-				id = j;
+				// id = j;
 				repeat(2)@(negedge clk);
         compare();
 			end
