@@ -5,7 +5,7 @@ module sim_route_mac_32;
 	bit reset;
 	bit [15:0] a;
 	bit [15:0] b;
-	bit [0:$clog2(`MAC_32+1)-1] id;
+	// bit [0:$clog2(`MAC_32+1)-1] id;
 	wire [31:0] out,out_netlist;
 
 	// bit [`ADDER_WIDTH - 1:0] op_a_data[0:15];
@@ -13,8 +13,8 @@ module sim_route_mac_32;
 
 	integer mismatch=0;
 
-	mac_32 golden(.a(a),.b(b),.reset(reset),.clock0(clk),.out(out),.id(id));
-	mac_32_post_route netlist(.a(a),.b(b),.reset(reset),.clock0(clk),.out(out_netlist),.id(id));
+	mac_32 golden(.a(a),.b(b),.reset(reset),.clock0(clk),.out(out));
+	mac_32_post_route netlist(.a(a),.b(b),.reset(reset),.clock0(clk),.out(out_netlist));
 
 	always #2 clk = ~clk;
 
@@ -24,7 +24,7 @@ module sim_route_mac_32;
 		clk = 0;
 		a  = 16'b0;
 		b  = 16'b0;
-		id = 0;
+		// id = 0;
 		repeat(10) @(negedge clk);
 
 		reset = 0;
@@ -32,8 +32,8 @@ module sim_route_mac_32;
 		compare();
 		// end
 
-		for (int j =0; j<`MAC_32; j+=1) begin
-			id = j;
+		// for (int j =0; j<`MAC_32; j+=1) begin
+			// id = j;
 			// out_pred = 0;
 			for(int i=0; i<1000; i+=1) begin
 				a = signed'($urandom_range(2**16 - 1,0));
@@ -51,7 +51,7 @@ module sim_route_mac_32;
 			// 	`ifdef VCS `uvm_info(design_name,$sformatf("Instance[ID]=%0d, test_cycle=%0d, Expected Output=%0h, Fabric Output=%0h",id,i,out_pred,out),UVM_HIGH)
 			// 	`else 		 $display("%s Passed :: Instance[ID]=%0d, test_cycle=%0d, Expected Output=%0h, Fabric Output=%0h",design_name,id,i,out_pred,out); `endif
 			end	
-		end
+		// end
 
 		repeat(10)@(negedge clk);
 
