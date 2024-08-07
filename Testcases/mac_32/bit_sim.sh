@@ -5,7 +5,7 @@ main_path=$PWD
 
 design_name=${PWD##*/}
 simulator_name="" #vcs,iverilog
-internal_bitstream_simulation=false
+internal_bitstream_simulation=true
 external_bitstream_simulation=false
 device=GEMINI_COMPACT_10x8
 

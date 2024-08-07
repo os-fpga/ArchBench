@@ -1,6 +1,6 @@
 sed -i "s|// reg \[0:0\] a\[0\];|bit signed \[31:0\] out_pred = 0;|g" $(find . -type f -name "fabric_mac_32_formal_random_top_tb.v")
 sed -i "s|// reg \[0:0\] a\[1\];|string design_name = \"mac_32\";|g" $(find . -type f -name "fabric_mac_32_formal_random_top_tb.v")
-sed -i "s|// reg \[0:0\] a\[2\];|reg \[31:0\] error;|g" $(find . -type f -name "fabric_mac_32_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] a\[2\];|reg \[31:0\] error=0;|g" $(find . -type f -name "fabric_mac_32_formal_random_top_tb.v")
 sed -i "s|//----- Default net type -----|\`timescale 1ns/1ps|g" $(find . -type f -name "fabric_mac_32_formal_random_top_tb.v")
 # sed -i "s|//----- Default net type -----|\`define ADDER_WIDTH 26|g" $(find . -type f -name "fabric_mac_32_formal_random_top_tb.v")
 sed -i "s|global_resetn_fm\[0\] = 1'b0;|global_resetn_fm\[0\] = 1'b1;|g" $(find . -type f -name "fabric_mac_32_top_formal_verification.v")
