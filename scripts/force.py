@@ -22,7 +22,6 @@ if check_pin_mapping:
     root = tree.getroot()
     for child in root.iter('io'):
         innernet = child.attrib['net']
-        print ('Net ' + innernet)
         if (innernet[0] == '$'):
           innernet = '\\'+innernet+' '
         if (child.attrib['dir'] == 'input'):
