@@ -1,20 +1,27 @@
 module sim_route_unsigned_multiply;
-    bit [4:0] dataa;
-	bit [4:0] datab;
-    wire [9:0] dataout,dataout_netlist;
+	parameter WIDTH=8;
 
-    reg clk;
+    bit [WIDTH-1:0] dataa;
+	bit [WIDTH-1:0] datab;
+	bit clk;
+	bit reset;
+    wire [2*WIDTH-1:0] dataout,dataout_netlist;
+
 	integer mismatch=0;
 
-unsigned_multiply golden(.dataa(dataa),.datab(datab),.dataout(dataout));
-unsigned_multiply_post_route netlist(.dataa(dataa),.datab(datab),.dataout(dataout_netlist));
+unsigned_multiply golden(.dataa(dataa),.datab(datab),.dataout(dataout),.clk(clk),.reset(reset));
+unsigned_multiply_post_route netlist(.dataa(dataa),.datab(datab),.dataout(dataout_netlist),.clk(clk),.reset(reset));
 
 always #5 clk = ~clk;
 
 initial begin
-    clk = 1'b0;
-	dataa=0;
-	datab=0;
+	reset = 0;
+	dataa = 0;
+	datab = 0;
+	repeat(5)@(negedge clk);
+	reset = 1;
+	repeat(5)@(negedge clk);
+	reset = 0;
 	@(negedge clk);
 	display_stimulus();
 	@(negedge clk);

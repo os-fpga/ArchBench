@@ -68,7 +68,8 @@ with open(f'../{design_name}/pin_assignments.v', 'a') as verilog_file:
 with open(f'../{design_name}/pin_assignments.v', 'r') as file:
     content = file.readlines()
 
-    assign_pattern = r'assign\s+\$auto\$\w+\.cc:\d+:\w+\$\d+\s+=\s+\w+\[\d+:\d+\];'
+    # assign_pattern = r'assign\s+\$auto\$\w+\.cc:\d+:\w+\$\d+\s+=\s+\w+\[\d+:\d+\];'
+    assign_pattern = r'assign\s+\$auto_\d+\s+=\s+\w+\[\d+:\d+\];'
 
     assign_regex = re.compile(assign_pattern)
 
