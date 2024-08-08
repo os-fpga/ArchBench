@@ -1,0 +1,1 @@
+TOPM=FullAdder32 DESN=FullAdder32 SIZE=10x8

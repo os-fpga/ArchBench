@@ -1,0 +1,1 @@
+TOPM=infer_dual_port_rom DESN=infer_dual_port_rom SIZE=10x8
