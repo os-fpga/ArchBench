@@ -1,0 +1,1 @@
+TOPM=spram_9x4096 DESN=spram_9x4096 SIZE=10x8

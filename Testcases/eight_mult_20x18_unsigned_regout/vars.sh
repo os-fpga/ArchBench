@@ -1,0 +1,1 @@
+TOPM=eight_mult_20x18_unsigned_regout DESN=eight_mult_20x18_unsigned_regout SIZE=10x8

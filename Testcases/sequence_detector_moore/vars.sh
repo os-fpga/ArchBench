@@ -1,0 +1,1 @@
+TOPM=sequence_detector_moore DESN=sequence_detector_moore SIZE=10x8
