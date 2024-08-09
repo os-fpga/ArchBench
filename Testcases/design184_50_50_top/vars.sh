@@ -1,0 +1,1 @@
+TOPM=design184_50_50_top DESN=design184_50_50_top SIZE=104x68 UTIL=0.7

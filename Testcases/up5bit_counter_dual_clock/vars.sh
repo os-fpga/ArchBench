@@ -1,0 +1,1 @@
+TOPM=up5bit_counter_dual_clock DESN=up5bit_counter_dual_clock SIZE=10x8
