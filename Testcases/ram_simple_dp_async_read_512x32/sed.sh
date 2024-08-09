@@ -1,0 +1,8 @@
+sed -i "s|//----- Default net type -----|\`timescale 1ns/1ps|g" $(find . -type f -name "fabric_ram_simple_dp_async_read_512x32_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] a\[0\];|reg [31:0] c_pred=0;|g" $(find . -type f -name "fabric_ram_simple_dp_async_read_512x32_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] a\[1\];|reg [31:0] error=0;|g" $(find . -type f -name "fabric_ram_simple_dp_async_read_512x32_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] a\[2\];|reg [31:0] memory[511:0];|g" $(find . -type f -name "fabric_ram_simple_dp_async_read_512x32_formal_random_top_tb.v")
+sed -i "s|// reg \[0:0\] a\[3\];|bit [8:0] address;|g" $(find . -type f -name "fabric_ram_simple_dp_async_read_512x32_formal_random_top_tb.v")
+sed -i "s|global_resetn_fm\[0\] = 1'b0;|global_resetn_fm[0] = 1'b1;|g" $(find . -type f -name "fabric_ram_simple_dp_async_read_512x32_top_formal_verification.v")
+sed -i "s|clk_fm\[15\] = 1'b0;|clk_fm[15] = clk;|g" $(find . -type f -name "fabric_ram_simple_dp_async_read_512x32_top_formal_verification.v")
+sed -i "s|// ----- BEGIN Local short connections -----|\`include \"BIT_SIM/initialize.v\"|g" $(find . -type f -name "fpga_top.v")
