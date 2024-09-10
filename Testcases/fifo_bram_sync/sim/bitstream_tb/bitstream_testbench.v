@@ -9,4 +9,4 @@
 
 
     while (!full_reg_gfpga)  push ();
-    while (!empty_reg_gfpga) pop ();
+    while (!empty_gfpga) pop ();
