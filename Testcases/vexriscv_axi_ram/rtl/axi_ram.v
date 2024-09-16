@@ -167,6 +167,7 @@ assign s_axi_rvalid = PIPELINE_OUTPUT ? s_axi_rvalid_pipe_reg : s_axi_rvalid_reg
 
 integer i, j;
 
+`ifndef SYNTHESIS
 initial begin
     // two nested loops for smaller number of iterations per loop
     // workaround for synthesizer complaints about large loop counts
@@ -176,6 +177,7 @@ initial begin
         end
     end
 end
+`endif
 
 always @* begin
     write_state_next = WRITE_STATE_IDLE;
