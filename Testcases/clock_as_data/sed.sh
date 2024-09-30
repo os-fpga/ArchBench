@@ -1,0 +1,5 @@
+sed -i "s|//----- Default net type -----|//----- Default net type -----\n\`timescale 1ns/1ps|g" $(find . -type f -name "fabric_top_formal_random_top_tb.v")
+sed -i "s|// ----- Shared inputs -------|// ----- Shared inputs -------\n\treg expected_dout;|g" $(find . -type f -name "fabric_top_formal_random_top_tb.v")
+sed -i "s|// ----- Shared inputs -------|// ----- Shared inputs -------\n\treg [31:0] error = 0;|g" $(find . -type f -name "fabric_top_formal_random_top_tb.v")
+sed -i "s|global_resetn_fm\[0\] = 1'b0|global_resetn_fm[0] = 1'b1|g" $(find . -type f -name "fabric_top_top_formal_verification.v")
+sed -i "s|clk_fm\[15\] = 1'b0|clk_fm[15] = clk_ibuf|g" $(find . -type f -name "fabric_top_top_formal_verification.v")
