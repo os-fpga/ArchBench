@@ -7,4 +7,4 @@
         end
     end
 
-    assign expected_dout = din_ibuf * clk_ibuf;
+    assign expected_dout = din_ibuf & clk_ibuf;
