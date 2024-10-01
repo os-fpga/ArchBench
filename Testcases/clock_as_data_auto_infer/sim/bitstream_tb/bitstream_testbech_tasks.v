@@ -7,4 +7,4 @@
         end
     end
 
-    assign expected_dout = din * clk;
+    assign expected_dout = din & clk;

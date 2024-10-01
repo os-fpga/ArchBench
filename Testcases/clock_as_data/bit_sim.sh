@@ -95,8 +95,8 @@ echo "add_library_path ../rtl">>raptor.tcl
 echo "add_library_ext .v .sv">>raptor.tcl 
 echo "add_design_file ../rtl/top.v">>raptor.tcl
 echo "set_top_module top">>raptor.tcl
-# echo "add_simulation_file ../sim/post_route_tb/sim_route_${design_name}.sv">>raptor.tcl 
-# echo "set_top_testbench sim_route_${design_name}">>raptor.tcl 
+echo "add_simulation_file ../sim/post_route_tb/sim_route_top.sv">>raptor.tcl 
+echo "set_top_testbench sim_route_top">>raptor.tcl 
 [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor.tcl
 [ -z "$bitstream_setting_path" ] || [ -z "$fixed_sim_openfpga_path" ] || [ -z "$repack_design_constraint_path" ] && echo "" || echo "bitstream_config_files -bitstream $bitstream_setting_path -sim $fixed_sim_openfpga_path">>raptor.tcl
 [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor.tcl
@@ -104,11 +104,28 @@ echo "add_constraint_file ../top.sdc">>raptor.tcl
 echo "add_constraint_file ../top.pin">>raptor.tcl 
 echo "analyze">>raptor.tcl 
 echo "synthesize delay">>raptor.tcl
-echo "setup_lec_sim">>raptor.tcl
+echo "set input_file [open \"$design_name/run_1/synth_1_1/synthesis/${design_name}_post_synth.v\" r]">>raptor.tcl
+echo "set file_content [read \$input_file]">>raptor.tcl
+echo "close \$input_file">>raptor.tcl
+echo "set modified_content [string map {\"module top(\" \"module top_post_synth(\"} \$file_content]">>raptor.tcl
+echo "set output_file [open \"$design_name/run_1/synth_1_1/synthesis/${design_name}_post_synth.v\" w]">>raptor.tcl
+echo "puts \$output_file \$modified_content">>raptor.tcl
+echo "close \$output_file">>raptor.tcl
+echo "simulate gate icarus">>raptor.tcl
 echo "packing">>raptor.tcl  
 echo "place">>raptor.tcl  
 echo "route">>raptor.tcl
-echo "simulation_options compilation icarus pnr" >> raptor.tcl
+echo "set input_file [open \"$design_name/run_1/synth_1_1/synthesis/post_pnr_wrapper_${design_name}_post_synth.v\" r]">>raptor.tcl 
+echo "set file_content [read \$input_file]">>raptor.tcl
+echo "close \$input_file">>raptor.tcl 
+echo "set modified_content [string map {\"module top(\" \"module top_post_route (\"} \$file_content]">>raptor.tcl 
+echo "set output_file [open \"$design_name/run_1/synth_1_1/synthesis/post_pnr_wrapper_${design_name}_post_synth.v\" w]">>raptor.tcl
+echo "puts \$output_file \$modified_content">>raptor.tcl 
+echo "close \$output_file">>raptor.tcl 
+echo "simulate pnr icarus">>raptor.tcl
+echo "clear_simulation_files">>raptor.tcl
+echo "setup_lec_sim">>raptor.tcl
+echo "simulate gate icarus">>raptor.tcl
 echo "simulate pnr icarus">>raptor.tcl
 echo "sta">>raptor.tcl  
 echo "power">>raptor.tcl
