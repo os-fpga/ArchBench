@@ -13,7 +13,7 @@ jobs:
           echo "Assigned user: $assigned_user"
           if [[ $assigned_user == "NadeemYaseen" ]]
           then
-              gh pr merge ${{ github.event.pull_request.head.ref }} -m -d -t "Auto merge by $assigned_user"
+              gh pr merge ${{ github.event.pull_request.head.ref }} --auto -m -d -t "Auto merge by $assigned_user"
           fi
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
