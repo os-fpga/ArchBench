@@ -114,21 +114,21 @@ module fabric_multi_clocks_top_formal_verification_random_tb;
 	);
 
     always #1.1 clock0 = ~clock0;  
-    always #1.2 clock1 = ~clock1;  
-    always #1.3 clock2 = ~clock2;  
-    always #1.6 clock3 = ~clock3;  
-    always #1.5 clock4 = ~clock4;  
-    always #1.4 clock5 = ~clock5;  
-    always #1.9 clock6 = ~clock6;  
-    always #1.8 clock7 = ~clock7;  
-    always #1.7 clock8 = ~clock8;  
-    always #2 clock9 = ~clock9;  
-    always #2.1 clock10 = ~clock10;  
-    always #2.3 clock11 = ~clock11;  
-    always #2.2 clock12 = ~clock12;  
-    always #2.5 clock13 = ~clock13;  
-    always #2.4 clock14 = ~clock14;  
-    always #2.6 clock15 = ~clock15;  
+    always #1.1 clock1 = ~clock1;  
+    always #1.1 clock2 = ~clock2;  
+    always #1.1 clock3 = ~clock3;  
+    always #1.1 clock4 = ~clock4;  
+    always #1.1 clock5 = ~clock5;  
+    always #1.1 clock6 = ~clock6;  
+    always #1.1 clock7 = ~clock7;  
+    always #1.1 clock8 = ~clock8;  
+    always #1.1 clock9 = ~clock9;  
+    always #1.1 clock10 = ~clock10;  
+    always #1.1 clock11 = ~clock11;  
+    always #1.1 clock12 = ~clock12;  
+    always #1.1 clock13 = ~clock13;  
+    always #1.1 clock14 = ~clock14;  
+    always #1.1 clock15 = ~clock15;  
 
 	initial begin
 		$dumpfile("fabric_multi_clocks_formal.vcd");
