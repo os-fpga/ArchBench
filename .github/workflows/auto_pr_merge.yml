@@ -1,19 +1,26 @@
 name: Auto PR Merge
 on:
-  pull_request:
+  #pull_request:
   workflow_dispatch:
 jobs:
-  build:
+  Auto_Merge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - name: Run a multi-line script
+        with:
+             sparse-checkout: '.github'
+      
+      - name: Try auto approve
+        if: github.actor == 'NadeemYaseen' || github.actor == 'zhergarvi' || github.actor == 'abdulhameed-akram'
         run: |
-          assigned_user=$(gh pr view  ${{ github.event.pull_request.head.ref }}    --json reviewRequests  --jq '.reviewRequests[0].login')
-          echo "Assigned user: $assigned_user"
-          if [[ $assigned_user == "NadeemYaseen" ]]
-          then
-              gh pr merge ${{ github.event.pull_request.head.ref }} --auto -m -d -t "Auto merge by $assigned_user"
-          fi
+              urls=$(gh pr list --json url | jq -r '.[].url')
+              for url in $urls; do
+                  echo "Approve PR: $url"
+                  gh pr review --approve "$url"
+                  gh pr merge --auto -m "$url"
+              done
         env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.APPROVE_PR }}
