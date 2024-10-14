@@ -9,6 +9,7 @@ internal_bitstream_simulation=true
 external_bitstream_simulation=false
 device=GEMINI_COMPACT_10x8
 
+
 given_device=$2
 # echo "Passed device is $given_device">device.txt
 
